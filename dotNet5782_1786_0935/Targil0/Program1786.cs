@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Targil0
 {
-    partial class Program1786
+    partial class Program
     {
         static partial void Welcome1786()
         {
