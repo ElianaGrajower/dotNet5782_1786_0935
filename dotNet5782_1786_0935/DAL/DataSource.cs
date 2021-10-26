@@ -31,7 +31,7 @@ namespace DAL
                             Name = r.Next(1, 5),
                             Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
                             Lattitude= (r.NextDouble() + r.Next(-180, 179)),
-                            ChargeSlots = r.Next(1,12)
+                            ChargeSlots = r.Next(1, 100)
 
                         });
                     static void CreateDrone()
