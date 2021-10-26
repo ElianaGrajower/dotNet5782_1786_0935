@@ -12,7 +12,7 @@ namespace DAL
         class DataSource
         {
             public static Random r = new Random();
-            internal static List<Parcel> ParcelsList = new List<Parcel>();
+            internal static List<Parcel> ParcelList = new List<Parcel>();
             internal static List<Drone> DroneList = new List<Drone>();
             internal static List<Station> StationList = new List<Station>();
             internal static List<Customer> CustomerList = new List<Customer>();
@@ -31,7 +31,7 @@ namespace DAL
                             Name = r.Next(1, 5),
                             Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
                             Lattitude= (r.NextDouble() + r.Next(-180, 179)),
-                            ChargeSlots = r.Next(100000000, 999999999)
+                            ChargeSlots = r.Next(1, 100)
 
                         });
                     static void CreateDrone()
@@ -58,7 +58,7 @@ namespace DAL
                                 TargetId = r.Next(100000000, 999999999),
                                 DroneId = r.Next(100000000, 999999999),
                                 Weight = (IDAL.DO.WeightCategories)r.Next(1, 3),
-                                priority = (IDAL.DO.Priorities)r.Next(1, 3),
+                                Priority = (IDAL.DO.Priorities)r.Next(1, 3),
                                 Requested=DateTime.Now,
                                 Scheduled=DateTime.Today,
                                 PickedUp= DateTime.Today,
