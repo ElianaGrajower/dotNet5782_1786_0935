@@ -14,7 +14,7 @@ namespace DAL
             internal static List<Parcel> parcelsList = new List<Parcel>();
             internal static List<Drone> DroneList = new List<Drone>();
             internal static List<Station> StationList = new List<Station>();
-            internal static List<Parcel> parcelsList = new List<Parcel>();
+            internal static List<Parcel> ParcelsList = new List<Parcel>();
         }
     }
 }

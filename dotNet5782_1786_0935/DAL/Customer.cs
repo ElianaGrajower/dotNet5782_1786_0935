@@ -10,14 +10,14 @@ namespace IDAL
     {
         class Customer
         {
-            int id { set; get; }
-            string Name { set; get; }
-            string Phone { set; get; }
-            double Longitude { set; get; }
-            double Lattitude { set; get; }
+            public int id { set; get; }
+            public string Name { set; get; }
+            public string Phone { set; get; }
+            public double Longitude { set; get; }
+            public double Lattitude { set; get; }
             public override string ToString()
             {
-                return String.Format($"id:{id}\nName:{Name}\nPhone:{Phone}\nLongitude:{Longitude}\nLattitude:{Lattitude}\n");
+                return String.Format($"id: {id}\nName: {Name}\nPhone: {Phone}\nLongitude: {Longitude}\nLattitude: {Lattitude}\n");
             }
         }
     }
