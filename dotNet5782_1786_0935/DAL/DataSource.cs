@@ -34,7 +34,18 @@ namespace DAL
                             ChargeSlots = r.Next(100000000, 999999999)
 
                         });
-
+                }
+                static void CreateCustomer()
+                {
+                    for (int i = 0; i < 10; i++)
+                        CustomerList.Add(new Customer()
+                        {
+                            id = r.Next(100000000, 999999999),
+                            Name = "Customer" + i,
+                            Phone = "05"+r.Next(00000000, 99999999),
+                            Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
+                            Lattitude = (r.NextDouble() + r.Next(-180, 179)),
+                        });
                 }
             }
         }

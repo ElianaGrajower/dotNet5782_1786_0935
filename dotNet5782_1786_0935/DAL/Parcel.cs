@@ -10,16 +10,16 @@ namespace IDAL
     {
         public struct Parcel
         {
-            int Id;
-            int SenderId;
-            int TargetId;
-            WeightCategories Weight;
-            Priorities Priority;
-            int DroneId;
-            DateTime Requested;
-            DateTime Scheduled;
-            DateTime PickedUp;
-            DateTime Delivered;
+            public int Id { set; get; }
+            public int SenderId { set; get; }
+            public int TargetId { set; get; }
+            public WeightCategories Weight { set; get; }
+            public Priorities Priority { set; get; }
+            public int DroneId { set; get; }
+            public DateTime Requested { set; get; }
+            public DateTime Scheduled { set; get; }
+            public DateTime PickedUp { set; get; }
+            public DateTime Delivered { set; get; }
             public override string ToString()
             {
                 return "Id: " + Id + "\n" + "Sender Id: " + SenderId + "\n" +
