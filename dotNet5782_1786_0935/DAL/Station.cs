@@ -10,7 +10,6 @@ namespace IDAL
     {
         class Station
         {
-            
             public int id { set; get; }
             public int Name { set; get; }
             public double Longitude { set; get; }
@@ -18,7 +17,7 @@ namespace IDAL
             public int ChargeSlots { set; get; }
             public override string ToString()
             {
-                return String.Format($"id:{id}\nName:{Name}\nLongitude:{Longitude}\nLattitude:{Lattitude}\nChargeSlots:{ChargeSlots}\n");
+                return String.Format($"id: {id}\nName: {Name}\nLongitude: {Longitude}\nLattitude: {Lattitude}\nChargeSlots: {ChargeSlots}\n");
             }
         }
     }
