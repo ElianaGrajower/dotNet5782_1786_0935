@@ -31,7 +31,7 @@ namespace DAL
                             Name = r.Next(1, 5),
                             Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
                             Lattitude= (r.NextDouble() + r.Next(-180, 179)),
-                            ChargeSlots = r.Next(100000000, 999999999)
+                            ChargeSlots = r.Next(1,12)
 
                         });
                     static void CreateDrone()
@@ -53,7 +53,7 @@ namespace DAL
                         for (int i = 0; i < 10; i++)
                             ParcelList.Add(new Parcel()
                             {
-                                id = r.Next(100000000, 999999999),
+                                id = r.Next(100000000+ParcelList.Count(), 999999999),
                                 SenderId = r.Next(100000000, 999999999),
                                 TargetId = r.Next(100000000, 999999999),
                                 DroneId = r.Next(100000000, 999999999),
