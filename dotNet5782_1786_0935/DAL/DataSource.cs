@@ -16,6 +16,7 @@ namespace DAL
             internal static List<Drone> DroneList = new List<Drone>();
             internal static List<Station> StationList = new List<Station>();
             internal static List<Customer> CustomerList = new List<Customer>();
+            internal static List<DroneCharge> DroneChargeList = new List<DroneCharge>();
             internal class config
             {
                 
