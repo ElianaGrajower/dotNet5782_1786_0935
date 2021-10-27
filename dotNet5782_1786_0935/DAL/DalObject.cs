@@ -83,15 +83,6 @@ namespace DAL
                 p.TargetId = c.id;
                 p.Delivered = DateTime.Now;
             }
-
-
-
-
-            public DalObject() { DataSource.Initialize(); }
-
-            
-
-
             public void PrintStation()
             {
                 Console.WriteLine("enter a ststions id: ");
