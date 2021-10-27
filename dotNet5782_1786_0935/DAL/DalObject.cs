@@ -49,7 +49,7 @@ namespace DAL
             }
             public void printavailablecharge()
             {
-                DataSource.StationList.ForEach(s=> { if (s.ChargeSlots < 100) s.ToString(); });
+                DataSource.StationList.ForEach(s=> { if (s.ChargeSlots >0) s.ToString(); });
             }
             public void printnotassigned()//prints all parcel not yet assigned to drone
             {
@@ -83,10 +83,21 @@ namespace DAL
 
 
             }
-            public void deliverparcel(Customer c, Parcel p)
+            public void deliverparcel(Customer c, Parcel p)//matches up parcel with buyer
             {
                 p.TargetId = c.id;
                 p.Delivered = DateTime.Now;
+            }
+            public void chargedrone(Drone d)//charges drone
+            {
+                d.Status = DroneStatuses.maintenance;
+                d.Battery = 100;
+                int i = 1;
+                int m;
+                Console.WriteLine("Enter number of station you want to charge drone at:");
+                DataSource.StationList.ForEach(s => { if (s.ChargeSlots > 0) Console.WriteLine( i++ +": "+s.Name); });
+                m = int.Parse(Console.ReadLine());
+                DataSource.StationList.ForEach(s => { if (s.ChargeSlots > 0 && m == i++) s.ChargeSlots--; });
             }
 
 
