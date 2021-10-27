@@ -90,6 +90,8 @@ namespace DAL
             {
                 p.TargetId = c.id;
                 p.Delivered = DateTime.Now;
+                Console.WriteLine("Enter level of priority: ");
+                p.Priority=(Priorities)int.Parse(Console.ReadLine());
             }
             public void chargedrone(Drone d)//charges drone
             {
