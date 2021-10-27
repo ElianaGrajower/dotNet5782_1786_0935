@@ -78,8 +78,8 @@ namespace DAL
                             id = r.Next(999999999, 100000000),
                             Name = "Customer" + i,
                             Phone = "05"+r.Next( 99999999,00000000),
-                            Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
-                            Lattitude = (r.NextDouble() + r.Next(-180, 179)),
+                            Longitude = (r.NextDouble() + r.Next(89, -90)),   //getcoordinates(-90,90),
+                            Lattitude = (r.NextDouble() + r.Next(179, -180)),
                         });
                 }
             }
