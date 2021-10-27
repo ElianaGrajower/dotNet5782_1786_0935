@@ -59,22 +59,27 @@ namespace DAL
             public void matchupparcel(Parcel p)//matches up package with drone
             {
                 Drone d = new Drone();
-                d=(DataSource.DroneList.Find(d => d.Status == DroneStatuses.available));
-                DataSource.DroneList.Remove(m => m.id == d.id);
+                d=(DataSource.DroneList.Find(t=> t.Status == DroneStatuses.available));
+                DataSource.DroneList.RemoveAll(m => m.id == d.id);
                 p.DroneId = d.id;
                 p.Scheduled = DateTime.Now;
                 d.Status = DroneStatuses.delivery;
+                DataSource.DroneList.Add(d);
 
 
-                
+
+
             }
             public void pickupparcel(Customer c,Parcel p)//matches up packg with sender of pckg
             {
                 p.SenderId = c.id;
                 p.PickedUp = DateTime.Now;
                 Drone d = new Drone();
-                d = (DataSource.DroneList.Find(d => d.id== p.SenderId));
-                d.Status= DroneStatuses.available;
+                d = (DataSource.DroneList.Find(t => t.id== p.SenderId));
+                d.Status = DroneStatuses.delivery;
+                DataSource.DroneList.RemoveAll(m => m.id == d.id);
+                DataSource.DroneList.Add(d);
+
 
 
             }
