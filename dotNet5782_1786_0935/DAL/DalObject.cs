@@ -23,7 +23,7 @@ namespace DAL
                 DataSource.DroneList.Add(d);
 
             }
-            public void AddCustomer()//adds customer to list
+            public void AddCustomer()//adds customer to listnn
             {
                 Customer c=buildcustomer();
                 DataSource.CustomerList.Add(c);
