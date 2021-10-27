@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
-        class Station
+        public struct Station
         {
             public int id { set; get; }
             public int Name { set; get; }

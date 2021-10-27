@@ -7,9 +7,9 @@ using IDAL.DO;
 
 namespace DAL
 {
-    namespace DALObject
+    namespace DalObject
     {
-        class DataSource
+        internal class DataSource
         {
             public static Random r = new Random();
             internal static List<Parcel> ParcelList = new List<Parcel>();
