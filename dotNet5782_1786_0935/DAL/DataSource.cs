@@ -27,10 +27,10 @@ namespace DAL
                     for (int i = 0; i < 2; i++)
                         StationList.Add(new Station()
                         {
-                            id = r.Next(100000000, 999999999),
+                            id = r.Next(999999999, 100000000),
                             Name = r.Next(1, 5),
-                            Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
-                            Lattitude= (r.NextDouble() + r.Next(-180, 179)),
+                            Longitude = (r.NextDouble() + r.Next(89, -90)),   //getcoordinates(-90,90),
+                            Lattitude= (r.NextDouble() + r.Next(179, -180)),
                             ChargeSlots = r.Next(1, 100)
 
                         });
@@ -39,10 +39,10 @@ namespace DAL
                         for (int i = 0; i < 5; i++)
                             DroneList.Add(new Drone()
                             {
-                                id = r.Next(100000000, 999999999),
+                                id = r.Next(999999999, 100000000),
                                 Model = "Model " + i,
-                                MaxWeight = (IDAL.DO.WeightCategories)r.Next(1, 3),
-                                Status=(IDAL.DO.DroneStatuses)r.Next(1, 3),
+                                MaxWeight = (IDAL.DO.WeightCategories)r.Next(3,1),
+                                Status=(IDAL.DO.DroneStatuses)r.Next(3,1),
                             }
                             ); ;
                     }
@@ -53,12 +53,12 @@ namespace DAL
                         for (int i = 0; i < 10; i++)
                             ParcelList.Add(new Parcel()
                             {
-                                id = r.Next(100000000, 999999999),
-                                SenderId = r.Next(100000000, 999999999),
-                                TargetId = r.Next(100000000, 999999999),
-                                DroneId = r.Next(100000000, 999999999),
-                                Weight = (IDAL.DO.WeightCategories)r.Next(1, 3),
-                                Priority = (IDAL.DO.Priorities)r.Next(1, 3),
+                                id = r.Next(999999999,100000000 + ParcelList.Count()),
+                                SenderId = r.Next(999999999, 100000000),
+                                TargetId = r.Next(999999999, 100000000),
+                                DroneId = r.Next(999999999, 100000000),
+                                Weight = (IDAL.DO.WeightCategories)r.Next(3,1),
+                                Priority = (IDAL.DO.Priorities)r.Next(3,1),
                                 Requested=DateTime.Now,
                                 Scheduled=DateTime.Today,
                                 PickedUp= DateTime.Today,
@@ -74,9 +74,9 @@ namespace DAL
                     for (int i = 0; i < 10; i++)
                         CustomerList.Add(new Customer()
                         {
-                            id = r.Next(100000000, 999999999),
+                            id = r.Next(999999999, 100000000),
                             Name = "Customer" + i,
-                            Phone = "05"+r.Next(00000000, 99999999),
+                            Phone = "05"+r.Next( 99999999,00000000),
                             Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
                             Lattitude = (r.NextDouble() + r.Next(-180, 179)),
                         });

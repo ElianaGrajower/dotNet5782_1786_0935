@@ -8,7 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct Customer
+       public struct Customer
         {
             public int id { set; get; }
             public string Name { set; get; }
