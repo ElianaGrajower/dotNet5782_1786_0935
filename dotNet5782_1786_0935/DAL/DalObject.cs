@@ -91,17 +91,16 @@ namespace DAL
             public void chargedrone(Drone d)//charges drone
             {
                 d.Status = DroneStatuses.maintenance;
-                d.Battery = 100;
-                int i = 1;
                 int m;
-                Console.WriteLine("Enter number of station you want to charge drone at:");
-                DataSource.StationList.ForEach(s => { if (s.ChargeSlots > 0) Console.WriteLine( i++ +": "+s.Name); });
+                Console.WriteLine("Enter name of station you want to charge drone at:");
+                printavailablecharge();
                 m = int.Parse(Console.ReadLine());
-                DataSource.StationList.ForEach(s => { if (s.ChargeSlots > 0 && m == i++) s.ChargeSlots--; });
+                DataSource.StationList.ForEach(s => { if (s.Name == m) s.ChargeSlots--; });
+                DroneCharge c = new DroneCharge();
+                c.DroneId = d.id;
+                DataSource.StationList.ForEach(s => { if (s.Name == m) c.StationId = s.id; });
+                DataSource.DroneChargeList.Add(c);
             }
-
-
-
             public void PrintStation()
             {
                 Console.WriteLine("enter a ststions id: ");
