@@ -12,23 +12,26 @@ namespace DAL
         public class DalObject
         {
             public DalObject() { DataSource.Initialize(); }// default constructer calls on initialize func
-            public  void AddStation(Station s )//adds station o list
+            public  void AddStation( )//adds station o list
             {
+                Station s = buildstation();
                DataSource.StationList.Add(s);
-             
             }
-            public void AddDrone(Drone d)//adds drone to list
+            public void AddDrone()//adds drone to list
             {
+                Drone d = buildDrone();
                 DataSource.DroneList.Add(d);
 
             }
-            public void AddCustomer(Customer c)//adds customer to list
+            public void AddCustomer()//adds customer to list
             {
+                Customer c=buildcustomer();
                 DataSource.CustomerList.Add(c);
 
             }
-            public void getParcel(Parcel p)//adds parcel to list
+            public void getParcel()//adds parcel to list
             {
+                Parcel p = buildParcel();
                 DataSource.ParcelList.Add(p);
             }
             public void printStations()
@@ -164,6 +167,48 @@ namespace DAL
                         return;
                     }
                 }
+            }
+            public Parcel buildParcel()
+            {
+                Console.WriteLine("Enter Parcel weight:");
+                Parcel p = new Parcel() { id = DataSource.r.Next(999999999, 100000000), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
+                return p;
+            }
+            public Customer buildcustomer()
+            {
+                Console.WriteLine("Enter name of customer: ");
+                Customer c = new Customer() { id = DataSource.r.Next(999999999, 100000000), Name = (Console.ReadLine()) };
+                Console.WriteLine("Enter phone number of customer: ");
+                c.Phone = Console.ReadLine();
+                Console.WriteLine("Enter Your longitude coordinates: ");
+                c.Longitude = double.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Your lattitude coordinates: ");
+                c.Lattitude = double.Parse(Console.ReadLine());
+                return c;
+
+
+            }
+            public Drone buildDrone()
+            {
+                Console.WriteLine("Enter name of model: ");
+                Drone d = new Drone() { id = DataSource.r.Next(999999999, 100000000), Model = (Console.ReadLine()) };
+                Console.WriteLine("Enter maximum weight drone can hold");
+                d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
+                d.Battery = 100;
+                d.Status = DroneStatuses.available;
+                return d;
+            }
+            public Station buildstation()
+            {
+                Console.WriteLine("Enter name of station: ");
+                Station s = new Station() { id = DataSource.r.Next(999999999, 100000000), Name = int.Parse(Console.ReadLine()) };
+                Console.WriteLine("Enter amount of charge slots that station has: ");
+                s.ChargeSlots = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Your longitude coordinates: ");
+                s.Longitude = double.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Your lattitude coordinates: ");
+                s.Lattitude = double.Parse(Console.ReadLine());
+                return s;
             }
 
         }
