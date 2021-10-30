@@ -14,25 +14,25 @@ namespace DAL
             public DalObject() { DataSource.Initialize(); }// default constructer calls on initialize func
             public  void AddStation( )//adds station o list
             {
-                Station s = buildstation();//creats a new station by calling on buildtation func
-               DataSource.StationList.Add(s);//adds the station to list of station
+                Station s = buildstation();
+               DataSource.StationList.Add(s);
             }
             public void AddDrone()//adds drone to list
             {
-                Drone d = buildDrone();//creates new drone by calling on new drone func
-                DataSource.DroneList.Add(d);//adds new drone to drone list
+                Drone d = buildDrone();
+                DataSource.DroneList.Add(d);
 
             }
             public void AddCustomer()//adds customer to listnn
             {
-                Customer c=buildcustomer();//creates new customer by calling on build customer func
-                DataSource.CustomerList.Add(c);//adds enw customer to customer list
+                Customer c=buildcustomer();
+                DataSource.CustomerList.Add(c);
 
             }
             public void getParcel()//adds parcel to list
             {
-                Parcel p = buildParcel();//builds new parcel b ycalling on buikd parcel function
-                DataSource.ParcelList.Add(p);//adds new parcel to build func
+                Parcel p = buildParcel();
+                DataSource.ParcelList.Add(p);
             }
             public void printStationsList()
             {
@@ -97,9 +97,8 @@ namespace DAL
                 c.DroneId = d.id;
                 DataSource.StationList.ForEach(s => { if (s.Name == m) c.StationId = s.id; });
                 DataSource.DroneChargeList.Add(c);
-
             }
-            public void releasedrone(DroneCharge c)//releases drone from charge
+            public void releaseDrone(DroneCharge c)//releases drone from charge
             {
                 DataSource.DroneList.ForEach(m => { if (m.id == c.DroneId) { m.Status = DroneStatuses.available; m.Battery = 100; } });
                 DataSource.StationList.ForEach(s => { if (s.id == c.StationId) s.ChargeSlots++; });
