@@ -17,9 +17,9 @@ namespace DAL
                 Station s = buildstation();//creats a new station by calling on buildtation func
                DataSource.StationList.Add(s);//adds the station to list of station
             }
-            public void AddDrone()//adds drone to list
+            public void AddDrone( Drone d)//adds drone to list
             {
-                Drone d = buildDrone();//creates new drone by calling on new drone func
+                /*Drone d = buildDrone();//creates new drone by calling on*/ /*new drone func*/
                 DataSource.DroneList.Add(d);//adds new drone to drone list
 
             }
@@ -36,19 +36,19 @@ namespace DAL
             }
             public void printStationsList()
             {
-                DataSource.StationList.ForEach(s => Console.WriteLine(s.ToString()));
+                DataSource.StationList.ForEach(s => PrintStation(s.id));
             }
             public void printDronesList()
             {
-                DataSource.DroneList.ForEach(d => Console.WriteLine(d.ToString()));
+                DataSource.DroneList.ForEach(d => PrintDrone(d.id));
             }
             public void printCustomersList()
             {
-                DataSource.CustomerList.ForEach(c => Console.WriteLine(c.ToString()));
+                DataSource.CustomerList.ForEach(c => PrintCustomer(c.id));
             }
             public void printParcelsList()
             {
-                DataSource.ParcelList.ForEach(p => Console.WriteLine(p.ToString()));
+                DataSource.ParcelList.ForEach(p => PrintParcel(p.id));
             }
             public void printAvailableCharge()
             {
