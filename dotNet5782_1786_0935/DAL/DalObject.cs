@@ -14,27 +14,27 @@ namespace DAL
             public DalObject() { DataSource.Initialize(); }// default constructer calls on initialize func
             public  void AddStation( )//adds station o list
             {
-                Station s = buildstation();
-               DataSource.StationList.Add(s);
+                Station s = buildstation();//creats a new station by calling on buildtation func
+               DataSource.StationList.Add(s);//adds the station to list of station
             }
             public void AddDrone()//adds drone to list
             {
-                Drone d = buildDrone();
-                DataSource.DroneList.Add(d);
+                Drone d = buildDrone();//creates new drone by calling on new drone func
+                DataSource.DroneList.Add(d);//adds new drone to drone list
 
             }
             public void AddCustomer()//adds customer to listnn
             {
-                Customer c=buildcustomer();
-                DataSource.CustomerList.Add(c);
+                Customer c=buildcustomer();//creates new customer by calling on build customer func
+                DataSource.CustomerList.Add(c);//adds enw customer to customer list
 
             }
             public void getParcel()//adds parcel to list
             {
-                Parcel p = buildParcel();
-                DataSource.ParcelList.Add(p);
+                Parcel p = buildParcel();//builds new parcel b ycalling on buikd parcel function
+                DataSource.ParcelList.Add(p);//adds new parcel to build func
             }
-            public void printStations()
+            public void printStations()//prints list of func
             {
                 DataSource.StationList.ForEach(s => Console.WriteLine(s.ToString()));
             }
@@ -106,8 +106,7 @@ namespace DAL
                 DataSource.StationList.ForEach(s => { if (s.Name == m) c.StationId = s.id; });
                 DataSource.DroneChargeList.Add(c);
 
-            }
-            public void releasedrone(DroneCharge c)//releases drone from charge
+            }            public void releasedrone(DroneCharge c)//releases drone from charge
             {
                 DataSource.DroneList.ForEach(m => { if (m.id == c.DroneId) { m.Status = DroneStatuses.available; m.Battery = 100; } });
                 DataSource.StationList.ForEach(s => { if (s.id == c.StationId) s.ChargeSlots++; });
