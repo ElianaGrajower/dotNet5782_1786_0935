@@ -189,6 +189,22 @@ namespace DAL
                 s.Lattitude = double.Parse(Console.ReadLine());
                 return s;
             }
+            //Data = new DalObject();
+            //Console.WriteLine("enter a stations id: ");
+            //int stationId = int.Parse(Console.ReadLine());
+            //Console.WriteLine(Data.PrintStation(stationId));
+
+            //Console.WriteLine("enter a drones id: ");
+            //int droneId = int.Parse(Console.ReadLine());
+            //Console.WriteLine(Data.PrintDrone(droneId));
+
+            //Console.WriteLine("enter a customer id: ");
+            //int customerId = int.Parse(Console.ReadLine());
+            //Console.WriteLine(Data.PrintCustomer(customerId));
+
+            //Console.WriteLine("enter a parcel id: ");
+            //int parcelId = int.Parse(Console.ReadLine());
+            //Console.WriteLine(Data.PrintParcel(parcelId));
 
         }
     }
