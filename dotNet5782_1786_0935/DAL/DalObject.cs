@@ -29,27 +29,27 @@ namespace DAL
             {
                 DataSource.ParcelList.Add(p);
             }
-            public void printStationsList() //prints the list of stations
+            public void printStationsList()
             {
-                DataSource.StationList.ForEach(s => Console.WriteLine(s.ToString()));
+                DataSource.StationList.ForEach(s => PrintStation(s.id));
             }
-            public void printDronesList() //prints the list of drones
+            public void printDronesList()
             {
-                DataSource.DroneList.ForEach(d => Console.WriteLine(d.ToString()));
+                DataSource.DroneList.ForEach(d => PrintDrone(d.id));
             }
-            public void printCustomersList() //prints the list of customers
+            public void printCustomersList()
             {
-                DataSource.CustomerList.ForEach(c => Console.WriteLine(c.ToString()));
+                DataSource.CustomerList.ForEach(c => PrintCustomer(c.id));
             }
-            public void printParcelsList() //prints the list of parcels
+            public void printParcelsList()
             {
-                DataSource.ParcelList.ForEach(p => Console.WriteLine(p.ToString()));
+                DataSource.ParcelList.ForEach(p => PrintParcel(p.id));
             }
-            public void printAvailableCharge() //prints list of available charge stations
+            public void printAvailableCharge()
             {
                 DataSource.StationList.ForEach(s=> { if (s.ChargeSlots >0) s.ToString(); });
             }
-            public void printNotAssigned() //prints all parcel not yet assigned to drone
+            public void printNotAssigned()//prints all parcel not yet assigned to drone
             {
                 DataSource.ParcelList.ForEach(s => { if (s.DroneId==0) s.ToString(); });
             }
