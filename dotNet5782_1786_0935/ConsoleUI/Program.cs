@@ -11,6 +11,7 @@ namespace ConsoleUI
         static DalObject Data;
         static void Main(string[] args)
         {
+            Data = new DalObject();
             int choice;
             Console.WriteLine("Choose from the following options:");
             Console.WriteLine("1- To add new item");
@@ -35,7 +36,9 @@ namespace ConsoleUI
                                 case 'A':
                                     {
                                         Console.WriteLine("Enter name of station: ");
-                                        Station s = new Station() { id = DalObject.r.Next(999999999, 100000000), Name = int.Parse(Console.ReadLine()) };
+                                        Station s = new Station() { Name = int.Parse(Console.ReadLine()) };
+                                        Console.WriteLine("Enter ID of station: ");
+                                        s.id = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
                                         s.ChargeSlots = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter Your longitude coordinates: ");
@@ -59,7 +62,7 @@ namespace ConsoleUI
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter name of customer: ");
-                                        Customer c = new Customer() { id = DalObject.r.Next(999999999, 100000000), Name = (Console.ReadLine()) };
+                                        Customer c = new Customer() { id = DalObject.r.Next( 100000000, 999999999), Name = (Console.ReadLine()) };
                                         Console.WriteLine("Enter phone number of customer: ");
                                         c.Phone = Console.ReadLine();
                                         Console.WriteLine("Enter Your longitude coordinates: ");
@@ -72,7 +75,7 @@ namespace ConsoleUI
                                 case 'D':
                                     {
                                         Console.WriteLine("Enter Parcel weight:");
-                                        Parcel p = new Parcel() { id = DalObject.r.Next(999999999, 100000000), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
+                                        Parcel p = new Parcel() { id = DalObject.r.Next(100000000, 999999999), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
                                         Data.getParcel(p);
                                         break;
                                     }

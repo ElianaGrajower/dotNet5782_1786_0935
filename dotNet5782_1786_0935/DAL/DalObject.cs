@@ -15,7 +15,7 @@ namespace DAL
             public DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
             public void AddStation(Station s) //adds station o list
             {
-               DataSource.StationList.Add(s);
+                DataSource.StationList.Add(s);
             }
             public void AddDrone(Drone d) //adds drone to list
             {
@@ -35,7 +35,7 @@ namespace DAL
             }
             public void printDronesList()
             {
-                DataSource.DroneList.ForEach(d => PrintDrone(d.id));
+                DataSource.DroneList.ForEach(d =>  PrintDrone(d.id));
             }
             public void printCustomersList()
             {
@@ -97,14 +97,7 @@ namespace DAL
             }
             public string PrintStation(int stationId) //prints a station
             {
-                for (int i=0; i < DataSource.StationList.Count(); i++)
-                {
-                    if (DataSource.StationList[i].id == stationId)
-                    {
-                        return (DataSource.StationList[i].ToString());
-                    }
-                }
-                return ("ERROR id doesn't match a station");
+                return findStation(stationId).ToString();
             }
             public string PrintDrone(int droneId) //prints a drone
             {
@@ -150,6 +143,18 @@ namespace DAL
                     if (DataSource.DroneList[i].id == droneId)
                     {
                         return (DataSource.DroneList[i]);
+                    }
+                }
+                return notFound;
+            }
+            public Station findStation(int stationId) //finds a drone using its id
+            {
+                Station notFound = new Station();
+                for (int i = 0; i < DataSource.StationList.Count(); i++)
+                {
+                    if (DataSource.StationList[i].id == stationId)
+                    {
+                        return (DataSource.StationList[i]);
                     }
                 }
                 return notFound;
