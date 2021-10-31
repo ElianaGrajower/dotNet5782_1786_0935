@@ -104,7 +104,7 @@ namespace ConsoleUI
                                 case 'D':
                                     {
                                         Data.printParcelsList();
-                                        break;
+                                        break;             
                                     }
                                 default:
                                     break;
