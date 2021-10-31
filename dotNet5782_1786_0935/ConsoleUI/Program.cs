@@ -1,7 +1,7 @@
 ﻿using System;
 using IDAL.DO;
 using DAL.DalObject;
-using DAL;
+
 
 
 namespace ConsoleUI
@@ -17,19 +17,17 @@ namespace ConsoleUI
             Console.WriteLine("2- To update item");
             Console.WriteLine("3- To print item details");
             Console.WriteLine("4- To print list of items");
-            Console.WriteLine("5- End program");
             choice = int.Parse(Console.ReadLine());
-            Data = new DalObject();
             while (choice != 5)
             {
-                switch(choice)
+                switch (choice)
                 {
                     case 1:
                         {
                             Console.WriteLine("Enter your choice:\n" +
-                                "A- add a station\n" + 
-                                "B- add a drone\n" + 
-                                "C- add a customer\n" + 
+                                "A- add a station\n" +
+                                "B- add a drone\n" +
+                                "C- add a customer\n" +
                                 "D- add a parcel");
                             char addingChoice = char.Parse(Console.ReadLine());
                             switch (addingChoice)
@@ -43,7 +41,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter Your longitude coordinates: ");
                                         s.Longitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter Your lattitude coordinates: ");
-                                        s.Lattitude = double.Parse(Console.ReadLine());                                   
+                                        s.Lattitude = double.Parse(Console.ReadLine());
                                         Data.AddStation(s);
                                         break;
                                     }
@@ -87,10 +85,10 @@ namespace ConsoleUI
                     case 2:
                         {
                             Console.WriteLine("Enter your choice:\n" +
-                                "A- match a parcel to a drone\n" + 
-                                "B- collect a parcel by drone\n" + 
-                                "C- deliver a parcel to a customer\n" + 
-                                "D- charge a drone" + 
+                                "A- match a parcel to a drone\n" +
+                                "B- collect a parcel by drone\n" +
+                                "C- deliver a parcel to a customer\n" +
+                                "D- charge a drone" +
                                 "E- unpug a charging drone");
                             char updateChoice = char.Parse(Console.ReadLine());
                             switch (updateChoice)
@@ -130,7 +128,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
                                         Data.printAvailableCharge();
                                         stationNum = int.Parse(Console.ReadLine());
-                                        Data.chargeDrone(Data.findDrone(droneId),stationNum);
+                                        Data.chargeDrone(Data.findDrone(droneId), stationNum);
                                         break;
                                     }
                                 case 'E':
@@ -146,17 +144,102 @@ namespace ConsoleUI
                             }
                             break;
                         }
-                    case 3: 
+                    case 3:
+                        {
+                            char Choice_Print;
+                            int Id;
+                            Console.WriteLine("Enter choice you want to print:");
+                            Console.WriteLine("A- charge station");
+                            Console.WriteLine("B- drone");
+                            Console.WriteLine("C- customer");
+                            Console.WriteLine("D- parcel");
+                            Choice_Print = char.Parse(Console.ReadLine());
+                            Console.Write("Enter ");
+                            if (Choice_Print == 'A')
+                                Console.Write("charge Station ");
+                            if (Choice_Print == 'b')
+                                Console.Write("drone ");
+                            if (Choice_Print == 'C')
+                                Console.Write("customer ");
+                            if (Choice_Print == 'D')
+                                Console.Write("pacel ");
+                            Console.WriteLine("id");
+                            Id = int.Parse(Console.ReadLine());
+
+                            switch (Choice_Print)
+                            {
+                                case 'A':
+                                    {
+                                        Data.PrintStation(Id);
+                                        break;
+                                    }
+                                case 'B':
+                                    {
+                                        Data.PrintDrone(Id);
+                                        break;
+                                    }
+                                case 'C':
+                                    {
+                                        Data.PrintCustomer(Id);
+                                        break;
+                                    }
+                                case 'D':
+                                    {
+                                        Data.PrintParcel(Id);
+                                        break;
+                                    }
+                                default: break;
+
+                            }
+                            break;
+                        }
+
                     case 4:
-                    default: Console.WriteLine("ERROR INVALID CHOICE");
+                        {
+                            char Choice_Print;
+                            Console.WriteLine("Enter choice you want to print:");
+                            Console.WriteLine("A- charge station list");
+                            Console.WriteLine("B- drone list");
+                            Console.WriteLine("C- customer list");
+                            Console.WriteLine("D- parcel list");
+                            Choice_Print = char.Parse(Console.ReadLine());
+                            switch (Choice_Print)
+                            {
+                                case 'A':
+                                    {
+                                        Data.printStationsList();
+                                        break;
+                                    }
+                                case 'B':
+                                    {
+                                        Data.printDronesList();
+                                        break;
+                                    }
+                                case 'C':
+                                    {
+                                        Data.printCustomersList();
+                                        break;
+                                    }
+                                case 'D':
+                                    {
+                                        Data.printParcelsList();
+                                        break;
+                                    }
+                                default:
+                                    break;
+                            }
+                            break;
+                        }
+                    default:
+                        Console.WriteLine("ERROR INVALID CHOICE");
                         break;
                 }
                 Console.WriteLine("Choose from the following options:");
                 Console.WriteLine("1- To add new item");
                 Console.WriteLine("2- To update item");
-                Console.WriteLine("3- To print item details");
-                Console.WriteLine("4- To print list of items");
-                Console.WriteLine("5- End program");
+                Console.WriteLine("3- to print item details");
+                Console.WriteLine("4-to print list of items");
+                Console.WriteLine("5-to exit");
                 choice = int.Parse(Console.ReadLine());
             }
         }
