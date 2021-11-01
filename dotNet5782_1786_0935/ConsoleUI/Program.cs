@@ -162,13 +162,13 @@ namespace ConsoleUI
                             Choice_Print = char.Parse(Console.ReadLine());
                             Console.Write("Enter ");
                             if (Choice_Print == 'A')
-                                Console.Write("charge Station: ");
+                                Console.Write("charge Station ");
                             if (Choice_Print == 'b')
-                                Console.Write("drone: ");
+                                Console.Write("drone ");
                             if (Choice_Print == 'C')
-                                Console.Write("customer: ");
+                                Console.Write("customer ");
                             if (Choice_Print == 'D')
-                                Console.Write("pacel: ");
+                                Console.Write("pacel ");
                             Console.WriteLine("id: ");
                             Id = int.Parse(Console.ReadLine());
 
