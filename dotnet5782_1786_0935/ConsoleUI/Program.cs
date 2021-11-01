@@ -102,6 +102,8 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter parcel id: ");
                                         int parcelId = int.Parse(Console.ReadLine());
+
+
                                         Data.matchUpParcel(Data.findParcel(parcelId));
                                         break;
                                     }
@@ -175,22 +177,22 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
-                                        Data.PrintStation(Id).ToString();
+                                        Console.WriteLine(Data.PrintStation(Id).ToString() ); 
                                         break;
                                     }
                                 case 'B':
                                     {
-                                        Data.PrintDrone(Id).ToString();
+                                        Console.WriteLine(Data.PrintDrone(Id).ToString());
                                         break;
                                     }
                                 case 'C':
                                     {
-                                        Data.PrintCustomer(Id).ToString();
+                                        Console.WriteLine(Data.PrintCustomer(Id).ToString());
                                         break;
                                     }
                                 case 'D':
                                     {
-                                        Data.PrintParcel(Id).ToString();
+                                        Console.WriteLine(Data.PrintParcel(Id).ToString());
                                         break;
                                     }
                                 default: break;
