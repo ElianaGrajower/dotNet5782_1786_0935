@@ -3,7 +3,6 @@ using IDAL.DO;
 using DAL.DalObject;
 
 
-
 namespace ConsoleUI
 {
     class Program
@@ -77,7 +76,7 @@ namespace ConsoleUI
                                 case 'D':
                                     {
                                         Console.WriteLine("Enter Parcel weight: ");
-                                        Parcel p = new Parcel() { id = DalObject.r.Next(100000000, 999999999), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
+                                        Parcel p = new Parcel() { id = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
                                         Data.getParcel(p);
                                         break;
                                     }
