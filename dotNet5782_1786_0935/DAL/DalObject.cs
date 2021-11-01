@@ -51,11 +51,7 @@ namespace DAL
                 return DataSource.StationList;
                
             }
-            //public List<Parcel> printNotAssigned()//prints all parcel not yet assigned to drone
-           // {
-               // return DataSource.ParcelList.Re
-               
-            //}
+            
             public void matchUpParcel(Parcel p) //matches up package with drone
             {
                 Drone d = new Drone();
