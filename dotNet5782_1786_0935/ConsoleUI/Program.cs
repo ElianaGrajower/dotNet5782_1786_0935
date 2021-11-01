@@ -177,7 +177,7 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
-                                        Data.PrintStation(Id).ToString();
+                                        Console.WriteLine(Data.PrintStation(Id).ToString()); 
                                         break;
                                     }
                                 case 'B':
