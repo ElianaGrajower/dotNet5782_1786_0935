@@ -3,7 +3,6 @@ using IDAL.DO;
 using DAL.DalObject;
 
 
-
 namespace ConsoleUI
 {
     class Program
@@ -51,7 +50,7 @@ namespace ConsoleUI
                                 case 'B':
                                     {
                                         Console.WriteLine("Enter name of model: ");
-                                        Drone d = new Drone() { id = DalObject.r.Next(999999999, 100000000), Model = (Console.ReadLine()) };
+                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = (Console.ReadLine()) };
                                         Console.WriteLine("Enter maximum weight drone can hold: ");
                                         d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
                                         d.Battery = 100;
@@ -77,12 +76,12 @@ namespace ConsoleUI
                                 case 'D':
                                     {
                                         Console.WriteLine("Enter Parcel weight: ");
-                                        Parcel p = new Parcel() { id = DalObject.r.Next(100000000, 999999999), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
+                                        Parcel p = new Parcel() { id = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
                                         Data.getParcel(p);
                                         break;
                                     }
                                 default:
-                                    Console.WriteLine("ERROR CHOICE NOT VALID");
+                                    Console.WriteLine("ERROR CHOICE NOT VALID");   
                                     break;
                             }
                             break;
@@ -132,7 +131,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
                                         int stationNum;
-                                        Data.printStationsList().ForEach(s => { if(s.ChargeSlots == 0) s.ToString(); });
+                                        Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
                                         //Data.printAvailableCharge();
                                         stationNum = int.Parse(Console.ReadLine());
@@ -200,7 +199,6 @@ namespace ConsoleUI
                             }
                             break;
                         }
-
                     case 4:
                         {
                             char Choice_Print;
