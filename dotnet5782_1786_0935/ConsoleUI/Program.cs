@@ -50,7 +50,7 @@ namespace ConsoleUI
                                 case 'B':
                                     {
                                         Console.WriteLine("Enter name of model: ");
-                                        Drone d = new Drone() { id = DalObject.r.Next(999999999, 100000000), Model = (Console.ReadLine()) };
+                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = (Console.ReadLine()) };
                                         Console.WriteLine("Enter maximum weight drone can hold: ");
                                         d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
                                         d.Battery = 100;
@@ -81,7 +81,7 @@ namespace ConsoleUI
                                         break;
                                     }
                                 default:
-                                    Console.WriteLine("ERROR CHOICE NOT VALID");
+                                    Console.WriteLine("ERROR CHOICE NOT VALID");   
                                     break;
                             }
                             break;
@@ -131,9 +131,8 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
                                         int stationNum;
-                                        Data.printStationsList().ForEach(s => { if(s.ChargeSlots == 0) s.ToString(); });
+                                        Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
-                                        //Data.printAvailableCharge();
                                         stationNum = int.Parse(Console.ReadLine());
                                         Data.chargeDrone(Data.findDrone(droneId), stationNum);
                                         break;
@@ -199,7 +198,6 @@ namespace ConsoleUI
                             }
                             break;
                         }
-
                     case 4:
                         {
                             char Choice_Print;
