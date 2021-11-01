@@ -59,7 +59,7 @@ namespace DAL
             public void matchUpParcel(Parcel p) //matches up package with drone
             {
                 Drone d = new Drone();
-                d=(DataSource.DroneList.Find(t=> t.Status == DroneStatuses.available));
+                d=(DataSource.DroneList.Find(t=> t.Status == DroneStatuses.available && t.MaxWeight<=p.Weight));
                 DataSource.DroneList.RemoveAll(m => m.id == d.id);
                 p.DroneId = d.id;
                 p.Scheduled = DateTime.Now;
