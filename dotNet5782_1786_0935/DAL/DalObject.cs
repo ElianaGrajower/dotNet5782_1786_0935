@@ -61,16 +61,10 @@ namespace DAL
                 Drone d = new Drone();
                 d = (DataSource.DroneList.Find(t => t.Status == DroneStatuses.available && t.MaxWeight >= p.Weight));
                 DataSource.DroneList.RemoveAll(m => m.id == d.id);
-                if (d.id != 0)
-                {
-                    p.DroneId = d.id;
-                    p.Scheduled = DateTime.Now;
-                    d.Status = DroneStatuses.delivery;
-                    DataSource.DroneList.Add(d);
-                    DataSource.ParcelList.RemoveAll(m => m.id == p.id);
-                    DataSource.ParcelList.Add(p);
-                }
-
+                p.DroneId = d.id;
+                p.Scheduled = DateTime.Now;
+                d.Status = DroneStatuses.delivery;
+                DataSource.DroneList.Add(d);
             }
             public void pickUpParcel(Customer c,Parcel p) //matches up packg with sender of pckg
             {
@@ -78,62 +72,30 @@ namespace DAL
                 p.PickedUp = DateTime.Now;
                 Drone d = new Drone();
                 d = (DataSource.DroneList.Find(t => t.id== p.SenderId));
-                if (d.id != 0&&p.id!=0)
-                {
-                    d.Status = DroneStatuses.delivery;
-                    DataSource.DroneList.RemoveAll(m => m.id == d.id);
-                    DataSource.DroneList.Add(d);
-                    DataSource.ParcelList.RemoveAll(m => m.id == p.id);
-                    DataSource.ParcelList.Add(p);
-                }
+                d.Status = DroneStatuses.delivery;
+                DataSource.DroneList.RemoveAll(m => m.id == d.id);
+                DataSource.DroneList.Add(d);
             }
             public void deliverParcel(Customer c, Parcel p, int priorityLevel) //matches up parcel with buyer
             {
                 p.TargetId = c.id;
                 p.Delivered = DateTime.Now;
                 p.Priority = (Priorities)priorityLevel;
-                if (p.id != 0)
-                {
-                    DataSource.ParcelList.RemoveAll(m => m.id == p.id);
-                    DataSource.ParcelList.Add(p);
-                }
 
             }
-            public void chargeDrone(Drone d, int stationNum) //charges drone
+            public void chargeDrone(Drone d,int stationNum) //charges drone
             {
                 d.Status = DroneStatuses.maintenance;
-                Station s = DataSource.StationList.Find(s => (s.Name == stationNum));
-                if(s.id!=0)
-                {
-
-                    DataSource.StationList.Remove(s);
-                    s.ChargeSlots--;
-                    DroneCharge c = new DroneCharge();
-                    c.DroneId = d.id;
-                    c.StationId = s.id;
-                    DataSource.DroneChargeList.Add(c);
-                    DataSource.StationList.Add(s);
-                    DataSource.DroneList.Add(d);
-
-                }
+                DataSource.StationList.ForEach(s => { if (s.Name == stationNum) s.ChargeSlots--; });
+                DroneCharge c=new DroneCharge();
+                c.DroneId = d.id;
+                DataSource.StationList.ForEach(s => { if (s.Name == stationNum) c.StationId = s.id; });
+                DataSource.DroneChargeList.Add(c);
             }
             public void releaseDrone(DroneCharge c) //releases drone from charge
             {
-               Drone d= DataSource.DroneList.Find(m => (m.id == c.DroneId)  );
-                if(d.id!=0)
-                { 
-                    d.Status = DroneStatuses.available;
-                    d.Battery = 100;
-                    DataSource.DroneList.RemoveAll(m => (m.id == c.DroneId));
-                    DataSource.DroneList.Add(d);
-                }
-                Station s=DataSource.StationList.Find(s => (s.id == c.StationId)  );
-                if (s.id != 0)
-                { 
-                    s.ChargeSlots++;
-                    DataSource.StationList.RemoveAll(s => (s.id == c.StationId));
-                    DataSource.StationList.Add(s);
-                }
+                DataSource.DroneList.ForEach(m => { if (m.id == c.DroneId) { m.Status = DroneStatuses.available; m.Battery = 100; } });
+                DataSource.StationList.ForEach(s => { if (s.id == c.StationId) s.ChargeSlots++; });
                 DataSource.DroneChargeList.Remove(c);
  
             }
@@ -213,11 +175,7 @@ namespace DAL
                 }
                 return notFound;
             }
-            public static Random r = new Random();
-            public int getParcelId()
-            {
-                return DataSource.config.assignParcelId.Next(100000000 + DataSource.ParcelList.Count(), 999999999);
-            }
+            public static Random r = new Random(); ///can we have this twice?????????????
         }
     }
 }
