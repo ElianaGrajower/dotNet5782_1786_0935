@@ -175,7 +175,7 @@ namespace DAL
                 }
                 return notFound;
             }
-            public static Random r = new Random(); ///can we have this twice?????????????
+            public static Random r = new Random(); ///can we have this twice???????????
         }
     }
 }
