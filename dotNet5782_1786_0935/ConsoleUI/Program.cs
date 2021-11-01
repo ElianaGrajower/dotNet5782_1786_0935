@@ -52,7 +52,7 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter name of model: ");
                                         Drone d = new Drone() { id = DalObject.r.Next(999999999, 100000000), Model = (Console.ReadLine()) };
-                                        Console.WriteLine("Enter maximum weight drone can hold");
+                                        Console.WriteLine("Enter maximum weight drone can hold: ");
                                         d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
                                         d.Battery = 100;
                                         d.Status = DroneStatuses.available;
@@ -76,7 +76,7 @@ namespace ConsoleUI
                                     }
                                 case 'D':
                                     {
-                                        Console.WriteLine("Enter Parcel weight:");
+                                        Console.WriteLine("Enter Parcel weight: ");
                                         Parcel p = new Parcel() { id = DalObject.r.Next(100000000, 999999999), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
                                         Data.getParcel(p);
                                         break;
@@ -93,7 +93,7 @@ namespace ConsoleUI
                                 "A- match a parcel to a drone\n" +
                                 "B- collect a parcel by drone\n" +
                                 "C- deliver a parcel to a customer\n" +
-                                "D- charge a drone" +
+                                "D- charge a drone\n" +
                                 "E- unpug a charging drone");
                             char updateChoice = char.Parse(Console.ReadLine());
                             switch (updateChoice)
@@ -171,7 +171,7 @@ namespace ConsoleUI
                                 Console.Write("customer ");
                             if (Choice_Print == 'D')
                                 Console.Write("pacel ");
-                            Console.WriteLine("id");
+                            Console.WriteLine("id: ");
                             Id = int.Parse(Console.ReadLine());
 
                             switch (Choice_Print)
@@ -245,9 +245,9 @@ namespace ConsoleUI
                 Console.WriteLine("Choose from the following options:");
                 Console.WriteLine("1- To add new item");
                 Console.WriteLine("2- To update item");
-                Console.WriteLine("3- to print item details");
-                Console.WriteLine("4-to print list of items");
-                Console.WriteLine("5-to exit");
+                Console.WriteLine("3- To print item details");
+                Console.WriteLine("4- To print list of items");
+                Console.WriteLine("5- To exit");
                 choice = int.Parse(Console.ReadLine());
             }
         }
