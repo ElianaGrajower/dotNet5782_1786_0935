@@ -211,7 +211,7 @@ namespace DAL
             public static Random r = new Random(); ///can we have this twice?????????????
             public int getParcelId()
             {
-                return DataSource.config.assignParcelId.Next(100000000+DataSource.ParcelList.Count(), 999999999);
+                return DataSource.config.assignParcelId.Next(100000000 + DataSource.ParcelList.Count(), 999999999);
             }
         }
     }
