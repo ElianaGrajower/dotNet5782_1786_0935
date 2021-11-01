@@ -9,22 +9,144 @@ namespace ConsoleUI
     class Program
     {
         static DalObject Data;
-
         static void Main(string[] args)
         {
+            Data = new DalObject();
             int choice;
             Console.WriteLine("Choose from the following options:");
             Console.WriteLine("1- To add new item");
             Console.WriteLine("2- To update item");
-            Console.WriteLine("3- to print item details");
-            Console.WriteLine("4-to print list of items");
+            Console.WriteLine("3- To print item details");
+            Console.WriteLine("4- To print list of items");
             choice = int.Parse(Console.ReadLine());
             while (choice != 5)
             {
                 switch (choice)
                 {
                     case 1:
+                        {
+                            Console.WriteLine("Enter your choice:\n" +
+                                "A- add a station\n" +
+                                "B- add a drone\n" +
+                                "C- add a customer\n" +
+                                "D- add a parcel");
+                            char addingChoice = char.Parse(Console.ReadLine());
+                            switch (addingChoice)
+                            {
+                                case 'A':
+                                    {
+                                        Console.WriteLine("Enter name of station: ");
+                                        Station s = new Station() { Name = int.Parse(Console.ReadLine()) };
+                                        Console.WriteLine("Enter ID of station: ");
+                                        s.id = int.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter amount of charge slots that station has: ");
+                                        s.ChargeSlots = int.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter Your longitude coordinates: ");
+                                        s.Longitude = double.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter Your lattitude coordinates: ");
+                                        s.Lattitude = double.Parse(Console.ReadLine());
+                                        Data.AddStation(s);
+                                        break;
+                                    }
+                                case 'B':
+                                    {
+                                        Console.WriteLine("Enter name of model: ");
+                                        Drone d = new Drone() { id = DalObject.r.Next(999999999, 100000000), Model = (Console.ReadLine()) };
+                                        Console.WriteLine("Enter maximum weight drone can hold");
+                                        d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
+                                        d.Battery = 100;
+                                        d.Status = DroneStatuses.available;
+                                        Data.AddDrone(d);
+                                        break;
+                                    }
+                                case 'C':
+                                    {
+                                        Console.WriteLine("Enter name of customer: ");
+                                        Customer c = new Customer() { id = DalObject.r.Next( 100000000, 999999999), Name = (Console.ReadLine()) };
+                                        Console.WriteLine("Enter phone number of customer: ");
+                                        c.Phone = Console.ReadLine();
+                                        Console.WriteLine("Enter Your longitude coordinates: ");
+                                        c.Longitude = double.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter Your lattitude coordinates: ");
+                                        c.Lattitude = double.Parse(Console.ReadLine());
+                                        Data.AddCustomer(c);
+                                        break;
+                                    }
+                                case 'D':
+                                    {
+                                        Console.WriteLine("Enter Parcel weight:");
+                                        Parcel p = new Parcel() { id = DalObject.r.Next(100000000, 999999999), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
+                                        Data.getParcel(p);
+                                        break;
+                                    }
+                                default:
+                                    Console.WriteLine("ERROR CHOICE NOT VALID");
+                                    break;
+                            }
+                            break;
+                        }
                     case 2:
+                        {
+                            Console.WriteLine("Enter your choice:\n" +
+                                "A- match a parcel to a drone\n" +
+                                "B- collect a parcel by drone\n" +
+                                "C- deliver a parcel to a customer\n" +
+                                "D- charge a drone" +
+                                "E- unpug a charging drone");
+                            char updateChoice = char.Parse(Console.ReadLine());
+                            switch (updateChoice)
+                            {
+                                case 'A':
+                                    {
+                                        Console.WriteLine("Enter parcel id: ");
+                                        int parcelId = int.Parse(Console.ReadLine());
+                                        Data.matchUpParcel(Data.findParcel(parcelId));
+                                        break;
+                                    }
+                                case 'B':
+                                    {
+                                        Console.WriteLine("Enter parcel id: ");
+                                        int parcelId = int.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter customer id: ");
+                                        int customerId = int.Parse(Console.ReadLine());
+                                        Data.pickUpParcel(Data.findCustomer(customerId), Data.findParcel(parcelId));
+                                        break;
+                                    }
+                                case 'C':
+                                    {
+                                        Console.WriteLine("Enter parcel id: ");
+                                        int parcelId = int.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter customer id: ");
+                                        int customerId = int.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter level of priority: ");
+                                        int priorityLevel = int.Parse(Console.ReadLine());
+                                        Data.deliverParcel(Data.findCustomer(customerId), Data.findParcel(parcelId), priorityLevel);
+                                        break;
+                                    }
+                                case 'D':
+                                    {
+                                        Console.WriteLine("Enter drone id: ");
+                                        int droneId = int.Parse(Console.ReadLine());
+                                        int stationNum;
+                                        Console.WriteLine("Enter name of station you want to charge drone at:");
+                                        Data.printAvailableCharge();
+                                        stationNum = int.Parse(Console.ReadLine());
+                                        Data.chargeDrone(Data.findDrone(droneId), stationNum);
+                                        break;
+                                    }
+                                case 'E':
+                                    {
+                                        Console.WriteLine("Enter drone id: ");
+                                        int droneId = int.Parse(Console.ReadLine());
+                                        Data.releaseDrone(Data.findDroneCharge(droneId));
+                                        break;
+                                    }
+                                default:
+                                    Console.WriteLine("ERROR CHOICE NOT VALID");
+                                    break;
+                            }
+                            break;
+                        }
                     case 3:
                         {
                             char Choice_Print;
@@ -104,7 +226,7 @@ namespace ConsoleUI
                                 case 'D':
                                     {
                                         Data.printParcelsList();
-                                        break;             
+                                        break;
                                     }
                                 default:
                                     break;
@@ -114,7 +236,6 @@ namespace ConsoleUI
                     default:
                         Console.WriteLine("ERROR INVALID CHOICE");
                         break;
-                
                 }
                 Console.WriteLine("Choose from the following options:");
                 Console.WriteLine("1- To add new item");
@@ -122,156 +243,6 @@ namespace ConsoleUI
                 Console.WriteLine("3- to print item details");
                 Console.WriteLine("4-to print list of items");
                 Console.WriteLine("5-to exit");
-            }
-
-            //  IDAL.DO.BaseStation baseStation = new IDAL.DO.BaseStation();
-            //   Console.WriteLine(baseStation);
-            int choice;
-            Console.WriteLine("Choose from the following options:");
-            Console.WriteLine("1- To add new item");
-            Console.WriteLine("2- To update item");
-            Console.WriteLine("3- To print item details");
-            Console.WriteLine("4- To print list of items");
-            Console.WriteLine("5- End program");
-            choice = int.Parse(Console.ReadLine());
-            Data = new DalObject();
-            while (choice != 5)
-            {
-                switch(choice)
-                {
-                    case 1:
-                        {
-                            Console.WriteLine("Enter your choice:\n" +
-                                "A- add a station\n" + 
-                                "B- add a drone\n" + 
-                                "C- add a customer\n" + 
-                                "D- add a parcel");
-                            char addingChoice = char.Parse(Console.ReadLine());
-                            switch (addingChoice)
-                            {
-                                case 'A':
-                                    {
-                                        Console.WriteLine("Enter name of station: ");
-                                        Station s = new Station() { id = DalObject.r.Next(999999999, 100000000), Name = int.Parse(Console.ReadLine()) };
-                                        Console.WriteLine("Enter amount of charge slots that station has: ");
-                                        s.ChargeSlots = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter Your longitude coordinates: ");
-                                        s.Longitude = double.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter Your lattitude coordinates: ");
-                                        s.Lattitude = double.Parse(Console.ReadLine());                                   
-                                        Data.AddStation(s);
-                                        break;
-                                    }
-                                case 'B':
-                                    {
-                                        Console.WriteLine("Enter name of model: ");
-                                        Drone d = new Drone() { id = DalObject.r.Next(999999999, 100000000), Model = (Console.ReadLine()) };
-                                        Console.WriteLine("Enter maximum weight drone can hold");
-                                        d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
-                                        d.Battery = 100;
-                                        d.Status = DroneStatuses.available;
-                                        Data.AddDrone(d);
-                                        break;
-                                    }
-                                case 'C':
-                                    {
-                                        Console.WriteLine("Enter name of customer: ");
-                                        Customer c = new Customer() { id = DalObject.r.Next(999999999, 100000000), Name = (Console.ReadLine()) };
-                                        Console.WriteLine("Enter phone number of customer: ");
-                                        c.Phone = Console.ReadLine();
-                                        Console.WriteLine("Enter Your longitude coordinates: ");
-                                        c.Longitude = double.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter Your lattitude coordinates: ");
-                                        c.Lattitude = double.Parse(Console.ReadLine());
-                                        Data.AddCustomer(c);
-                                        break;
-                                    }
-                                case 'D':
-                                    {
-                                        Console.WriteLine("Enter Parcel weight:");
-                                        Parcel p = new Parcel() { id = DalObject.r.Next(999999999, 100000000), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
-                                        Data.getParcel(p);
-                                        break;
-                                    }
-                                default:
-                                    Console.WriteLine("ERROR CHOICE NOT VALID");
-                                    break;
-                            }
-                            break;
-                        }
-                    case 2:
-                        {
-                            Console.WriteLine("Enter your choice:\n" +
-                                "A- match a parcel to a drone\n" + 
-                                "B- collect a parcel by drone\n" + 
-                                "C- deliver a parcel to a customer\n" + 
-                                "D- charge a drone" + 
-                                "E- unpug a charging drone");
-                            char updateChoice = char.Parse(Console.ReadLine());
-                            switch (updateChoice)
-                            {
-                                case 'A':
-                                    {
-                                        Console.WriteLine("Enter parcel id: ");
-                                        int parcelId = int.Parse(Console.ReadLine());
-                                        Data.matchUpParcel(Data.findParcel(parcelId));
-                                        break;
-                                    }
-                                case 'B':
-                                    {
-                                        Console.WriteLine("Enter parcel id: ");
-                                        int parcelId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter customer id: ");
-                                        int customerId = int.Parse(Console.ReadLine());
-                                        Data.pickUpParcel(Data.findCustomer(customerId), Data.findParcel(parcelId));
-                                        break;
-                                    }
-                                case 'C':
-                                    {
-                                        Console.WriteLine("Enter parcel id: ");
-                                        int parcelId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter customer id: ");
-                                        int customerId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter level of priority: ");
-                                        int priorityLevel = int.Parse(Console.ReadLine());
-                                        Data.deliverParcel(Data.findCustomer(customerId), Data.findParcel(parcelId), priorityLevel);
-                                        break;
-                                    }
-                                case 'D':
-                                    {
-                                        Console.WriteLine("Enter drone id: ");
-                                        int droneId = int.Parse(Console.ReadLine());
-                                        int stationNum;
-                                        Console.WriteLine("Enter name of station you want to charge drone at:");
-                                        Data.printAvailableCharge();
-                                        stationNum = int.Parse(Console.ReadLine());
-                                        Data.chargeDrone(Data.findDrone(droneId),stationNum);
-                                        break;
-                                    }
-                                case 'E':
-                                    {
-                                        Console.WriteLine("Enter drone id: ");
-                                        int droneId = int.Parse(Console.ReadLine());
-                                        Data.releaseDrone(Data.findDroneCharge(droneId));
-                                        break;
-                                    }
-                                default:
-                                    Console.WriteLine("ERROR CHOICE NOT VALID");
-                                    break;
-                            }
-                            break;
-                        }
-                    case 3: 
-                    case 4:
-                    default: Console.WriteLine("ERROR INVALID CHOICE");
-                        break;
-                }
-                Console.WriteLine("Choose from the following options:");
-                Console.WriteLine("1- To add new item");
-                Console.WriteLine("2- To update item");
-                Console.WriteLine("3- To print item details");
-                Console.WriteLine("4- To print list of items");
-                Console.WriteLine("5- End program");
                 choice = int.Parse(Console.ReadLine());
             }
         }
