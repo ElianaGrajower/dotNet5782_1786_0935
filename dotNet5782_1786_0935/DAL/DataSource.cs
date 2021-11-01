@@ -19,7 +19,7 @@ namespace DAL
             internal static List<DroneCharge> DroneChargeList = new List<DroneCharge>();
             internal class config
             {
-                
+                public static Random assignParcelId = new Random();
             }
             public static void Initialize()
             {
@@ -58,7 +58,7 @@ namespace DAL
                     for (int i = 0; i < 10; i++)
                         ParcelList.Add(new Parcel()
                         {
-                            id = r.Next( 100000000 + ParcelList.Count(), 999999999),
+                            id = config.assignParcelId.Next( 100000000 + ParcelList.Count(), 999999999),
                             SenderId = r.Next(100000000, 999999999),
                             TargetId = r.Next(100000000, 999999999),
                             DroneId = r.Next(100000000, 999999999),
