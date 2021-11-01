@@ -29,29 +29,32 @@ namespace DAL
             {
                 DataSource.ParcelList.Add(p);
             }
-            public void printStationsList()
+            public List<Station> printStationsList()
             {
-                DataSource.StationList.ForEach(s => PrintStation(s.id));
+                return DataSource.StationList;
             }
-            public void printDronesList()
+            public List<Drone> printDronesList()
             {
-                DataSource.DroneList.ForEach(d =>  PrintDrone(d.id));
+                return DataSource.DroneList;
             }
-            public void printCustomersList()
+            public List<Customer> printCustomersList()
             {
-                DataSource.CustomerList.ForEach(c => PrintCustomer(c.id));
+                return DataSource.CustomerList;
+                
             }
-            public void printParcelsList()
+            public List<Parcel> printParcelsList()
             {
-                DataSource.ParcelList.ForEach(p => PrintParcel(p.id));
+                return DataSource.ParcelList; 
             }
-            public void printAvailableCharge()
+            public List<Station> printAvailableCharge()
             {
-                DataSource.StationList.ForEach(s=> { if (s.ChargeSlots >0) s.ToString(); });
+                return DataSource.StationList;
+               
             }
-            public void printNotAssigned()//prints all parcel not yet assigned to drone
+            public List<Parcel> printNotAssigned()//prints all parcel not yet assigned to drone
             {
-                DataSource.ParcelList.ForEach(s => { if (s.DroneId==0) s.ToString(); });
+                return DataSource.ParcelList;
+               
             }
             public void matchUpParcel(Parcel p) //matches up package with drone
             {
