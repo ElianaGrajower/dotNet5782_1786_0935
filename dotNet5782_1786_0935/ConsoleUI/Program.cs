@@ -131,9 +131,8 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
                                         int stationNum;
-                                        Data.printStationsList().ForEach(s => { if(s.ChargeSlots == 0) s.ToString(); });
+                                        Data.printStationsList().ForEach(s => { if(s.ChargeSlots == 0) s.ToString();});
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
-                                        //Data.printAvailableCharge();
                                         stationNum = int.Parse(Console.ReadLine());
                                         Data.chargeDrone(Data.findDrone(droneId), stationNum);
                                         break;
