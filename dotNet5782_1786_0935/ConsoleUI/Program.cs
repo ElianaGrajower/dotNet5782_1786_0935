@@ -177,22 +177,22 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
-                                        Console.WriteLine(Data.PrintStation(Id).ToString()); 
+                                        Console.WriteLine(Data.PrintStation(Id).ToString() ); 
                                         break;
                                     }
                                 case 'B':
                                     {
-                                        Data.PrintDrone(Id).ToString();
+                                        Console.WriteLine(Data.PrintDrone(Id).ToString());
                                         break;
                                     }
                                 case 'C':
                                     {
-                                        Data.PrintCustomer(Id).ToString();
+                                        Console.WriteLine(Data.PrintCustomer(Id).ToString());
                                         break;
                                     }
                                 case 'D':
                                     {
-                                        Data.PrintParcel(Id).ToString();
+                                        Console.WriteLine(Data.PrintParcel(Id).ToString());
                                         break;
                                     }
                                 default: break;
