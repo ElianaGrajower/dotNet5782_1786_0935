@@ -172,7 +172,6 @@ namespace ConsoleUI
                                 Console.Write("pacel ");
                             Console.WriteLine("id: ");
                             Id = int.Parse(Console.ReadLine());
-
                             switch (Choice_Print)
                             {
                                 case 'A':
