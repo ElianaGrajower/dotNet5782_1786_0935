@@ -62,7 +62,9 @@ namespace ConsoleUI
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter name of customer: ");
-                                        Customer c = new Customer() { id = DalObject.r.Next( 100000000, 999999999), Name = (Console.ReadLine()) };
+                                        Customer c = new Customer() { Name = (Console.ReadLine()) };
+                                        Console.WriteLine("Enter Id of customer: ");
+                                        c.id = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter phone number of customer: ");
                                         c.Phone = Console.ReadLine();
                                         Console.WriteLine("Enter Your longitude coordinates: ");
