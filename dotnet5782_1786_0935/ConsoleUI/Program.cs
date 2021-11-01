@@ -128,8 +128,9 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
                                         int stationNum;
+                                        Data.printStationsList().ForEach(s => { if(s.ChargeSlots == 0) s.ToString(); });
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
-                                        Data.printAvailableCharge();
+                                        //Data.printAvailableCharge();
                                         stationNum = int.Parse(Console.ReadLine());
                                         Data.chargeDrone(Data.findDrone(droneId), stationNum);
                                         break;
@@ -173,22 +174,22 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
-                                        Data.PrintStation(Id);
+                                        Data.PrintStation(Id).ToString();
                                         break;
                                     }
                                 case 'B':
                                     {
-                                        Data.PrintDrone(Id);
+                                        Data.PrintDrone(Id).ToString();
                                         break;
                                     }
                                 case 'C':
                                     {
-                                        Data.PrintCustomer(Id);
+                                        Data.PrintCustomer(Id).ToString();
                                         break;
                                     }
                                 case 'D':
                                     {
-                                        Data.PrintParcel(Id);
+                                        Data.PrintParcel(Id).ToString();
                                         break;
                                     }
                                 default: break;
@@ -210,22 +211,22 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
-                                        Data.printStationsList();
+                                        Data.printStationsList().ForEach(s => Console.WriteLine(s.ToString() +"\n"));
                                         break;
                                     }
                                 case 'B':
                                     {
-                                        Data.printDronesList();
+                                        Data.printDronesList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'C':
                                     {
-                                        Data.printCustomersList();
+                                        Data.printCustomersList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'D':
                                     {
-                                        Data.printParcelsList();
+                                        Data.printParcelsList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 default:
