@@ -10,14 +10,14 @@ namespace IDAL
     {
         public struct Station
         {
-            public int id { set; get; }
+            public int StationId { set; get; } 
             public int Name { set; get; }
             public double Longitude { set; get; }
             public double Lattitude { set; get; }
-            public int ChargeSlots { set; get; }
+            public int ChargeSlots { set; get; } //the amount of available charge slots in the station
             public override string ToString()
             {
-                return String.Format($"id: {id}\nName: {Name}\nLongitude: {Longitude}\nLattitude: {Lattitude}\nChargeSlots: {ChargeSlots}");
+                return String.Format($"Id: {StationId}\nName: {Name}\nLongitude: {Longitude}\nLattitude: {Lattitude}\nChargeSlots: {ChargeSlots}");
             }
         }
     }

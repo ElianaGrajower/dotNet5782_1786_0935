@@ -10,14 +10,14 @@ namespace IDAL
     {
        public struct Customer
         {
-            public int id { set; get; }
+            public int CustomerId { set; get; }
             public string Name { set; get; }
             public string Phone { set; get; }
             public double Longitude { set; get; }
             public double Lattitude { set; get; }
             public override string ToString()
             {
-                return String.Format($"id: {id}\nName: {Name}\nPhone: {Phone}\nLongitude: {Longitude}\nLattitude: {Lattitude}");
+                return String.Format($"Id: {CustomerId}\nName: {Name}\nPhone: {Phone}\nLongitude: {Longitude}\nLattitude: {Lattitude}");
             }
         }
     }
