@@ -55,7 +55,7 @@ namespace DAL
                 Drone drone = new Drone();
                 drone = (DataSource.DroneList.Find(temp => temp.Status == DroneStatuses.available && temp.MaxWeight >= parcel.Weight)); //finds avail drone that can contain weight of pckg
                 DataSource.DroneList.RemoveAll(temp => temp.DroneId == drone.DroneId); //removes the availabe drone
-                if (drone.DroneId != 0) //if found drone updates info to match pckg
+                if (drone.DroneId != 0 && parcel.ParcelId!=0) //if found drone updates info to match pckg
                 {
                     parcel.DroneId = drone.DroneId;
                     parcel.Scheduled = DateTime.Now;
@@ -117,7 +117,7 @@ namespace DAL
                 string complete = "Your request was completed successfully";
                 drone.Status = DroneStatuses.maintenance;
                 Station station = DataSource.StationList.Find(temp => (temp.Name == stationNum)); //builds station
-                if (station.StationId != 0) //if station exists updates it
+                if (station.StationId != 0 && drone.DroneId!=0) //if station exists updates it
                 {
                     DataSource.StationList.Remove(station); //removes station
                     DataSource.DroneList.Remove(drone); //removes station
@@ -161,10 +161,13 @@ namespace DAL
             }
             public string PrintStation(int stationId) //prints a station
             {
+                if(findStation(stationId).StationId!=0)
                 return findStation(stationId).ToString();
+                return "Your request could not be completed"; 
             }
             public string PrintDrone(int droneId) //prints a drone
             {
+                
                 return findDrone(droneId).ToString();
             }
             public string PrintCustomer(int customerId) //prints a customer
