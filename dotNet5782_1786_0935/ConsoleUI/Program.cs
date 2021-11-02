@@ -164,6 +164,8 @@ namespace ConsoleUI
                                         Data.printCustomersList().ForEach(s => { Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude, s.Longitude, latitude, longitutde)); });
                                         break;
                                     }
+                                
+                                     
                                 default:
                                     Console.WriteLine("ERROR CHOICE NOT VALID");
                                     break;
