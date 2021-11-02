@@ -261,13 +261,25 @@ namespace ConsoleUI
                                     }
                                 case 'E': //prints parcel that was not matched up to drone list
                                     {
+                                        Parcel check = Data.printParcelsList().Find(s => s.DroneId != 0);
+                                        if (check.DroneId == 0)
+                                        {
+                                            Console.WriteLine("All parcels matched up to drone");
+                                            break;
+                                        }
                                         Console.WriteLine("List of parcel not matched up with drones:");
                                         Data.printParcelsList().ForEach(s => { if (s.DroneId == 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
                                 case 'F': //prints charge station with available charge list
                                     {
-                                        Console.WriteLine("List of stations with available charging slots:");
+                                        Station check = Data.printStationsList().Find(s => s.ChargeSlots != 0);
+                                        if (check.StationId==0)
+                                        {
+                                            Console.WriteLine("No available charge slots at any station");
+                                            break;
+                                        }
+                                        Console.WriteLine("List of stations with available charging drone:");
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
