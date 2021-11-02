@@ -112,7 +112,7 @@ namespace ConsoleUI
                                         int parcelId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter customer id: ");
                                         int customerId = int.Parse(Console.ReadLine());
-                                        Data.pickUpParcel(Data.findCustomer(customerId), Data.findParcel(parcelId));
+                                        Console.WriteLine(Data.pickUpParcel(Data.findCustomer(customerId), Data.findParcel(parcelId))); 
                                         break;
                                     }
                                 case 'C':
@@ -123,7 +123,7 @@ namespace ConsoleUI
                                         int customerId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter level of priority: ");
                                         int priorityLevel = int.Parse(Console.ReadLine());
-                                        Data.deliverParcel(Data.findCustomer(customerId), Data.findParcel(parcelId), priorityLevel);
+                                        Console.WriteLine(Data.deliverParcel(Data.findCustomer(customerId), Data.findParcel(parcelId), priorityLevel)); 
                                         break;
                                     }
                                 case 'D':
@@ -134,14 +134,14 @@ namespace ConsoleUI
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
                                         stationNum = int.Parse(Console.ReadLine());
-                                        Data.chargeDrone(Data.findDrone(droneId), stationNum);
+                                        Console.WriteLine(Data.chargeDrone(Data.findDrone(droneId), stationNum)); 
                                         break;
                                     }
                                 case 'E':
                                     {
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        Data.releaseDrone(Data.findDroneCharge(droneId));
+                                        Console.WriteLine(Data.releaseDrone(Data.findDroneCharge(droneId))); 
                                         break;
                                     }
                                 case 'F':
@@ -151,7 +151,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter latitude coordinates: ");
                                         double latitude= double.Parse(Console.ReadLine());
                                         Console.WriteLine("the distance is:");
-                                        Data.printStationsList().ForEach(s => {   Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude,s.Longitude,latitude,longitutde)); });
+                                        Data.printStationsList().ForEach(s => { Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude, s.Longitude, latitude, longitutde)); });
                                         break;
                                     }
                                 case 'G':
@@ -164,6 +164,8 @@ namespace ConsoleUI
                                         Data.printCustomersList().ForEach(s => { Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude, s.Longitude, latitude, longitutde)); });
                                         break;
                                     }
+                                
+                                     
                                 default:
                                     Console.WriteLine("ERROR CHOICE NOT VALID");
                                     break;
