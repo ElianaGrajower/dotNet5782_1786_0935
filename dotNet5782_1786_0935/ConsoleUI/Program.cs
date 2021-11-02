@@ -50,7 +50,7 @@ namespace ConsoleUI
                                 case 'B':
                                     {
                                         Console.WriteLine("Enter name of model: ");
-                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = "Model " + (Console.ReadLine()) };
+                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = "Model-" + (Console.ReadLine()) };
                                         Console.WriteLine("Enter maximum weight drone can hold: ");
                                         d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
                                         d.Battery = 100; 
@@ -62,7 +62,6 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter name of customer: ");
                                         Customer c = new Customer() { Name = "Customer-" + (Console.ReadLine()) }; 
-                                        Customer c = new Customer() { Name = "Customer " + (Console.ReadLine()) }; 
                                         Console.WriteLine("Enter Id of customer: ");
                                         c.id = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter phone number of customer: ");
@@ -78,7 +77,7 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter Parcel weight: ");
                                         Parcel p = new Parcel() { id = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
-                                        Data.getParcel(p);
+                                        Data.AddParcel(p);
                                         break;
                                     }
                                 default:
@@ -102,7 +101,7 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter parcel id: ");
                                         int parcelId = int.Parse(Console.ReadLine());
-                                        Data.matchUpParcel(Data.findParcel(parcelId));
+                                        Console.WriteLine(Data.matchUpParcel(Data.findParcel(parcelId)) + "\n");
                                         break;
                                     }
                                 case 'B':
