@@ -61,6 +61,7 @@ namespace ConsoleUI
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter name of customer: ");
+                                        Customer c = new Customer() { Name = "Customer-" + (Console.ReadLine()) }; 
                                         Customer c = new Customer() { Name = "Customer " + (Console.ReadLine()) }; 
                                         Console.WriteLine("Enter Id of customer: ");
                                         c.id = int.Parse(Console.ReadLine());
