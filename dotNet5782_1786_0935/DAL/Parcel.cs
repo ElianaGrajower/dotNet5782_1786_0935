@@ -22,7 +22,7 @@ namespace IDAL
             public DateTime Delivered { set; get; }
             public override string ToString()
             {
-                return String.Format($"Id: {id}\nSender Id: {SenderId}\nTarget Id: {TargetId}\nWeight: {Weight}\nPriority: {Priority}\nDrone Id: {DroneId}\nRequested: { Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}");
+                return String.Format($" Parcel Id: {id}\nSender Id: {SenderId}\nTarget Id: {TargetId}\nWeight: {Weight}\nPriority: {Priority}\nDrone Id: {DroneId}\nRequested: { Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}");
                 
                 
 

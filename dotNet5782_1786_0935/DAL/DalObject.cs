@@ -13,7 +13,7 @@ namespace DAL
         public class DalObject
         {
             public DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
-            public void AddStation(Station s) //adds station o list
+            public void AddStation(Station s) //adds station to list
             {
                 DataSource.StationList.Add(s);
             }
@@ -29,11 +29,11 @@ namespace DAL
             {
                 DataSource.ParcelList.Add(p);
             }
-            public List<Station> printStationsList()
+            public List<Station> printStationsList() 
             {
                 return DataSource.StationList;
             }
-            public List<Drone> printDronesList()
+            public List<Drone> printDronesList() 
             {
                 return DataSource.DroneList;
             }
@@ -176,6 +176,22 @@ namespace DAL
             {
                 return DataSource.config.assignParcelId.Next(100000000 + DataSource.ParcelList.Count(), 999999999);
             }
+            public double distance(double x1,double y1, double x2, double y2)
+            {
+                x1 = x1 - x2;
+                y1 = y1 - y2;
+                x1 = Math.Pow(x1, 2);
+                y1 = Math.Pow(y1, 2);
+                x1 = x1 + y1;
+                return Math.Sqrt(x1);
+
+            }
+            //for main:
+            //Console.WriteLine("enter coordinates);
+            //    get them;
+            //Data.printStationsList().ForEach(s => Console.WriteLine(s.name dis +"\n"));
+           
+
         }
     }
 }
