@@ -87,6 +87,9 @@ namespace DAL
             }
             public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel) //matches up parcel with buyer
             {
+                
+                if(customer.CustomerId==0)
+                    return "Your request could not be completed";
                 string complete = "Your request was completed successfully";
                 parcel.TargetId = customer.CustomerId;
                 parcel.Delivered = DateTime.Now;
@@ -114,6 +117,7 @@ namespace DAL
             {
                 string complete = "Your request was completed successfully";
                 drone.Status = DroneStatuses.maintenance;
+                drone.Battery = 0;
                 Station station = DataSource.StationList.Find(temp => (temp.Name == stationNum)); //builds station
                 if (station.StationId != 0 && drone.DroneId != 0) //if station exists updates it
                 {
