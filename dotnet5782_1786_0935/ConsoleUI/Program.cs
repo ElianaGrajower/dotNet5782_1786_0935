@@ -164,26 +164,8 @@ namespace ConsoleUI
                                         Data.printCustomersList().ForEach(s => { Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude, s.Longitude, latitude, longitutde)); });
                                         break;
                                     }
-                                case 'F':
-                                    {
-                                        Console.WriteLine("Enter langitude coordinates: ");
-                                        double longitutde = double.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter latitude coordinates: ");
-                                        double latitude= double.Parse(Console.ReadLine());
-                                        Console.WriteLine("the distance is:");
-                                        Data.printStationsList().ForEach(s => {   Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude,s.Longitude,latitude,longitutde)); });
-                                        break;
-                                    }
-                                case 'G':
-                                    {
-                                        Console.WriteLine("Enter langitude coordinates: ");
-                                        double longitutde = double.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter latitude coordinates: ");
-                                        double latitude = double.Parse(Console.ReadLine());
-                                        Console.WriteLine("the distance is:");
-                                        Data.printCustomersList().ForEach(s => { Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude, s.Longitude, latitude, longitutde)); });
-                                        break;
-                                    }
+                                
+                                     
                                 default:
                                     Console.WriteLine("ERROR CHOICE NOT VALID");
                                     break;
