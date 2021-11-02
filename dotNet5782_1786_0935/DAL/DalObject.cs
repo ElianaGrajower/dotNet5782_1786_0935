@@ -251,7 +251,7 @@ namespace DAL
                 //ditance between 2 points is: sqrt of- pow2(x1-x2) + pow2(y1-y2)
                 lattitude1 = lattitude1 - lattitude2; //(x1-x2)
                 longitute1 = longitute1 - longitute2; //(y1 - y2)
-                lattitude1 = Math.Pow(lattitude1, 2); //pow2(update)
+                lattitude1 = Math.Pow((lattitude1), 2); //pow2(update)
                 longitute1 = Math.Pow(longitute1, 2); //pow2(update)
                 lattitude1 = lattitude1 + longitute1; //update + update
                 return Math.Sqrt(lattitude1); //sqrt of update

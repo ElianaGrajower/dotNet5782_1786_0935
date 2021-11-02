@@ -58,15 +58,9 @@ namespace DAL
                     ParcelList.Add(new Parcel()
                     {
                         ParcelId = config.assignParcelId.Next(100000000 + ParcelList.Count(), 999999999),
-                        SenderId = DalObject.r.Next(100000000, 999999999),
-                        TargetId = DalObject.r.Next(100000000, 999999999),
-                        DroneId = DalObject.r.Next(100000000, 999999999),
                         Weight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a weight from light, average, heavy
-                        Priority = (IDAL.DO.Priorities)DalObject.r.Next(0, 2), //chooses a priority from regular, fast, emergency
                         Requested = DateTime.Now,
-                        Scheduled = DateTime.Today,
-                        PickedUp = DateTime.Today,
-                        Delivered = DateTime.Today,
+                       
                     });
             }
             static void CreateCustomer() //creats a customer with random information
