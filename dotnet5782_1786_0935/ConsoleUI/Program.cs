@@ -76,7 +76,7 @@ namespace ConsoleUI
                                 case 'D': //adds a parcel
                                     {
                                         Console.WriteLine("Enter Parcel weight: ");
-                                        Parcel p = new Parcel() { ParcelId = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
+                                        Parcel p = new Parcel() { ParcelId = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), Requested = DateTime.Now, };
                                         Data.AddParcel(p); //builds and adds a parcel using the information the user provided
                                         break;
                                     }
