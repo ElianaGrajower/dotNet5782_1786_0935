@@ -11,7 +11,7 @@ namespace DAL
     {
         internal class DataSource
         {
-            public static Random r = new Random();     //**************does this need this here
+            
             internal static List<Parcel> ParcelList = new List<Parcel>();
             internal static List<Drone> DroneList = new List<Drone>();
             internal static List<Station> StationList = new List<Station>();
@@ -33,12 +33,12 @@ namespace DAL
                 for (int i = 0; i < 2; i++)
                     StationList.Add(new Station()
                     {
-                        id = r.Next(100000000, 999999999),
-                        Name = r.Next(1, 5),
-                        Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getc
+                        id = DalObject.r.Next(100000000, 999999999),
+                        Name = DalObject.r.Next(1, 5),
+                        Longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)),   //getc
                                                                           //oordinates(-90,90),
-                        Lattitude = (r.NextDouble() + r.Next(-180, 179)),
-                        ChargeSlots = r.Next(1, 100)
+                        Lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)),
+                        ChargeSlots = DalObject.r.Next(1, 100)
 
                     });
             }
@@ -47,10 +47,10 @@ namespace DAL
                 for (int i = 0; i < 5; i++)
                     DroneList.Add(new Drone()
                     {
-                        id = r.Next(100000000, 999999999),
+                        id = DalObject.r.Next(100000000, 999999999),
                         Model = "Model-" + i,
-                        MaxWeight = (IDAL.DO.WeightCategories)r.Next(1, 3),
-                        Status = (IDAL.DO.DroneStatuses)r.Next(1, 3),
+                        MaxWeight = (IDAL.DO.WeightCategories)DalObject.r.Next(1, 3),
+                        Status = (IDAL.DO.DroneStatuses)DalObject.r.Next(1, 3),
                     });
             }
             static void CreateParcel()
@@ -59,11 +59,11 @@ namespace DAL
                     ParcelList.Add(new Parcel()
                     {
                         id = config.assignParcelId.Next(100000000 + ParcelList.Count(), 999999999),
-                        SenderId = r.Next(100000000, 999999999),
-                        TargetId = r.Next(100000000, 999999999),
-                        DroneId = r.Next(100000000, 999999999),
-                        Weight = (IDAL.DO.WeightCategories)r.Next(1, 3),
-                        Priority = (IDAL.DO.Priorities)r.Next(1, 3),
+                        SenderId = DalObject.r.Next(100000000, 999999999),
+                        TargetId = DalObject.r.Next(100000000, 999999999),
+                        DroneId = DalObject.r.Next(100000000, 999999999),
+                        Weight = (IDAL.DO.WeightCategories)DalObject.r.Next(1, 3),
+                        Priority = (IDAL.DO.Priorities)DalObject.r.Next(1, 3),
                         Requested = DateTime.Now,
                         Scheduled = DateTime.Today,
                         PickedUp = DateTime.Today,
@@ -75,11 +75,11 @@ namespace DAL
                 for (int i = 0; i < 10; i++)
                     CustomerList.Add(new Customer()
                     {
-                        id = r.Next(100000000, 999999999),
+                        id = DalObject.r.Next(100000000, 999999999),
                         Name = "Customer-" + i,
-                        Phone = "05" + r.Next(00000000, 99999999),
-                        Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
-                        Lattitude = (r.NextDouble() + r.Next(-180, 179)),
+                        Phone = "05" + DalObject.r.Next(00000000, 99999999),
+                        Longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)),   //getcoordinates(-90,90),
+                        Lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)),
                     });
             }
         }
