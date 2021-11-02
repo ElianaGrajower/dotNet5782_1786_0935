@@ -48,7 +48,7 @@ namespace DAL
                     DroneList.Add(new Drone()
                     {
                         id = r.Next(100000000, 999999999),
-                        Model = "Model " + i,
+                        Model = "Model-" + i,
                         MaxWeight = (IDAL.DO.WeightCategories)r.Next(1, 3),
                         Status = (IDAL.DO.DroneStatuses)r.Next(1, 3),
                     });
@@ -76,7 +76,7 @@ namespace DAL
                     CustomerList.Add(new Customer()
                     {
                         id = r.Next(100000000, 999999999),
-                        Name = "Customer " + i,
+                        Name = "Customer-" + i,
                         Phone = "05" + r.Next(00000000, 99999999),
                         Longitude = (r.NextDouble() + r.Next(-90, 89)),   //getcoordinates(-90,90),
                         Lattitude = (r.NextDouble() + r.Next(-180, 179)),
