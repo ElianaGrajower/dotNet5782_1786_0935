@@ -34,7 +34,7 @@ namespace DAL
                     StationList.Add(new Station()
                     {
                         StationId = DalObject.r.Next(100000000, 999999999),
-                        Name = DalObject.r.Next(1, 999),
+                        Name = DalObject.r.Next(1, 99),
                         Longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90) 
                         Lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
                         ChargeSlots = DalObject.r.Next(1, 100)
@@ -47,8 +47,9 @@ namespace DAL
                     {
                         DroneId = DalObject.r.Next(100000000, 999999999),
                         Model = "Model-" + i,
+                        Battery=100,
                         MaxWeight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a max weight from light, average, heavy
-                        Status = (IDAL.DO.DroneStatuses)DalObject.r.Next(0, 2), //chooses a status from available, maintenance, delivery
+                        Status = 0, //chooses a status from available, maintenance, delivery
                     });
             }
             static void CreateParcel() //creats a parcel with random information
