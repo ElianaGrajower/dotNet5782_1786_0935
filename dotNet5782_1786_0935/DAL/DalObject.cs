@@ -54,14 +54,14 @@ namespace DAL
                 string complete = "Your request was completed successfully";
                 Drone drone = new Drone();
                 drone = (DataSource.DroneList.Find(temp => temp.Status == DroneStatuses.available && temp.MaxWeight >= parcel.Weight)); //finds avail drone that can contain weight of pckg
-                DataSource.DroneList.RemoveAll(temp => temp.id == drone.id); //removes the availabe drone
-                if (drone.id != 0) //if found drone updates info to match pckg
+                DataSource.DroneList.RemoveAll(temp => temp.DroneId == drone.DroneId); //removes the availabe drone
+                if (drone.DroneId != 0) //if found drone updates info to match pckg
                 {
-                    parcel.DroneId = drone.id;
+                    parcel.DroneId = drone.DroneId;
                     parcel.Scheduled = DateTime.Now;
                     drone.Status = DroneStatuses.delivery;
                     DataSource.DroneList.Add(drone);
-                    DataSource.ParcelList.RemoveAll(temp => temp.id == parcel.id);
+                    DataSource.ParcelList.RemoveAll(temp => temp.ParcelId == parcel.ParcelId);
                     DataSource.ParcelList.Add(parcel); //adds updates parcel back into list of parcel
                     return complete;
                 }
@@ -71,16 +71,16 @@ namespace DAL
             public string pickUpParcel(Customer customer,Parcel parcel) //matches up packg with sender of pckg
             {
                 string complete = "Your request was completed successfully";
-                parcel.SenderId = customer.id;
+                parcel.SenderId = customer.CustomerId;
                 parcel.PickedUp = DateTime.Now;
                 Drone drone = new Drone(); //builds new drone
-                drone = (DataSource.DroneList.Find(temp => temp.id == parcel.SenderId)); //make new droen equal the one matched up with parcel
-                if (drone.id != 0 && parcel.id != 0) //if such a drone exists updaed drone
+                drone = (DataSource.DroneList.Find(temp => temp.DroneId == parcel.DroneId)); //make new droen equal the one matched up with parcel
+                if (drone.DroneId != 0 && parcel.ParcelId != 0) //if such a drone exists updaed drone
                 {
                     drone.Status = DroneStatuses.delivery;
-                    DataSource.DroneList.RemoveAll(temp=> temp.id == drone.id);
+                    DataSource.DroneList.RemoveAll(temp=> temp.DroneId == drone.DroneId);
                     DataSource.DroneList.Add(drone);
-                    DataSource.ParcelList.RemoveAll(temp => temp.id == parcel.id);
+                    DataSource.ParcelList.RemoveAll(temp => temp.ParcelId == parcel.ParcelId);
                     DataSource.ParcelList.Add(parcel);
                     return complete;
                 }
@@ -90,22 +90,22 @@ namespace DAL
             public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel) //matches up parcel with buyer
             {
                 string complete = "Your request was completed successfully";
-                parcel.TargetId = customer.id;
+                parcel.TargetId = customer.CustomerId;
                 parcel.Delivered = DateTime.Now;
                 parcel.Priority = (Priorities)priorityLevel;
                 Drone drone = new Drone(); //builds new drone
-                drone = (DataSource.DroneList.Find(temp => temp.id == parcel.DroneId));
-                if(drone.id!=0) //ensures drone exists and updates its status
+                drone = (DataSource.DroneList.Find(temp => temp.DroneId== parcel.DroneId));
+                if(drone.DroneId!=0) //ensures drone exists and updates its status
                 { 
                     drone.Status = DroneStatuses.available;
-                    DataSource.DroneList.RemoveAll(temp => temp.id == parcel.DroneId);
+                    DataSource.DroneList.RemoveAll(temp => temp.DroneId == parcel.DroneId);
                     DataSource.DroneList.Add(drone);
                 }
                 else
                     return "Your request could not be completed";
-                if (parcel.id != 0) //ensures parcel exists and updates its status
+                if (parcel.ParcelId!= 0) //ensures parcel exists and updates its status
                 {
-                    DataSource.ParcelList.RemoveAll(temp=> temp.id == parcel.id);
+                    DataSource.ParcelList.RemoveAll(temp=> temp.ParcelId == parcel.ParcelId);
                     DataSource.ParcelList.Add(parcel);
                     return complete;
                 }
@@ -117,14 +117,14 @@ namespace DAL
                 string complete = "Your request was completed successfully";
                 drone.Status = DroneStatuses.maintenance;
                 Station station = DataSource.StationList.Find(temp => (temp.Name == stationNum)); //builds station
-                if (station.id != 0) //if station exists updates it
+                if (station.StationId != 0) //if station exists updates it
                 {
                     DataSource.StationList.Remove(station); //removes station
                     DataSource.DroneList.Remove(drone); //removes station
                     station.ChargeSlots--;
                     DroneCharge charge = new DroneCharge();
-                    charge.DroneId = drone.id;
-                    charge.StationId = station.id;
+                    charge.DroneId = drone.DroneId;
+                    charge.StationId = station.StationId;
                     DataSource.DroneChargeList.Add(charge); //adds new charge to chargedroen list
                     DataSource.StationList.Add(station); //adds updated station
                     DataSource.DroneList.Add(drone); //adds updated drone
@@ -136,21 +136,21 @@ namespace DAL
             public string releaseDrone(DroneCharge charge) //releases drone from charge
             {
                 string complete = "Your request was completed successfully";
-                Drone drone = DataSource.DroneList.Find(temp => (temp.id == charge.DroneId)); //pulls correct drone
-                if (drone.id != 0) //if droen exists updates  
+                Drone drone = DataSource.DroneList.Find(temp => (temp.DroneId == charge.DroneId)); //pulls correct drone
+                if (drone.DroneId != 0) //if droen exists updates  
                 {
                     drone.Status = DroneStatuses.available;
                     drone.Battery = 100;
-                    DataSource.DroneList.RemoveAll(m => (m.id == charge.DroneId));
+                    DataSource.DroneList.RemoveAll(m => (m.DroneId == charge.DroneId));
                     DataSource.DroneList.Add(drone);
                 }
                 else
                     return "Your request could not be completed";
-                Station station = DataSource.StationList.Find(s => (s.id == charge.StationId)); //pulls correct station
-                if (station.id != 0) //if station exists updates
+                Station station = DataSource.StationList.Find(s => (s.StationId == charge.StationId)); //pulls correct station
+                if (station.StationId != 0) //if station exists updates
                 {
                     station.ChargeSlots++;
-                    DataSource.StationList.RemoveAll(temp => (temp.id == charge.StationId));
+                    DataSource.StationList.RemoveAll(temp => (temp.StationId == charge.StationId));
                     DataSource.StationList.Add(station);
                 }
                 else
@@ -180,7 +180,7 @@ namespace DAL
                 Parcel notFound = new Parcel();
                 for (int i = 0; i < DataSource.ParcelList.Count(); i++) //goes over parcel list
                 {
-                    if (DataSource.ParcelList[i].id == parcelId) //if id matches
+                    if (DataSource.ParcelList[i].ParcelId == parcelId) //if id matches
                     {
                         return (DataSource.ParcelList[i]);
                     }
@@ -192,7 +192,7 @@ namespace DAL
                 Customer notFound = new Customer();
                 for (int i = 0; i < DataSource.CustomerList.Count(); i++) //goes over customer list
                 {
-                    if (DataSource.CustomerList[i].id == customerId) //if id matches
+                    if (DataSource.CustomerList[i].CustomerId == customerId) //if id matches
                     {
                         return (DataSource.CustomerList[i]); 
                     }
@@ -204,7 +204,7 @@ namespace DAL
                 Drone notFound = new Drone();
                 for (int i = 0; i < DataSource.DroneList.Count(); i++) //goes over drone list
                 {
-                    if (DataSource.DroneList[i].id == droneId) //if id matches
+                    if (DataSource.DroneList[i].DroneId == droneId) //if id matches
                     {
                         return (DataSource.DroneList[i]);
                     }
@@ -216,7 +216,7 @@ namespace DAL
                 Station notFound = new Station();
                 for (int i = 0; i < DataSource.StationList.Count(); i++) //goes over station list
                 {
-                    if (DataSource.StationList[i].id == stationId) //if id matches
+                    if (DataSource.StationList[i].StationId == stationId) //if id matches
                     {
                         return (DataSource.StationList[i]);
                     }
