@@ -244,10 +244,8 @@ namespace DAL
                 }
                 return notFound;
             }
-
             public int getParcelId() //returns parcel id
             {
-               
                 return DataSource.config.assignParcelId++; //genrates parcel id
             }
             public double distance(double lattitude1,double longitute1, double lattitude2, double longitute2) //calculates distance between coordinates for bonus
