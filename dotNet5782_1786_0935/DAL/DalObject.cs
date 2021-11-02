@@ -241,10 +241,7 @@ namespace DAL
                 x1 = x1 + y1;
                 return Math.Sqrt(x1);
             }
-            //for main:
-            //Console.WriteLine("enter coordinates);
-            //    get them;
-            //Data.printStationsList().ForEach(s => Console.WriteLine(s.name dis +"\n"));
+            
            
 
         }

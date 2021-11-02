@@ -93,7 +93,9 @@ namespace ConsoleUI
                                 "B- collect a parcel by drone\n" +
                                 "C- deliver a parcel to a customer\n" +
                                 "D- charge a drone\n" +
-                                "E- unpug a charging drone");
+                                "E- unpug a charging drone\n" +
+                                "F- find distance to charge station\n"+
+                                "G- find distance from customer");
                             char updateChoice = char.Parse(Console.ReadLine());
                             switch (updateChoice)
                             {
@@ -140,6 +142,26 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
                                         Data.releaseDrone(Data.findDroneCharge(droneId));
+                                        break;
+                                    }
+                                case 'F':
+                                    {
+                                        Console.WriteLine("Enter langitude coordinates: ");
+                                        double longitutde = double.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter latitude coordinates: ");
+                                        double latitude= double.Parse(Console.ReadLine());
+                                        Console.WriteLine("the distance is:");
+                                        Data.printStationsList().ForEach(s => {   Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude,s.Longitude,latitude,longitutde)); });
+                                        break;
+                                    }
+                                case 'G':
+                                    {
+                                        Console.WriteLine("Enter langitude coordinates: ");
+                                        double longitutde = double.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter latitude coordinates: ");
+                                        double latitude = double.Parse(Console.ReadLine());
+                                        Console.WriteLine("the distance is:");
+                                        Data.printCustomersList().ForEach(s => { Console.WriteLine(s.Name + ": " + Data.distance(s.Lattitude, s.Longitude, latitude, longitutde)); });
                                         break;
                                     }
                                 default:
