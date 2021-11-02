@@ -18,7 +18,7 @@ namespace DAL
             internal static List<DroneCharge> DroneChargeList = new List<DroneCharge>(); //a list of all the drones that are being charged
             internal class config
             {
-                public static Random assignParcelId = new Random(); //assigns a random id to a parcel
+                public static int assignParcelId = 1001; //assigns a random id to a parcel
             }
             public static void Initialize()
             {
@@ -57,10 +57,10 @@ namespace DAL
                 for (int i = 0; i < 10; i++) //creates 10 parcels with information
                     ParcelList.Add(new Parcel()
                     {
-                        ParcelId = config.assignParcelId.Next(100000000 + ParcelList.Count(), 999999999),
+                        ParcelId = config.assignParcelId++/*.Next(100000000 + ParcelList.Count(), 999999999)*/,
                         Weight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a weight from light, average, heavy
                         Requested = DateTime.Now,
-                       
+
                     });
             }
             static void CreateCustomer() //creats a customer with random information

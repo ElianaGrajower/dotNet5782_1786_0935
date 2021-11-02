@@ -47,8 +47,6 @@ namespace DAL
             {
                 return DataSource.ParcelList;  //returns parcel list
             }
-            
-            
             public string matchUpParcel(Parcel parcel) //matches up package with drone
             {
                 string complete = "Your request was completed successfully";
@@ -89,7 +87,6 @@ namespace DAL
             }
             public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel) //matches up parcel with buyer
             {
-                
                 if(customer.CustomerId==0)
                     return "Your request could not be completed";
                 string complete = "Your request was completed successfully";
@@ -248,7 +245,8 @@ namespace DAL
             }
             public int getParcelId() //returns parcel id
             {
-                return DataSource.config.assignParcelId.Next(100000000+DataSource.ParcelList.Count(), 999999999); //genrates parcel id
+               // return DataSource.config.assignParcelId.Next(100000000+DataSource.ParcelList.Count(), 999999999); //genrates parcel id
+                return DataSource.config.assignParcelId++; //genrates parcel id
             }
             public double distance(double lattitude1,double longitute1, double lattitude2, double longitute2) //calculates distance between coordinates for bonus
             {

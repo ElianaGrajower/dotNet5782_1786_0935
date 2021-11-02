@@ -56,6 +56,7 @@ namespace ConsoleUI
                                         d.Battery = 100; 
                                         d.Status = DroneStatuses.available;
                                         Data.AddDrone(d); //builds and adds a drone using the information the user provided
+                                        Console.WriteLine("drone id: " + d.DroneId + "\n");
                                         break;
                                     }
                                 case 'C': //adds a customer
@@ -78,6 +79,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter Parcel weight: ");
                                         Parcel p = new Parcel() { ParcelId = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), Requested = DateTime.Now, };
                                         Data.AddParcel(p); //builds and adds a parcel using the information the user provided
+                                        Console.WriteLine("parcel id: " + p.ParcelId + "\n");
                                         break;
                                     }
                                 default:
@@ -110,20 +112,20 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter parcel id: ");
                                         int parcelId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter customer id: ");
+                                        Console.WriteLine("Enter sending customers id: ");
                                         int customerId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine(Data.pickUpParcel(Data.findCustomer(customerId), Data.findParcel(parcelId))); //collects and prints if completed successfully
+                                        Console.WriteLine(Data.pickUpParcel(Data.findCustomer(customerId), Data.findParcel(parcelId)) + "\n"); //collects and prints if completed successfully
                                         break;
                                     }
                                 case 'C': //delivers a parcel to a customer
                                     {
                                         Console.WriteLine("Enter parcel id: ");
                                         int parcelId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter customer id: ");
+                                        Console.WriteLine("Enter receiving customers id: ");
                                         int customerId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter level of priority: ");
                                         int priorityLevel = int.Parse(Console.ReadLine());
-                                        Console.WriteLine(Data.deliverParcel(Data.findCustomer(customerId), Data.findParcel(parcelId), priorityLevel)); //delivers and prints if completed successfully
+                                        Console.WriteLine(Data.deliverParcel(Data.findCustomer(customerId), Data.findParcel(parcelId), priorityLevel) + "\n"); //delivers and prints if completed successfully
                                         break;
                                     }
                                 case 'D': //charges a drone
@@ -135,14 +137,14 @@ namespace ConsoleUI
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); }); //prints list of available charging stations
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
                                         stationNum = int.Parse(Console.ReadLine());
-                                        Console.WriteLine(Data.chargeDrone(Data.findDrone(droneId), stationNum)); //charges and prints if completed successfully
+                                        Console.WriteLine(Data.chargeDrone(Data.findDrone(droneId), stationNum) + "\n"); //charges and prints if completed successfully
                                         break;
                                     }
                                 case 'E': //unplugs a charging drone
                                     {
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine(Data.releaseDrone(Data.findDroneCharge(droneId))); //unplugs and prints if completed successfully
+                                        Console.WriteLine(Data.releaseDrone(Data.findDroneCharge(droneId)) + "\n"); //unplugs and prints if completed successfully
                                         break;
                                     }
                                 case 'F': //finds distance to charge station
