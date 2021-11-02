@@ -262,7 +262,7 @@ namespace ConsoleUI
                                 case 'E': //prints parcel that was not matched up to drone list
                                     {
                                         Parcel check = Data.printParcelsList().Find(s => s.DroneId != 0);
-                                        if (check.DroneId == 0)
+                                        if (check.DroneId == 0) 
                                         {
                                             Console.WriteLine("All parcels matched up to drone");
                                             break;
