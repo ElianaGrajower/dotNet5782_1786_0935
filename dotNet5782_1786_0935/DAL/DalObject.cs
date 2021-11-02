@@ -65,7 +65,10 @@ namespace DAL
                     DataSource.DroneList.Add(d);
                     DataSource.ParcelList.RemoveAll(m => m.id == p.id);
                     DataSource.ParcelList.Add(p);
+                   
                 }
+               
+                   
             }
             public void pickUpParcel(Customer c,Parcel p) //matches up packg with sender of pckg
             {
