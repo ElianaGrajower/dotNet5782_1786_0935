@@ -120,7 +120,7 @@ namespace DAL
                 if (station.StationId != 0 && drone.DroneId != 0) //if station exists updates it
                 {
                     DataSource.StationList.Remove(station); //removes station
-                    DataSource.DroneList.Remove(drone); //removes station
+                    DataSource.DroneList.RemoveAll(temp=>temp.DroneId==drone.DroneId); //removes station
                     station.ChargeSlots--;
                     DroneCharge charge = new DroneCharge();
                     charge.DroneId = drone.DroneId;
@@ -155,7 +155,7 @@ namespace DAL
                 }
                 else
                     return "Your request could not be completed";
-                DataSource.DroneChargeList.Remove(charge);
+                DataSource.DroneChargeList.RemoveAll(temp=>temp.DroneId==charge.DroneId);
                 return complete;
             }
             public string PrintStation(int stationId) //prints a station
