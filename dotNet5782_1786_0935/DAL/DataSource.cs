@@ -11,7 +11,6 @@ namespace DAL
     {
         internal class DataSource
         {
-            
             internal static List<Parcel> ParcelList = new List<Parcel>();
             internal static List<Drone> DroneList = new List<Drone>();
             internal static List<Station> StationList = new List<Station>();

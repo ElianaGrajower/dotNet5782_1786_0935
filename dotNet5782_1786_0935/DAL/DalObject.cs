@@ -25,7 +25,7 @@ namespace DAL
             {
                 DataSource.CustomerList.Add(c);
             }
-            public void getParcel(Parcel p) //adds parcel to list
+            public void AddParcel(Parcel p) //adds parcel to list
             {
                 DataSource.ParcelList.Add(p);
             }
@@ -52,8 +52,9 @@ namespace DAL
                
             }
             
-            public void matchUpParcel(Parcel p) //matches up package with drone
+            public string matchUpParcel(Parcel p) //matches up package with drone
             {
+                string empty = "your request was completed successfully";
                 Drone d = new Drone();
                 d = (DataSource.DroneList.Find(t => t.Status == DroneStatuses.available && t.MaxWeight >= p.Weight));
                 DataSource.DroneList.RemoveAll(m => m.id == d.id);
@@ -65,13 +66,14 @@ namespace DAL
                     DataSource.DroneList.Add(d);
                     DataSource.ParcelList.RemoveAll(m => m.id == p.id);
                     DataSource.ParcelList.Add(p);
-                   
+                    return empty;
                 }
-               
-                   
+                else
+                    return "NOT FOUND";
             }
-            public void pickUpParcel(Customer c,Parcel p) //matches up packg with sender of pckg
+            public string pickUpParcel(Customer c,Parcel p) //matches up packg with sender of pckg
             {
+                string empty = "your request was completed successfully";
                 p.SenderId = c.id;
                 p.PickedUp = DateTime.Now;
                 Drone d = new Drone();
@@ -83,10 +85,14 @@ namespace DAL
                     DataSource.DroneList.Add(d);
                     DataSource.ParcelList.RemoveAll(m => m.id == p.id);
                     DataSource.ParcelList.Add(p);
+                    return empty;
                 }
+                else
+                    return "NOT FOUND";
             }
-            public void deliverParcel(Customer c, Parcel p, int priorityLevel) //matches up parcel with buyer
+            public string deliverParcel(Customer c, Parcel p, int priorityLevel) //matches up parcel with buyer
             {
+                string empty = "your request was completed successfully";
                 p.TargetId = c.id;
                 p.Delivered = DateTime.Now;
                 p.Priority = (Priorities)priorityLevel;
@@ -94,10 +100,14 @@ namespace DAL
                 {
                     DataSource.ParcelList.RemoveAll(m => m.id == p.id);
                     DataSource.ParcelList.Add(p);
+                    return empty;
                 }
+                else
+                    return "NOT FOUND";
             }
-            public void chargeDrone(Drone d,int stationNum) //charges drone
+            public string chargeDrone(Drone d,int stationNum) //charges drone
             {
+                string empty = "your request was completed successfully";
                 d.Status = DroneStatuses.maintenance;
                 Station s = DataSource.StationList.Find(s => (s.Name == stationNum));
                 if (s.id != 0)
@@ -110,10 +120,14 @@ namespace DAL
                     DataSource.DroneChargeList.Add(c);
                     DataSource.StationList.Add(s);
                     DataSource.DroneList.Add(d);
+                    return empty;
                 }
+                else
+                    return "NOT FOUND";
             }
-            public void releaseDrone(DroneCharge c) //releases drone from charge
+            public string releaseDrone(DroneCharge c) //releases drone from charge
             {
+                string empty = "your request was completed successfully";
                 Drone d = DataSource.DroneList.Find(m => (m.id == c.DroneId));
                 if (d.id != 0)
                 {
@@ -122,6 +136,8 @@ namespace DAL
                     DataSource.DroneList.RemoveAll(m => (m.id == c.DroneId));
                     DataSource.DroneList.Add(d);
                 }
+                else
+                    return "NOT FOUND";
                 Station s = DataSource.StationList.Find(s => (s.id == c.StationId));
                 if (s.id != 0)
                 {
@@ -129,7 +145,11 @@ namespace DAL
                     DataSource.StationList.RemoveAll(s => (s.id == c.StationId));
                     DataSource.StationList.Add(s);
                 }
+                else
+                    return "NOT FOUND";
                 DataSource.DroneChargeList.Remove(c);
+                return empty;
+
             }
             public string PrintStation(int stationId) //prints a station
             {
