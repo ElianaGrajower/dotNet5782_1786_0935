@@ -219,7 +219,6 @@ namespace ConsoleUI
                                 default:
                                     Console.WriteLine("ERROR CHOICE NOT VALID");
                                     break;
-
                             }
                             break;
                         }
