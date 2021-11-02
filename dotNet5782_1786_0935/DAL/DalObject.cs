@@ -87,7 +87,6 @@ namespace DAL
             }
             public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel) //matches up parcel with buyer
             {
-                
                 if(customer.CustomerId==0)
                     return "Your request could not be completed";
                 string complete = "Your request was completed successfully";
