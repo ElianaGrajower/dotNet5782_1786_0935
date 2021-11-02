@@ -53,7 +53,7 @@ namespace ConsoleUI
                                         Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = "Model " + (Console.ReadLine()) };
                                         Console.WriteLine("Enter maximum weight drone can hold: ");
                                         d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
-                                        d.Battery = 0; //do we want this changed? does the question specify? maybe it should come charged?@@@@@@@@@@@@@@@
+                                        d.Battery = 100; 
                                         d.Status = DroneStatuses.available;
                                         Data.AddDrone(d);
                                         break;
@@ -61,7 +61,8 @@ namespace ConsoleUI
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter name of customer: ");
-                                        Customer c = new Customer() { Name = "Customer " + (Console.ReadLine()) }; //do we want it like this?@@@@@@@@@@@@
+                                        Customer c = new Customer() { Name = "Customer-" + (Console.ReadLine()) }; 
+                                        Customer c = new Customer() { Name = "Customer " + (Console.ReadLine()) }; 
                                         Console.WriteLine("Enter Id of customer: ");
                                         c.id = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter phone number of customer: ");
@@ -214,31 +215,37 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
+                                        Console.WriteLine("List of stations:");
                                         Data.printStationsList().ForEach(s => Console.WriteLine(s.ToString() +"\n"));
                                         break;
                                     }
                                 case 'B':
                                     {
+                                        Console.WriteLine("List of drones:");
                                         Data.printDronesList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'C':
                                     {
+                                        Console.WriteLine("List of customers:");
                                         Data.printCustomersList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'D':
                                     {
+                                        Console.WriteLine("List of parcel:");
                                         Data.printParcelsList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'E':
                                     {
+                                        Console.WriteLine("List of parcel not matched up with drones:");
                                         Data.printParcelsList().ForEach(s => { if (s.DroneId == 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
                                 case 'F':
                                     {
+                                        Console.WriteLine("List of stations with available charging drone:");
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
