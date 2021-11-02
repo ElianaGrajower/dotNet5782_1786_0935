@@ -196,22 +196,22 @@ namespace ConsoleUI
                             {
                                 case 'A': //prints a charge stations details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintStation(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintStation(Id) + "\n");
                                         break;
                                     }
                                 case 'B': //prints a drones details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintDrone(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintDrone(Id) + "\n");
                                         break;
                                     }
                                 case 'C': //prints a customers details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintCustomer(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintCustomer(Id) + "\n");
                                         break;
                                     }
                                 case 'D': //prints a parcels details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintParcel(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintParcel(Id) + "\n");
                                         break;
                                     }
                                 default:
@@ -261,12 +261,24 @@ namespace ConsoleUI
                                     }
                                 case 'E': //prints parcel that was not matched up to drone list
                                     {
+                                        Parcel check = Data.printParcelsList().Find(s => s.DroneId != 0);
+                                        if (check.DroneId == 0)
+                                        {
+                                            Console.WriteLine("All parcels matched up to drone");
+                                            break;
+                                        }
                                         Console.WriteLine("List of parcel not matched up with drones:");
                                         Data.printParcelsList().ForEach(s => { if (s.DroneId == 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
                                 case 'F': //prints charge station with available charge list
                                     {
+                                        Station check = Data.printStationsList().Find(s => s.ChargeSlots != 0);
+                                        if (check.StationId==0)
+                                        {
+                                            Console.WriteLine("No available charge slots at any station");
+                                            break;
+                                        }
                                         Console.WriteLine("List of stations with available charging drone:");
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
