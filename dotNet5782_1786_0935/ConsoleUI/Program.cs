@@ -237,25 +237,25 @@ namespace ConsoleUI
                             {
                                 case 'A': //prints charge station list
                                     {
-                                        Console.WriteLine("List of stations:");
+                                        Console.WriteLine("List of stations:\n");
                                         Data.printStationsList().ForEach(s => Console.WriteLine(s.ToString() +"\n"));
                                         break;
                                     }
                                 case 'B': //prints drone list
                                     {
-                                        Console.WriteLine("List of drones:");
+                                        Console.WriteLine("List of drones:\n");
                                         Data.printDronesList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'C': //prints customer list
                                     {
-                                        Console.WriteLine("List of customers:");
+                                        Console.WriteLine("List of customers:\n");
                                         Data.printCustomersList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'D': //prints parcel list
                                     {
-                                        Console.WriteLine("List of parcel:");
+                                        Console.WriteLine("List of parcel:\n");
                                         Data.printParcelsList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
@@ -267,7 +267,7 @@ namespace ConsoleUI
                                             Console.WriteLine("All parcels matched up to drone");
                                             break;
                                         }
-                                        Console.WriteLine("List of parcel not matched up with drones:");
+                                        Console.WriteLine("List of parcel not matched up with drones:\n");
                                         Data.printParcelsList().ForEach(s => { if (s.DroneId == 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
@@ -279,7 +279,7 @@ namespace ConsoleUI
                                             Console.WriteLine("No available charge slots at any station");
                                             break;
                                         }
-                                        Console.WriteLine("List of stations with available charging drone:");
+                                        Console.WriteLine("List of stations with available charging drone:\n");
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
