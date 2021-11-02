@@ -50,10 +50,10 @@ namespace ConsoleUI
                                 case 'B':
                                     {
                                         Console.WriteLine("Enter name of model: ");
-                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = (Console.ReadLine()) };
+                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = "Model-" + (Console.ReadLine()) };
                                         Console.WriteLine("Enter maximum weight drone can hold: ");
                                         d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
-                                        d.Battery = 100;
+                                        d.Battery = 0; //do we want this changed? does the question specify? maybe it should come charged?@@@@@@@@@@@@@@@
                                         d.Status = DroneStatuses.available;
                                         Data.AddDrone(d);
                                         break;
@@ -61,7 +61,7 @@ namespace ConsoleUI
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter name of customer: ");
-                                        Customer c = new Customer() { Name = (Console.ReadLine()) };
+                                        Customer c = new Customer() { Name = "Customer-" + (Console.ReadLine()) }; //do we want it like this?@@@@@@@@@@@@
                                         Console.WriteLine("Enter Id of customer: ");
                                         c.id = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter phone number of customer: ");
@@ -161,7 +161,7 @@ namespace ConsoleUI
                             Console.Write("Enter ");
                             if (Choice_Print == 'A')
                                 Console.Write("charge Station ");
-                            if (Choice_Print == 'b')
+                            if (Choice_Print == 'B')
                                 Console.Write("drone ");
                             if (Choice_Print == 'C')
                                 Console.Write("customer ");
@@ -173,25 +173,27 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
-                                        Console.WriteLine(Data.PrintStation(Id).ToString() ); 
+                                        Console.WriteLine("\n" + Data.PrintStation(Id).ToString() + "\n");
                                         break;
                                     }
                                 case 'B':
                                     {
-                                        Console.WriteLine(Data.PrintDrone(Id).ToString());
+                                        Console.WriteLine("\n" + Data.PrintDrone(Id).ToString() + "\n");
                                         break;
                                     }
                                 case 'C':
                                     {
-                                        Console.WriteLine(Data.PrintCustomer(Id).ToString());
+                                        Console.WriteLine("\n" + Data.PrintCustomer(Id).ToString() + "\n");
                                         break;
                                     }
                                 case 'D':
                                     {
-                                        Console.WriteLine(Data.PrintParcel(Id).ToString());
+                                        Console.WriteLine("\n" + Data.PrintParcel(Id).ToString() + "\n");
                                         break;
                                     }
-                                default: break;
+                                default:
+                                    Console.WriteLine("ERROR CHOICE NOT VALID");
+                                    break;
 
                             }
                             break;
@@ -241,6 +243,7 @@ namespace ConsoleUI
                                         break;
                                     }
                                 default:
+                                    Console.WriteLine("ERROR CHOICE NOT VALID");
                                     break;
                             }
                             break;
