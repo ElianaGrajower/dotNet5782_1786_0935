@@ -101,8 +101,6 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter parcel id: ");
                                         int parcelId = int.Parse(Console.ReadLine());
-
-
                                         Data.matchUpParcel(Data.findParcel(parcelId));
                                         break;
                                     }
@@ -206,6 +204,9 @@ namespace ConsoleUI
                             Console.WriteLine("B- drone list");
                             Console.WriteLine("C- customer list");
                             Console.WriteLine("D- parcel list");
+                            Console.WriteLine("E- parcel that was not matched up to drone list");
+                            Console.WriteLine("F- charge station with available charge list");
+
                             Choice_Print = char.Parse(Console.ReadLine());
                             switch (Choice_Print)
                             {
@@ -227,6 +228,16 @@ namespace ConsoleUI
                                 case 'D':
                                     {
                                         Data.printParcelsList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
+                                        break;
+                                    }
+                                case 'E':
+                                    {
+                                        Data.printParcelsList().ForEach(s => { if (s.DroneId == 0) Console.WriteLine(s.ToString() + "\n"); });
+                                        break;
+                                    }
+                                case 'F':
+                                    {
+                                        Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
                                 default:
