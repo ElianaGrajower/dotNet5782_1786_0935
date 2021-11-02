@@ -163,7 +163,6 @@ namespace DAL
                 if (findStation(stationId).StationId != 0)
                     return findStation(stationId).ToString();
                 return "Your request could not be completed";
-                return "Your request could not be completed"; 
             }
             public string PrintDrone(int droneId) //prints a drone
             {
