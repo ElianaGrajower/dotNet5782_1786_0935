@@ -50,10 +50,10 @@ namespace ConsoleUI
                                 case 'B':
                                     {
                                         Console.WriteLine("Enter name of model: ");
-                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = "Model " + (Console.ReadLine()) };
+                                        Drone d = new Drone() { id = DalObject.r.Next(100000000, 999999999), Model = "Model-" + (Console.ReadLine()) };
                                         Console.WriteLine("Enter maximum weight drone can hold: ");
                                         d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
-                                        d.Battery = 0; //do we want this changed? does the question specify? maybe it should come charged?@@@@@@@@@@@@@@@
+                                        d.Battery = 100; 
                                         d.Status = DroneStatuses.available;
                                         Data.AddDrone(d);
                                         break;
@@ -61,7 +61,7 @@ namespace ConsoleUI
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter name of customer: ");
-                                        Customer c = new Customer() { Name = "Customer " + (Console.ReadLine()) }; //do we want it like this?@@@@@@@@@@@@
+                                        Customer c = new Customer() { Name = "Customer-" + (Console.ReadLine()) }; 
                                         Console.WriteLine("Enter Id of customer: ");
                                         c.id = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter phone number of customer: ");
@@ -101,8 +101,6 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter parcel id: ");
                                         int parcelId = int.Parse(Console.ReadLine());
-
-
                                         Data.matchUpParcel(Data.findParcel(parcelId));
                                         break;
                                     }
@@ -208,6 +206,9 @@ namespace ConsoleUI
                             Console.WriteLine("B- drone list");
                             Console.WriteLine("C- customer list");
                             Console.WriteLine("D- parcel list");
+                            Console.WriteLine("E- parcel that was not matched up to drone list");
+                            Console.WriteLine("F- charge station with available charge list");
+
                             Choice_Print = char.Parse(Console.ReadLine());
                             switch (Choice_Print)
                             {
@@ -229,6 +230,16 @@ namespace ConsoleUI
                                 case 'D':
                                     {
                                         Data.printParcelsList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
+                                        break;
+                                    }
+                                case 'E':
+                                    {
+                                        Data.printParcelsList().ForEach(s => { if (s.DroneId == 0) Console.WriteLine(s.ToString() + "\n"); });
+                                        break;
+                                    }
+                                case 'F':
+                                    {
+                                        Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
                                 default:
