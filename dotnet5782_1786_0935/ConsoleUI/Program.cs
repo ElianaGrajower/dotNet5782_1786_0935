@@ -214,31 +214,37 @@ namespace ConsoleUI
                             {
                                 case 'A':
                                     {
+                                        Console.WriteLine("List of stations:");
                                         Data.printStationsList().ForEach(s => Console.WriteLine(s.ToString() +"\n"));
                                         break;
                                     }
                                 case 'B':
                                     {
+                                        Console.WriteLine("List of drones:");
                                         Data.printDronesList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'C':
                                     {
+                                        Console.WriteLine("List of customers:");
                                         Data.printCustomersList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'D':
                                     {
+                                        Console.WriteLine("List of parcel:");
                                         Data.printParcelsList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
                                 case 'E':
                                     {
+                                        Console.WriteLine("List of parcel not matched up with drones:");
                                         Data.printParcelsList().ForEach(s => { if (s.DroneId == 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
                                 case 'F':
                                     {
+                                        Console.WriteLine("List of stations with available charging drone:");
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
