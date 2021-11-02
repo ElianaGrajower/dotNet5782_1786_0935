@@ -34,7 +34,7 @@ namespace DAL
                     StationList.Add(new Station()
                     {
                         StationId = DalObject.r.Next(100000000, 999999999),
-                        Name = DalObject.r.Next(1, 5),
+                        Name = DalObject.r.Next(1, 999),
                         Longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90) 
                         Lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
                         ChargeSlots = DalObject.r.Next(1, 100)
