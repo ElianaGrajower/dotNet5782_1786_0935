@@ -47,6 +47,7 @@ namespace DAL
             {
                 return DataSource.ParcelList;  //returns parcel list
             }
+           
             public string matchUpParcel(Parcel parcel) //matches up package with drone
             {
                 string complete = "Your request was completed successfully";
@@ -243,9 +244,10 @@ namespace DAL
                 }
                 return notFound;
             }
+
             public int getParcelId() //returns parcel id
             {
-               // return DataSource.config.assignParcelId.Next(100000000+DataSource.ParcelList.Count(), 999999999); //genrates parcel id
+               
                 return DataSource.config.assignParcelId++; //genrates parcel id
             }
             public double distance(double lattitude1,double longitute1, double lattitude2, double longitute2) //calculates distance between coordinates for bonus

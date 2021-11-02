@@ -57,7 +57,7 @@ namespace DAL
                 for (int i = 0; i < 10; i++) //creates 10 parcels with information
                     ParcelList.Add(new Parcel()
                     {
-                        ParcelId = config.assignParcelId++/*.Next(100000000 + ParcelList.Count(), 999999999)*/,
+                        ParcelId = config.assignParcelId++,
                         Weight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a weight from light, average, heavy
                         Requested = DateTime.Now,
 
