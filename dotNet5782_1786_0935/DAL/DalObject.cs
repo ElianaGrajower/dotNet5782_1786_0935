@@ -13,7 +13,7 @@ namespace DAL
         public class DalObject
         {
             public DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
-            public void AddStation(Station s) //adds station o list
+            public void AddStation(Station s) //adds station to list
             {
                 DataSource.StationList.Add(s);
             }
@@ -29,11 +29,11 @@ namespace DAL
             {
                 DataSource.ParcelList.Add(p);
             }
-            public List<Station> printStationsList()
+            public List<Station> printStationsList() 
             {
                 return DataSource.StationList;
             }
-            public List<Drone> printDronesList()
+            public List<Drone> printDronesList() 
             {
                 return DataSource.DroneList;
             }
@@ -51,86 +51,49 @@ namespace DAL
                 return DataSource.StationList;
                
             }
-            //public List<Parcel> printNotAssigned()//prints all parcel not yet assigned to drone
-           // {
-               // return DataSource.ParcelList.Re
-               
-            //}
+            
             public void matchUpParcel(Parcel p) //matches up package with drone
             {
                 Drone d = new Drone();
                 d = (DataSource.DroneList.Find(t => t.Status == DroneStatuses.available && t.MaxWeight >= p.Weight));
                 DataSource.DroneList.RemoveAll(m => m.id == d.id);
-                if (d.id != 0)
-                {
-                    p.DroneId = d.id;
-                    p.Scheduled = DateTime.Now;
-                    d.Status = DroneStatuses.delivery;
-                    DataSource.DroneList.Add(d);
-                    DataSource.ParcelList.RemoveAll(m => m.id == p.id);
-                    DataSource.ParcelList.Add(p);
-                }
+                p.DroneId = d.id;
+                p.Scheduled = DateTime.Now;
+                d.Status = DroneStatuses.delivery;
+                DataSource.DroneList.Add(d);
             }
             public void pickUpParcel(Customer c,Parcel p) //matches up packg with sender of pckg
             {
                 p.SenderId = c.id;
                 p.PickedUp = DateTime.Now;
                 Drone d = new Drone();
-                d = (DataSource.DroneList.Find(t => t.id == p.SenderId));
-                if (d.id != 0 && p.id != 0)
-                {
-                    d.Status = DroneStatuses.delivery;
-                    DataSource.DroneList.RemoveAll(m => m.id == d.id);
-                    DataSource.DroneList.Add(d);
-                    DataSource.ParcelList.RemoveAll(m => m.id == p.id);
-                    DataSource.ParcelList.Add(p);
-                }
+                d = (DataSource.DroneList.Find(t => t.id== p.SenderId));
+                d.Status = DroneStatuses.delivery;
+                DataSource.DroneList.RemoveAll(m => m.id == d.id);
+                DataSource.DroneList.Add(d);
             }
             public void deliverParcel(Customer c, Parcel p, int priorityLevel) //matches up parcel with buyer
             {
                 p.TargetId = c.id;
                 p.Delivered = DateTime.Now;
                 p.Priority = (Priorities)priorityLevel;
-                if (p.id != 0)
-                {
-                    DataSource.ParcelList.RemoveAll(m => m.id == p.id);
-                    DataSource.ParcelList.Add(p);
-                }
+
             }
             public void chargeDrone(Drone d,int stationNum) //charges drone
             {
                 d.Status = DroneStatuses.maintenance;
-                Station s = DataSource.StationList.Find(s => (s.Name == stationNum));
-                if (s.id != 0)
-                {
-                    DataSource.StationList.Remove(s);
-                    s.ChargeSlots--;
-                    DroneCharge c = new DroneCharge();
-                    c.DroneId = d.id;
-                    c.StationId = s.id;
-                    DataSource.DroneChargeList.Add(c);
-                    DataSource.StationList.Add(s);
-                    DataSource.DroneList.Add(d);
-                }
+                DataSource.StationList.ForEach(s => { if (s.Name == stationNum) s.ChargeSlots--; });
+                DroneCharge c=new DroneCharge();
+                c.DroneId = d.id;
+                DataSource.StationList.ForEach(s => { if (s.Name == stationNum) c.StationId = s.id; });
+                DataSource.DroneChargeList.Add(c);
             }
             public void releaseDrone(DroneCharge c) //releases drone from charge
             {
-                Drone d = DataSource.DroneList.Find(m => (m.id == c.DroneId));
-                if (d.id != 0)
-                {
-                    d.Status = DroneStatuses.available;
-                    d.Battery = 100;
-                    DataSource.DroneList.RemoveAll(m => (m.id == c.DroneId));
-                    DataSource.DroneList.Add(d);
-                }
-                Station s = DataSource.StationList.Find(s => (s.id == c.StationId));
-                if (s.id != 0)
-                {
-                    s.ChargeSlots++;
-                    DataSource.StationList.RemoveAll(s => (s.id == c.StationId));
-                    DataSource.StationList.Add(s);
-                }
+                DataSource.DroneList.ForEach(m => { if (m.id == c.DroneId) { m.Status = DroneStatuses.available; m.Battery = 100; } });
+                DataSource.StationList.ForEach(s => { if (s.id == c.StationId) s.ChargeSlots++; });
                 DataSource.DroneChargeList.Remove(c);
+ 
             }
             public string PrintStation(int stationId) //prints a station
             {
@@ -213,6 +176,22 @@ namespace DAL
             {
                 return DataSource.config.assignParcelId.Next(100000000 + DataSource.ParcelList.Count(), 999999999);
             }
+            public double distance(double x1,double y1, double x2, double y2)
+            {
+                x1 = x1 - x2;
+                y1 = y1 - y2;
+                x1 = Math.Pow(x1, 2);
+                y1 = Math.Pow(y1, 2);
+                x1 = x1 + y1;
+                return Math.Sqrt(x1);
+
+            }
+            //for main:
+            //Console.WriteLine("enter coordinates);
+            //    get them;
+            //Data.printStationsList().ForEach(s => Console.WriteLine(s.name dis +"\n"));
+           
+
         }
     }
 }
