@@ -76,7 +76,7 @@ namespace ConsoleUI
                                 case 'D': //adds a parcel
                                     {
                                         Console.WriteLine("Enter Parcel weight: ");
-                                        Parcel p = new Parcel() { ParcelId = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), };
+                                        Parcel p = new Parcel() { ParcelId = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), Requested = DateTime.Now, };
                                         Data.AddParcel(p); //builds and adds a parcel using the information the user provided
                                         break;
                                     }
@@ -196,22 +196,22 @@ namespace ConsoleUI
                             {
                                 case 'A': //prints a charge stations details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintStation(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintStation(Id) + "\n");
                                         break;
                                     }
                                 case 'B': //prints a drones details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintDrone(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintDrone(Id) + "\n");
                                         break;
                                     }
                                 case 'C': //prints a customers details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintCustomer(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintCustomer(Id) + "\n");
                                         break;
                                     }
                                 case 'D': //prints a parcels details
                                     {
-                                        Console.WriteLine("\n" + Data.PrintParcel(Id).ToString() + "\n");
+                                        Console.WriteLine("\n" + Data.PrintParcel(Id) + "\n");
                                         break;
                                     }
                                 default:
@@ -267,7 +267,7 @@ namespace ConsoleUI
                                     }
                                 case 'F': //prints charge station with available charge list
                                     {
-                                        Console.WriteLine("List of stations with available charging drone:");
+                                        Console.WriteLine("List of stations with available charging slots:");
                                         Data.printStationsList().ForEach(s => { if (s.ChargeSlots != 0) Console.WriteLine(s.ToString() + "\n"); });
                                         break;
                                     }
