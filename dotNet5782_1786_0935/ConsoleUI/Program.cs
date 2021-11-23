@@ -261,6 +261,8 @@ namespace ConsoleUI
                                 case 'D': //prints parcel list
                                     {
                                         Console.WriteLine("List of parcel:\n");
+                                        Console.WriteLine("this is my change \n");
+
                                         Data.printParcelsList().ForEach(s => Console.WriteLine(s.ToString() + "\n"));
                                         break;
                                     }
