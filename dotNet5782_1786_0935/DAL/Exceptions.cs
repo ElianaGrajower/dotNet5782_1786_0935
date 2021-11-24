@@ -14,6 +14,15 @@ namespace IDAL
         {
             public class InfoTwoStationsMissException : Exception
             {
+                public AddingProblemException() : base() { }
+                public AddingProblemException(string message) : base(message) { }
+                public AddingProblemException(string message, Exception inner) : base(message, inner) { }
+                protected AddingProblemException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+            }
+
+            [Serializable]
+            public class MissDataOfTwoStationsExceptions : Exception
+            {
                 public int FirstStation;
                 public int SecondStation;
                 public InfoTwoStationsMissException(int station1, int station2) : base()

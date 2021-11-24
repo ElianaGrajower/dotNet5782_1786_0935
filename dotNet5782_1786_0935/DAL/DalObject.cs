@@ -12,7 +12,7 @@ namespace DAL
 {
     namespace DalObject
     {
-        public class DalObject
+        public class DalObject : IDal
         {
             public static Random r = new Random();
             public DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
