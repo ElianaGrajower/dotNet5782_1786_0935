@@ -7,7 +7,7 @@ using DAL.DalObject;
 
 
 
-namespace ConsoleUI
+namespace ConsoleUI  
 {
     class Program
     {
