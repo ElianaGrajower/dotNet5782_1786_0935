@@ -13,12 +13,12 @@ namespace IDAL
             public int DroneId { set; get; }
             public string Model { set; get; }
             public WeightCategories MaxWeight { set; get; } //light,average,heavy
-                                                            //public DroneStatuses Status { set; get; } //available, maintenance, delivery
-                                                            //  public double Battery { set; get; }
+            //public DroneStatuses Status { set; get; } //available, maintenance, delivery
+          //  public double Battery { set; get; }
             public override string ToString()
             {
-                return String.Format($"Id: {DroneId}\nModel: {Model}\nMaxWeight: {MaxWeight}\n");
-                //Status: {Status}\nBattery: {Battery}");
+                return String.Format($"Id: {DroneId}\nModel: {Model}\nMaxWeight: {MaxWeight}\n"); 
+               //Status: {Status}\nBattery: {Battery}");
             }
         }
     }

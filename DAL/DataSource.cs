@@ -24,7 +24,7 @@ namespace DAL
                 public static double mediumLoad;
                 public static double heavyLoad;
                 public static double chargeSpeed;
-
+                
             }
             public static void Initialize()
             {
@@ -53,9 +53,9 @@ namespace DAL
                     {
                         DroneId = DalObject.r.Next(100000000, 999999999),
                         Model = "Model-" + i,
-                        // Battery=100,
+                       // Battery=100,
                         MaxWeight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a max weight from light, average, heavy
-                                                                                      //  Status = 0, //chooses a status from available, maintenance, delivery
+                      //  Status = 0, //chooses a status from available, maintenance, delivery
                     });
             }
             static void CreateParcel() //creats a parcel with random information
