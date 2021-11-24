@@ -34,6 +34,7 @@ namespace ConsoleUI
                                 "B- add a drone\n" +
                                 "C- add a customer\n" +
                                 "D- add a parcel");
+
                             char addingChoice = char.Parse(Console.ReadLine());
                             switch (addingChoice) //chooses what item to add 
                             {
