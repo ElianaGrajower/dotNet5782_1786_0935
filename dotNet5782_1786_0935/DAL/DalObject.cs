@@ -12,10 +12,98 @@ namespace DAL
 {
     namespace DalObject
     {
-        public class DalObject : IDal
+        public class DalObject 
         {
             public static Random r = new Random();
             public DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
+           //.. #region AddStation
+          
+           
+            #region  GetStation
+            public Station GetStation(int stationId)
+            {
+                try
+                {
+                    return findStation(stationId);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            #endregion
+            #region GetDrone
+            public Drone GetDrone(int droneId)
+            {
+                try
+                {
+                    return findDrone(droneId);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            #endregion
+            #region GetCustomer
+            public Customer GetCustomer(int customerId)
+            {
+                try
+                {
+                    return findCustomer(customerId);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            #endregion
+            #region GetParcel
+            public Parcel GetParcel(int parcelId)
+            {
+                try
+                {
+                    return findParcel(parcelId);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            #endregion
+            public void UpdateDrone(Drone droneToUpdate)
+            {
+
+                DataSource.DroneList.RemoveAll(x => x.DroneId == droneToUpdate.DroneId);
+                DataSource.DroneList.Add(droneToUpdate);
+
+
+            }
+            public void UpdateStation(Station stationToUpdate)
+            {
+
+                DataSource.StationList.RemoveAll(x => x.StationId == stationToUpdate.StationId);
+                DataSource.StationList.Add(stationToUpdate);
+
+
+            }
+            //still need to finsh customer func and find out id=f staton can be aded afr=ter he fact
+            public void UpdateCustomer(Customer customerToUpdate)
+            {
+
+                DataSource.CustomerList.RemoveAll(x => x.CustomerId == customerToUpdate.CustomerId);
+                DataSource.CustomerList.Add(customerToUpdate);
+
+
+            }
+            public void UpdateParcel(Parcel parcelToUpdate)
+            {
+
+                DataSource.ParcelList.RemoveAll(x => x.ParcelId == parcelToUpdate.ParcelId);
+                DataSource.ParcelList.Add(parcelToUpdate);
+
+
+            }
             #region AddStation
             public void AddStation(Station stationToAdd) //adds station to list
             {
@@ -69,8 +157,9 @@ namespace DAL
                     DataSource.DroneList.Add(drone);
                     DataSource.ParcelList.RemoveAll(temp => temp.ParcelId == parcelToUpdate.ParcelId);
                     DataSource.ParcelList.Add(parcelToUpdate); //adds updates parcel back into list of parcel
-                    return complete;
+                    
                 }
+                return complete;
 
 
             }
@@ -363,6 +452,11 @@ namespace DAL
                 }
             }
             #endregion
+
+
+           
         }
     }
+
 }
+

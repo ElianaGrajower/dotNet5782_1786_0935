@@ -24,6 +24,8 @@ namespace DAL
                 DataSource.StationList.Add(stationToAdd);
             }
             #endregion
+            //need the bl update func to find correct drone from dl pull it copy info with new updated info and then just send it back to dl to store in list
+           
             #region  AddDrone
             public void AddDrone(Drone droneToAdd) //adds drone to list
             {
@@ -51,6 +53,90 @@ namespace DAL
                 DataSource.ParcelList.Add(parcelToAdd);
             }
             #endregion
+            #region  GetStation
+            public Station GetStation(int stationId)
+            {
+                try
+                {
+                    return findStation(stationId);
+                }
+                catch(DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            #endregion
+            #region GetDrone
+            public Drone GetDrone(int droneId)
+            {
+                try
+                {
+                    return findDrone(droneId);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            #endregion
+            #region GetCustomer
+            public Customer GetCustomer(int customerId)
+            {
+                try
+                {
+                    return findCustomer( customerId);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            #endregion
+            #region GetParcel
+            public Parcel GetParcel(int parcelId)
+            {
+                try
+                {
+                    return findParcel(parcelId);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+            }
+            public void UpdateDrone(Drone droneToUpdate)
+            {
+
+                DataSource.DroneList.RemoveAll(x => x.DroneId == droneToUpdate.DroneId);
+                DataSource.DroneList.Add(droneToUpdate);
+
+
+            }
+            public void UpdateStation(Station stationToUpdate)
+            {
+
+                DataSource.StationList.RemoveAll(x => x.StationId == stationToUpdate.StationId);
+                DataSource.StationList.Add(stationToUpdate);
+
+
+            }
+            //still need to finsh customer func and find out id=f staton can be aded afr=ter he fact
+            public void UpdateCustomer(Customer customerToUpdate)
+            {
+
+                DataSource.CustomerList.RemoveAll(x => x.CustomerId == customerToUpdate.CustomerId);
+                DataSource.CustomerList.Add(customerToUpdate);
+
+
+            }
+            public void UpdateParcel(Parcel parcelToUpdate)
+            {
+
+                DataSource.ParcelList.RemoveAll(x => x.ParcelId == parcelToUpdate.ParcelId);
+                DataSource.ParcelList.Add(parcelToUpdate);
+
+
+            }
             #region matchUpParcel
             public void matchUpParcel(Parcel parcelToUpdate) //matches up package with drone
             {

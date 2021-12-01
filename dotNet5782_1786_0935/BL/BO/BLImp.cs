@@ -9,14 +9,14 @@ using IBL.BO;
 
 namespace BL
 {
-    public partial class BL:IBL
+    public partial class BL
     {
         IDAL.DO.IDal dal;
         //DAL.DalObject.DalObject dal; //am i allowed to do this???   
-        public BLImp()
-        {
-            dal = new DalObject();
-        }
+        //public BLImp()
+        //{
+        //    dal = new DalObject();
+        //}
         //public BO.Drone GetDrone(int id)
         //{
 
