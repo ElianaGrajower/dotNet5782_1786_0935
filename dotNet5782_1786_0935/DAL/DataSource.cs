@@ -34,6 +34,7 @@ namespace DAL
                 CreateCustomer(); //creats a customer with random information
 
             }
+
             static void CreateStation() //creats a station with random information
             {
                 for (int i = 0; i < 2; i++) //creates 2 stations with information
@@ -58,6 +59,7 @@ namespace DAL
                                                                                       //  Status = 0, //chooses a status from available, maintenance, delivery
                     });
             }
+
             static void CreateParcel() //creats a parcel with random information
             {
                 for (int i = 0; i < 10; i++) //creates 10 parcels with information
