@@ -59,7 +59,7 @@ namespace BL
                 throw exc;
             }
         }
-        public void AddCustomer(IBL.BO.Customer CustomertoAdd)
+        public void AddCustomer(IBL.BO.Customer CustomertoAdd)   
         {
            
             CustomertoAdd.ParcelsOrdered = new List<ParcelCustomer>();
