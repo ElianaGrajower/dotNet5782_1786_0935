@@ -11,11 +11,10 @@ namespace BL
     {
         public int DroneId;
         public int ParcelId;
-        public WeightCategories MaxDroneWeight;
         public WeightCategories ParcelWeight;
         public override string ToString()
         {
-            return String.Format($"Drone Id: {DroneId}\nParcel Id: {ParcelId}\nMax Drone Weight: {MaxDroneWeight}\nParcel Weight: {ParcelWeight}\n");
+            return String.Format($"Parcel Id: {ParcelId}\n\nParcel Weight: {ParcelWeight}\n");
         }
     }
 }

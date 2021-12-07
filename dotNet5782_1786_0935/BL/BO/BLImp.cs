@@ -18,16 +18,16 @@ namespace BL
 {
     //namespace BLImp
     //{
-        public  class BLImp
-        {
-           // IDAL.DO.IDal dal;
-           DAL.DalObject.DalObject dal; 
-                                         //public BLImp()
-                                         //{
-                                         //    dal = new DalObject();
-                                         //}
-                                        
-        
+    public class BLImp
+    {
+        //IDAL.DO.IDal dal;
+        DAL.DalObject.DalObject dal;
+        //public BLImp()
+        //{
+        //    dal = new DalObject();
+        //}
+
+
         //build all exceptions to ensure that all drone info valid and logical
         //for example id positive numb of 9 digits
 
@@ -59,16 +59,16 @@ namespace BL
                 throw exc;
             }
         }
-        public void AddCustomer(IBL.BO.Customer CustomertoAdd)   
+        public void AddCustomer(IBL.BO.Customer CustomertoAdd)
         {
-           
+
             CustomertoAdd.ParcelsOrdered = new List<ParcelCustomer>();
-            CustomertoAdd.ParcelsDelivered= new List<ParcelCustomer>();
+            CustomertoAdd.ParcelsDelivered = new List<ParcelCustomer>();
             if (CustomertoAdd.CustomerId > 999999999 || CustomertoAdd.CustomerId < 100000000)
                 throw new InvalidCastException("customer id not valid\n");
-            if(!CustomertoAdd.Phone.All(onlydigits))
+            if (!CustomertoAdd.Phone.All(onlydigits))
                 throw new InvalidCastException("customer phone not valid- must contain only numbers\n");
-            if(CustomertoAdd.Location.Lattitude<30.5 || CustomertoAdd.Location.Lattitude>34.5)
+            if (CustomertoAdd.Location.Lattitude < 30.5 || CustomertoAdd.Location.Lattitude > 34.5)
                 throw new InvalidCastException("lattitude coordinates out of range\n");
             if (CustomertoAdd.Location.Longitude < 34.3 || CustomertoAdd.Location.Longitude > 35.5)
                 throw new InvalidCastException("longitude coordinates out of range\n");
@@ -78,10 +78,10 @@ namespace BL
             IDAL.DO.Customer newCustomer = new IDAL.DO.Customer()
             {
                 CustomerId = CustomertoAdd.CustomerId,
-                Name= CustomertoAdd.Name,
-               Phone= CustomertoAdd.Phone,
-               Lattitude= CustomertoAdd.Location.Lattitude,
-               Longitude= CustomertoAdd.Location.Longitude
+                Name = CustomertoAdd.Name,
+                Phone = CustomertoAdd.Phone,
+                Lattitude = CustomertoAdd.Location.Lattitude,
+                Longitude = CustomertoAdd.Location.Longitude
             };
             try
             {
@@ -90,7 +90,7 @@ namespace BL
             }
             catch (AlreadyExistException exc)
             {
-                throw  exc;
+                throw exc;
             }
         }
         public void AddStation(IBL.BO.Station StationtoAdd)
@@ -98,14 +98,14 @@ namespace BL
 
             StationtoAdd.DronesatStation = new List<DroneCharging>();
             StationtoAdd.DronesLeftStation = new List<PastCharges>();
-            if (StationtoAdd.StationId <=0)
+            if (StationtoAdd.StationId <= 0)
                 throw new IBL.BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
             if (StationtoAdd.Location.Lattitude < 30.5 || StationtoAdd.Location.Lattitude > 34.5)
                 throw new IBL.BO.InvalidInputException("station coordinates not valid-lattitude coordinates out of range\n");
             if (StationtoAdd.Location.Longitude < 34.3 || StationtoAdd.Location.Longitude > 35.5)
                 throw new IBL.BO.InvalidInputException("station coordinates not valid-longitude coordinates out of range\n");
             if (StationtoAdd.ChargeSlots <= 0)
-                throw  new IBL.BO.InvalidInputException("invalid amount of chargeslots- must be a positive number");
+                throw new IBL.BO.InvalidInputException("invalid amount of chargeslots- must be a positive number");
 
 
 
@@ -123,12 +123,88 @@ namespace BL
             }
             catch (AlreadyExistException exc)
             {
-                throw  exc;
+                throw exc;
             }
         }
 
 
-    }
-    // }
 
+
+        public void DeleteStation(int StationId)
+        {
+            try
+            {
+                dal.DeleteStation(StationId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            { 
+                throw exc;
+            }
+            
+        }
+        public void DeleteParcel(int ParcelId)
+        {
+            try
+            {
+                dal.DeleteParcel(ParcelId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+
+        }
+        public void DeleteCustomer(int CustomerId)
+        {
+            try
+            {
+                dal.DeleteCustomer(CustomerId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+
+        }
+        public void DeleteDrone(int DroneId)
+        {
+            try
+            {
+                dal.DeleteDrone(DroneId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+
+        }
+        public IBL.BO.Drone GetDrone(int DroneId)
+        {
+            try
+            {
+               IDAL.DO.Drone temp= dal.GetDrone(DroneId);
+                IBL.BO.Drone drone = new IBL.BO.Drone()
+                {
+                    DroneId = temp.DroneId,
+                    Model = temp.Model,
+                    MaxWeight = (IBL.BO.WeightCategories)((int)temp.MaxWeight),
+                    ParcelDroneList = dal.printParcelsList().Select
+                    (parcel => new ParcelDrone()
+                    {
+                        DroneId=parcel.DroneId,
+                        ParcelId = parcel.ParcelId,
+                        ParcelWeight = (IBL.BO.WeightCategories)parcel.Weight
+
+
+                    }).Where(ParcelDrone=>ParcelDrone.DroneId==DroneId),
+
+                };
+            }
+            catch(IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+            
+        }
+    }
 }

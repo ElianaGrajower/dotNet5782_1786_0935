@@ -13,9 +13,10 @@ namespace IBL.BO
         public string Model { set; get; }
         public WeightCategories MaxWeight;
         public double MilesCovered;
-        public List<StationDrone> StationDroneList; //a list of all the stations the drone charged at.
+        public DroneStatus Status { set; get; }
+        public IEnumerable<StationDrone> StationDroneList; //a list of all the stations the drone charged at.
         public int DroneBatteryPercentage; //the battery that the drone has left in percentages out of 100%.//instructions
-        public List<ParcelDrone> ParcelDroneList; //a list of all the parcels that the drone carried.
+        public IEnumerable<ParcelDrone> ParcelDroneList; //a list of all the parcels that the drone carried.
 
         public override string ToString()
         {

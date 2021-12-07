@@ -11,8 +11,8 @@ namespace IBL.BO
     class Parcel
     {
         public int ParcelId { set; get; }
-        public int SenderId { set; get; }
-        public int TargetId { set; get; } //the id of the customer who is receiving the parcel
+        public CustomerInParcel Sender { set; get; }
+        public CustomerInParcel Target { set; get; } //the id of the customer who is receiving the parcel
         public WeightCategories Weight { set; get; } //light, average, heavy
         public Priorities Priority { set; get; } //regular, fast, emergency
         public DroneCarryingParcel Drone { set; get; }
