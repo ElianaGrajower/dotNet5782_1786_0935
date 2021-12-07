@@ -20,6 +20,8 @@ namespace IDAL
             public DateTime Scheduled { set; get; } //The time the parcel is matched up with a drone
             public DateTime PickedUp { set; get; } //The time the drones picks up the parcel from the sender
             public DateTime Delivered { set; get; } //The time the customer receives the oarcel
+            public bool Fragile { set; get; } //if the parcel is fragile    
+
             public override string ToString()
             {
                 return String.Format($"Parcel Id: {ParcelId}\nSender Id: {SenderId}\nTarget Id: {TargetId}\nDrone Id: {DroneId}\nWeight: {Weight}\nPriority: {Priority}\nRequested: { Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}");

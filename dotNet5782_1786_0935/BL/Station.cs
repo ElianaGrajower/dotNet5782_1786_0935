@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL;
-
+//updated and needed
 namespace IBL.BO
 {
     public class Station
@@ -16,7 +16,7 @@ namespace IBL.BO
         public void decreaseChargeSlots() { ChargeSlots--; }
         public void addChargeSlots() { ChargeSlots++; }
         public List<DroneCharging> DronesatStation;//id battery
-        public List<PastCharges> DronesLeftStation;
+       // public List<PastCharges> DronesLeftStation;  //extra
         public override string ToString()
         {
             return String.Format($"Id: {StationId}\nName: {Name}\nLocatiob: {Location}\nChargeSlots: {ChargeSlots}");

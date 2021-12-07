@@ -8,18 +8,22 @@ using BL;
 
 namespace IBL.BO
 {
-    class Parcel
+    public class Parcel
     {
         public int ParcelId { set; get; }
         public int SenderId { set; get; }
         public int TargetId { set; get; } //the id of the customer who is receiving the parcel
         public WeightCategories Weight { set; get; } //light, average, heavy
         public Priorities Priority { set; get; } //regular, fast, emergency
-        public DroneCarryingParcel Drone { set; get; }
+        public DroneCarryingParcel DroneInfo { set; get; }
         public DateTime Requested { set; get; } //The time the parcel is made
         public DateTime Scheduled { set; get; } //The time the parcel is matched up with a drone
         public DateTime PickedUp { set; get; } //The time the drones picks up the parcel from the sender
         public DateTime Delivered { set; get; } //The time the customer receives the parcel
-        public bool fragile;
+        public bool Fragile { set; get; } //if the parcel is fragile    
+        public override string ToString()
+        {
+            return String.Format($"Parcel Id: {ParcelId}\nSender Id: {SenderId}\nTarget Id: {TargetId}\nDrone Id: {DroneInfo}\nWeight: {Weight}\nPriority: {Priority}\nRequested: { Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}\nFragile: {Fragile}");
+        }
     }
 }
