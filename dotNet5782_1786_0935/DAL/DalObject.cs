@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using IDAL.DO;
 
 
-
+//dont think i have any of the delelyes
+//basically just recheck my crud
 
 namespace DAL
 {

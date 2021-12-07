@@ -104,6 +104,7 @@ namespace DAL
                     throw exc;
                 }
             }
+            #endregion
             public void UpdateDrone(Drone droneToUpdate)
             {
 

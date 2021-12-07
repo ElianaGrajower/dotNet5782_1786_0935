@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace IBL.BO
 {
     public class Drone
     {
@@ -12,9 +12,8 @@ namespace BL
         public string Model { set; get; }
         public int droneId;
         public int stationId;
-
-
-        // public enum WeightCategories { };
+        public enum WeightCategories { };
+        
 
     }
 }
