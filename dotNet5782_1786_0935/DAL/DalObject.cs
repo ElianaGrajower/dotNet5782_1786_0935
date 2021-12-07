@@ -142,26 +142,57 @@ namespace DAL
             #endregion
             public void DeleteDrone(int id)
             {
+                try
+                {
+                    DataSource.DroneList.Remove(findDrone(id));
 
-                DataSource.DroneList.RemoveAll(x => x.DroneId == id);
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
 
             }
             public void DeleteCustomer(int id)
             {
 
-                DataSource.CustomerList.RemoveAll(x => x.CustomerId == id);
+                try
+                {
+                    DataSource.CustomerList.Remove(findCustomer(id));
+
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
 
             }
             public void DeleteParcel(int id)
             {
 
-                DataSource.ParcelList.RemoveAll(x => x.ParcelId == id);
+                try
+                {
+                    DataSource.ParcelList.Remove(findParcel(id));
+
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
 
             }
             public void DeleteStation(int id)
             {
-
-                DataSource.StationList.RemoveAll(x => x.StationId == id);
+                try
+                {
+                    DataSource.StationList.Remove(findStation(id));
+                    
+                }
+                catch(DoesntExistException exc)
+                {
+                    throw exc;
+                }
+               
 
             }
 

@@ -20,7 +20,7 @@ namespace BL
     //{
     public class BLImp
     {
-        // IDAL.DO.IDal dal;
+        //IDAL.DO.IDal dal;
         DAL.DalObject.DalObject dal;
         //public BLImp()
         //{
@@ -159,11 +159,88 @@ namespace BL
             catch (AlreadyExistException exc)
             {
                 throw exc;
+                throw exc;
             }
         }
 
 
-    }
-    // }
 
+
+        public void DeleteStation(int StationId)
+        {
+            try
+            {
+                dal.DeleteStation(StationId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            { 
+                throw exc;
+            }
+            
+        }
+        public void DeleteParcel(int ParcelId)
+        {
+            try
+            {
+                dal.DeleteParcel(ParcelId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+
+        }
+        public void DeleteCustomer(int CustomerId)
+        {
+            try
+            {
+                dal.DeleteCustomer(CustomerId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+
+        }
+        public void DeleteDrone(int DroneId)
+        {
+            try
+            {
+                dal.DeleteDrone(DroneId);
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+
+        }
+        public IBL.BO.Drone GetDrone(int DroneId)
+        {
+            try
+            {
+               IDAL.DO.Drone temp= dal.GetDrone(DroneId);
+                IBL.BO.Drone drone = new IBL.BO.Drone()
+                {
+                    DroneId = temp.DroneId,
+                    Model = temp.Model,
+                    MaxWeight = (IBL.BO.WeightCategories)((int)temp.MaxWeight),
+                    ParcelDroneList = dal.printParcelsList().Select
+                    (parcel => new ParcelDrone()
+                    {
+                        DroneId=parcel.DroneId,
+                        ParcelId = parcel.ParcelId,
+                        ParcelWeight = (IBL.BO.WeightCategories)parcel.Weight
+
+
+                    }).Where(ParcelDrone=>ParcelDrone.DroneId==DroneId),
+
+                };
+            }
+            catch(IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+            
+        }
+    }
 }
