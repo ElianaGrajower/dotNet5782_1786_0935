@@ -8,5 +8,11 @@ namespace IBL.BO
 {
     class Customer
     {
+        public int CustomerId { set; get; }
+        public string Name { set; get; }
+        public string Phone { set; get; }
+        public double Longitude { set; get; }
+        public double Lattitude { set; get; }
+
     }
 }

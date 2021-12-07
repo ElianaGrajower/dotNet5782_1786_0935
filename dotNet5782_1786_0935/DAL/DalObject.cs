@@ -140,6 +140,30 @@ namespace DAL
                 DataSource.ParcelList.Add(parcelToAdd);
             }
             #endregion
+            public void DeleteDrone(int id)
+            {
+
+                DataSource.DroneList.RemoveAll(x => x.DroneId == id);
+
+            }
+            public void DeleteCustomer(int id)
+            {
+
+                DataSource.CustomerList.RemoveAll(x => x.CustomerId == id);
+
+            }
+            public void DeleteParcel(int id)
+            {
+
+                DataSource.ParcelList.RemoveAll(x => x.ParcelId == id);
+
+            }
+            public void DeleteStation(int id)
+            {
+
+                DataSource.StationList.RemoveAll(x => x.StationId == id);
+
+            }
             #region matchUpParcel
             public string matchUpParcel(Parcel parcelToUpdate) //matches up package with drone
             {
@@ -178,7 +202,7 @@ namespace DAL
                 parcelToUpdate.SenderId = customerToUpdate.CustomerId;
                 parcelToUpdate.PickedUp = DateTime.Now;
                 Drone drone = new Drone(); //builds new drone
-                drone = (DataSource.DroneList.Find(temp => temp.DroneId == parcelToUpdate.DroneId)); //make new droen equal the one matched up with parcel
+                drone = (DataSource.DroneList.Find(temp => temp.DroneId == parcelToUpdate.DroneId)); //make new droe equal the one matched up with parcel
                 if (drone.DroneId != 0 && parcelToUpdate.ParcelId != 0) //if such a drone exists updaed drone
                 {
                     //  drone.Status = DroneStatuses.delivery;

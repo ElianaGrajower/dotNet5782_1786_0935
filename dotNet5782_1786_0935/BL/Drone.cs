@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
@@ -10,10 +11,16 @@ namespace IBL.BO
     {
         public int DroneId { set; get; }
         public string Model { set; get; }
-        public int droneId;
-        public int stationId;
-        public enum WeightCategories { };
-        
+        public WeightCategories weight;
 
+        public List<StationDrone> StationDroneList; //a list of all the stations the drone charged at.
+        public int DroneBatteryPercentage; //the battery that the drone has left in percentages out of 100%.//instructions
+        public List<ParcelDrone> ParcelDroneList; //a list of all the parcels that the drone carried.
+
+        public override string ToString()
+        {
+            return String.Format($"Id: {DroneId}\nModel: {Model}\nMaxWeight: {MaxWeight}\n");
+            //Status: {Status}\nBattery: {Battery}");
+        }
     }
 }
