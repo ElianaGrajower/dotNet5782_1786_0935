@@ -21,15 +21,13 @@ namespace BL
         public  class BLImp
         {
            // IDAL.DO.IDal dal;
-            DAL.DalObject.DalObject dal; //am i allowed to do this???   
+           DAL.DalObject.DalObject dal; 
                                          //public BLImp()
                                          //{
                                          //    dal = new DalObject();
                                          //}
-                                         //public BO.Drone GetDrone(int id)
-                                         //{
-
-        //}
+                                        
+        
         //build all exceptions to ensure that all drone info valid and logical
         //for example id positive numb of 9 digits
 
