@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 namespace IBL.BO
 {
-    class Station
+    public class Station
     {
         public int StationId { set; get; }
         public int Name { set; get; }
-        public double Longitude { set; get; }
-        public double Lattitude { set; get; }
+        public Location Location;
         public int ChargeSlots { set; get; } //the amount of available charge slots in the station
+        public void decreaseChargeSlots() { ChargeSlots--; }
+        public void addChargeSlots() { ChargeSlots++; }
+        public List<DroneCharging> DronesatStation;//id battery
+        public List<PastCharges> DronesLeftStation;
+        public override string ToString()
+        {
+            return String.Format($"Id: {StationId}\nName: {Name}\nLocatiob: {Location}\nChargeSlots: {ChargeSlots}");
+        }
     }
 }
