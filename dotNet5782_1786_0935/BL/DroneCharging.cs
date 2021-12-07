@@ -11,5 +11,9 @@ namespace BL
         public int DroneId;
         public double battery;
         public DateTime arrival;
+        public override string ToString()
+        {
+            return String.Format($"Drone Id: {DroneId}\n Battery: {battery}\n Arrival time: {arrival}\n");
+        }
     }
 }

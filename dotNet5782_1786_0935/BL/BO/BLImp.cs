@@ -49,7 +49,7 @@ namespace BL
             {
                 DroneId = drone.DroneId,
                 Model = drone.Model,
-                MaxWeight = (IDAL.DO.WeightCategories)((int)drone.weight)
+                MaxWeight = (IDAL.DO.WeightCategories)((int)drone.MaxWeight)
             };
             try
             {
@@ -90,9 +90,9 @@ namespace BL
 
                 dal.AddCustomer(newCustomer);
             }
-            catch (AddException exc)
+            catch (AlreadyExistException exc)
             {
-                throw new AlreadyExistException exc;
+                throw  exc;
             }
         }
         public void AddStation(IBL.BO.Station StationtoAdd)
@@ -101,13 +101,13 @@ namespace BL
             StationtoAdd.DronesatStation = new List<DroneCharging>();
             StationtoAdd.DronesLeftStation = new List<PastCharges>();
             if (StationtoAdd.StationId <=0)
-                throw new InvalidException("station id not valid- must be a posittive\n");//check error
+                throw new IBL.BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
             if (StationtoAdd.Location.Lattitude < 30.5 || StationtoAdd.Location.Lattitude > 34.5)
-                throw new InvalidException("station coordinates not valid-lattitude coordinates out of range\n");
+                throw new IBL.BO.InvalidInputException("station coordinates not valid-lattitude coordinates out of range\n");
             if (StationtoAdd.Location.Longitude < 34.3 || StationtoAdd.Location.Longitude > 35.5)
-                throw new InvalidException("station coordinates not valid-longitude coordinates out of range\n");
+                throw new IBL.BO.InvalidInputException("station coordinates not valid-longitude coordinates out of range\n");
             if (StationtoAdd.ChargeSlots <= 0)
-                throw new InvalidException("invalid amount of chargeslots- must be a positive number");
+                throw  new IBL.BO.InvalidInputException("invalid amount of chargeslots- must be a positive number");
 
 
 
@@ -123,9 +123,9 @@ namespace BL
 
                 dal.AddStation(newStation);
             }
-            catch (AddException exc)
+            catch (AlreadyExistException exc)
             {
-                throw new AlreadyExistException exc;
+                throw  exc;
             }
         }
 

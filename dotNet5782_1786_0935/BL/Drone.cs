@@ -19,7 +19,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return String.Format($"Id: {DroneId}\nModel: {Model}\nMaxWeight: {weight}\n");
+            return String.Format($"Id: {DroneId}\nModel: {Model}\nMaxWeight: {MaxWeight}\n");
             //Status: {Status}\nBattery: {Battery}");
         }
     }
