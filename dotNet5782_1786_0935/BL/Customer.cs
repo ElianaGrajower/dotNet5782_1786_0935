@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL;
-//add 2 string to all the classes
+//updated and needed
 namespace IBL.BO
 {
     public class Customer
@@ -13,8 +13,8 @@ namespace IBL.BO
         public string Name { set; get; }
         public string Phone { set; get; }
         public Location Location{ set; get; }
-        public List<ParcelCustomer> ParcelsOrdered;
-        public List<ParcelCustomer> ParcelsDelivered;
+        public List<ParcelinCustomer> ParcelsOrdered;
+        public List<ParcelinCustomer> ParcelsDelivered;
         public override string ToString()
         {
             return String.Format($"Id: {CustomerId}\nName: {Name}\nPhone: {Phone}\nLocation: {Location}\n");

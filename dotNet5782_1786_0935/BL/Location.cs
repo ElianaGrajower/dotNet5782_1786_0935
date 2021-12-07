@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//updated and needed
 
-namespace BL
+namespace IBL.BO
 {
     public class Location
     {

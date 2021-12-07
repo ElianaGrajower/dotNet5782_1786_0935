@@ -62,8 +62,8 @@ namespace BL
         public void AddCustomer(IBL.BO.Customer CustomertoAdd)
         {
 
-            CustomertoAdd.ParcelsOrdered = new List<ParcelCustomer>();
-            CustomertoAdd.ParcelsDelivered = new List<ParcelCustomer>();
+            CustomertoAdd.ParcelsOrdered = new List<ParcelinCustomer>();
+            CustomertoAdd.ParcelsDelivered = new List<ParcelinCustomer>();
             if (CustomertoAdd.CustomerId > 999999999 || CustomertoAdd.CustomerId < 100000000)
                 throw new InvalidCastException("customer id not valid\n");
             if (!CustomertoAdd.Phone.All(onlydigits))
