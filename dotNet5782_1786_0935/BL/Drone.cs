@@ -10,9 +10,8 @@ namespace IBL.BO
     {
         public int DroneId { set; get; }
         public string Model { set; get; }
-        public int droneId;
-        public int stationId;
-        public enum WeightCategories { };
+        public WeightCategories weight;
+
         
 
     }
