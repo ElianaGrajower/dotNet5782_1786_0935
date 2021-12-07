@@ -10,9 +10,13 @@ namespace BL
     {
         public int ParcelId { get; set; }
         public int CustomerId { get; set; }
-        public IBL.BO.WeightCategories weight { get; set; }
-        public IBL.BO.Priorities priority { get; set; }
-        public IBL.BO.ParcelStatus parcelStatus { get; set; }
-        
+        public IBL.BO.WeightCategories Weight { get; set; }
+        public IBL.BO.Priorities Priority { get; set; }
+        public IBL.BO.ParcelStatus ParcelStatus { get; set; }
+        public override string ToString()
+        {
+            return String.Format($"Parcel Id: {ParcelId}\nCustomer Id: {CustomerId}\nParcel Weight: {Weight}\nPriority: {Priority}\nParcel status: {ParcelStatus}\n");
+        }
+
     }
 }
