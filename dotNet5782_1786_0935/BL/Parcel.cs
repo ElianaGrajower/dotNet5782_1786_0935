@@ -15,7 +15,7 @@ namespace IBL.BO
         public int TargetId { set; get; } //the id of the customer who is receiving the parcel
         public WeightCategories Weight { set; get; } //light, average, heavy
         public Priorities Priority { set; get; } //regular, fast, emergency
-        public int DroneId { set; get; }
+        public DroneCarryingParcel Drone { set; get; }
         public DateTime Requested { set; get; } //The time the parcel is made
         public DateTime Scheduled { set; get; } //The time the parcel is matched up with a drone
         public DateTime PickedUp { set; get; } //The time the drones picks up the parcel from the sender

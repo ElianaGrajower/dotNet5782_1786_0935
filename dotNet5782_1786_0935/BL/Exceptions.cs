@@ -6,10 +6,35 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    
-        class Exceptions
-        {
+    [Serializable]
+    public class DoesntExistException : Exception
+    {
+        public DoesntExistException() : base() { }
+        public DoesntExistException(string message) : base(message) { }
+        public DoesntExistException(string message, Exception inner) : base(message, inner) { }
+       
 
-        }
+    }
+
+    [Serializable]
+    public class AlreadyExistsException : Exception
+    {
+        public AlreadyExistsException() : base() { }
+        public AlreadyExistsException(string message) : base(message) { }
+        public AlreadyExistsException(string message, Exception inner) : base(message, inner) { }
+        
+
+    }
+
     
+    public class InvalidInputException : Exception
+    {
+        public InvalidInputException() : base() { }
+        public InvalidInputException(string message) : base(message) { }
+        public InvalidInputException(string message, Exception inner) : base(message, inner) { }
+        
+
+    }
+
+
 }
