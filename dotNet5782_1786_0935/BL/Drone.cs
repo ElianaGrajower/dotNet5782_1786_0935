@@ -8,11 +8,11 @@ using BL;
 namespace IBL.BO
 {
     public class Drone
-    {
+    {     
         public int DroneId { set; get; }
         public string Model { set; get; }
-        public WeightCategories weight;
-
+        public WeightCategories MaxWeight;
+        public double MilesCovered;
         public List<StationDrone> StationDroneList; //a list of all the stations the drone charged at.
         public int DroneBatteryPercentage; //the battery that the drone has left in percentages out of 100%.//instructions
         public List<ParcelDrone> ParcelDroneList; //a list of all the parcels that the drone carried.

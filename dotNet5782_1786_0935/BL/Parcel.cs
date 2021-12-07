@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 
 
 namespace IBL.BO
@@ -18,6 +19,7 @@ namespace IBL.BO
         public DateTime Requested { set; get; } //The time the parcel is made
         public DateTime Scheduled { set; get; } //The time the parcel is matched up with a drone
         public DateTime PickedUp { set; get; } //The time the drones picks up the parcel from the sender
-        public DateTime Delivered { set; get; } //The time the customer receives the oarcel
+        public DateTime Delivered { set; get; } //The time the customer receives the parcel
+        public bool fragile;
     }
 }

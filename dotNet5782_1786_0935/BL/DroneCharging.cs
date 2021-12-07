@@ -10,5 +10,6 @@ namespace BL
     {
         public int DroneId;
         public double battery;
+
     }
 }
