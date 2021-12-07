@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace DAL
 {
-    public class DroneCharging
+    class BatteryUsage
     {
-        public int DroneId;
-        public double battery;
-        public DateTime arrival;
     }
 }
