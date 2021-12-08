@@ -16,7 +16,7 @@ namespace IBL.BO
             Lattitude = x;
             Longitude = y;
         }
-        public Location(double x, double y)
+        public Location(double x,double y)
         {
             Lattitude = x;
             Longitude = y;

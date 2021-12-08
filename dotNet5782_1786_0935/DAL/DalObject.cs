@@ -18,7 +18,7 @@ namespace DAL
             public static Random r = new Random();
             public DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
            
-          
+            
            
             #region  GetStation
             public Station GetStation(int stationId)

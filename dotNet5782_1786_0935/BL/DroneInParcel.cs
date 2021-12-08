@@ -9,8 +9,6 @@ namespace IBL.BO
     public class DroneInParcel
     {
         public int droneId;
-        //  public WeightCategories MaxDroneWeight;
-        //  public WeightCategories ParcelWeight;
         public double battery;
         public Location location;
    

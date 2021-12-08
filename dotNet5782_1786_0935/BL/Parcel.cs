@@ -23,7 +23,7 @@ namespace IBL.BO
      //   public bool Fragile { set; get; } //if the parcel is fragile    
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {ParcelId}\nSender Id: {SenderId}\nTarget Id: {TargetId}\nDrone Id: {DroneInfo}\nWeight: {Weight}\nPriority: {Priority}\nRequested: { Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}\nFragile: {Fragile}");
+            return String.Format($"Parcel Id: {ParcelId}\nSender: {Sender}\nTarget : {Target}\nDrone : {Drone}\nWeight: {Weight}\nPriority: {Priority}\nRequested: { Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}\nFragile: {Fragile}");
         }
     }
 }
