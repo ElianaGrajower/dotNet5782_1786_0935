@@ -20,10 +20,10 @@ namespace IBL.BO
         public DateTime Scheduled { set; get; } //The time the parcel is matched up with a drone
         public DateTime PickedUp { set; get; } //The time the drones picks up the parcel from the sender
         public DateTime Delivered { set; get; } //The time the customer receives the parcel
-     //   public bool Fragile { set; get; } //if the parcel is fragile    
+        public bool Fragile { set; get; } //if the parcel is fragile    //******should we take it out?
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {ParcelId}\nSender: {Sender}\nTarget : {Target}\nDrone : {Drone}\nWeight: {Weight}\nPriority: {Priority}\nRequested: { Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}\nFragile: {Fragile}");
+            return String.Format($"Parcel Id: {ParcelId}\nSender: {Sender}\nTarget: {Target}\nWeight: {Weight}\nPriority: {Priority}\nDrone: {Drone}\nRequested: {Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}\nFragile: {Fragile}");
         }
     }
 }

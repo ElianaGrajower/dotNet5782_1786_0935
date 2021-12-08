@@ -17,7 +17,7 @@ namespace IBL.BO
         public IEnumerable<ParcelinCustomer> ParcelsDelivered;
         public override string ToString()
         {
-            return String.Format($"Id: {CustomerId}\nName: {Name}\nPhone: {Phone}\nLocation: {Location}\n");
+            return String.Format($"Customer Id: {CustomerId}\nCustomer Name: {Name}\nPhone: {Phone}\nLocation: {Location}\n");
         }
 
     }
