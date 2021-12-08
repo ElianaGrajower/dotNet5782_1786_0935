@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IDAL.DO;
 using DAL.DalObject;
 using IBL.BO;
+
 //write all the functions- its written in targil which one we need
 //start with all the basic- just all the adds and then all the gets and then deletes
 //build the bl constructer its the begining of part 2
@@ -77,15 +78,14 @@ namespace BL
         public void AddStation(IBL.BO.Station StationtoAdd)
         {
 
-            StationtoAdd.DronesatStation = new List<DroneCharging>();
-            StationtoAdd.DronesLeftStation = new List<PastCharges>();
+            StationtoAdd.DronesatStation = new List<DroneInCharging>();
             if (StationtoAdd.StationId <= 0)
                 throw new IBL.BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
-            if (StationtoAdd.Location.Lattitude < 30.5 || StationtoAdd.Location.Lattitude > 34.5)
+            if (StationtoAdd.location.Lattitude < 30.5 || StationtoAdd.location.Lattitude > 34.5)
                 throw new IBL.BO.InvalidInputException("station coordinates not valid-lattitude coordinates out of range\n");
-            if (StationtoAdd.Location.Longitude < 34.3 || StationtoAdd.Location.Longitude > 35.5)
+            if (StationtoAdd.location.Longitude < 34.3 || StationtoAdd.location.Longitude > 35.5)
                 throw new IBL.BO.InvalidInputException("station coordinates not valid-longitude coordinates out of range\n");
-            if (StationtoAdd.ChargeSlots <= 0)
+            if (StationtoAdd.chargeSlots <= 0)
                 throw new IBL.BO.InvalidInputException("invalid amount of chargeslots- must be a positive number");
 
 
@@ -93,28 +93,31 @@ namespace BL
             IDAL.DO.Station newStation = new IDAL.DO.Station()
             {
                 StationId = StationtoAdd.StationId,
-                Name = StationtoAdd.Name,
-                Lattitude = StationtoAdd.Location.Lattitude,
-                Longitude = StationtoAdd.Location.Longitude
+                Name = StationtoAdd.name,
+                Lattitude = StationtoAdd.location.Lattitude,
+                Longitude = StationtoAdd.location.Longitude,
+                ChargeSlots = StationtoAdd.chargeSlots
             };
             try
             {
-
                 dal.AddStation(newStation);
             }
             catch (AlreadyExistException exc)
             {
                 throw exc;
             }
-        } 
-        public void AddDrone(IBL.BO.Drone DronetoAdd)
+        }
+        public void AddDrone(IBL.BO.Drone DronetoAdd, int StationId)
         {
-            DronetoAdd.ListofDroneStations = new List<StationDrone>();
-            DronetoAdd.ListofDroneParcels = new List<DroneInParcel>();
-            if(DronetoAdd.DroneId <= 0)
+            Random rnd = new Random();
+            if (DronetoAdd.DroneId <= 0)
                 throw new IBL.BO.InvalidInputException("drone id not valid- must be a posittive\n");
-            if (DronetoAdd.MaxWeight!=IBL.BO.WeightCategories.light&& DronetoAdd.MaxWeight!=IBL.BO.WeightCategories.average&& DronetoAdd.MaxWeight != IBL.BO.WeightCategories.heavy) 
+            if (DronetoAdd.MaxWeight != IBL.BO.WeightCategories.light && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.average && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.heavy)
                 throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");//should this be frased differently?
+            DronetoAdd.battery = rnd.Next(20, 40);
+            DronetoAdd.droneStatus = DroneStatus.maintenance;
+            Location StationLocation = (dal.findStation(StationId).Lattitude, dal.findStation(StationId).Longitude);
+            DronetoAdd.location = StationLocation;
 
             IDAL.DO.Drone newDrone = new IDAL.DO.Drone()
             {
@@ -159,13 +162,8 @@ namespace BL
             catch (AlreadyExistException exc)
             {
                 throw exc;
-                throw exc;
             }
         }
-
-
-
-
         public void DeleteStation(int StationId)
         {
             try
@@ -173,10 +171,10 @@ namespace BL
                 dal.DeleteStation(StationId);
             }
             catch (IBL.BO.DoesntExistException exc)
-            { 
+            {
                 throw exc;
             }
-            
+
         }
         public void DeleteParcel(int ParcelId)
         {
@@ -214,33 +212,73 @@ namespace BL
             }
 
         }
+        public IBL.BO.Station GetStation(int stationId)
+        {
+
+            try
+            {
+                IDAL.DO.Station temp = dal.GetStation(stationId);
+                IBL.BO.Station station = new IBL.BO.Station()
+                {
+                    StationId = temp.StationId,
+                    name = temp.Name,
+                    location = new Location(temp.Lattitude, temp.Lattitude)
+                    {
+                        Lattitude = temp.Lattitude,
+                        Longitude = temp.Lattitude,
+                    },
+                    chargeSlots = temp.ChargeSlots,
+                    DronesatStation = dal.printDroneChargeList().Where(station => station.StationId == stationId).Select(Station => new DroneInCharging()
+                    {
+                        droneId = Station.DroneId,
+                        //battery= dal.findDrone(Station.DroneId).
+                      
+                    }
+                };
+                return station;
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+        }
+
+
+        /// <summary>
+        /// ///redoooo
+        /// </summary>
+        /// <param name="DroneId"></param>
+        /// <returns></returns>
         public IBL.BO.Drone GetDrone(int DroneId)
         {
             try
             {
-               IDAL.DO.Drone temp= dal.GetDrone(DroneId);
+                IDAL.DO.Drone temp = dal.GetDrone(DroneId);
                 IBL.BO.Drone drone = new IBL.BO.Drone()
                 {
                     DroneId = temp.DroneId,
                     Model = temp.Model,
                     MaxWeight = (IBL.BO.WeightCategories)((int)temp.MaxWeight),
+                    battery=temp.battery,/////
                     ParcelDroneList = dal.printParcelsList().Select
                     (parcel => new ParcelDrone()
                     {
-                        DroneId=parcel.DroneId,
+                        DroneId = parcel.DroneId,
                         ParcelId = parcel.ParcelId,
                         ParcelWeight = (IBL.BO.WeightCategories)parcel.Weight
 
 
-                    }).Where(ParcelDrone=>ParcelDrone.DroneId==DroneId),
+                    }).Where(ParcelDrone => ParcelDrone.DroneId == DroneId),
 
                 };
+                return drone;
             }
-            catch(IBL.BO.DoesntExistException exc)
+            catch (IBL.BO.DoesntExistException exc)
             {
                 throw exc;
             }
-            
+
         }
+
     }
 }

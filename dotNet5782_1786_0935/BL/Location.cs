@@ -16,6 +16,11 @@ namespace IBL.BO
             Lattitude = x;
             Longitude = y;
         }
+        public Location(double x, double y)
+        {
+            Lattitude = x;
+            Longitude = y;
+        }
         public override string ToString()
         {
             return String.Format($"Location: ( {Lattitude} , {Longitude} )\n");

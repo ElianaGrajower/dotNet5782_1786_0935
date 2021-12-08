@@ -509,9 +509,18 @@ namespace DAL
                 }
             }
             #endregion
+            #region printDroneChargeList
+            public IEnumerable<DroneCharge> printDroneChargeList() //prints DroneCharge list
+            {
+                foreach (DroneCharge item in DataSource.DroneChargeList)
+                {
+                    yield return item;
+                }
+            }
+            #endregion
 
 
-           
+
         }
     }
 

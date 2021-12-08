@@ -10,16 +10,16 @@ namespace IBL.BO
     public class Station
     {
         public int StationId { set; get; }
-        public int Name { set; get; }
-        public Location Location;
-        public int ChargeSlots { set; get; } //the amount of available charge slots in the station
-        public void decreaseChargeSlots() { ChargeSlots--; }
-        public void addChargeSlots() { ChargeSlots++; }
-        public List<DroneCharging> DronesatStation;//id battery
+        public int name { set; get; }
+        public Location location;
+        public int chargeSlots { set; get; } //the amount of available charge slots in the station
+        public void decreaseChargeSlots() { chargeSlots--; }
+        public void addChargeSlots() { chargeSlots++; }
+        public List<DroneInCharging> DronesatStation;//drones being charged at the station
        // public List<PastCharges> DronesLeftStation;  //extra
         public override string ToString()
         {
-            return String.Format($"Id: {StationId}\nName: {Name}\nLocatiob: {Location}\nChargeSlots: {ChargeSlots}");
+            return String.Format($"Id: {StationId}\nName: {name}\nLocatiob: {location}\nChargeSlots: {chargeSlots}");
         }
     }
 }
