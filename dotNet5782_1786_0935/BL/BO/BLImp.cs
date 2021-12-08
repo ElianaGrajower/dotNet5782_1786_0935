@@ -12,6 +12,7 @@ using IBL.BO;
 //deal with all the exceptions also in the dl
 //writye the main
 //leave all the updates till the end
+//change the names of print func in dal to get
 
 
 namespace BL
@@ -20,12 +21,9 @@ namespace BL
     //{
     public class BLImp
     {
-        //IDAL.DO.IDal dal;
-        DAL.DalObject.DalObject dal;
-        //public BLImp()
-        //{
-        //    dal = new DalObject();
-        //}
+       // IDAL.DO.IDal dal;
+       DAL.DalObject.DalObject dal;
+        
 
         #region OnlyDigits
         public bool OnlyDigits(char x)
@@ -265,6 +263,7 @@ namespace BL
         #endregion
         public IBL.BO.Parcel GetParcel(int parcelId)
         {
+
             try
             {
                 IDAL.DO.Parcel temp = dal.GetParcel(parcelId);
@@ -307,10 +306,36 @@ namespace BL
                 throw exc;
             }
         }
+        
+        private IEnumerable<DroneToList> droneToLists;
+        public double[] chargeCapacity;
+        public BLImp()
+        { 
+            dal = new DAL.DalObject.DalObject();
+            chargeCapacity  = dal.ChargeCapacity();
+            droneToLists = new List<IBL.BO.DroneToList>();
+            bool flag = false;
+            Random rand = new Random();
+            double minBattery = 0;
+            IEnumerable<IDAL.DO.Drone> drones = dal.printDronesList();
+            IEnumerable<IDAL.DO.Parcel> parcels= dal.printParcelsList();
+            foreach(var item in drones)
+            {
+                IBL.BO.DroneToList temp = new DroneToList();
+                temp.droneId = item.DroneId;
+                temp.Model = item.Model;
+                temp.weight = (IBL.BO.WeightCategories)((int)item.MaxWeight);
+                temp.parcelId= dal.printParcelsList().ToList().Find(x => x.DroneId == temp.droneId).DroneId;
 
 
+            }
+
+    
+
+            
+        }
 }
-                    
+                      
 
 
                    
