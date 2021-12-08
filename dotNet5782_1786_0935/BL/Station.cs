@@ -19,7 +19,7 @@ namespace IBL.BO
        // public List<PastCharges> DronesLeftStation;  //extra
         public override string ToString()
         {
-            return String.Format($"Id: {StationId}\nName: {name}\nLocatiob: {location}\nChargeSlots: {chargeSlots}");
+            return String.Format($"Station Id: {StationId}\nStation Name: {name}\nStation Location: {location}\nChargeSlots: {chargeSlots}");
         }
     }
 }
