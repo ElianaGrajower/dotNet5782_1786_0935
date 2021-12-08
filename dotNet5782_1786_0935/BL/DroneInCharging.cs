@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 //updated and needed
 namespace IBL.BO
 {
-    class DroneInCharging
+    public class DroneInCharging
     {
-        public int parcelId;
+        public int dronelId;
         public double battery;
 
     }

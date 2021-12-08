@@ -27,27 +27,25 @@ namespace BL
         //    dal = new DalObject();
         //}
 
-
-        //build all exceptions to ensure that all drone info valid and logical
-        //for example id positive numb of 9 digits
-
-        public bool onlydigits(char x)
+        #region OnlyDigits
+        public bool OnlyDigits(char x)
         {
             if (48 <= x && x <= 57)
                 return true;
             return false;
 
         }
+        #endregion
 
-        //not remotley done
+        #region AddCustomer
         public void AddCustomer(IBL.BO.Customer CustomertoAdd)
         {
 
-            CustomertoAdd.ParcelsOrdered = new List<ParcelCustomer>();
-            CustomertoAdd.ParcelsDelivered = new List<ParcelCustomer>();
+            CustomertoAdd.ParcelsOrdered = new List<ParcelinCustomer>();
+            CustomertoAdd.ParcelsDelivered = new List<ParcelinCustomer>();
             if (CustomertoAdd.CustomerId > 999999999 || CustomertoAdd.CustomerId < 100000000)
                 throw new InvalidCastException("customer id not valid\n");
-            if (!CustomertoAdd.Phone.All(onlydigits))
+            if (!CustomertoAdd.Phone.All(OnlyDigits))
                 throw new InvalidCastException("customer phone not valid- must contain only numbers\n");
             if (CustomertoAdd.Location.Lattitude < 30.5 || CustomertoAdd.Location.Lattitude > 34.5)
                 throw new InvalidCastException("lattitude coordinates out of range\n");
@@ -74,11 +72,13 @@ namespace BL
                 throw exc;
             }
         }
+        #endregion
+        #region AddStation
         public void AddStation(IBL.BO.Station StationtoAdd)
         {
 
-            StationtoAdd.DronesatStation = new List<DroneCharging>();
-            StationtoAdd.DronesLeftStation = new List<PastCharges>();
+            StationtoAdd.DronesatStation = new List<DroneInCharging>();
+
             if (StationtoAdd.StationId <= 0)
                 throw new IBL.BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
             if (StationtoAdd.Location.Lattitude < 30.5 || StationtoAdd.Location.Lattitude > 34.5)
@@ -106,51 +106,37 @@ namespace BL
             {
                 throw exc;
             }
-        } 
-        public void AddDrone(IBL.BO.Drone DronetoAdd)
-        {
-            DronetoAdd.ListofDroneStations = new List<StationDrone>();
-            DronetoAdd.ListofDroneParcels = new List<DroneInParcel>();
-            if(DronetoAdd.DroneId <= 0)
-                throw new IBL.BO.InvalidInputException("drone id not valid- must be a posittive\n");
-            if (DronetoAdd.MaxWeight!=IBL.BO.WeightCategories.light&& DronetoAdd.MaxWeight!=IBL.BO.WeightCategories.average&& DronetoAdd.MaxWeight != IBL.BO.WeightCategories.heavy) 
-                throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");//should this be frased differently?
-
-            IDAL.DO.Drone newDrone = new IDAL.DO.Drone()
-            {
-                DroneId = DronetoAdd.DroneId,
-                Model = DronetoAdd.Model,
-                MaxWeight = (IDAL.DO.WeightCategories)((int)DronetoAdd.MaxWeight)
-            };
-            try
-            {
-                dal.AddDrone(newDrone);
-            }
-            catch (AlreadyExistException exc)
-            {
-                throw exc;
-            }
         }
+        #endregion
+        #region AddParcel
         public void AddParcel(IBL.BO.Parcel ParceltoAdd)
         {
             if (ParceltoAdd.ParcelId <= 0)
                 throw new IBL.BO.InvalidInputException("parcel id not valid- must be a posittive\n");
-            if (ParceltoAdd.SenderId > 999999999 || ParceltoAdd.SenderId < 100000000)
+            if (ParceltoAdd.Sender.CustomerId > 999999999 || ParceltoAdd.Sender.CustomerId < 100000000)
                 throw new InvalidCastException("sender id not valid\n");
-            if (ParceltoAdd.TargetId > 999999999 || ParceltoAdd.TargetId < 100000000)
+            if (ParceltoAdd.Target.CustomerId > 999999999 || ParceltoAdd.Target.CustomerId < 100000000)
                 throw new InvalidCastException("target id not valid\n");
             if (ParceltoAdd.Weight != IBL.BO.WeightCategories.light && ParceltoAdd.Weight != IBL.BO.WeightCategories.average && ParceltoAdd.Weight != IBL.BO.WeightCategories.heavy)
-                throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");//should this be frased differently?
-
+                throw new IBL.BO.InvalidInputException("invalid weight- must light,average or heavy");
+            ParceltoAdd.Requested = DateTime.Now;
+            ParceltoAdd.Scheduled = new DateTime(0, 0);
+            ParceltoAdd.PickedUp = new DateTime(0, 0);
+            ParceltoAdd.Delivered = new DateTime(0, 0);
+            ParceltoAdd.Drone.droneId = 0;
             IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel()
             {
                 ParcelId = ParceltoAdd.ParcelId,
-                SenderId = ParceltoAdd.SenderId,
-                TargetId = ParceltoAdd.TargetId,
+                SenderId = ParceltoAdd.Sender.CustomerId,
+                TargetId = ParceltoAdd.Target.CustomerId,
                 Weight = (IDAL.DO.WeightCategories)((int)ParceltoAdd.Weight),
                 Priority = (IDAL.DO.Priorities)((int)ParceltoAdd.Priority),
-                Fragile = ParceltoAdd.Fragile
-                //do we need to add droneInfo to idal? should the times be in here?
+                DroneId = 0,
+                Requested = ParceltoAdd.Requested,
+                Scheduled = ParceltoAdd.Scheduled,
+                PickedUp = ParceltoAdd.PickedUp,
+                Delivered = ParceltoAdd.Delivered,
+                Fragile = ParceltoAdd.Fragile,
             };
             try
             {
@@ -159,13 +145,13 @@ namespace BL
             catch (AlreadyExistException exc)
             {
                 throw exc;
-                throw exc;
+
             }
         }
+        #endregion
 
 
-
-
+        #region DeleteStation
         public void DeleteStation(int StationId)
         {
             try
@@ -173,11 +159,13 @@ namespace BL
                 dal.DeleteStation(StationId);
             }
             catch (IBL.BO.DoesntExistException exc)
-            { 
+            {
                 throw exc;
             }
-            
+
         }
+        #endregion
+        #region DeleteParcel
         public void DeleteParcel(int ParcelId)
         {
             try
@@ -190,6 +178,8 @@ namespace BL
             }
 
         }
+        #endregion
+        #region DeleteCustomer
         public void DeleteCustomer(int CustomerId)
         {
             try
@@ -202,6 +192,8 @@ namespace BL
             }
 
         }
+        #endregion
+        #region DeleteDrone
         public void DeleteDrone(int DroneId)
         {
             try
@@ -214,33 +206,125 @@ namespace BL
             }
 
         }
-        public IBL.BO.Drone GetDrone(int DroneId)
+        #endregion
+        #region GetCustomer
+        public IBL.BO.Customer GetCustomer(int customerId)
         {
             try
             {
-               IDAL.DO.Drone temp= dal.GetDrone(DroneId);
-                IBL.BO.Drone drone = new IBL.BO.Drone()
+                IDAL.DO.Customer temp = dal.GetCustomer(customerId);
+                IBL.BO.Customer customer = new IBL.BO.Customer()
                 {
-                    DroneId = temp.DroneId,
-                    Model = temp.Model,
-                    MaxWeight = (IBL.BO.WeightCategories)((int)temp.MaxWeight),
-                    ParcelDroneList = dal.printParcelsList().Select
-                    (parcel => new ParcelDrone()
+                    CustomerId = temp.CustomerId,
+                    Name = temp.Name,
+                    Phone = temp.Phone,
+                    Location = new Location(temp.Lattitude, temp.Lattitude)
                     {
-                        DroneId=parcel.DroneId,
-                        ParcelId = parcel.ParcelId,
-                        ParcelWeight = (IBL.BO.WeightCategories)parcel.Weight
+                        Lattitude = temp.Lattitude,
+                        Longitude = temp.Lattitude,
 
+                    },
+                    ParcelsOrdered = dal.printParcelsList().Where(parcel => parcel.TargetId == customerId).Select(Parcel => new ParcelinCustomer()
 
-                    }).Where(ParcelDrone=>ParcelDrone.DroneId==DroneId),
+                    {
+                        ParcelId = Parcel.ParcelId,
+                        Weight = (IBL.BO.WeightCategories)((int)Parcel.Weight),
+                        Priority = (IBL.BO.Priorities)((int)Parcel.Priority),
+                        ParcelStatus = ParcelStatus.delivered,
+                        CustomerInParcel = new CustomerInParcel()
+                        {
+                            CustomerId = Parcel.SenderId,
+                            CustomerName = dal.GetCustomer(Parcel.SenderId).Name
+                        }
+                    }),
+            
+                    ParcelsDelivered = dal.printParcelsList().Where(parcel => parcel.SenderId == customerId).Select(Parcel => new ParcelinCustomer()
+
+                    {
+                        ParcelId = Parcel.ParcelId,
+                        Weight = (IBL.BO.WeightCategories)((int)Parcel.Weight),
+                        Priority = (IBL.BO.Priorities)((int)Parcel.Priority),
+                        ParcelStatus = ParcelStatus.delivered,
+                        CustomerInParcel = new CustomerInParcel()
+                        {
+                            CustomerId = Parcel.TargetId,
+                            CustomerName = dal.GetCustomer(Parcel.TargetId).Name
+                        }
+
+                    })
+        
+                };
+               return customer;
+
+            }
+        catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+        }
+        #endregion
+        public IBL.BO.Parcel GetParcel(int parcelId)
+        {
+            try
+            {
+                IDAL.DO.Parcel temp = dal.GetParcel(parcelId);
+                IBL.BO.Parcel parcel = new IBL.BO.Parcel()
+                {
+                    ParcelId=temp.ParcelId,
+                    Sender=new CustomerInParcel()
+                    {
+                        CustomerId = temp.SenderId,
+                        CustomerName = dal.GetCustomer(temp.SenderId).Name
+                    },
+                    Target = new CustomerInParcel()
+                    {
+                        CustomerId = temp.TargetId,
+                        CustomerName = dal.GetCustomer(temp.TargetId).Name
+                    },
+                    Weight = (IBL.BO.WeightCategories)((int)temp.Weight),
+                    Priority = (IBL.BO.Priorities)((int)temp.Priority),
+                    Requested=temp.Requested,
+                    Scheduled=temp.Scheduled,
+                    PickedUp=temp.PickedUp,
+                    Delivered=temp.Delivered
+                    /////figure out when to add this
+                    //Drone = new DroneInParcel()
+                    //{
+                    //    droneId = temp.DroneId,
+                    //    //how!?!?!?!?1?!?!!?
+                    //    // battery=dal.GetDrone(temp.DroneId).
+                    //    //how in the world do i know his location
+                    //    // location=new Location()
+
+                    //}
 
                 };
+                return parcel;
+
             }
             catch(IBL.BO.DoesntExistException exc)
             {
                 throw exc;
             }
-            
         }
-    }
+
+
+}
+                    
+
+
+                   
+
+
+
+
+
+                        
+
+
+                    
+                        
+
+         
+    
 }
