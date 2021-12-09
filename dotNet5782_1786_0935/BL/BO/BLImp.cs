@@ -143,10 +143,10 @@ namespace BL
                 IBL.BO.Station station = new IBL.BO.Station();
                 var tempStation = dal.GetStation(stationId);
                 station.StationId = tempStation.StationId;
-                station.Name = tempStation.Name;
-                station.ChargeSlots = station.ChargeSlots;
-                station.Location.Lattitude = tempStation.Lattitude;
-                station.Location.Longitude = tempStation.Longitude;
+                station.name = tempStation.Name;
+                station.chargeSlots = station.chargeSlots;
+                station.location.Lattitude = tempStation.Lattitude;
+                station.location.Longitude = tempStation.Longitude;
                 station.DronesatStation = dal.printdroneChargesList().Where(item=>item.StationId== stationId)
                     .Select(drone => new DroneInCharging()
                     {
@@ -179,7 +179,7 @@ namespace BL
         public int AvailableChargingSlots()
         {
             IBL.BO.Station station = new IBL.BO.Station();
-            return station.ChargeSlots;
+            return station.chargeSlots;
         }
         #endregion
         #region StationLocationslist
@@ -188,7 +188,7 @@ namespace BL
             List<Location> locations = new List<Location>();
             foreach (var station in GetStations())
             {
-                locations.Add(new Location(station.Location.Lattitude, station.Location.Longitude));
+                locations.Add(new Location(station.location.Lattitude, station.location.Longitude));
                 
             }
             return locations;
@@ -205,8 +205,8 @@ namespace BL
             {
                 if (withChargeSlots)
                 {
-                    var station = GetStations().ToList().Find(x => x.Location.Longitude == locations[i].Longitude && x.Location.Longitude == locations[i].Longitude);
-                    if (Distance(locations[i], currentlocation) < distance && station.ChargeSlots > 0)
+                    var station = GetStations().ToList().Find(x => x.location.Longitude == locations[i].Longitude && x.location.Longitude == locations[i].Longitude);
+                    if (Distance(locations[i], currentlocation) < distance && station.chargeSlots > 0)
                     {
                         distance = Distance(locations[i], currentlocation);
                     }
@@ -290,11 +290,11 @@ namespace BL
 
             if (StationtoAdd.StationId <= 0)
                 throw new IBL.BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
-            if (StationtoAdd.Location.Lattitude < 30.5 || StationtoAdd.Location.Lattitude > 34.5)
+            if (StationtoAdd.location.Lattitude < 30.5 || StationtoAdd.location.Lattitude > 34.5)
                 throw new IBL.BO.InvalidInputException("station coordinates not valid-lattitude coordinates out of range\n");
-            if (StationtoAdd.Location.Longitude < 34.3 || StationtoAdd.Location.Longitude > 35.5)
+            if (StationtoAdd.location.Longitude < 34.3 || StationtoAdd.location.Longitude > 35.5)
                 throw new IBL.BO.InvalidInputException("station coordinates not valid-longitude coordinates out of range\n");
-            if (StationtoAdd.ChargeSlots <= 0)
+            if (StationtoAdd.chargeSlots <= 0)
                 throw new IBL.BO.InvalidInputException("invalid amount of chargeslots- must be a positive number");
 
 
@@ -302,9 +302,9 @@ namespace BL
             IDAL.DO.Station newStation = new IDAL.DO.Station()
             {
                 StationId = StationtoAdd.StationId,
-                Name = StationtoAdd.Name,
-                Lattitude = StationtoAdd.Location.Lattitude,
-                Longitude = StationtoAdd.Location.Longitude
+                Name = StationtoAdd.name,
+                Lattitude = StationtoAdd.location.Lattitude,
+                Longitude = StationtoAdd.location.Longitude
             };
             try
             {
@@ -472,6 +472,7 @@ namespace BL
             }
         }
         #endregion
+        #region GetParcel
         public IBL.BO.Parcel GetParcel(int parcelId)
         {
 
@@ -647,7 +648,7 @@ namespace BL
         {
             var tempStation = GetStation(stationId);
             dal.DeleteStation(stationId);
-            tempStation.Name = name;
+            tempStation.name = name;
             AddStation(tempStation);
         }
         #endregion
@@ -675,14 +676,14 @@ namespace BL
                     weight=tempDrone.weight,
                     battery=tempDrone.battery,
                     droneStatus=DroneStatus.available,
-                    location=new Location(possibleStation.Location.Lattitude, possibleStation.Location.Longitude),
+                    location=new Location(possibleStation.location.Lattitude, possibleStation.location.Longitude),
                     parcelId=0,
                     //how do i figure this out?!?!?1?1??
                     //numOfParcelsDelivered=tempDrone.
 
                 };
            
-                if(possibleStation.ChargeSlots>0)
+                if(possibleStation.chargeSlots>0)
                 {
                     if(MinBatteryRequired(droneToList)<=tempDrone.battery)
                     {
