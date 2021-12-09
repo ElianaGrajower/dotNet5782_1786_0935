@@ -122,6 +122,15 @@ namespace DAL
 
 
             }
+            public void AddDroneCharge(DroneCharge droneChargeToAdd) //adds drone to list
+            {
+                if (DataSource.DroneChargeList.Count(x => x.DroneId == droneChargeToAdd.DroneId) != 0)
+                    throw new AlreadyExistException("The drone is already being charged at a station");
+                DataSource.DroneChargeList.Add(droneChargeToAdd);
+
+
+            }
+
             #endregion
             #region AddCustomer
             public void AddCustomer(Customer customerToAdd) //adds customer to list

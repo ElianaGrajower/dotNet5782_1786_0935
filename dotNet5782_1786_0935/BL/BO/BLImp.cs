@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using IDAL.DO;
 using DAL.DalObject;
 using IBL.BO;
-
-//write all the functions- its written in targil which one we need
-//start with all the basic- just all the adds and then all the gets and then deletes
+//must finish linarit 4
+//must figure out battery situatoion in blimp 
+//must build the closeststationfunc
 //build the bl constructer its the begining of part 2
 //deal with all the exceptions also in the dl
 //writye the main
@@ -35,6 +35,10 @@ namespace BL
 
         }
         #endregion
+        public Location ClosestStation(Location loc)
+        {
+            return loc;
+        }
 
         #region AddCustomer
         public void AddCustomer(IBL.BO.Customer CustomertoAdd)
@@ -417,7 +421,7 @@ namespace BL
             chargeCapacity  = dal.ChargeCapacity();
             droneToLists = new List<IBL.BO.DroneToList>();
             bool flag = false;
-            Random rand = new Random();
+            Random rand= new Random();
             double minBattery = 0;
             IEnumerable<IDAL.DO.Drone> drones = dal.printDronesList();
             IEnumerable<IDAL.DO.Parcel> parcels= dal.printParcelsList();
@@ -428,6 +432,84 @@ namespace BL
                 temp.Model = item.Model;
                 temp.weight = (IBL.BO.WeightCategories)((int)item.MaxWeight);
                 temp.parcelId= dal.printParcelsList().ToList().Find(x => x.DroneId == temp.droneId).DroneId;
+                if(dal.GetParcel(temp.parcelId).Delivered==new DateTime(0,0)&& dal.GetParcel(temp.parcelId).Scheduled != new DateTime(0, 0))
+                {
+                    temp.droneStatus = DroneStatus.delivery;
+                    if (dal.GetParcel(temp.parcelId).PickedUp == new DateTime(0, 0))
+                    {
+                        int senderId = dal.GetParcel(temp.parcelId).SenderId;
+                        temp.location.Lattitude = ClosestStation(GetCustomer(senderId).Location).Lattitude;
+                        temp.location.Longitude = ClosestStation(GetCustomer(senderId).Location).Longitude;
+
+
+                    }
+                    else
+                    {
+                        int tempId = dal.GetParcel(temp.parcelId).SenderId;
+                        temp.location.Lattitude = dal.GetCustomer(tempId).Lattitude;
+                        temp.location.Longitude = dal.GetCustomer(tempId).Longitude;
+                    }
+                    //figureout battery!!!!!!
+                        
+                }
+                else
+                    if(temp.parcelId==0)
+                {
+                    temp.droneStatus = (IBL.BO.DroneStatus)rand.Next(0,2);
+                }
+                if(temp.droneStatus==DroneStatus.maintenance)
+                {
+                    
+                    IEnumerable<IDAL.DO.Station> availableStations = dal.printStationsList().Where(station=> station.ChargeSlots>0);
+                    int go = rand.Next(0, availableStations.Count());
+                    int count = 0;
+                    foreach(var station in availableStations)
+                    {
+                        count++;
+                        if(count==go)
+                        {
+                            temp.location.Lattitude = station.Lattitude;
+                            temp.location.Longitude = station.Longitude;
+                            int num = station.ChargeSlots + 1;
+                            IDAL.DO.Station station1 = new IDAL.DO.Station
+                                (station.StationId, station.Name, station.Lattitude, station.Longitude, num);
+                            dal.UpdateStation(station1);
+                            temp.battery = rand.Next(0, 21);
+                            IDAL.DO.DroneCharge droneCharge=new DroneCharge();
+                            droneCharge.DroneId = temp.droneId;
+                            droneCharge.StationId = station.StationId;
+                            dal.AddDroneCharge(droneCharge);
+                            break;
+                        }
+                       
+                    }
+                    
+                }
+                if (temp.droneStatus == DroneStatus.available)
+                {
+                    //figure out battery!!!!!!
+                    IEnumerable<IDAL.DO.Parcel> sentParcel = dal.printParcelsList().Where(parcel => parcel.TargetId!=0);
+                    List<IDAL.DO.Customer> CustomersWithParcel=new List<IDAL.DO.Customer>();
+                    int count = 0;
+                    foreach(var parcel in sentParcel)
+                    {
+                        CustomersWithParcel.Add(dal.GetCustomer(parcel.TargetId));
+                        
+                    }
+                    int go = rand.Next(0, CustomersWithParcel.Count());
+                    foreach(var customer in CustomersWithParcel)
+                    {
+                        count++;
+                        if(count==go)
+                        {
+                            temp.location.Lattitude = customer.Lattitude;
+                            temp.location.Longitude = customer.Longitude;
+                        }
+                    }
+
+
+
+                }
 
 
             }
