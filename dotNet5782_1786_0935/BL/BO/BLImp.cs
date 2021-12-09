@@ -24,7 +24,7 @@ namespace BL
     {
        // IDAL.DO.IDal dal;
        DAL.DalObject.DalObject dal;
-        
+        public static Random rnd = new Random();
 
         #region OnlyDigits
         public bool OnlyDigits(char x)
@@ -39,7 +39,6 @@ namespace BL
         {
             return loc;
         }
-
         #region AddCustomer
         public void AddCustomer(IBL.BO.Customer CustomertoAdd)
         {
@@ -155,7 +154,6 @@ namespace BL
         #region AddDrone
         public void AddDrone(IBL.BO.Drone DronetoAdd, int StationId)
         {
-            Random rnd = new Random();
             if (DronetoAdd.DroneId <= 0)
                 throw new IBL.BO.InvalidInputException("drone id not valid- must be a posittive\n");
             if (DronetoAdd.MaxWeight != IBL.BO.WeightCategories.light && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.average && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.heavy)

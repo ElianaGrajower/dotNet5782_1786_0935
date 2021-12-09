@@ -9,7 +9,7 @@ namespace IBL.BO
 {
     public class Location
     {
-       public double Lattitude;
+        public double Lattitude;
         public double Longitude;
         public Location(char a,double x,char b,double y,char c) 
         {

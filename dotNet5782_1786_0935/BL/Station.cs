@@ -11,7 +11,7 @@ namespace IBL.BO
     {
         public int StationId { set; get; }
         public int name { set; get; }
-        public Location location;
+        public Location location { set; get; }
         public int chargeSlots { set; get; } //the amount of available charge slots in the station
         public void decreaseChargeSlots() { chargeSlots--; }
         public void addChargeSlots() { chargeSlots++; }
