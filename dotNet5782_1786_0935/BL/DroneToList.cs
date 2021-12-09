@@ -16,5 +16,10 @@ namespace IBL.BO
         public Location location;
         public int parcelId;
         public int numOfParcelsDelivered;
+
+        public override string ToString()
+        {
+            return String.Format($"Drone Id: {droneId}\nModel: {Model}\nWeight: {weight}\nbattery: {battery}\nDrone Status: {droneStatus}\nLocation: {location}\nParcel Id: {parcelId}\nNumber Of Parcels Delivered: {numOfParcelsDelivered}\n");
+        }
     }
 }

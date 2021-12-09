@@ -16,7 +16,7 @@ namespace IBL.BO
         public CustomerInParcel CustomerInParcel;
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {ParcelId}\nParcel Weight: {Weight}\nPriority: {Priority}\nParcel status: {ParcelStatus}\n");
+            return String.Format($"Parcel Id: {ParcelId}\nParcel Weight: {Weight}\nPriority: {Priority}\nParcel status: {ParcelStatus}\nCustomer In Parcel: {CustomerInParcel}\n");
         }
 
     }

@@ -11,5 +11,10 @@ namespace IBL.BO
     {
         public int CustomerId;
         public string CustomerName;
+
+        public override string ToString()
+        {
+            return String.Format($"Customer Id: {CustomerId}\nCustomer Name: {CustomerName}\n");
+        }
     }
 }

@@ -472,7 +472,6 @@ namespace BL
             }
         }
         #endregion
-        #region GetParcel
         public IBL.BO.Parcel GetParcel(int parcelId)
         {
 

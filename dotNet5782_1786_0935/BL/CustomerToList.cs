@@ -17,5 +17,11 @@ namespace IBL.BO
         public int recievedParcel;
         public int transitParcel;
 
+        public override string ToString()
+        {
+            return String.Format($"Customer Id: {customerId}\nCustomer Name: {customerName}\nPhone: {phone}\nParcels Delivered: {parcelsDelivered}\nundelivered Parcels: {undeliveredParcels}\nRecieved Parcel: {recievedParcel}\nTransit Parcel: {transitParcel}\n");
+        }
     }
+
+
 }

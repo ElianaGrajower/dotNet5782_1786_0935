@@ -8,8 +8,13 @@ namespace IBL.BO
 {
     public class DroneInCharging
     {
-        public int dronelId;
+        public int droneId;
         public double battery;
 
+
+        public override string ToString()
+        {
+            return String.Format($"Drone Id: {droneId}\nBattery: {battery}\n");
+        }
     }
 }
