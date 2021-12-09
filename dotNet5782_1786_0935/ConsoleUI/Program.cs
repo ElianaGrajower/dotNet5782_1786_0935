@@ -6,6 +6,12 @@ using DAL.DalObject;
 //this code allows you to build drone,parcel,station ,and customer and use different functions to use them
 
 
+//need ideas if what to add to add extra connections between structs
+//kind of want to build a coordinates class- should find out if exists in c# library
+//not really sure y uenum doesnt work
+//find out how to add connections between the different classes- pretty important
+
+
 
 namespace ConsoleUI  
 {
