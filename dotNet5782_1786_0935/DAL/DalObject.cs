@@ -305,7 +305,7 @@ namespace DAL
                 {
                     DataSource.StationList.Remove(station); //removes station
                     DataSource.DroneList.RemoveAll(temp => temp.DroneId == droneToUpdate.DroneId); //removes station
-                    station.ChargeSlots--;
+                    station.availableChargeSlots--;
                     DroneCharge charge = new DroneCharge();
                     charge.DroneId = droneToUpdate.DroneId;
                     charge.StationId = station.StationId;
@@ -339,7 +339,7 @@ namespace DAL
                     throw new DoesntExistException("This drone doesn't exist in the system");
                 if (myStation.StationId != 0) //if station exists updates
                 {
-                    myStation.ChargeSlots++;
+                    myStation.availableChargeSlots++;
                     DataSource.StationList.RemoveAll(temp => (temp.StationId == charge.StationId));
                     DataSource.StationList.Add(myStation);
                 }
@@ -518,9 +518,16 @@ namespace DAL
                 }
             }
             #endregion
+            public IEnumerable<DroneCharge> printdroneChargesList() //prints parcel list
+            {
+                foreach (DroneCharge item in DataSource.DroneChargeList)
+                {
+                    yield return item;
+                }
+            }
 
 
-           
+
         }
     }
 
