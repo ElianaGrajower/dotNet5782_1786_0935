@@ -35,6 +35,15 @@ namespace IBL.BO
         
 
     }
+    public class UnableToCompleteRequest : Exception
+    {
+        public UnableToCompleteRequest() : base() { }
+        public UnableToCompleteRequest(string message) : base(message) { }
+        public UnableToCompleteRequest(string message, Exception inner) : base(message, inner) { }
+
+
+    }
+
 
 
 }

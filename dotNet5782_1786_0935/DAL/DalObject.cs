@@ -204,6 +204,20 @@ namespace DAL
                
 
             }
+            public void DeleteDroneCharge(int droneId,int stationId)
+            {
+
+                try
+                {
+                    DataSource.DroneChargeList.Remove(findDroneCharge(droneId,stationId));
+
+                }
+                catch (DoesntExistException exc)
+                {
+                    throw exc;
+                }
+
+            }
 
             #region matchUpParcel
             public string matchUpParcel(Parcel parcelToUpdate) //matches up package with drone
@@ -408,6 +422,18 @@ namespace DAL
                 throw new DoesntExistException("The customer doesn't exist in system");
             }
             #endregion
+            public DroneCharge findDroneCharge(int droneId,int stationId) //finds a customer using its id
+            {
+
+                for (int i = 0; i < DataSource.DroneChargeList.Count(); i++) //goes over customer list
+                {
+                    if (DataSource.DroneChargeList[i].DroneId == droneId && DataSource.DroneChargeList[i].StationId == stationId) //if id matches
+                    {
+                        return (DataSource.DroneChargeList[i]);
+                    }
+                }
+                throw new DoesntExistException("The customer doesn't exist in system");
+            }
             #region findDrone
             public Drone findDrone(int droneId) //finds a drone using its id
             {
