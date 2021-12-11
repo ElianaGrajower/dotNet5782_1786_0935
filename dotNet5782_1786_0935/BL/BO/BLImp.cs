@@ -9,21 +9,21 @@ using IBL.BO;
 
 //deal with all the exceptions also in the dl
 //writye the main
-//change the names of print func in dal to get
+//change the names of print func in dal to get CC FDHGFF
 
 
 namespace BL
 {
     //namespace BLImp
     //{
-    public class BLImp
+    public class BLImp           
     {
-        // IDAL.DO.IDal dal;
+        // IDAL.DO.IDal dal;     
         //private IEnumerable<DroneToList> droneToLists;
-        public double[] chargeCapacity;
-        private List<IBL.BO.Drone> drones;
+        public double[] chargeCapacity;    
+        private List<IBL.BO.Drone> drones; 
         DAL.DalObject.DalObject dal;
-        public static Random rand = new Random();
+        public static Random rand = new Random(); 
         #region GetChargeCapacity
         public chargeCapacity GetChargeCapacity()
         {
