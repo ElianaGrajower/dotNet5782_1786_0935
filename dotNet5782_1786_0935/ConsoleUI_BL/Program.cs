@@ -4,12 +4,12 @@ using BL;
 
 namespace ConsoleUI_BL
 {
-    class Program
+    public class Program
     {
-        static BL Data;
+        static BLImp Data;
         static void Main(string[] args)
         {
-            Data = new BL();
+            Data = new BLImp();
             int choice;
             Console.WriteLine("Choose from the following options:");
             Console.WriteLine("1- To add new item");
