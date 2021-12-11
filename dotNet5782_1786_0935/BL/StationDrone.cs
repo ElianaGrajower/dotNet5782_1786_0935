@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class StationDrone
+    public class StationDrone   
     {
         
         public int StationName;

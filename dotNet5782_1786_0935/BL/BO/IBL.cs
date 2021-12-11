@@ -10,5 +10,5 @@ namespace IBL.BO
     public interface IBL
     {
         public double[] GetChargeCapacity();
-    }
+    }     
 }

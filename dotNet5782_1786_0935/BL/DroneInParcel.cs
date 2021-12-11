@@ -12,7 +12,7 @@ namespace IBL.BO
         public double battery;
         public Location location;
    
-
+          
         public override string ToString()
         {
             return String.Format($"Drone Id: {droneId}\nBattery: {battery}\nLocation: {location}\n");

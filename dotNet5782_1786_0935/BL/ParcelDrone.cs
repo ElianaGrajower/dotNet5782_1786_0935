@@ -9,7 +9,7 @@ namespace BL
 {
     public class ParcelDrone
     {
-        public int DroneId;
+        public int DroneId;   
         public int ParcelId;
         public WeightCategories ParcelWeight;
         public override string ToString()

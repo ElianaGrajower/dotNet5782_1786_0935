@@ -13,7 +13,7 @@ namespace IBL.BO
         public WeightCategories weight;
         public double battery;
         public DroneStatus droneStatus;
-        public Location location;
+        public Location location;   
         public int parcelId;
         public int numOfParcelsDelivered;
 

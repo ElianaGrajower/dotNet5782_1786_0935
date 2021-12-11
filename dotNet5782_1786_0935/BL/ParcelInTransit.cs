@@ -13,7 +13,7 @@ namespace IBL.BO
         public bool parcelStatus;//true if matched with drone
         public Priorities priority;
         public WeightCategories weight;
-        public CustomerInParcel sender;
+        public CustomerInParcel sender;   
         public CustomerInParcel target;
         public Location pickupLocation;
         public Location targetLocation;

@@ -181,14 +181,13 @@ namespace BL
         {
             try
             {
-                IBL.BO.Station station = new IBL.BO.Station();
+                IBL.BO.Station station = new IBL.BO.Station();       
                 var tempStation = dal.GetStation(stationId);
                 station.StationId = tempStation.StationId;
                 station.name = tempStation.Name;
                 station.chargeSlots = tempStation.ChargeSlots;
-                station.location.Longitude = tempStation.Longitude;
                 station.location.Lattitude = tempStation.Lattitude;
-                
+                station.location.Longitude = tempStation.Longitude;   
                 station.DronesatStation = dal.printDroneChargeList().Where(item=>item.StationId== stationId)
                     .Select(drone => new DroneInCharging()
                     {

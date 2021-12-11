@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace IBL.BO
 {
     [Serializable]
-    public class DoesntExistException : Exception
+    public class DoesntExistException : Exception   
     {
         public DoesntExistException() : base() { }
         public DoesntExistException(string message) : base(message) { }

@@ -16,7 +16,7 @@ namespace IBL.BO
         public Priorities priority;
         public ParcelStatus parcelStatus;
 
-        public override string ToString()
+        public override string ToString()   
         {
             return String.Format($"Parcel Id: {parcelId}\nSender Name: {senderName}\nReciver Name: {reciverName}\nWeight: {weight}\nPriority: {priority}\nParcel Status: {parcelStatus}\n");
         }

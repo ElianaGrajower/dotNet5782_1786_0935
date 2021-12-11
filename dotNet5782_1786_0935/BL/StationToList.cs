@@ -11,7 +11,7 @@ namespace IBL.BO
         public int stationId;
         public int name;  
         public int numberOfAvailableSlots;
-        public int numberOfSlotsInUse;
+        public int numberOfSlotsInUse;  
 
         public override string ToString()
         {

@@ -13,7 +13,7 @@ namespace IBL.BO
         public int name { set; get; }
         public Location location { set; get; }
         public int chargeSlots { set; get; } //the amount of available charge slots in the station
-        public void decreaseChargeSlots() { chargeSlots--; }
+        public void decreaseChargeSlots() { chargeSlots--; }  
         public void addChargeSlots() { chargeSlots++; }
         public List<DroneInCharging> DronesatStation;//drones being charged at the station
        // public List<PastCharges> DronesLeftStation;  //extra
