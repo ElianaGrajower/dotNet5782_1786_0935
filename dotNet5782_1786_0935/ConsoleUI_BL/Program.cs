@@ -6,10 +6,10 @@ namespace ConsoleUI_BL
 {
     class Program
     {
-        static BL Data;
+        static BLImp Data;
         static void Main(string[] args)
         {
-            Data = new BL();
+            Data = new BLImp();
             int choice;
             Console.WriteLine("Choose from the following options:");
             Console.WriteLine("1- To add new item");
@@ -42,7 +42,6 @@ namespace ConsoleUI_BL
                                         s.location.Longitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
                                         s.chargeSlots = int.Parse(Console.ReadLine());
-                                        List<DroneInCharging> s.DronesatStation = new List<DroneInCharging>();
                                         Data.AddStation(s);
 
                                         break;
@@ -72,7 +71,7 @@ namespace ConsoleUI_BL
                                         }
                                         Console.WriteLine("Enter station number");   
                                         int stationId = int.Parse(Console.ReadLine());
-                                        Data.AddDrone(d); //builds and adds a drone using the information the user provided
+                                        Data.AddDrone(d,stationId); //builds and adds a drone using the information the user provided
                                         Console.WriteLine("drone id: " + d.DroneId + "\n");
                                         break;
                                     }
@@ -169,7 +168,7 @@ namespace ConsoleUI_BL
                                         int droneId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter model of drone");
                                         int model = int.Parse(Console.ReadLine());
-                                        updateStationName(droneId, model);
+                                        Data.UpdateStationName(droneId, model);
                                         break;
                                     }
                                 case 'B':
@@ -193,14 +192,14 @@ namespace ConsoleUI_BL
                                         string customerName = Console.ReadLine();
                                         Console.WriteLine("Enter a new phone number:");
                                         string phone = Console.ReadLine();
-                                        updateCostumerName(customerId, customerName, phone);
+                                        Data.UpdateCustomerName(customerId, customerName, phone);
                                         break;
                                     }
                                 case 'D':
                                     {
                                         Console.WriteLine("Enter id of drone");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        SendDroneToCharge(droneId);
+                                        Data.SendDroneToCharge(droneId);
                                         break;
                                     }
                                 case 'E':
@@ -216,21 +215,21 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine("Enter id of drone");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        MatchUpParcel(droneId);
+                                        Data.MatchDroneWithPacrel(droneId);
                                         break;
                                     }
                                 case 'G':
                                     {
                                         Console.WriteLine("Enter id of drone");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        PickedUpParcel(droneId);
+                                        Data.PickUpParcel(droneId);
                                         break;
                                     }
                                 case 'H':
                                     {
                                         Console.WriteLine("Enter id of drone");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        DeliveredParcel(droneId);
+                                        Data.DeliveredParcel(droneId);
                                         break;
                                     }
                                 default:
@@ -253,28 +252,28 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine("Enter id of station");
                                         int stationId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("\n" + Data.GetStation.ToString(stationId) + "\n");
+                                        Console.WriteLine("\n" + Data.GetStation(stationId).ToString() + "\n");
                                         break;
                                     }
                                 case 'B':
                                     {
                                         Console.WriteLine("Enter id of drone");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("\n" + Data.GetDrone.ToString(droneId) + "\n");
+                                        Console.WriteLine("\n" + Data.GetDrone(droneId).ToString() + "\n");
                                         break;
                                     }
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter id of customer");
                                         int customerId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("\n" + Data.GetCustomer(customerId) + "\n");
+                                        Console.WriteLine("\n" + Data.GetCustomer(customerId).ToString() + "\n");
                                         break;
                                     }
                                 case 'D':
                                     {
                                         Console.WriteLine("Enter id of parcel");
                                         int parcelId = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("\n" + Data.GetParcel.ToString(parcelId) + "\n");
+                                        Console.WriteLine("\n" + Data.GetParcel(parcelId).ToString() + "\n");
                                         break;
                                     }
                                 default:
@@ -310,7 +309,7 @@ namespace ConsoleUI_BL
                                 case 'C':
                                     {
                                         Console.WriteLine("List of customers:\n");
-                                        foreach (Customer item in Data.GetCustomerList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                        foreach (Customer item in Data.GetCustomersList()) { Console.WriteLine(item.ToString() + "\n"); };
                                         break;
                                     }
                                 case 'D':

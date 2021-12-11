@@ -910,7 +910,7 @@ namespace BL
         }
         #endregion
         #region GetDroneList
-        public List<IBL.BO.Drone> GetDroneList()
+        public List<IBL.BO.Drone> GetDronesList()
         {
             List<IBL.BO.Drone> drone = new List<IBL.BO.Drone>();
             try
