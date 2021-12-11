@@ -298,15 +298,41 @@ namespace ConsoleUI_BL
                                 case 'A':
                                     {
                                         Console.WriteLine("List of stations:\n");
-                                        foreach (Station item in Data.StationToList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                        foreach (Station item in Data.GetStationsList()) { Console.WriteLine(item.ToString() + "\n"); };
                                         break;
                                     }
                                 case 'B':
                                     {
                                         Console.WriteLine("List of drones:\n");
-                                        foreach (Drone item in Data.printDronesList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                        foreach (Drone item in Data.GetDronesList()) { Console.WriteLine(item.ToString() + "\n"); };
                                         break;
                                     }
+                                case 'C':
+                                    {
+                                        Console.WriteLine("List of customers:\n");
+                                        foreach (Customer item in Data.GetCustomerList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                        break;
+                                    }
+                                case 'D':
+                                    {
+                                        Console.WriteLine("List of parcels:\n");
+                                        foreach (Parcel item in Data.GetParcelsList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                        break;
+                                    }
+                                case 'E':
+                                    {
+                                        Console.WriteLine("List of parcels that are not yet matched up to drone:\n");
+                                        foreach (Parcel item in Data.GetUnmatchedParcelsList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                        break;
+                                    }
+                                case 'F':
+                                    {
+                                        Console.WriteLine("List of stations with availablechargeslots:\n");
+                                        foreach (Station item in Data.GetAvailableStationsList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                        break;
+                                    }
+
+
                             }
                             break;
                         }
