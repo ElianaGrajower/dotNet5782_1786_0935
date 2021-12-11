@@ -20,7 +20,7 @@ namespace BL
     public class BLImp
     {
        // IDAL.DO.IDal dal;
-       DAL.DalObject.DalObject dal;
+        DAL.DalObject.DalObject dal;
         public static Random rand = new Random();
         #region GetChargeCapacity
         public chargeCapacity GetChargeCapacity()
@@ -150,7 +150,7 @@ namespace BL
                 station.DronesatStation = dal.printdroneChargesList().Where(item=>item.StationId== stationId)
                     .Select(drone => new DroneInCharging()
                     {
-                        dronelId = drone.DroneId,
+                        droneId = drone.DroneId,
                         battery = getDroneBattery(drone.DroneId)
                     }).ToList();
                 return station;
@@ -236,7 +236,7 @@ namespace BL
         #region getDroneBattery
         private double getDroneBattery(int droneId)
         {
-            return drones.Find(drone => drone.droneId == droneId).battery;
+            return drones.ToList().Find(drone => drone.droneId == droneId).battery;
         }
         #endregion
         #region getRandomCordinatesBL
@@ -245,7 +245,7 @@ namespace BL
             return (rand.NextDouble() * (num2 - num1) + num1);
         }
         #endregion
-
+        
         #region AddCustomer
         public void AddCustomer(IBL.BO.Customer CustomertoAdd)
         {
@@ -304,7 +304,8 @@ namespace BL
                 StationId = StationtoAdd.StationId,
                 Name = StationtoAdd.name,
                 Lattitude = StationtoAdd.location.Lattitude,
-                Longitude = StationtoAdd.location.Longitude
+                Longitude = StationtoAdd.location.Longitude,
+                ChargeSlots = StationtoAdd.chargeSlots
             };
             try
             {
@@ -355,6 +356,36 @@ namespace BL
             {
                 throw exc;
 
+            }
+        }
+        #endregion
+
+        #region AddDrone
+        public void AddDrone(IBL.BO.Drone DronetoAdd, int StationId)
+        {
+            if (DronetoAdd.DroneId <= 0)
+                throw new IBL.BO.InvalidInputException("drone id not valid- must be a posittive\n");
+            if (DronetoAdd.MaxWeight != IBL.BO.WeightCategories.light && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.average && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.heavy)
+                throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");//should this be frased differently?
+            DronetoAdd.battery = rand.Next(20, 40);
+            DronetoAdd.droneStatus = DroneStatus.maintenance;
+            double StationLattitude = dal.findStation(StationId).Lattitude;
+            double StationLongitude = dal.findStation(StationId).Longitude;
+            DronetoAdd.location = new Location(StationLattitude, StationLongitude);
+
+            IDAL.DO.Drone newDrone = new IDAL.DO.Drone()
+            {
+                DroneId = DronetoAdd.DroneId,
+                Model = DronetoAdd.Model,
+                MaxWeight = (IDAL.DO.WeightCategories)((int)DronetoAdd.MaxWeight)
+            };
+            try
+            {
+                dal.AddDrone(newDrone);
+            }
+            catch (AlreadyExistException exc)
+            {
+                throw exc;
             }
         }
         #endregion
@@ -523,6 +554,66 @@ namespace BL
         }
         #endregion
 
+        #region GetDrone
+        /// <summary>
+        /// ///redoooo
+        /// </summary>
+        /// <param name="DroneId"></param>
+        /// <returns></returns>
+
+
+        public IBL.BO.Drone GetDrone(int DroneId) /////////////not done
+        {
+            try
+            {
+                IDAL.DO.Drone temp = dal.GetDrone(DroneId);
+                var droneBL = drones.ToList().Find(x => x.droneId == DroneId);
+                IBL.BO.Parcel parcel = GetParcelsList().ToList().Find(x => x.droneId = DroneId);
+                IBL.BO.Drone drone = new IBL.BO.Drone()
+                {
+
+                    DroneId = temp.DroneId,
+                    Model = temp.Model,
+                    MaxWeight = (IBL.BO.WeightCategories)((int)temp.MaxWeight),
+                    battery = droneBL.battery,
+                    droneStatus = droneBL.droneStatus,
+                    // parcel=GetParcel(droneBL.parcelId),
+                    //var parcel = GetParcels().ToList().Find(x => x.droneId ==);
+                    IBL.BO.ParcelInTransit parcelInTransit = new IBL.BO.ParcelInTransit()
+     //               ParcelInTransit drone = drones.ToList().Find(d => d.id == id)
+                    {
+                        parcelId = parcel.ParcelId,
+                        parcelStatus = IDAL.DalObject.Data.findCustomer(parcel.Sender.CustomerId),
+                        priority=parcel.Priority,
+                        weight = parcel.Weight,
+                        sender = parcel.Sender,
+                        target = parcel.Target,
+                        pickupLocation = Data.findCustomer(parcel.Sender.CustomerId).location,
+                        targetLocation = Target.location,
+                        distance = Distance(pickupLocation, targetLocation),
+
+                    },
+                    //// = dal.printParcelsList().Select(parcel => new ParcelDrone()
+                    //{
+                    //    DroneId = parcel.DroneId,
+                    //        ParcelId = parcel.ParcelId,
+                    //        ParcelWeight = (IBL.BO.WeightCategories)parcel.Weight
+
+
+                    //    }).Where(ParcelDrone => ParcelDrone.DroneId == DroneId),
+
+                    location = droneBL.location
+                };
+            return drone; 
+            }
+            catch (IBL.BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+
+        }
+        #endregion
+
         private IEnumerable<DroneToList> droneToLists;
         public double[] chargeCapacity;
         private List<DroneToList> drones;
@@ -634,7 +725,6 @@ namespace BL
 
                     Console.WriteLine(drt.ToString());
 
-
                 }
                 
 
@@ -672,8 +762,8 @@ namespace BL
                 DroneToList droneToList = new DroneToList()
                 {
                     droneId = droneId,
-                    Model=tempDrone.model,
-                    weight=tempDrone.weight,
+                    Model=tempDrone.Model,
+                    weight=tempDrone.MaxWeight,
                     battery=tempDrone.battery,
                     droneStatus=DroneStatus.available,
                     location=new Location(possibleStation.location.Lattitude, possibleStation.location.Longitude),
