@@ -185,9 +185,9 @@ namespace BL
                 var tempStation = dal.GetStation(stationId);
                 station.StationId = tempStation.StationId;
                 station.name = tempStation.Name;
-                station.chargeSlots = station.chargeSlots;
+                station.chargeSlots = tempStation.ChargeSlots;
                 station.location.Lattitude = tempStation.Lattitude;
-                station.location.Longitude = tempStation.Longitude;
+                station.location.Longitude = tempStation.Longitude;   
                 station.DronesatStation = dal.printDroneChargeList().Where(item=>item.StationId== stationId)
                     .Select(drone => new DroneInCharging()
                     {

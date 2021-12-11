@@ -9,7 +9,7 @@ namespace IBL.BO
 {
     public class ParcelinCustomer
     {
-        public int ParcelId { get; set; }
+        public int ParcelId { get; set; }   
         public WeightCategories Weight { get; set; }
         public Priorities Priority { get; set; }
         public ParcelStatus ParcelStatus { get; set; }

@@ -9,7 +9,7 @@ namespace BL
     public class DroneCharging
     {
         public int stationId;
-        public int DroneId;
+        public int DroneId;   
         public double battery;
         public DateTime arrival;
         public override string ToString()

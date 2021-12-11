@@ -42,7 +42,7 @@ namespace ConsoleUI_BL
                                         s.location.Lattitude = double.Parse(Console.ReadLine());
                                         s.location.Longitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
-                                        s.chargeSlots = int.Parse(Console.ReadLine());
+                                        s.chargeSlots = int.Parse(Console.ReadLine());   
                                         Data.AddStation(s);
 
                                         break;

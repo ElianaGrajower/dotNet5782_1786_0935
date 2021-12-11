@@ -11,7 +11,7 @@ using IDAL.DO;
 
 namespace DAL
 {
-    namespace DalObject
+    namespace DalObject     
     {
         public class DalObject 
         {

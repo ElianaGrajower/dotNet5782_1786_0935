@@ -10,7 +10,7 @@ namespace IBL.BO
     public class Customer
     {
         public int CustomerId { set; get; }
-        public string Name { set; get; }
+        public string Name { set; get; }    
         public string Phone { set; get; }
         public Location Location{ set; get; }
         public IEnumerable<ParcelinCustomer> ParcelsOrdered;

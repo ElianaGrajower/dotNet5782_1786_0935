@@ -13,7 +13,7 @@ namespace IBL.BO
         public string Model { set; get; }
         public WeightCategories MaxWeight;
         public double battery;
-        public DroneStatus droneStatus { set; get; }
+        public DroneStatus droneStatus { set; get; }   
         public ParcelInTransit parcel;
         public Location location;
 

@@ -15,7 +15,7 @@ using DAL.DalObject;
 
 namespace ConsoleUI  
 {
-    class Program
+    class Program   
     {
         static DalObject Data;
         static void Main(string[] args)

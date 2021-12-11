@@ -10,4 +10,4 @@ namespace IBL.BO
     public enum DroneStatus { available, maintenance, delivery };
     public enum Priorities { regular, fast, emergency };
     public enum ParcelStatus { created, matched, pickedUp, delivered };
-}
+}   
