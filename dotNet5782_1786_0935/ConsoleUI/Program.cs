@@ -21,16 +21,16 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             Data = new DalObject(); //creates an object of DalObject type
-            int choice;
+            int chosen;
             Console.WriteLine("Choose from the following options:");
             Console.WriteLine("1- To add new item");
             Console.WriteLine("2- To update item");
             Console.WriteLine("3- To print item details");
             Console.WriteLine("4- To print list of items");
-            choice = int.Parse(Console.ReadLine());
-            while (choice != 5) //loops untill 5 is chosen then the program ends
+            chosen = int.Parse(Console.ReadLine());
+            while (chosen != 5) //loops untill 5 is chosen then the program ends
             {
-                switch (choice) //chooses what activaty to do
+                switch (chosen) //chooses what activaty to do
                 {
                     case 1: //adds to a item
                         {
@@ -39,8 +39,20 @@ namespace ConsoleUI
                                 "B- add a drone\n" +
                                 "C- add a customer\n" +
                                 "D- add a parcel");
-                            char addingChoice = char.Parse(Console.ReadLine());
-                            switch (addingChoice) //chooses what item to add 
+                            string addingChoice = (Console.ReadLine());
+                            try
+                            { 
+                              // string addingChoice = (Console.ReadLine()); 
+                                if(addingChoice.Length!=1)
+                                    throw new InvalidInputException("Choice must be from following menu!\n");
+                                
+                            }
+                            catch(InvalidInputException exc)
+                            {
+                                Console.WriteLine(exc);
+                            }
+                            char Mychoice = addingChoice[0];
+                            switch (Mychoice) //chooses what item to add 
                             {
                                 case 'A': //adds a station
                                     {
@@ -109,8 +121,21 @@ namespace ConsoleUI
                                 "E- unplug a charging drone\n" +
                                 "F- find distance to charge station\n" +
                                 "G- find distance from customer");
-                            char updateChoice = char.Parse(Console.ReadLine());
-                            switch (updateChoice) //chooses what to update
+                           // char updateChoice = char.Parse(Console.ReadLine());
+                            string updateChoice = (Console.ReadLine());
+                            try
+                            {
+                                // string addingChoice = (Console.ReadLine()); 
+                                if (updateChoice.Length != 1)
+                                    throw new InvalidInputException("Choice must be from following menu!\n");
+
+                            }
+                            catch (InvalidInputException exc)
+                            {
+                                Console.WriteLine(exc);
+                            }
+                            char Mychoice = updateChoice[0];
+                            switch (Mychoice) //chooses what to update
                             {
                                 case 'A': //matchs a parcel to a drone
                                     {
@@ -186,26 +211,39 @@ namespace ConsoleUI
                         }
                     case 3: //prints item details
                         {
-                            char Choice_Print;
+                            //char Choice_Print;
                             int Id;
                             Console.WriteLine("Enter choice you want to print:");
                             Console.WriteLine("A- charge station");
                             Console.WriteLine("B- drone");
                             Console.WriteLine("C- customer");
                             Console.WriteLine("D- parcel");
-                            Choice_Print = char.Parse(Console.ReadLine());
+                           // Choice_Print = char.Parse(Console.ReadLine());
+                            string Choice_Print = (Console.ReadLine());
+                            try
+                            {
+                                // string addingChoice = (Console.ReadLine()); 
+                                if (Choice_Print.Length != 1)
+                                    throw new InvalidInputException("Choice must be from following menu!\n");
+
+                            }
+                            catch (InvalidInputException exc)
+                            {
+                                Console.WriteLine(exc);
+                            }
+                            char Mychoice = Choice_Print[0];
                             Console.Write("Enter ");
-                            if (Choice_Print == 'A')
+                            if (Mychoice == 'A')
                                 Console.Write("charge Station ");
-                            if (Choice_Print == 'B')
+                            if (Mychoice == 'B')
                                 Console.Write("drone ");
-                            if (Choice_Print == 'C')
+                            if (Mychoice == 'C')
                                 Console.Write("customer ");
-                            if (Choice_Print == 'D')
+                            if (Mychoice == 'D')
                                 Console.Write("pacel ");
                             Console.WriteLine("id: ");
                             Id = int.Parse(Console.ReadLine());
-                            switch (Choice_Print) //chooses an item
+                            switch (Mychoice) //chooses an item
                             {
                                 case 'A': //prints a charge stations details
                                     {
@@ -235,7 +273,7 @@ namespace ConsoleUI
                         }
                     case 4: //prints list of items
                         {
-                            char Choice_Print;
+                           // char Choice_Print;
                             Console.WriteLine("Enter choice you want to print:");
                             Console.WriteLine("A- charge station list");
                             Console.WriteLine("B- drone list");
@@ -243,9 +281,22 @@ namespace ConsoleUI
                             Console.WriteLine("D- parcel list");
                             Console.WriteLine("E- parcel that was not matched up to drone list");
                             Console.WriteLine("F- charge station with available charge list");
+                            string Choice_Print = (Console.ReadLine());
+                            try
+                            {
+                                // string addingChoice = (Console.ReadLine()); 
+                                if (Choice_Print.Length != 1)
+                                    throw new InvalidInputException("Choice must be from following menu!\n");
 
-                            Choice_Print = char.Parse(Console.ReadLine());
-                            switch (Choice_Print) //chooses an item
+                            }
+                            catch (InvalidInputException exc)
+                            {
+                                Console.WriteLine(exc);
+                            }
+                            char Mychoice = Choice_Print[0];
+
+                            //Choice_Print = char.Parse(Console.ReadLine());
+                            switch (Mychoice) //chooses an item
                             {
                                 case 'A': //prints charge station list
                                     {
@@ -329,7 +380,20 @@ namespace ConsoleUI
                 Console.WriteLine("3- To print item details");
                 Console.WriteLine("4- To print list of items");
                 Console.WriteLine("5- To exit");
-                choice = int.Parse(Console.ReadLine());
+                //choice = int.Parse(Console.ReadLine());
+                string choice = (Console.ReadLine());
+                try
+                {
+                    // string addingChoice = (Console.ReadLine()); 
+                    if (choice.Length != 1)
+                        throw new InvalidInputException("Choice must be from following menu!\n");
+
+                }
+                catch (InvalidInputException exc)
+                {
+                    Console.WriteLine(exc);
+                }
+                chosen = choice[0];
             }
         }
     }

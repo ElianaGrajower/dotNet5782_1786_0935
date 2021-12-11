@@ -39,11 +39,23 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("Enter name of station: ");
                                         s.name = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter lattitude and longitude of station");
+                                        s.location = new Location(0, 0);
                                         s.location.Lattitude = double.Parse(Console.ReadLine());
                                         s.location.Longitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
-                                        s.chargeSlots = int.Parse(Console.ReadLine());   
-                                        Data.AddStation(s);
+                                        s.chargeSlots = int.Parse(Console.ReadLine());
+                                        try
+                                        {
+                                            Data.AddStation(s);
+                                        }
+                                        catch(InvalidInputException exc)
+                                        {
+                                            Console.WriteLine( exc.Message);
+                                        }
+                                        catch (AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
 
                                         break;
                                     }
@@ -72,7 +84,18 @@ namespace ConsoleUI_BL
                                         }
                                         Console.WriteLine("Enter station number");   
                                         int stationId = int.Parse(Console.ReadLine());
-                                        Data.AddDrone(d,stationId); //builds and adds a drone using the information the user provided
+                                        try
+                                        {
+                                            Data.AddDrone(d, stationId); //builds and adds a drone using the information the user provided
+                                        }
+                                        catch (InvalidInputException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
+                                        catch (AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
                                         Console.WriteLine("drone id: " + d.DroneId + "\n");
                                         break;
                                     }
@@ -88,7 +111,18 @@ namespace ConsoleUI_BL
                                         c.Location.Longitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter Your lattitude coordinates: ");
                                         c.Location.Lattitude = double.Parse(Console.ReadLine());
-                                        Data.AddCustomer(c); //builds and adds a customer using the information the user provided
+                                        try
+                                        {
+                                            Data.AddCustomer(c); //builds and adds a customer using the information the user provided
+                                        }
+                                        catch (InvalidInputException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
+                                        catch (AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
                                         break;
                                     }
                                 case 'D':
@@ -140,7 +174,18 @@ namespace ConsoleUI_BL
                                                 p.Priority = Priorities.emergency;
                                                 break;
                                         }
-                                        Data.AddParcel(p); //builds and adds a parcel using the information the user provided
+                                        try
+                                        {
+                                            Data.AddParcel(p); //builds and adds a parcel using the information the user provided
+                                        }
+                                        catch (InvalidInputException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
+                                        catch (AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
                                         break;
                                     }
                                 default:

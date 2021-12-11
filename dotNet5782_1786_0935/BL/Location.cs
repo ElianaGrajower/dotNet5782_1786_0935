@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL;
 //updated and needed
 
 namespace IBL.BO   
@@ -23,7 +24,7 @@ namespace IBL.BO
         }
         public override string ToString()
         {
-            return String.Format($"Location: ( {Lattitude} , {Longitude} )\n");
+            return String.Format($"Location: ( { Math.Round(Lattitude,3)} , {Math.Round(Longitude,3)} )\n");
         }
     }
 }
