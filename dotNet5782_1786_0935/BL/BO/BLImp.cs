@@ -711,57 +711,7 @@ namespace BL
                 tempCustomer.Phone = number;
         }
         #endregion
-        //SendDroneToCharge
-        //need to take care of if no avail chargeslots 
-        //public void SendDroneToCharge(int droneId)
-        //{
-        //    var tempDrone = GetDrone(droneId);
-        //    if(tempDrone.droneStatus== DroneStatus.available )
-        //    {
-        //        var location = ClosestStation(tempDrone.location, true,StationLocationslist());
-        //        var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == location.Lattitude && station.Longitude == location.Longitude).StationId);
-        //        DroneToList droneToList = new DroneToList()
-        //        {
-        //            droneId = droneId,
-        //            Model=tempDrone.Model,
-        //            weight=tempDrone.MaxWeight,
-        //            battery=tempDrone.battery,
-        //            droneStatus=DroneStatus.available,
-        //            location=new Location(possibleStation.location.Lattitude, possibleStation.location.Longitude),
-        //            parcelId=0,
-        //            //how do i figure this out?!?!?1?1??
-        //            //numOfParcelsDelivered=tempDrone.
-
-        //        };
-
-        //        if(possibleStation.chargeSlots>0)
-        //        {
-        //            if(MinBatteryRequired(droneToList.droneId)<=tempDrone.battery)
-        //            {
-        //                IDAL.DO.DroneCharge temp = new IDAL.DO.DroneCharge() 
-        //                {
-        //                    DroneId= droneToList.droneId,
-        //                  StationId= possibleStation.StationId
-        //                };
-        //                possibleStation.decreaseChargeSlots();
-        //                dal.AddDroneCharge(temp);
-        //                dal.DeleteStation(possibleStation.StationId);
-        //                AddStation(possibleStation);
-        //                dal.DeleteDrone(tempDrone.DroneId);
-        //                BatteryUsage usage=new BatteryUsage();
-        //                tempDrone.battery -= Distance(possibleStation.location, tempDrone.location)*usage.light;
-        //                tempDrone.droneStatus = DroneStatus.maintenance;
-        //                AddDrone(tempDrone,FindStation(tempDrone.location));
-
-        //            }
-        //            else 
-        //                throw(new UnableToCompleteRequest());
-        //        }
-        //        //how do i get next closest sttation
-        //    }
-
-        //}
-        //#endregion
+       
         #region ReleaseDroneFromCharge
         public void ReleaseDroneFromCharge(int droneId,int chargeTime)
         {
