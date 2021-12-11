@@ -181,7 +181,7 @@ namespace BL
         {
             try
             {
-                IBL.BO.Station station = new IBL.BO.Station();
+                IBL.BO.Station station = new IBL.BO.Station();       
                 var tempStation = dal.GetStation(stationId);
                 station.StationId = tempStation.StationId;
                 station.name = tempStation.Name;
