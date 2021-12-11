@@ -800,8 +800,79 @@ namespace BL
         //        throw (new UnableToCompleteRequest());
         //}
         //#endregion
-        #region matchingDroneToParcel
-        public void matchingDroneToParcel(int droneId)
+        private IDAL.DO.Parcel findTheParcel(IBL.BO.WeightCategories we, IBL.BO.Location a, double buttery, IDAL.DO.Priorities pri)
+        {
+
+
+            double d, x;
+            IDAL.DO.Parcel theParcel = new IDAL.DO.Parcel();
+
+            IBL.BO.Location loc = new IBL.BO.Location(0,0);
+            IDAL.DO.Customer customer = new IDAL.DO.Customer();
+            double far = 1000000;
+            // bool flug = false;
+
+            //השאילתא אחראית למצוא את כל החבילות בעדיפות המבוקשת
+            var parcels = dal.printParcelsList();
+            var tempParcel = from item in parcels
+                             where item.Priority == pri
+                             select item;
+
+            foreach (var item in tempParcel)
+            {
+                customer = dal.GetCustomer(item.SenderId);
+                loc.Lattitude = customer.Lattitude;
+                loc.Longitude = customer.Longitude;
+                chargeCapacity chargeCapacity = GetChargeCapacity();
+                d = Distance(a, loc);//המרחק בין מיקום נוכחי למיקום השולח
+                x = Distance(loc, new IBL.BO.Location (dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Longitude ));//המרחק בין מיקום שולח למיקום יעד
+                double fromCusToSta = Distance(new IBL.BO.Location (dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Longitude ), ClosestStation(new IBL.BO.Location ( dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Lattitude ), false, StationLocationslist()));
+                double butteryUse = x * chargeCapacity.chargeCapacityArr[(int)item.Weight] + fromCusToSta * chargeCapacity.chargeCapacityArr[0] + d * chargeCapacity.chargeCapacityArr[0];
+                if (d < far && (buttery - butteryUse) > 0 && item.Scheduled == DateTime.MinValue && weight(we, (IBL.BO.WeightCategories)item.Weight) == true)
+                {
+                    far = d;
+                    theParcel = item;
+                    return theParcel;
+                }
+            }
+            //if (v.Count() > 0)//if there is a parcel.priority. ....
+            //flug = true;
+
+            if (pri == IDAL.DO.Priorities.emergency)//אם לא מצא בעדיפות הכי גבוהה מחפש בעדיפות מתחתיה
+                theParcel = findTheParcel(we, a, buttery, IDAL.DO.Priorities.fast);
+
+            if (pri == IDAL.DO.Priorities.fast)
+                theParcel = findTheParcel(we, a, buttery, IDAL.DO.Priorities.regular);
+            if (theParcel.ParcelId == 0)
+                throw new IBL.BO.DoesntExistException("ERROR! there is not a parcel that match to the drone ");
+            return theParcel;
+        }
+        private bool weight(IBL.BO.WeightCategories dr, IBL.BO.WeightCategories pa)
+        {
+            if (dr == IBL.BO.WeightCategories.heavy)
+                return true;
+            if (dr == IBL.BO.WeightCategories.average && (pa == IBL.BO.WeightCategories.average || pa == IBL.BO.WeightCategories.light))
+                return true;
+            if (dr == IBL.BO.WeightCategories.light && pa == IBL.BO.WeightCategories.light)
+                return true;
+            return false;
+        }
+        private int indexOfChargeCapacity(IDAL.DO.WeightCategories w)
+        {
+            if (w == IDAL.DO.WeightCategories.light)
+                return 1;
+            if (w == IDAL.DO.WeightCategories.heavy)
+                return 2;
+            if (w == IDAL.DO.WeightCategories.average)
+                return 3;
+
+            return 0;
+
+        }
+      
+
+        #region MatchDroneWithPacrel
+        public void MatchDroneWithPacrel(int droneId)
         {
 
             try
@@ -817,10 +888,10 @@ namespace BL
                 DeleteDrone(myDrone.id);
                 drones.RemoveAt(index);
                 myDrone.droneStatus = DroneStatus.delivery;
-                myDrone.parcelId = myParcel.id;
+                myDrone.parcelId = myParcel.ParcelId;
                 AddDrone(myDrone, station.StationId);
             }
-            catch (findException exp) { throw new dosntExisetException(exp.Message); }
+            catch (IBL.BO.DoesntExistException exp) { throw new IBL.BO.DoesntExistException(exp.Message); }
 
         }
         #endregion
@@ -954,7 +1025,7 @@ namespace BL
             {
                 drone = GetDrone(droneID);
             }
-            catch (IDAL.DO.findException exp)
+            catch (IDAL.DO.DoesntExistException exp)
             {
                 throw new IBL.BO.DoesntExistException(exp.Message);
             }
@@ -971,8 +1042,8 @@ namespace BL
             drones[droneIndex].droneStatus = DroneStatus.maintenance;
 
             try { DeleteDrone(droneID); }
-            catch (deleteException exp) { throw new deleteException(exp.Message); }
-            catch (findException exp)
+            catch (UnableToCompleteRequest exp) { throw new UnableToCompleteRequest(exp.Message); }
+            catch (IBL.BO.DoesntExistException exp)
             {
                 throw new IBL.BO.DoesntExistException(exp.Message);
             }

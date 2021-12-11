@@ -553,6 +553,15 @@ namespace DAL
                 }
             }
             #endregion
+            public void attribute(int dID, int pID)//the function attribute parcel to drone
+            {
+                Drone tmpD = GetDrone(dID);
+                Parcel tmpP = GetParcel(pID);
+                DataSource.ParcelList.RemoveAll(m => m.ParcelId == tmpP.DroneId);   //removing all the data from the place in the list the equal to tmpP id
+                tmpP.DroneId = tmpD.DroneId;        //attribute drones id to parcel 
+                tmpP.Scheduled = DateTime.Now; //changing the time to be right now
+                DataSource.ParcelList.Add(tmpP); //adding to the parcel list tmpP
+            }
 
 
 

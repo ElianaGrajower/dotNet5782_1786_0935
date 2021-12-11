@@ -43,7 +43,15 @@ namespace IBL.BO
 
 
     }
+    
+        public class unavailableException : Exception
+    {
+        public unavailableException() : base() { }
+        public unavailableException(string message) : base(message) { }
+        public unavailableException(string message, Exception inner) : base(message, inner) { }
 
+
+    }
 
 
 }
