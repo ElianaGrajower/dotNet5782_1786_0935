@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 //updated and needed
 namespace IBL.BO
 {
-    class DroneToList
+    public class DroneToList
     {
         public int droneId;
         public string Model { set; get; }
