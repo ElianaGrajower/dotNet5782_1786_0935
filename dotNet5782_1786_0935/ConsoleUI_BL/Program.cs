@@ -4,7 +4,7 @@ using BL;
 
 namespace ConsoleUI_BL
 {
-    class Program
+    public class Program
     {
         static BLImp Data;
         static void Main(string[] args)

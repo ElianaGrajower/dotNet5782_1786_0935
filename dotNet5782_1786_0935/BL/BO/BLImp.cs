@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using IDAL.DO;
 using DAL.DalObject;
 using IBL.BO;
-//figure out where and how to do all the abtetru=y usage filler situation
+
 //deal with all the exceptions also in the dl
 //writye the main
-//leave all the updates till the end
 //change the names of print func in dal to get
 
 
@@ -20,7 +19,7 @@ namespace BL
     public class BLImp
     {
         // IDAL.DO.IDal dal;
-        private IEnumerable<DroneToList> droneToLists;
+        //private IEnumerable<DroneToList> droneToLists;
         public double[] chargeCapacity;
         private List<IBL.BO.Drone> drones;
         DAL.DalObject.DalObject dal;
@@ -107,6 +106,7 @@ namespace BL
 
         }
         #endregion
+        #region FindStation
         public int FindStation(Location location)
         {
             var station = dal.printStationsList().Where(s => s.Longitude == location.Longitude && s.Lattitude == location.Lattitude);
@@ -115,6 +115,7 @@ namespace BL
             var stationId = station.First().StationId;
             return stationId;
         }
+        #endregion
         #region AddDrone
         public void AddDrone(IBL.BO.Drone DronetoAdd, int StationId)
         {
@@ -711,7 +712,6 @@ namespace BL
                 tempCustomer.Phone = number;
         }
         #endregion
-       
         #region ReleaseDroneFromCharge
         public void ReleaseDroneFromCharge(int droneId,int chargeTime)
         {
@@ -758,7 +758,7 @@ namespace BL
             }
         }
         #endregion
-       
+        #region findTheParcel
         private IDAL.DO.Parcel findTheParcel(IBL.BO.WeightCategories we, IBL.BO.Location a, double buttery, IDAL.DO.Priorities pri)
         {
 
@@ -806,6 +806,8 @@ namespace BL
                 throw new IBL.BO.DoesntExistException("ERROR! there is not a parcel that match to the drone ");
             return theParcel;
         }
+        #endregion
+        #region weight
         private bool weight(IBL.BO.WeightCategories dr, IBL.BO.WeightCategories pa)
         {
             if (dr == IBL.BO.WeightCategories.heavy)
@@ -816,6 +818,8 @@ namespace BL
                 return true;
             return false;
         }
+        #endregion
+        #region indexOfChargeCapacity
         private int indexOfChargeCapacity(IDAL.DO.WeightCategories w)
         {
             if (w == IDAL.DO.WeightCategories.light)
@@ -828,8 +832,7 @@ namespace BL
             return 0;
 
         }
-      
-
+        #endregion
         #region MatchDroneWithPacrel
         public void MatchDroneWithPacrel(int droneId)
         {
@@ -924,9 +927,7 @@ namespace BL
 
 
         }
-        #endregion
-      
-          
+        #endregion  
         #region GetCustomersList
         public List<IBL.BO.Customer> GetCustomersList()
         {
@@ -1014,6 +1015,7 @@ namespace BL
             dal.AddDroneCharge(DC);
         }
         #endregion
+        #region GetDrone
         public IBL.BO.Drone GetDrone(int id)
         {
             try
@@ -1054,6 +1056,7 @@ namespace BL
                 throw exp;
             }
         }
+        #endregion
 
 
 
