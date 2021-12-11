@@ -209,7 +209,7 @@ namespace BL
             try
             {
                 var stationsDal = dal.printStationsList().ToList();
-                foreach (var s in stationsDal)
+                foreach (var s in stationsDal)    
                 { stations.Add(GetStation(s.StationId)); }
             }
             catch (ArgumentException) { throw new IBL.BO.DoesntExistException(); }
