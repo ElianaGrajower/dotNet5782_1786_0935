@@ -1062,9 +1062,7 @@ namespace BL
             var temp=GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
-            { dal.AddDroneCharge(DC); }
-            catch (IDAL.DO.AlreadyExistException exc)
-            { throw new IBL.BO.AlreadyExistsException(exc.Message); }
+
         }
         #endregion
 
