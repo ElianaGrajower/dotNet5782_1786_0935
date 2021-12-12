@@ -55,7 +55,7 @@ namespace DAL
                         DroneId = DalObject.r.Next(100000000, 999999999),
                         Model = "Model-" + i,
                         // Battery=100,
-                        MaxWeight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a max weight from light, average, heavy
+                        MaxWeight = (IDAL.DO.WeightCategories)DalObject.r.Next(1, 3), //chooses a max weight from light, average, heavy
                                                                                       //  Status = 0, //chooses a status from available, maintenance, delivery
                     });
             }
