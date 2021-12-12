@@ -305,10 +305,10 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         
                                         Console.WriteLine("Enter model of drone");
-                                        int model = int.Parse(Console.ReadLine());
+                                        string model = Console.ReadLine();
                                         try
                                         {
-                                            Data.UpdateStationName(droneId, model);
+                                            Data.UpdateDroneName(droneId, model);
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
