@@ -44,7 +44,7 @@ namespace ConsoleUI_BL
                                 "D- add a parcel for delivery");
                             string data;
                             bool flag;   
-                            char addingChoice;
+                            char addingChoice;     
                             data = Console.ReadLine();
                             flag = char.TryParse(data, out char wrong);
                             if (flag)
