@@ -7,19 +7,16 @@ using IDAL.DO;
 using DAL.DalObject;
 using IBL.BO;
 
-//deal with all the exceptions also in the dl
-//writye the main
-//change the names of print func in dal to get CC FDHGFF
+
 
 
 namespace BL
 {
-    //namespace BLImp
-    //{
+    
     public class BLImp           
     {
         // IDAL.DO.IDal dal;     
-        private IEnumerable<DroneToList> droneToLists;
+      //  private IEnumerable<DroneToList> droneToLists;
         public double[] chargeCapacity;    
         private List<IBL.BO.DroneToList> drones; 
         DAL.DalObject.DalObject dal;
@@ -754,6 +751,7 @@ namespace BL
         public void ReleaseDroneFromCharge(int droneId,int chargeTime)
         {
             var tempDrone = GetDrone(droneId);
+            var temp = returnsDrone(droneId);
             if (tempDrone.droneStatus == DroneStatus.maintenance)
             {
                 try
@@ -764,6 +762,8 @@ namespace BL
                 {
                     throw new IBL.BO.DoesntExistException(exp.Message);
                 }
+                dal.DeleteDrone(tempDrone.DroneId);
+                drones.Remove(temp);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery = chargeTime * usage.chargeSpeed;
                 AddDrone(tempDrone,FindStation(tempDrone.location));
@@ -779,6 +779,9 @@ namespace BL
                 {
                     throw new IBL.BO.DoesntExistException(exp.Message);
                 }
+                temp = returnsDrone(droneId);
+                drones.Add(temp);
+                dal.DeleteDroneCharge(droneId, possibleStation.StationId);
                 
             }
             else
