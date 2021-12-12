@@ -591,7 +591,7 @@ namespace BL
             }
             catch(IDAL.DO.DoesntExistException exc)
             {
-                throw exc;
+                throw new IBL.BO.DoesntExistException(exc.Message);
             }
         }
         #endregion
