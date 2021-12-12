@@ -754,7 +754,7 @@ namespace BL
             {
                 IDAL.DO.Station stationDl = new IDAL.DO.Station();
                 stationDl = dal.GetStation(stationID);
-                if (Name !=  " ")
+                if (Name !=  "")
                     stationDl.Name = Name;
                 if (AvlblDCharges != 0)
                 {
