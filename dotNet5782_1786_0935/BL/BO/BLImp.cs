@@ -765,7 +765,7 @@ namespace BL
                 drones.Remove(temp);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery = chargeTime * usage.chargeSpeed;
-                AddDrone(tempDrone, FindStation(tempDrone.location));
+                AddDrone(tempDrone,FindStation(tempDrone.location));
                 var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
                 dal.DeleteStation(possibleStation.StationId);
                 possibleStation.addChargeSlots();
@@ -1062,6 +1062,9 @@ namespace BL
             var temp=GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
+            { dal.AddDroneCharge(DC); }
+            catch (IDAL.DO.AlreadyExistException exc)
+            { throw new IBL.BO.AlreadyExistsException(exc.Message); }
         }
         #endregion
 
@@ -1141,7 +1144,7 @@ namespace BL
             }
             catch (ArgumentNullException exp)
             {
-                throw new IBL.BO.DoesntExistException(exp.Message);
+                throw new IBL.BO.DoesntExistException(" \n");
             }
             catch (IDAL.DO.AlreadyExistException exp)
             {
