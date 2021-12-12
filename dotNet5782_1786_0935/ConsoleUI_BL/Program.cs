@@ -163,10 +163,10 @@ namespace ConsoleUI_BL
                                         c.Location = new Location(0, 0);
                                         Console.WriteLine("Enter Your lattitude coordinates: ");
                                         double.TryParse(Console.ReadLine(), out latitude);
-                                        c.Location.Lattitude = latitude;
+                                        
                                         Console.WriteLine("Enter Your longitude coordinates: ");
                                         double.TryParse(Console.ReadLine(), out longitude);
-                                        c.Location.Longitude = longitude;
+                                        c.Location = new Location(latitude, longitude);
 
                                         try
                                         {

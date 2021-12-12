@@ -19,11 +19,11 @@ namespace DAL
             internal class config
             {
                 public static int assignParcelId = 1001; //assigns a random id to a parcel
-                public static double available = 0;
-                public static double lightLoad = 0.1;
-                public static double mediumLoad = 0.2;
-                public static double heavyLoad = 0.3;
-                public static double chargeSpeed = 0.3;
+                public static double available=0;
+                public static double lightLoad=0.1;
+                public static double mediumLoad=0.2;
+                public static double heavyLoad=0.3;
+                public static double chargeSpeed=0.3;
 
             }
             public static void Initialize()
