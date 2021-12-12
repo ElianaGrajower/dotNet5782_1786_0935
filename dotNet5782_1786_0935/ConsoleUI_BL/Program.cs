@@ -131,7 +131,7 @@ namespace ConsoleUI_BL
 
                                         try
                                         {
-                                            Data.AddDrone(d, stationId); //builds and adds a drone using the information the user provided
+                                            Data.AddDrone(d,stationId); //builds and adds a drone using the information the user provided
                                         }
                                         catch (InvalidInputException exc)
                                         {
@@ -180,6 +180,10 @@ namespace ConsoleUI_BL
                                             Console.WriteLine(exc.Message);
                                         }
                                         catch (AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
+                                        catch(InvalidCastException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }

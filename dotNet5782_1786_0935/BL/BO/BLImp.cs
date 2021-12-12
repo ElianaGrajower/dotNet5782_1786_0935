@@ -117,7 +117,7 @@ namespace BL
         }
         #endregion
         #region AddDrone
-        public void AddDrone(IBL.BO.Drone DronetoAdd, int StationId)
+        public void AddDrone(IBL.BO.Drone DronetoAdd, int stationId)
         {
             if (DronetoAdd.DroneId <= 0)
                 throw new IBL.BO.InvalidInputException("drone id not valid- must be a posittive\n");
@@ -127,14 +127,23 @@ namespace BL
             DronetoAdd.droneStatus = DroneStatus.maintenance;
             try
             {
-                double StationLattitude = dal.findStation(StationId).Lattitude;
-                double StationLongitude = dal.findStation(StationId).Longitude;
+                double StationLattitude = dal.findStation(stationId).Lattitude;
+                double StationLongitude = dal.findStation(stationId).Longitude;
                 DronetoAdd.location = new Location(StationLattitude, StationLongitude);
             }
             catch(IDAL.DO.DoesntExistException exc)
             {
                 throw new IBL.BO.DoesntExistException(exc.Message);
             }
+            DroneToList dtl = new DroneToList();
+            dtl.droneId = DronetoAdd.DroneId;
+            dtl.Model = DronetoAdd.Model;
+            dtl.weight = DronetoAdd.MaxWeight;
+            dtl.battery = (double)rand.Next(20, 40);
+            dtl.droneStatus = DroneStatus.maintenance; ///עכשיו שיניתי את זה שזה יהיה פנוי ולא CHARGE
+            dtl.location = new Location(0,0);
+            dtl.location.Lattitude = dal.findStation(stationId).Lattitude;
+            dtl.location.Longitude = dal.findStation(stationId).Longitude;
 
             IDAL.DO.Drone newDrone = new IDAL.DO.Drone()
             {
@@ -145,8 +154,8 @@ namespace BL
             try
             {
                 dal.AddDrone(newDrone);
-                drones.Add(returnsDrone(DronetoAdd.DroneId));
-                
+                drones.Add(dtl);
+                IDAL.DO.DroneCharge dc = new IDAL.DO.DroneCharge { DroneId = DronetoAdd.DroneId, StationId = stationId };
             }
             catch (AlreadyExistException exc)
             {
@@ -1050,48 +1059,8 @@ namespace BL
             { throw new IBL.BO.AlreadyExistsException(exc.Message); }
         }
         #endregion
+
         #region GetDrone
-        //public IBL.BO.Drone GetDrone(int id)
-        //{
-        //    try
-        //    {
-        //        IBL.BO.Drone droneBo = new IBL.BO.Drone();
-        //        IDAL.DO.Drone droneDo = dal.GetDrone(id);
-        //        IBL.BO.Drone drone = drones.Where(d => d.DroneId == id).First();
-        //        droneBo.DroneId = droneDo.DroneId;
-        //        droneBo.Model = droneDo.Model;
-        //        droneBo.MaxWeight = (IBL.BO.WeightCategories)droneDo.MaxWeight;
-        //        droneBo.location = new Location(drone.location.Lattitude,drone.location.Longitude);
-        //        droneBo.battery = drone.battery;
-        //        droneBo.droneStatus = drone.droneStatus;
-        //       // droneBo.N = drone.numOfParcelsDelivered;
-        //       // droneBo.numOfParcelsDelivered = dal.printParcelsList().Count(x => x.DroneId == droneBo.droneId);
-        //        int parcelID = dal.printParcelsList().ToList().Find(x => x.DroneId == droneBo.DroneId).ParcelId;
-        //        var tempParcel = GetParcel(parcelID);
-        //        droneBo.parcel.parcelId = parcelID;
-        //        if (tempParcel.Delivered != new DateTime(0, 0))
-        //            droneBo.parcel.parcelStatus = true;
-        //        else
-        //            droneBo.parcel.parcelStatus = false;
-        //        droneBo.parcel.priority = tempParcel.Priority;
-        //        droneBo.parcel.weight = tempParcel.Weight;
-        //        droneBo.parcel.sender = tempParcel.Sender;
-        //        droneBo.parcel.target = tempParcel.Target;
-        //        droneBo.parcel.pickupLocation = GetCustomer(tempParcel.Sender.CustomerId).Location;
-        //        droneBo.parcel.targetLocation = GetCustomer(tempParcel.Target.CustomerId).Location;
-        //        droneBo.parcel.distance = Distance(GetCustomer(tempParcel.Sender.CustomerId).Location, GetCustomer(tempParcel.Target.CustomerId).Location);
-        //        return droneBo;
-        //    }
-        //    catch (ArgumentNullException exp)
-        //    {
-        //        throw new IBL.BO.DoesntExistException(exp.Message);
-        //    }
-        //    catch (IBL.BO.DoesntExistException exp)
-        //    {
-        //        throw exp;
-        //    }
-        //}
-        //#endregion
         public IBL.BO.Drone GetDrone(int id)
         {
 
