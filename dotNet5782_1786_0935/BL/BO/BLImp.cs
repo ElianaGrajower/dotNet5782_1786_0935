@@ -121,7 +121,8 @@ namespace BL
             if (DronetoAdd.MaxWeight != IBL.BO.WeightCategories.light && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.average && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.heavy)
                 throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");//should this be frased differently?
             DronetoAdd.battery = rand.Next(20, 40);
-            DronetoAdd.droneStatus = DroneStatus.maintenance;
+                if (DronetoAdd.droneStatus == 0)
+            { DronetoAdd.droneStatus = DroneStatus.maintenance; }
             try
             {
                 double StationLattitude = dal.findStation(stationId).Lattitude;
@@ -747,7 +748,7 @@ namespace BL
             var tempCustomer = dal.GetCustomer(CustomerId);
             if (name != "")
                 tempCustomer.Name = name;
-            if (number != "")
+            if (number != "")    
                 tempCustomer.Phone = number;
             dal.DeleteCustomer(CustomerId);
             dal.AddCustomer(tempCustomer);
@@ -760,19 +761,20 @@ namespace BL
             var temp = returnsDrone(droneId);
             if (tempDrone.droneStatus == DroneStatus.maintenance)
             {
+                var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
                 dal.DeleteDrone(tempDrone.DroneId);
                 dal.DeleteDroneCharge(droneId, FindStation(tempDrone.location));
-                drones.RemoveAll(D => temp.droneId == droneId);
+                drones.RemoveAll(D=>temp.droneId==droneId);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery += chargeTime * usage.chargeSpeed;
                 tempDrone.droneStatus = DroneStatus.available;
-                AddDrone(tempDrone, FindStation(tempDrone.location));
+                AddDrone(tempDrone,FindStation(tempDrone.location));
                 drones.ForEach(d => { if (d.droneId == droneId) d.droneStatus = DroneStatus.available; });
-                var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
+               
                 dal.DeleteStation(possibleStation.StationId);
                 possibleStation.addChargeSlots();
                 AddStation(possibleStation);
-
+                
             }
             else
                 throw (new UnableToCompleteRequest("Drone was not charging\n"));
@@ -902,6 +904,7 @@ namespace BL
                 DeleteDrone(myDrone.DroneId);
                 drones.RemoveAt(index);
                 myDrone.droneStatus = DroneStatus.delivery;
+                myDrone.parcel = new ParcelInTransit();
                 myDrone.parcel.parcelId = myParcel.ParcelId;
                 AddDrone(myDrone, station.StationId);
             }
@@ -1060,7 +1063,7 @@ namespace BL
             {
                 throw new IBL.BO.DoesntExistException(exp.Message);
             }
-            var temp = GetDrone(drones[droneIndex].droneId);
+            var temp=GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
         }
