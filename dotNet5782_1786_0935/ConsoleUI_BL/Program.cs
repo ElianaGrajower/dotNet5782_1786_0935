@@ -21,19 +21,19 @@ namespace ConsoleUI_BL
             Console.WriteLine("2- To update item");
             Console.WriteLine("3- To print item details");
             Console.WriteLine("4- To print list of items");
-            string check = (Console.ReadLine());
-            try
-            {
-                // string addingChoice = (Console.ReadLine()); 
-                if (check.Length != 1)
-                    throw new InvalidInputException("Choice must be from following menu!\n");
+             choice = int.Parse(Console.ReadLine());
+            //try
+            //{
+            //    choice = int.Parse(Console.ReadLine());
+            //    throw new InvalidInputException("Choice must be from following menu!\n");
 
-            }
-            catch (InvalidInputException exc)
-            {
-                Console.WriteLine(exc);
-            }
-            choice = (int)check[0];
+            //}
+            //catch (InvalidInputException exc)
+            //{
+            //    Console.WriteLine(exc);
+            //}
+           
+
             while (choice!=5)
             {
                 switch (choice)
@@ -617,19 +617,10 @@ namespace ConsoleUI_BL
                 Console.WriteLine("2- To update item");
                 Console.WriteLine("3- To print item details");
                 Console.WriteLine("4- To print list of items");
-                string help = (Console.ReadLine());
-                try
-                {
-                    // string addingChoice = (Console.ReadLine()); 
-                    if (help.Length != 1)
-                        throw new InvalidInputException("Choice must be from following menu!\n");
+                choice = int.Parse(Console.ReadLine());
 
-                }
-                catch (InvalidInputException exc)
-                {
-                    Console.WriteLine(exc);
-                }
-                choice = (int)help[0];
+               
+
 
 
             }
