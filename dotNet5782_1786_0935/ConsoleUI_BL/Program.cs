@@ -201,6 +201,8 @@ namespace ConsoleUI_BL
                                                 
                                                   CustomerId = id
                                             }
+                                            
+                                            
                                         };
                                         Console.WriteLine("Enter Id of target: ");
                                         int.TryParse(Console.ReadLine(), out id);
@@ -209,7 +211,7 @@ namespace ConsoleUI_BL
                                             CustomerId = id
                                         };
                                         Console.WriteLine("Choose  weight of parcel:\n" +
-                                            " 1-light,2- average, 3-heavy\n");
+                                            "1-light,2- average, 3-heavy\n");
                                         IBL.BO.WeightCategories weightChoice;
 
                                         input = Console.ReadLine();
@@ -233,7 +235,7 @@ namespace ConsoleUI_BL
 
                                         }
                                         Console.WriteLine("Choose priority of parcel:\n" +
-                                          " 1-regular,2- fast,3- emergency \n");
+                                          "1-regular,2- fast,3- emergency \n");
                                         IBL.BO.Priorities priorities;
 
                                         input = Console.ReadLine();

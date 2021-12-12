@@ -390,8 +390,8 @@ namespace BL
         #region AddParcel
         public void AddParcel(IBL.BO.Parcel ParceltoAdd)
         {
-            if (ParceltoAdd.ParcelId <= 0)
-                throw new IBL.BO.InvalidInputException("parcel id not valid- must be a posittive\n");
+            ParceltoAdd.ParcelId = dal.getParcelId();
+           
             if (ParceltoAdd.Sender.CustomerId > 999999999 || ParceltoAdd.Sender.CustomerId < 100000000)
                 throw new InvalidCastException("sender id not valid\n");
             if (ParceltoAdd.Target.CustomerId > 999999999 || ParceltoAdd.Target.CustomerId < 100000000)
@@ -402,7 +402,7 @@ namespace BL
             ParceltoAdd.Scheduled = new DateTime(0, 0);
             ParceltoAdd.PickedUp = new DateTime(0, 0);
             ParceltoAdd.Delivered = new DateTime(0, 0);
-            ParceltoAdd.Drone.droneId = 0;
+            ParceltoAdd.Drone = new DroneInParcel();
             IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel()
             {
                 ParcelId = ParceltoAdd.ParcelId,
@@ -959,9 +959,9 @@ namespace BL
             List<IBL.BO.Drone> drone = new List<IBL.BO.Drone>();
             try
             {
-                var droneDal = dal.printDronesList().ToList();
-                foreach (var d in droneDal)
-                { drones.Add(returnsDrone(d.DroneId)); }
+                
+                foreach (var d in drones)
+                { drone.Add(GetDrone(d.droneId)); }
             }
             catch (ArgumentException) { throw new IBL.BO.DoesntExistException(); }
             return drone;
