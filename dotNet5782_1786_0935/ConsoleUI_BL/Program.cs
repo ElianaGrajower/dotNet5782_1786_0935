@@ -64,8 +64,7 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out id);
                                         s.StationId = id;
                                         Console.WriteLine("Enter name of station: ");
-                                        int.TryParse(Console.ReadLine(), out name);
-                                        s.name = name;
+                                        s.name = Console.ReadLine();
                                         Console.WriteLine("Enter lattitude and longitude of station");
                                         s.location = new Location(0, 0);
                                         double.TryParse(Console.ReadLine(), out latitude);
@@ -324,14 +323,13 @@ namespace ConsoleUI_BL
                                          int.TryParse(Console.ReadLine(),out stationId);
                                         Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
                                         Console.WriteLine("Enter new name of station:");
-                                        int stationName;
-                                        int.TryParse(Console.ReadLine(), out stationName);
+                                        string stationName = Console.ReadLine();
                                         Console.WriteLine("Enter new amount of charges at station:");
                                         int numOfCharges;
                                         int.TryParse(Console.ReadLine(), out numOfCharges);
                                         try
                                         {
-                                            Data.updateStation(stationId, stationName, numOfCharges);
+                                            Data.updateStation(stationId, numOfCharges,stationName);
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -590,9 +588,9 @@ namespace ConsoleUI_BL
                             bool flag;
                             char printListChoice;
                             data = Console.ReadLine();
-                            flag = char.TryParse(input, out char bad);
+                            flag = char.TryParse(data, out char bad);
                             if (flag)
-                                printListChoice = char.Parse(input);
+                                printListChoice = char.Parse(data);
                             else
                                 printListChoice = '!';
                             switch (printListChoice)

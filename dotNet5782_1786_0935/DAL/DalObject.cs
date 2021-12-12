@@ -305,7 +305,7 @@ namespace DAL
             }
             #endregion
             #region chargeDrone
-            public string chargeDrone(Drone droneToUpdate, int stationNum) //charges drone
+            public string chargeDrone(Drone droneToUpdate, string stationNum) //charges drone
             {
 
                 Drone myDrone = DataSource.DroneList.Find(x => x.DroneId == droneToUpdate.DroneId);
