@@ -744,13 +744,13 @@ namespace BL
         #region UpdateCustomerName
         public void UpdateCustomerName(int CustomerId,string name,string number)
         {
-            var tempCustomer = GetCustomer(CustomerId);
+            var tempCustomer = dal.GetCustomer(CustomerId);
             if (name != "")
                 tempCustomer.Name = name;
-            if (number != "")    
+            if (number != "")
                 tempCustomer.Phone = number;
-            var temp = dal.GetCustomer(CustomerId);
-            dal.UpdateCustomer(temp);
+            dal.DeleteCustomer(CustomerId);
+            dal.AddCustomer(tempCustomer);
         }
         #endregion
         #region ReleaseDroneFromCharge
@@ -762,16 +762,17 @@ namespace BL
             {
                 dal.DeleteDrone(tempDrone.DroneId);
                 dal.DeleteDroneCharge(droneId, FindStation(tempDrone.location));
-                drones.Remove(temp);
+                drones.RemoveAll(D => temp.droneId == droneId);
                 BatteryUsage usage = new BatteryUsage();
-                tempDrone.battery = chargeTime * usage.chargeSpeed;
-                AddDrone(tempDrone,FindStation(tempDrone.location));
+                tempDrone.battery += chargeTime * usage.chargeSpeed;
+                tempDrone.droneStatus = DroneStatus.available;
+                AddDrone(tempDrone, FindStation(tempDrone.location));
+                drones.ForEach(d => { if (d.droneId == droneId) d.droneStatus = DroneStatus.available; });
                 var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
                 dal.DeleteStation(possibleStation.StationId);
                 possibleStation.addChargeSlots();
                 AddStation(possibleStation);
-                temp = returnsDrone(droneId);
-                drones.Add(temp);
+
             }
             else
                 throw (new UnableToCompleteRequest("Drone was not charging\n"));
@@ -1049,7 +1050,7 @@ namespace BL
             //var droneBL=GetDrones().ToList().Find(x => x.id == droneID);
             if (station.chargeSlots > 0)
                 station.decreaseChargeSlots();
-            drones[droneIndex].battery = MinBatteryRequired(drones[droneIndex].droneId);//not sure that if it needs to be 100%
+            drones[droneIndex].battery -= MinBatteryRequired(drones[droneIndex].droneId);//not sure that if it needs to be 100%
             drones[droneIndex].location = station.location;
             drones[droneIndex].droneStatus = DroneStatus.maintenance;
 
@@ -1059,12 +1060,9 @@ namespace BL
             {
                 throw new IBL.BO.DoesntExistException(exp.Message);
             }
-            var temp=GetDrone(drones[droneIndex].droneId);
+            var temp = GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
-             
-            
-            { throw new IBL.BO.AlreadyExistsException(exc.Message); }
         }
         #endregion
 

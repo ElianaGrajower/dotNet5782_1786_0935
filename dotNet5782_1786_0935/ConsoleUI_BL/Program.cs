@@ -258,13 +258,17 @@ namespace ConsoleUI_BL
                                         try
                                         {
                                             Data.AddParcel(p); //builds and adds a parcel using the information the user provided
-                                            Console.WriteLine(p.ParcelId);
+                                            Console.WriteLine("Parcel ID: " + p.ParcelId);
                                         }
                                         catch (InvalidInputException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
                                         catch (AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
+                                        catch (InvalidCastException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
@@ -367,7 +371,7 @@ namespace ConsoleUI_BL
                                     }
                                 case 'D':
                                     {
-                                        Console.WriteLine("Enter id of drone");
+                                        Console.WriteLine("Enter id of drone:");
                                         int droneId;
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         try
