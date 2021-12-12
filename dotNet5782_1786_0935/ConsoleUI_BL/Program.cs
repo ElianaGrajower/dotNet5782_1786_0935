@@ -46,9 +46,9 @@ namespace ConsoleUI_BL
                             bool flag;   
                             char addingChoice;
                             data = Console.ReadLine();
-                            flag = char.TryParse(input, out char wrong);
+                            flag = char.TryParse(data, out char wrong);
                             if (flag)
-                                addingChoice = char.Parse(input);
+                                addingChoice = char.Parse(data);
                             else
                                 addingChoice = '!';
 
@@ -291,9 +291,9 @@ namespace ConsoleUI_BL
                             bool flag;
                             char updateChoice;
                             data = Console.ReadLine();
-                            flag = char.TryParse(input, out char bad);
+                            flag = char.TryParse(data, out char bad);
                             if (flag)
-                                updateChoice = char.Parse(input);
+                                updateChoice = char.Parse(data);
                             else
                                 updateChoice = '!';
                             switch (updateChoice) //chooses what to update
@@ -490,7 +490,7 @@ namespace ConsoleUI_BL
                             data = Console.ReadLine();
                             flag = char.TryParse(input, out char bad);
                             if (flag)
-                                printChoice = char.Parse(input);
+                                printChoice = char.Parse(data);
                             else
                                 printChoice = '!';
                             switch (printChoice)
@@ -698,6 +698,7 @@ namespace ConsoleUI_BL
                     choice = int.Parse(input);
                 else
                     choice = -1;
+
 
 
 
