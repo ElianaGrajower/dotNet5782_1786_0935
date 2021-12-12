@@ -754,35 +754,18 @@ namespace BL
             var temp = returnsDrone(droneId);
             if (tempDrone.droneStatus == DroneStatus.maintenance)
             {
-                try
-                {
-                    dal.DeleteDrone(tempDrone.DroneId);
-                }
-                catch (IDAL.DO.DoesntExistException exp)
-                {
-                    throw new IBL.BO.DoesntExistException(exp.Message);
-                }
                 dal.DeleteDrone(tempDrone.DroneId);
+                dal.DeleteDroneCharge(droneId, FindStation(tempDrone.location));
                 drones.Remove(temp);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery = chargeTime * usage.chargeSpeed;
-                AddDrone(tempDrone,FindStation(tempDrone.location));
+                AddDrone(tempDrone, FindStation(tempDrone.location));
                 var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
                 dal.DeleteStation(possibleStation.StationId);
                 possibleStation.addChargeSlots();
                 AddStation(possibleStation);
-                try
-                {
-                    dal.DeleteDroneCharge(droneId, possibleStation.StationId);
-                }
-                catch (IBL.BO.DoesntExistException exp)
-                {
-                    throw new IBL.BO.DoesntExistException(exp.Message);
-                }
                 temp = returnsDrone(droneId);
                 drones.Add(temp);
-                dal.DeleteDroneCharge(droneId, possibleStation.StationId);
-                
             }
             else
                 throw (new UnableToCompleteRequest());
@@ -952,7 +935,8 @@ namespace BL
         public void DeliveredParcel(int droneId)
         {
             var tempDrone = GetDrone(droneId);
-            var tempParcel = GetParcel(tempDrone.parcel.parcelId);
+            var tempParcel = new IBL.BO.Parcel();
+            tempParcel = GetParcel(tempDrone.parcel.parcelId);
             if (tempParcel.Delivered == new DateTime(0, 0))
             {
                 dal.DeleteDrone(tempDrone.DroneId);

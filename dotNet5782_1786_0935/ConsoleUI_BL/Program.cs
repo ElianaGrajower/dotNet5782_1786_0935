@@ -258,6 +258,7 @@ namespace ConsoleUI_BL
                                         try
                                         {
                                             Data.AddParcel(p); //builds and adds a parcel using the information the user provided
+                                            Console.WriteLine(p.ParcelId);
                                         }
                                         catch (InvalidInputException exc)
                                         {
