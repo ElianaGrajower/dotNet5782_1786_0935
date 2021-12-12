@@ -747,7 +747,7 @@ namespace BL
             var tempCustomer = GetCustomer(CustomerId);
             if (name != "")
                 tempCustomer.Name = name;
-            if (number != "")
+            if (number != "")    
                 tempCustomer.Phone = number;
             var temp = dal.GetCustomer(CustomerId);
             dal.UpdateCustomer(temp);
