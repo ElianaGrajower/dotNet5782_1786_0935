@@ -15,24 +15,21 @@ namespace ConsoleUI_BL
         static void Main(string[] args)
         {
             Data = new BLImp();
-            int choice;
             Console.WriteLine("Choose from the following options:");
             Console.WriteLine("1- To add new item");
             Console.WriteLine("2- To update item");
             Console.WriteLine("3- To print item details");
             Console.WriteLine("4- To print list of items");
-             choice = int.Parse(Console.ReadLine());
-            //try
-            //{
-            //    choice = int.Parse(Console.ReadLine());
-            //    throw new InvalidInputException("Choice must be from following menu!\n");
+            string input;
+            bool check;
+            int choice;
+            input = Console.ReadLine();
+            check = int.TryParse(input, out int error);
+            if (check)
+                choice = int.Parse(input);
+            else
+                choice = -1;
 
-            //}
-            //catch (InvalidInputException exc)
-            //{
-            //    Console.WriteLine(exc);
-            //}
-           
 
             while (choice!=5)
             {
@@ -41,38 +38,44 @@ namespace ConsoleUI_BL
                     case 1:
                         {
                             Console.WriteLine("Enter your choice:");
-                            Console.WriteLine("A- add a statsion\n " +
+                            Console.WriteLine("A- add a statsion\n" +
                                 "B- add a drone\n" +
                                 "C- add a new customer\n" +
                                 "D- add a parcel for delivery");
-                            
-                            string input = (Console.ReadLine());
-                            try
-                            {
-                                // string addingChoice = (Console.ReadLine()); 
-                                if (input.Length != 1)
-                                    throw new InvalidInputException("Choice must be from following menu!\n");
+                            string data;
+                            bool flag;
+                            char addingChoice;
+                            data = Console.ReadLine();
+                            flag = char.TryParse(input, out char wrong);
+                            if (flag)
+                                addingChoice = char.Parse(input);
+                            else
+                                addingChoice = '!';
 
-                            }
-                            catch (InvalidInputException exc)
-                            {
-                                Console.WriteLine(exc);
-                            }
-                            char addingChoice = input[0];
+
                             switch (addingChoice)
                             {
                                 case 'A':
                                     {
+                                        int id, chargeSlots,name;
+                                        double longitude, latitude;
                                         Console.WriteLine("Enter ID of station: ");
-                                        Station s = new Station() { StationId = int.Parse(Console.ReadLine()) };
+                                        Station s = new Station(); 
+                                        int.TryParse(Console.ReadLine(), out id);
+                                        s.StationId = id;
                                         Console.WriteLine("Enter name of station: ");
-                                        s.name = int.Parse(Console.ReadLine());
+                                        int.TryParse(Console.ReadLine(), out name);
+                                        s.name = name;
                                         Console.WriteLine("Enter lattitude and longitude of station");
                                         s.location = new Location(0, 0);
-                                        s.location.Lattitude = double.Parse(Console.ReadLine());
-                                        s.location.Longitude = double.Parse(Console.ReadLine());
+                                        double.TryParse(Console.ReadLine(), out latitude);
+                                        s.location.Lattitude = latitude;
+                                        double.TryParse(Console.ReadLine(), out longitude);
+                                        s.location.Longitude = longitude;
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
-                                        s.chargeSlots = int.Parse(Console.ReadLine());
+                                        int.TryParse(Console.ReadLine(), out chargeSlots);
+                                        s.chargeSlots = chargeSlots;
+                                        
                                         try
                                         {
                                             Data.AddStation(s);
@@ -80,6 +83,7 @@ namespace ConsoleUI_BL
                                         catch(InvalidInputException exc)
                                         {
                                             Console.WriteLine( exc.Message);
+                                            
                                         }
                                         catch (AlreadyExistsException exc)
                                         {
@@ -90,29 +94,41 @@ namespace ConsoleUI_BL
                                     }
                                 case 'B':
                                     {
+                                        int droneId, stationId;
+                                        
                                         Console.WriteLine("Enter drone number");
-                                        Drone d = new Drone() { DroneId = int.Parse(Console.ReadLine()) };
+                                        Drone d = new Drone();
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        d.DroneId = droneId;
                                         Console.WriteLine("Enter name of model: ");
+
                                         d.Model = Console.ReadLine();
                                         Console.WriteLine("Choose maximum weight drone can hold:\n" +
-                                            "a: light\n" +
-                                            "b: average\n" +
-                                            "c: heavy ");
-                                        char weightChoice = char.Parse(Console.ReadLine());
+                                            " light, average, heavy\n");
+                                        IBL.BO.WeightCategories weightChoice;
+                                        
+                                        input = Console.ReadLine();
+                                        check = int.TryParse(input, out error);
+                                        if (check)
+                                            choice = int.Parse(input);
+                                        else
+                                            choice = -1;
+                                        weightChoice = (IBL.BO.WeightCategories)choice;
                                         switch (weightChoice)
                                         {
-                                            case 'a':
+                                            case WeightCategories.light:
                                                 d.MaxWeight = WeightCategories.light;
                                                 break;
-                                            case 'b':
+                                            case WeightCategories.average:
                                                 d.MaxWeight = WeightCategories.average;
                                                 break;
-                                            case 'c':
+                                            case WeightCategories.heavy:
                                                 d.MaxWeight = WeightCategories.heavy;
                                                 break;
                                         }
-                                        Console.WriteLine("Enter station number");   
-                                        int stationId = int.Parse(Console.ReadLine());
+                                        Console.WriteLine("Enter station number");
+                                        int.TryParse(Console.ReadLine(), out stationId);
+
                                         try
                                         {
                                             Data.AddDrone(d, stationId); //builds and adds a drone using the information the user provided
@@ -120,26 +136,37 @@ namespace ConsoleUI_BL
                                         catch (InvalidInputException exc)
                                         {
                                             Console.WriteLine(exc.Message);
+                                            Console.WriteLine("unable to add ");
                                         }
                                         catch (AlreadyExistsException exc)
                                         {
                                             Console.WriteLine(exc.Message);
+                                            Console.WriteLine("unable to add ");
                                         }
                                         Console.WriteLine("drone id: " + d.DroneId + "\n");
                                         break;
                                     }
                                 case 'C':
                                     {
+                                        int id;
+                                        double latitude, longitude;
                                         Console.WriteLine("Enter Id of customer: ");
-                                        Customer c = new Customer() { CustomerId = int.Parse(Console.ReadLine()) };
+                                        Customer c = new Customer();
+                                        int.TryParse(Console.ReadLine(), out id);
+                                        c.CustomerId = id;
                                         Console.WriteLine("Enter name of customer: ");
-                                        c.Name = "Customer-" + Console.ReadLine();
+                                        c.Name =  Console.ReadLine();
                                         Console.WriteLine("Enter phone number of customer: ");
+                                        
                                         c.Phone = Console.ReadLine();
-                                        Console.WriteLine("Enter Your longitude coordinates: ");
-                                        c.Location.Longitude = double.Parse(Console.ReadLine());
+                                        c.Location = new Location(0, 0);
                                         Console.WriteLine("Enter Your lattitude coordinates: ");
-                                        c.Location.Lattitude = double.Parse(Console.ReadLine());
+                                        double.TryParse(Console.ReadLine(), out latitude);
+                                        c.Location.Lattitude = latitude;
+                                        Console.WriteLine("Enter Your longitude coordinates: ");
+                                        double.TryParse(Console.ReadLine(), out longitude);
+                                        c.Location.Longitude = longitude;
+
                                         try
                                         {
                                             Data.AddCustomer(c); //builds and adds a customer using the information the user provided
@@ -156,50 +183,66 @@ namespace ConsoleUI_BL
                                     }
                                 case 'D':
                                     {
+                                        int id;
                                         Console.WriteLine("Enter Id of sender: ");
+                                        int.TryParse(Console.ReadLine(), out id);
                                         Parcel p = new Parcel()
                                         {
                                             Sender = new CustomerInParcel()
-                                            { 
-                                                CustomerId = int.Parse(Console.ReadLine()) 
+                                            {
+                                                
+                                                  CustomerId = id
                                             }
                                         };
                                         Console.WriteLine("Enter Id of target: ");
+                                        int.TryParse(Console.ReadLine(), out id);
                                         p.Target = new CustomerInParcel()
                                         {
-                                            CustomerId = int.Parse(Console.ReadLine())
+                                            CustomerId = id
                                         };
-                                        Console.WriteLine("Choose weight of parcel:\n" +
-                                            "a: light\n" +
-                                            "b: average\n" +
-                                            "c: heavy ");
-                                        char weightChoice = char.Parse(Console.ReadLine());
+                                        Console.WriteLine("Choose  weight of parcel:\n" +
+                                            " light, average, heavy\n");
+                                        IBL.BO.WeightCategories weightChoice;
+
+                                        input = Console.ReadLine();
+                                        check = int.TryParse(input, out error);
+                                        if (check)
+                                            choice = int.Parse(input);
+                                        else
+                                            choice = -1;
+                                        weightChoice = (IBL.BO.WeightCategories)choice;
                                         switch (weightChoice)
                                         {
-                                            case 'a':
+                                            case WeightCategories.light:
                                                 p.Weight = WeightCategories.light;
                                                 break;
-                                            case 'b':
+                                            case WeightCategories.average:
                                                 p.Weight = WeightCategories.average;
                                                 break;
-                                            case 'c':
+                                            case WeightCategories.heavy:
                                                 p.Weight = WeightCategories.heavy;
                                                 break;
                                         }
                                         Console.WriteLine("Choose priority of parcel:\n" +
-                                            "a: regular\n" +
-                                            "b: fast\n" +
-                                            "c: emergency ");
-                                        char priorityChoice = char.Parse(Console.ReadLine());
+                                          " regular, fast, emergency \n");
+                                        IBL.BO.Priorities priorityChoice;
+
+                                        input = Console.ReadLine();
+                                        check = int.TryParse(input, out error);
+                                        if (check)
+                                            choice = int.Parse(input);
+                                        else
+                                            choice = -1;
+                                        priorityChoice = (IBL.BO.Priorities)choice;
                                         switch (priorityChoice)
                                         {
-                                            case 'a':
+                                            case Priorities.regular:
                                                 p.Priority = Priorities.regular;
                                                 break;
-                                            case 'b':
+                                            case Priorities.fast:
                                                 p.Priority = Priorities.fast;
                                                 break;
-                                            case 'c':
+                                            case Priorities.emergency:
                                                 p.Priority = Priorities.emergency;
                                                 break;
                                         }
@@ -226,7 +269,7 @@ namespace ConsoleUI_BL
                     case 2:
                         {
                             Console.WriteLine("Enter your choice:");
-                            Console.WriteLine("A- update the name of a drone\n " +
+                            Console.WriteLine("A- update the name of a drone\n" +
                                 "B- update stations details\n" +
                                 "C- update customers information\n" +
                                 "D- charge drone\n" +
@@ -234,26 +277,23 @@ namespace ConsoleUI_BL
                                 "F- match up parcel to drone\n" +
                                 "G- pickup parcel by drone\n" +
                                 "H- deliver parcel by drone\n");
-        
-                            string input = (Console.ReadLine());
-                            try
-                            {
-                                // string addingChoice = (Console.ReadLine()); 
-                                if (input.Length != 1)
-                                    throw new InvalidInputException("Choice must be from following menu!\n");
-
-                            }
-                            catch (InvalidInputException exc)
-                            {
-                                Console.WriteLine(exc);
-                            }
-                            char updateChoice = input[0];
+                            string data;
+                            bool flag;
+                            char updateChoice;
+                            data = Console.ReadLine();
+                            flag = char.TryParse(input, out char bad);
+                            if (flag)
+                                updateChoice = char.Parse(input);
+                            else
+                                updateChoice = '!';
                             switch (updateChoice) //chooses what to update
                             {
                                 case 'A':
                                     {
+                                        int droneId;
                                         Console.WriteLine("Enter Id of drone");
-                                        int droneId = int.Parse(Console.ReadLine());
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        
                                         Console.WriteLine("Enter model of drone");
                                         int model = int.Parse(Console.ReadLine());
                                         try
@@ -268,13 +308,17 @@ namespace ConsoleUI_BL
                                     }
                                 case 'B':
                                     {
+
                                         Console.WriteLine("Enter id of station");
-                                        int stationId = int.Parse(Console.ReadLine());
+                                        int stationId;
+                                         int.TryParse(Console.ReadLine(),out stationId);
                                         Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
                                         Console.WriteLine("Enter new name of station:");
-                                        int stationName = int.Parse(Console.ReadLine());
+                                        int stationName;
+                                        int.TryParse(Console.ReadLine(), out stationName);
                                         Console.WriteLine("Enter new amount of charges at station:");
-                                        int numOfCharges = int.Parse(Console.ReadLine());
+                                        int numOfCharges;
+                                        int.TryParse(Console.ReadLine(), out numOfCharges);
                                         try
                                         {
                                             Data.updateStation(stationId, stationName, numOfCharges);
@@ -288,8 +332,10 @@ namespace ConsoleUI_BL
                                     }
                                 case 'C':
                                     {
+
                                         Console.WriteLine("Enter id of customer");
-                                        int customerId = int.Parse(Console.ReadLine());
+                                        int customerId ;
+                                        int.TryParse(Console.ReadLine(), out customerId);
                                         Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
                                         Console.WriteLine("Enter a new customer name:");
                                         string customerName = Console.ReadLine();
@@ -308,7 +354,8 @@ namespace ConsoleUI_BL
                                 case 'D':
                                     {
                                         Console.WriteLine("Enter id of drone");
-                                        int droneId = int.Parse(Console.ReadLine());
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
                                         try
                                         {
                                             Data.SendDroneToCharge(droneId);
@@ -335,9 +382,11 @@ namespace ConsoleUI_BL
                                 case 'E':
                                     {
                                         Console.WriteLine("Enter id of drone");
-                                        int droneId = int.Parse(Console.ReadLine());
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
                                         Console.WriteLine("Enter the amount of time that the drone has been charging:");
-                                        int chargeTime = int.Parse(Console.ReadLine());
+                                        int chargeTime;
+                                        int.TryParse(Console.ReadLine(), out chargeTime);
                                         try
                                         { 
                                             Data.ReleaseDroneFromCharge(droneId, chargeTime);
@@ -357,7 +406,9 @@ namespace ConsoleUI_BL
                                 case 'F':
                                     {
                                         Console.WriteLine("Enter id of drone");
-                                        int droneId = int.Parse(Console.ReadLine());
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
+
                                         try
                                         {
                                             Data.MatchDroneWithPacrel(droneId);
@@ -375,7 +426,8 @@ namespace ConsoleUI_BL
                                 case 'G':
                                     {
                                         Console.WriteLine("Enter id of drone");
-                                        int droneId = int.Parse(Console.ReadLine());
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
                                         try
                                         { 
                                             Data.PickUpParcel(droneId); 
@@ -393,7 +445,8 @@ namespace ConsoleUI_BL
                                 case 'H':
                                     {
                                         Console.WriteLine("Enter id of drone");
-                                        int droneId = int.Parse(Console.ReadLine());
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
                                         try
                                         {
                                             Data.DeliveredParcel(droneId); 
@@ -417,29 +470,26 @@ namespace ConsoleUI_BL
                     case 3:
                         {
                             Console.WriteLine("Enter your choice:");
-                            Console.WriteLine("A- print station\n " +
+                            Console.WriteLine("A- print station\n" +
                                 "B- print drone\n" +
                                 "C- print customer\n" +
                                 "D- print parcel\n");
-                            string input = (Console.ReadLine());
-                            try
-                            {
-                                // string addingChoice = (Console.ReadLine()); 
-                                if (input.Length != 1)
-                                    throw new InvalidInputException("Choice must be from following menu!\n");
-
-                            }
-                            catch (InvalidInputException exc)
-                            {
-                                Console.WriteLine(exc);
-                            }
-                            char printChoice = input[0];
+                            string data;
+                            bool flag;
+                            char printChoice;
+                            data = Console.ReadLine();
+                            flag = char.TryParse(input, out char bad);
+                            if (flag)
+                                printChoice = char.Parse(input);
+                            else
+                                printChoice = '!';
                             switch (printChoice)
                             {
                                 case 'A':
                                     {
                                         Console.WriteLine("Enter id of station");
-                                        int stationId = int.Parse(Console.ReadLine());
+                                        int stationId;
+                                        int.TryParse(Console.ReadLine(), out stationId);
                                         try
                                         {
                                             Console.WriteLine("\n" + Data.GetStation(stationId).ToString() + "\n");
@@ -453,7 +503,8 @@ namespace ConsoleUI_BL
                                 case 'B':
                                     {
                                         Console.WriteLine("Enter id of drone");
-                                        int droneId = int.Parse(Console.ReadLine());
+                                        int droneId;
+                                        int.TryParse(Console.ReadLine(), out droneId);
                                         try
                                         {
                                             Console.WriteLine("\n" + Data.GetDrone(droneId).ToString() + "\n");
@@ -467,7 +518,8 @@ namespace ConsoleUI_BL
                                 case 'C':
                                     {
                                         Console.WriteLine("Enter id of customer");
-                                        int customerId = int.Parse(Console.ReadLine());
+                                        int customerId;
+                                        int.TryParse(Console.ReadLine(), out customerId);
                                         try
                                         {
                                             Console.WriteLine("\n" + Data.GetCustomer(customerId).ToString() + "\n");
@@ -481,7 +533,8 @@ namespace ConsoleUI_BL
                                 case 'D':
                                     {
                                         Console.WriteLine("Enter id of parcel");
-                                        int parcelId = int.Parse(Console.ReadLine());
+                                        int parcelId;
+                                        int.TryParse(Console.ReadLine(), out parcelId);
                                         try
                                         {
                                             Console.WriteLine("\n" + Data.GetParcel(parcelId).ToString() + "\n");
@@ -507,19 +560,15 @@ namespace ConsoleUI_BL
                             Console.WriteLine("D- parcel list");
                             Console.WriteLine("E- parcel that was not matched up to drone list");
                             Console.WriteLine("F- charge station with available charge list");
-                            string input = (Console.ReadLine());
-                            try
-                            {
-                                // string addingChoice = (Console.ReadLine()); 
-                                if (input.Length != 1)
-                                    throw new InvalidInputException("Choice must be from following menu!\n");
-
-                            }
-                            catch (InvalidInputException exc)
-                            {
-                                Console.WriteLine(exc);
-                            }
-                            char printListChoice = input[0];
+                            string data;
+                            bool flag;
+                            char printListChoice;
+                            data = Console.ReadLine();
+                            flag = char.TryParse(input, out char bad);
+                            if (flag)
+                                printListChoice = char.Parse(input);
+                            else
+                                printListChoice = '!';
                             switch (printListChoice)
                             {
                                 case 'A':
@@ -617,9 +666,14 @@ namespace ConsoleUI_BL
                 Console.WriteLine("2- To update item");
                 Console.WriteLine("3- To print item details");
                 Console.WriteLine("4- To print list of items");
-                choice = int.Parse(Console.ReadLine());
+                input = Console.ReadLine();
+                check = int.TryParse(input, out error);
+                if (check)
+                    choice = int.Parse(input);
+                else
+                    choice = -1;
 
-               
+
 
 
 
