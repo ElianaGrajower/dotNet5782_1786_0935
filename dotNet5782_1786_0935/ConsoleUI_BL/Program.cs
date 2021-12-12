@@ -1,10 +1,7 @@
 ﻿using System;
 using IBL.BO;
 using BL;
-//handel camelcase
-//get rid of all the fake case  we used to improve
-//case 1- exceptions all handled
-//case 2 all exceptions handled
+
 
 
 namespace ConsoleUI_BL
