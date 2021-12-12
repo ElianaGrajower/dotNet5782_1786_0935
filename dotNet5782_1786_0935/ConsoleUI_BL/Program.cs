@@ -125,6 +125,9 @@ namespace ConsoleUI_BL
                                             case WeightCategories.heavy:
                                                 d.MaxWeight = WeightCategories.heavy;
                                                 break;
+                                            default:
+                                                Console.WriteLine("ERROR INVALID CHOICE");
+                                                break;
                                         }
                                         Console.WriteLine("Enter station number");
                                         int.TryParse(Console.ReadLine(), out stationId);
@@ -221,6 +224,9 @@ namespace ConsoleUI_BL
                                                 break;
                                             case WeightCategories.heavy:
                                                 p.Weight = WeightCategories.heavy;
+                                                break;
+                                            default:
+                                                Console.WriteLine("ERROR INVALID CHOICE");
                                                 break;
                                         }
                                         Console.WriteLine("Choose priority of parcel:\n" +
