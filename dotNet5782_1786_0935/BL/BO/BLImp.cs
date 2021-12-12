@@ -745,10 +745,12 @@ namespace BL
         public void UpdateCustomerName(int CustomerId,string name,string number)
         {
             var tempCustomer = GetCustomer(CustomerId);
-            if (name != " ")
+            if (name != "")
                 tempCustomer.Name = name;
-            if (number != " ")
+            if (number != "")
                 tempCustomer.Phone = number;
+            var temp = dal.GetCustomer(CustomerId);
+            dal.UpdateCustomer(temp);
         }
         #endregion
         #region ReleaseDroneFromCharge
@@ -763,7 +765,7 @@ namespace BL
                 drones.Remove(temp);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery = chargeTime * usage.chargeSpeed;
-                AddDrone(tempDrone,FindStation(tempDrone.location));
+                AddDrone(tempDrone, FindStation(tempDrone.location));
                 var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
                 dal.DeleteStation(possibleStation.StationId);
                 possibleStation.addChargeSlots();
@@ -772,7 +774,7 @@ namespace BL
                 drones.Add(temp);
             }
             else
-                throw (new UnableToCompleteRequest());
+                throw (new UnableToCompleteRequest("Drone was not charging\n"));
         }
         #endregion
         #region updateStation
@@ -1060,10 +1062,6 @@ namespace BL
             var temp=GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
-            try
-            { dal.AddDroneCharge(DC); }
-            catch (IDAL.DO.AlreadyExistException exc)
-            { throw new IBL.BO.AlreadyExistsException(exc.Message); }
         }
         #endregion
 
