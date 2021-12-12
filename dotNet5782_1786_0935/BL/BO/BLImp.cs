@@ -15,13 +15,17 @@ namespace BL
     
     public class BLImp           
     {
-        // IDAL.DO.IDal dal;     
-      //  private IEnumerable<DroneToList> droneToLists;
+        
         public double[] chargeCapacity;    
         private List<IBL.BO.DroneToList> drones; 
         DAL.DalObject.DalObject dal;
         public static Random rand = new Random(); 
+
         #region GetChargeCapacity
+         /// <summary>
+         /// 
+         /// </summary>
+         /// <returns></returns>
         public chargeCapacity GetChargeCapacity()
         {
         
@@ -116,12 +120,14 @@ namespace BL
         #region AddDrone
         public void AddDrone(IBL.BO.Drone DronetoAdd, int stationId)
         {
+
             if (DronetoAdd.DroneId <= 0)
                 throw new IBL.BO.InvalidInputException("drone id not valid- must be a posittive\n");
             if (DronetoAdd.MaxWeight != IBL.BO.WeightCategories.light && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.average && DronetoAdd.MaxWeight != IBL.BO.WeightCategories.heavy)
-                throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");//should this be frased differently?
+                throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");
+            if(DronetoAdd.battery==0)
             DronetoAdd.battery = rand.Next(20, 40);
-                if (DronetoAdd.droneStatus == 0)
+            if (DronetoAdd.droneStatus == 0)
             { DronetoAdd.droneStatus = DroneStatus.maintenance; }
             try
             {
@@ -129,7 +135,7 @@ namespace BL
                 double StationLongitude = dal.findStation(stationId).Longitude;
                 DronetoAdd.location = new Location(StationLattitude, StationLongitude);
             }
-            catch(IDAL.DO.DoesntExistException exc)
+            catch (IDAL.DO.DoesntExistException exc)
             {
                 throw new IBL.BO.DoesntExistException(exc.Message);
             }
@@ -137,9 +143,9 @@ namespace BL
             dtl.droneId = DronetoAdd.DroneId;
             dtl.Model = DronetoAdd.Model;
             dtl.weight = DronetoAdd.MaxWeight;
-            dtl.battery = (double)rand.Next(20, 40);
-            dtl.droneStatus = DroneStatus.maintenance; ///עכשיו שיניתי את זה שזה יהיה פנוי ולא CHARGE
-            dtl.location = new Location(0,0);
+            dtl.battery = DronetoAdd.battery;
+            dtl.droneStatus = DronetoAdd.droneStatus; 
+            dtl.location = new Location(0, 0);
             dtl.location.Lattitude = dal.findStation(stationId).Lattitude;
             dtl.location.Longitude = dal.findStation(stationId).Longitude;
 
@@ -208,8 +214,6 @@ namespace BL
                 IDAL.DO.Station tempStation = dal.GetStation(stationId);
                 station.StationId = tempStation.StationId;
                 station.name = tempStation.Name;
-                //  station.location.Lattitude = tempStation.Lattitude;
-                // station.location.Longitude = tempStation.Longitude;
                 station.location=new Location(tempStation.Lattitude, tempStation.Longitude);
                 station.chargeSlots = tempStation.ChargeSlots;
                 
@@ -331,11 +335,7 @@ namespace BL
                 throw new InvalidCastException("customer id not valid\n");
             if (!CustomertoAdd.Phone.All(OnlyDigits))
                 throw new InvalidCastException("customer phone not valid- must contain only numbers\n");
-            //if (CustomertoAdd.Location.Lattitude < 30.5 || CustomertoAdd.Location.Lattitude > 34.5)
-            //    throw new InvalidCastException("lattitude coordinates out of range\n");   
-            //if (CustomertoAdd.Location.Longitude < 34.3 || CustomertoAdd.Location.Longitude > 35.5)
-            //    throw new InvalidCastException("longitude coordinates out of range\n");
-
+        
 
 
             IDAL.DO.Customer newCustomer = new IDAL.DO.Customer()
@@ -365,10 +365,7 @@ namespace BL
 
             if (StationtoAdd.StationId <= 0)
                 throw new IBL.BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
-            //if (StationtoAdd.location.Lattitude < 30.5 || StationtoAdd.location.Lattitude > 34.5)
-            //    throw new IBL.BO.InvalidInputException("station coordinates not valid-lattitude coordinates out of range\n");
-            //if (StationtoAdd.location.Longitude < 34.3 || StationtoAdd.location.Longitude > 35.5)
-            //    throw new IBL.BO.InvalidInputException("station coordinates not valid-longitude coordinates out of range\n");
+           
             if (StationtoAdd.chargeSlots <= 0)
                 throw new IBL.BO.InvalidInputException("invalid amount of chargeslots- must be a positive number");
 
@@ -501,10 +498,10 @@ namespace BL
                     CustomerId = temp.CustomerId,
                     Name = temp.Name,
                     Phone = temp.Phone,
-                    Location = new Location(temp.Lattitude, temp.Lattitude)
+                    Location = new Location(temp.Lattitude, temp.Longitude)
                     {
                         Lattitude = temp.Lattitude,
-                        Longitude = temp.Lattitude,
+                        Longitude = temp.Longitude,
 
                     },
                     ParcelsOrdered = dal.printParcelsList().Where(parcel => parcel.TargetId == customerId).Select(Parcel => new ParcelinCustomer()
@@ -701,7 +698,7 @@ namespace BL
 
                             if (minBatery > 100) { minBatery = 100; }
 
-                            drt.battery = rnd.Next((int)minBatery, 101);/// 100//*/;
+                            drt.battery = rnd.Next((int)minBatery, 101);
                         }
 
                     }
@@ -754,31 +751,34 @@ namespace BL
             dal.AddCustomer(tempCustomer);
         }
         #endregion
-        #region ReleaseDroneFromCharge
+        #region daseDroneFromCharge
         public void ReleaseDroneFromCharge(int droneId,int chargeTime)
         {
-            var tempDrone = GetDrone(droneId);
-            var temp = returnsDrone(droneId);
-            if (tempDrone.droneStatus == DroneStatus.maintenance)
-            {
-                var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
-                dal.DeleteDrone(tempDrone.DroneId);
-                dal.DeleteDroneCharge(droneId, FindStation(tempDrone.location));
-                drones.RemoveAll(D=>temp.droneId==droneId);
+            
+            
+                var tempDrone = GetDrone(droneId);
+                var temp = returnsDrone(droneId);
+                if (tempDrone.droneStatus == DroneStatus.maintenance)
+                {
+                    var possibleStation = GetStation(dal.printStationsList().ToList().Find(station => station.Lattitude == tempDrone.location.Lattitude && station.Longitude == tempDrone.location.Longitude).StationId);
+                    dal.DeleteDrone(tempDrone.DroneId);
+                    dal.DeleteDroneCharge(droneId, FindStation(tempDrone.location));
+                    drones.RemoveAll(D => D.droneId == droneId);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery += chargeTime * usage.chargeSpeed;
                 tempDrone.droneStatus = DroneStatus.available;
-                AddDrone(tempDrone,FindStation(tempDrone.location));
-                drones.ForEach(d => { if (d.droneId == droneId) d.droneStatus = DroneStatus.available; });
-               
+                AddDrone(tempDrone, FindStation(tempDrone.location));
+                drones.ForEach(d => { if (d.droneId == droneId) d.droneStatus = DroneStatus.available; tempDrone.battery += chargeTime * usage.chargeSpeed; });
+
                 dal.DeleteStation(possibleStation.StationId);
                 possibleStation.addChargeSlots();
                 AddStation(possibleStation);
-                
+
+
             }
-            else
-                throw (new UnableToCompleteRequest("Drone was not charging\n"));
-        }
+                else
+                    throw (new UnableToCompleteRequest("Drone was not charging\n"));
+            }
         #endregion
         #region updateStation
         public void updateStation(int stationID, int AvlblDCharges, string Name = " ")
@@ -813,7 +813,7 @@ namespace BL
         }
         #endregion
         #region findTheParcel
-        private IDAL.DO.Parcel findTheParcel(IBL.BO.WeightCategories we, IBL.BO.Location a, double buttery, IDAL.DO.Priorities pri)
+        private IDAL.DO.Parcel findTheParcel(IBL.BO.WeightCategories we, IBL.BO.Location a, double battery, IDAL.DO.Priorities pri)
         {
 
 
@@ -823,10 +823,8 @@ namespace BL
             IBL.BO.Location loc = new IBL.BO.Location(0,0);
             IDAL.DO.Customer customer = new IDAL.DO.Customer();
             double far = 1000000;
-            // bool flug = false;
-
-            //השאילתא אחראית למצוא את כל החבילות בעדיפות המבוקשת
-            var parcels = dal.printParcelsList();
+            
+            var parcels = dal.printParcelsList().Where(p=>p.TargetId!=0);
             var tempParcel = from item in parcels
                              where item.Priority == pri
                              select item;
@@ -837,25 +835,29 @@ namespace BL
                 loc.Lattitude = customer.Lattitude;
                 loc.Longitude = customer.Longitude;
                 chargeCapacity chargeCapacity = GetChargeCapacity();
-                d = Distance(a, loc);//המרחק בין מיקום נוכחי למיקום השולח
-                x = Distance(loc, new IBL.BO.Location (dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Longitude ));//המרחק בין מיקום שולח למיקום יעד
-                double fromCusToSta = Distance(new IBL.BO.Location (dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Longitude ), ClosestStation(new IBL.BO.Location ( dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Lattitude ), false, StationLocationslist()));
-                double butteryUse = x * chargeCapacity.chargeCapacityArr[(int)item.Weight] + fromCusToSta * chargeCapacity.chargeCapacityArr[0] + d * chargeCapacity.chargeCapacityArr[0];
-                if (d < far && (buttery - butteryUse) > 0 && item.Scheduled == DateTime.MinValue && weight(we, (IBL.BO.WeightCategories)item.Weight) == true)
-                {
-                    far = d;
-                    theParcel = item;
-                    return theParcel;
-                }
-            }
-            //if (v.Count() > 0)//if there is a parcel.priority. ....
-            //flug = true;
+                d = Distance(a, loc);
+               
+                    x = Distance(loc, new IBL.BO.Location(dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Longitude));
+                    double fromCusToSta = Distance(new IBL.BO.Location(dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Longitude), ClosestStation(new IBL.BO.Location(dal.GetCustomer(item.TargetId).Lattitude, dal.GetCustomer(item.TargetId).Lattitude), false, StationLocationslist()));
 
-            if (pri == IDAL.DO.Priorities.emergency)//אם לא מצא בעדיפות הכי גבוהה מחפש בעדיפות מתחתיה
-                theParcel = findTheParcel(we, a, buttery, IDAL.DO.Priorities.fast);
+                    double butteryUse = x * chargeCapacity.chargeCapacityArr[(int)item.Weight] + fromCusToSta * chargeCapacity.chargeCapacityArr[0] + d * chargeCapacity.chargeCapacityArr[0];
+                    if (d < far && (battery - butteryUse) > 0 && item.Scheduled == DateTime.MinValue && weight(we, (IBL.BO.WeightCategories)item.Weight) == true)
+                    {
+                        far = d;
+                        theParcel = item;
+                        return theParcel;
+                    }
+                
+                
+                
+            }
+            
+
+            if (pri == IDAL.DO.Priorities.emergency)
+                theParcel = findTheParcel(we, a, battery, IDAL.DO.Priorities.fast);
 
             if (pri == IDAL.DO.Priorities.fast)
-                theParcel = findTheParcel(we, a, buttery, IDAL.DO.Priorities.regular);
+                theParcel = findTheParcel(we, a, battery, IDAL.DO.Priorities.regular);
             if (theParcel.ParcelId == 0)
                 throw new IBL.BO.DoesntExistException("ERROR! there is not a parcel that match to the drone ");
             return theParcel;
@@ -1032,8 +1034,9 @@ namespace BL
         }
         #endregion
         #region SendDroneToCharge
-        public void SendDroneToCharge(int droneID) //int StationID)//have to send the closest sation that has available sattions
+        public void SendDroneToCharge(int droneID) 
         {
+
 
             IBL.BO.Drone drone = new();
             IBL.BO.Station station = new();
@@ -1047,13 +1050,13 @@ namespace BL
             }
             if (drone.droneStatus != DroneStatus.available)
                 throw new unavailableException("not available");
-            Location stationLocation = ClosestStation(drone.location, false, StationLocationslist());//not sure where and what its from
+            Location stationLocation = ClosestStation(drone.location, false, StationLocationslist());
             station = GetStations().Find(x => x.location.Longitude == stationLocation.Longitude && x.location.Lattitude == stationLocation.Lattitude);
             int droneIndex = drones.ToList().FindIndex(x => x.droneId == droneID);
-            //var droneBL=GetDrones().ToList().Find(x => x.id == droneID);
+            
             if (station.chargeSlots > 0)
                 station.decreaseChargeSlots();
-            drones[droneIndex].battery -= MinBatteryRequired(drones[droneIndex].droneId);//not sure that if it needs to be 100%
+            drones[droneIndex].battery -= MinBatteryRequired(drones[droneIndex].droneId);
             drones[droneIndex].location = station.location;
             drones[droneIndex].droneStatus = DroneStatus.maintenance;
 
@@ -1063,7 +1066,7 @@ namespace BL
             {
                 throw new IBL.BO.DoesntExistException(exp.Message);
             }
-            var temp=GetDrone(drones[droneIndex].droneId);
+            var temp = GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
         }
@@ -1091,7 +1094,7 @@ namespace BL
                 IDAL.DO.Parcel p = new IDAL.DO.Parcel();
                 try
                 {
-                    p = dal.GetParcel(drn.parcelId);//get the parcel from the dal
+                    p = dal.GetParcel(drn.parcelId);
                 }
                 catch (Exception)
                 {
