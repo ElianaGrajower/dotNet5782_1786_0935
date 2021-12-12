@@ -122,7 +122,7 @@ namespace ConsoleUI_BL
                                             case WeightCategories.average:
                                                 d.MaxWeight = WeightCategories.average;
                                                 break;
-                                            case WeightCategories.heavy:
+                                            case WeightCategories.heavy:   
                                                 d.MaxWeight = WeightCategories.heavy;
                                                 break;
                                             default:
