@@ -524,10 +524,15 @@ namespace BL
                return customer;
 
             }
-        catch (IBL.BO.DoesntExistException exc)
+            catch (IBL.BO.DoesntExistException exc)
             {
                 throw exc;
             }
+            catch (IDAL.DO.DoesntExistException exc)
+            {
+                throw new IBL.BO.DoesntExistException(exc.Message);
+            }
+
         }
         #endregion
         #region GetParcel
@@ -705,14 +710,20 @@ namespace BL
             {
                 throw new IBL.BO.DoesntExistException("drone does not exist");
             }
-
-            var tempDrone = dal.findDrone(droneID);
-            tempDrone.Model = dModel;
-            dal.UpdateDrone(tempDrone);
-            IBL.BO.DroneToList dr = drones.Find(p => p.droneId == droneID);
-            drones.Remove(dr);
-            dr.Model = dModel;
-            drones.Add(dr);
+            try
+            {
+                var tempDrone = dal.findDrone(droneID);
+                tempDrone.Model = dModel;
+                dal.UpdateDrone(tempDrone);
+                IBL.BO.DroneToList dr = drones.Find(p => p.droneId == droneID).;
+                drones.Remove(dr);
+                dr.Model = dModel;
+                drones.Add(dr);
+            }
+            catch (IDAL.DO.DoesntExistException exc)
+            {
+                Console.WriteLine(exc);
+            }
         }
         #endregion
         #region UpdateCustomerName
@@ -753,7 +764,7 @@ namespace BL
             {
                 IDAL.DO.Station stationDl = new IDAL.DO.Station();
                 stationDl = dal.GetStation(stationID);
-                if (Name !=  " ")
+                if (Name !=  "")
                     stationDl.Name = Name;
                 if (AvlblDCharges != 0)
                 {
@@ -765,6 +776,14 @@ namespace BL
                 }
             }
             catch (IBL.BO.DoesntExistException exp)
+            {
+                throw exp;
+            }
+            catch (IDAL.DO.DoesntExistException exp)
+            {
+                throw new IBL.BO.DoesntExistException(exp.Message);
+            }
+            catch (IBL.BO.UnableToCompleteRequest exp)
             {
                 throw exp;
             }
