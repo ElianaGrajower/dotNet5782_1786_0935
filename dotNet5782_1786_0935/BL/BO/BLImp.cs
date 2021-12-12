@@ -697,13 +697,22 @@ namespace BL
 
         }
         #endregion
-        #region UpdateStationName
-        public void UpdateStationName(int stationId, int name)
+        #region UpdateDroneName
+        public void UpdateDroneName(int droneID, string dModel)
         {
-            var tempStation = GetStation(stationId);
-            dal.DeleteStation(stationId);
-            tempStation.name = name;
-            AddStation(tempStation);
+            int dIndex = drones.FindIndex(x => x.droneId == droneID);
+            if (dIndex == 0)//לדעת מה הוא מחזיר אם הוא לא מוצא ולשים בתנאי
+            {
+                throw new IBL.BO.DoesntExistException("drone does not exist");
+            }
+
+            var tempDrone = dal.findDrone(droneID);
+            tempDrone.Model = dModel;
+            dal.UpdateDrone(tempDrone);
+            IBL.BO.DroneToList dr = drones.Find(p => p.droneId == droneID);
+            drones.Remove(dr);
+            dr.Model = dModel;
+            drones.Add(dr);
         }
         #endregion
         #region UpdateCustomerName
