@@ -747,13 +747,13 @@ namespace BL
         }
         #endregion
         #region updateStation
-        public void updateStation(int stationID, int AvlblDCharges, int Name = ' ')
+        public void updateStation(int stationID, int AvlblDCharges, string Name = " ")
         {
             try
             {
                 IDAL.DO.Station stationDl = new IDAL.DO.Station();
                 stationDl = dal.GetStation(stationID);
-                if (Name !=  ' ')
+                if (Name !=  " ")
                     stationDl.Name = Name;
                 if (AvlblDCharges != 0)
                 {

@@ -10,7 +10,7 @@ namespace IDAL
     {
         public struct Station
         {
-            public Station(int id, int name, double lat, double lon, int slots)
+            public Station(int id, string name, double lat, double lon, int slots)
             {
                 StationId = id;
                 Name = name;
@@ -21,7 +21,7 @@ namespace IDAL
 
             }
             public int StationId { set; get; } 
-            public int Name { set; get; }
+            public string Name { set; get; }
             public double Lattitude { set; get; }
             public double Longitude { set; get; }
             public int ChargeSlots { set; get; }
