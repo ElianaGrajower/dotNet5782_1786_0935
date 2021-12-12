@@ -10,11 +10,11 @@ namespace IBL.BO
    public class ParcelToList
     {
         public int parcelId;
-        public string senderName;
-        public string reciverName;
-        public WeightCategories weight;
-        public Priorities priority;
-        public ParcelStatus parcelStatus;
+        public string senderName; //the name of the customer who is sending the parcel
+        public string reciverName; //the name of the customer who is the target of the parcel
+        public WeightCategories weight; //light, average, heavy
+        public Priorities priority; //regular, fast, emergency   
+        public ParcelStatus parcelStatus; 
 
         public override string ToString()   
         {

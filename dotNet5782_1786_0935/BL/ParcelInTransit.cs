@@ -10,7 +10,7 @@ namespace IBL.BO
     public class ParcelInTransit
     {
         public int parcelId;
-        public bool parcelStatus;//true if matched with drone
+        public bool parcelStatus; //true if matched with drone
         public Priorities priority;
         public WeightCategories weight;
         public CustomerInParcel sender;   

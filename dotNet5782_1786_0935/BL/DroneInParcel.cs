@@ -9,7 +9,7 @@ namespace IBL.BO
     public class DroneInParcel
     {
         public int droneId;
-        public double battery;
+        public double battery; //in percentages
         public Location location;
    
           

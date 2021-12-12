@@ -10,11 +10,11 @@ namespace BL
     {
         public int stationId;
         public int DroneId;   
-        public double battery;
+        public double battery; //in percentages
         public DateTime arrival;
         public override string ToString()
         {
             return String.Format($"Drone Id: {DroneId}\n Battery: {battery}\n Arrival time: {arrival}\n");
         }
     }
-}
+}/////////////////////delete???????????

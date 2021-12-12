@@ -30,8 +30,8 @@ namespace IBL
         public IBL.BO.Customer GetCustomer(int customerId);
         public IBL.BO.Parcel GetParcel(int parcelId);
         public void UpdateDroneName(int droneID, string dModel);
-        public void UpdateCustomerName(int CustomerId, string name, string number);
-        public void ReleaseDroneFromCharge(int droneId, int chargeTime);
+        public void UpdateCustomerName(int CustomerId, string name, string number); // 
+        public void ReleaseDroneFromCharge(int droneId, int chargeTime); //releases the drone from its charge
         public void updateStation(int stationID, int AvlblDCharges, string Name = " ");
         public void MatchDroneWithPacrel(int droneId);
         public void PickUpParcel(int droneId);

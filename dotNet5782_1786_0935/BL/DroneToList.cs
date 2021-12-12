@@ -10,12 +10,12 @@ namespace IBL.BO
     {
         public int droneId;
         public string Model { set; get; }
-        public WeightCategories weight;
-        public double battery;
-        public DroneStatus droneStatus;
+        public WeightCategories weight; //light, average, heavy
+        public double battery; //in percentages
+        public DroneStatus droneStatus; //available, maintenance, delivery
         public Location location;   
         public int parcelId;
-        public int numOfParcelsDelivered;
+        public int numOfParcelsDelivered; //the number of parcels that the drone delivered
 
         public override string ToString()
         {

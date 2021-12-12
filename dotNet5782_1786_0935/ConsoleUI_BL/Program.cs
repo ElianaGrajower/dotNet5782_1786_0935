@@ -62,7 +62,7 @@ namespace ConsoleUI_BL
                                         s.StationId = id;
                                         Console.WriteLine("Enter name of station: ");
                                         s.name = Console.ReadLine();
-                                        Console.WriteLine("Enter lattitude and longitude of station");
+                                        Console.WriteLine("Enter lattitude and longitude of station:");
                                         s.location = new Location(0, 0);
                                         double.TryParse(Console.ReadLine(), out latitude);
                                         s.location.Lattitude = latitude;
@@ -123,7 +123,7 @@ namespace ConsoleUI_BL
                                                 break;
                                             
                                         }
-                                                Console.WriteLine("Enter station number");
+                                                Console.WriteLine("Enter station number:");
                                         int.TryParse(Console.ReadLine(), out stationId);
 
                                         try
@@ -305,10 +305,10 @@ namespace ConsoleUI_BL
                                 case 'A':
                                     {
                                         int droneId;
-                                        Console.WriteLine("Enter Id of drone");
+                                        Console.WriteLine("Enter Id of drone:");
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         
-                                        Console.WriteLine("Enter model of drone");
+                                        Console.WriteLine("Enter model of drone:");
                                         string model = Console.ReadLine();
                                         try
                                         {
@@ -323,7 +323,7 @@ namespace ConsoleUI_BL
                                 case 'B':
                                     {
 
-                                        Console.WriteLine("Enter id of station");
+                                        Console.WriteLine("Enter id of station:");
                                         int stationId;
                                          int.TryParse(Console.ReadLine(),out stationId);
                                         Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
@@ -351,7 +351,7 @@ namespace ConsoleUI_BL
                                 case 'C':
                                     {
 
-                                        Console.WriteLine("Enter id of customer");
+                                        Console.WriteLine("Enter id of customer:");
                                         int customerId ;
                                         int.TryParse(Console.ReadLine(), out customerId);
                                         Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
@@ -399,7 +399,7 @@ namespace ConsoleUI_BL
                                     }
                                 case 'E':
                                     {
-                                        Console.WriteLine("Enter id of drone");
+                                        Console.WriteLine("Enter id of drone:");
                                         int droneId;
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         Console.WriteLine("Enter the amount of time that the drone has been charging:");
@@ -427,7 +427,7 @@ namespace ConsoleUI_BL
                                     }
                                 case 'F':
                                     {
-                                        Console.WriteLine("Enter id of drone");
+                                        Console.WriteLine("Enter id of drone:");
                                         int droneId;
                                         int.TryParse(Console.ReadLine(), out droneId);
 
@@ -443,11 +443,15 @@ namespace ConsoleUI_BL
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
+                                        catch (IBL.BO.AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
                                         break;
                                     }
                                 case 'G':
                                     {
-                                        Console.WriteLine("Enter id of drone");
+                                        Console.WriteLine("Enter id of drone:");
                                         int droneId;
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         try
@@ -466,7 +470,7 @@ namespace ConsoleUI_BL
                                     }
                                 case 'H':
                                     {
-                                        Console.WriteLine("Enter id of drone");
+                                        Console.WriteLine("Enter id of drone:");
                                         int droneId;
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         try
@@ -509,7 +513,7 @@ namespace ConsoleUI_BL
                             {
                                 case 'A':
                                     {
-                                        Console.WriteLine("Enter id of station");
+                                        Console.WriteLine("Enter id of station:");
                                         int stationId;
                                         int.TryParse(Console.ReadLine(), out stationId);
                                         try
@@ -528,7 +532,7 @@ namespace ConsoleUI_BL
                                     }
                                 case 'B':
                                     {
-                                        Console.WriteLine("Enter id of drone");
+                                        Console.WriteLine("Enter id of drone:");
                                         int droneId;
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         try
@@ -547,7 +551,7 @@ namespace ConsoleUI_BL
                                     }
                                 case 'C':
                                     {
-                                        Console.WriteLine("Enter id of customer");
+                                        Console.WriteLine("Enter id of customer:");
                                         int customerId;
                                         int.TryParse(Console.ReadLine(), out customerId);
                                         try
@@ -566,7 +570,7 @@ namespace ConsoleUI_BL
                                     }
                                 case 'D':
                                     {
-                                        Console.WriteLine("Enter id of parcel");
+                                        Console.WriteLine("Enter id of parcel:");
                                         int parcelId;
                                         int.TryParse(Console.ReadLine(), out parcelId);
                                         try

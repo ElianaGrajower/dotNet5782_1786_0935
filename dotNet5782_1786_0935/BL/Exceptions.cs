@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace IBL.BO
 {
     [Serializable]
-    public class DoesntExistException : Exception   
+    public class DoesntExistException : Exception  //if the item doesn't exist
     {
         public DoesntExistException() : base() { }
         public DoesntExistException(string message) : base(message) { }
@@ -17,7 +17,7 @@ namespace IBL.BO
     }
 
     [Serializable]
-    public class AlreadyExistsException : Exception
+    public class AlreadyExistsException : Exception  //if the item already exists
     {
         public AlreadyExistsException() : base() { }
         public AlreadyExistsException(string message) : base(message) { }
@@ -27,7 +27,7 @@ namespace IBL.BO
     }
 
     
-    public class InvalidInputException : Exception
+    public class InvalidInputException : Exception  //if the input is invalid
     {
         public InvalidInputException() : base() { }
         public InvalidInputException(string message) : base(message) { }
@@ -35,7 +35,7 @@ namespace IBL.BO
         
 
     }
-    public class UnableToCompleteRequest : Exception
+    public class UnableToCompleteRequest : Exception  //if the program is Unable to complete the request 
     {
         public UnableToCompleteRequest() : base() { }
         public UnableToCompleteRequest(string message) : base(message) { }
@@ -44,7 +44,7 @@ namespace IBL.BO
 
     }
     
-        public class unavailableException : Exception
+        public class unavailableException : Exception //if the item is unavailable
     {
         public unavailableException() : base() { }
         public unavailableException(string message) : base(message) { }
