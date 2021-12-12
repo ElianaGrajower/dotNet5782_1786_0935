@@ -201,7 +201,7 @@ namespace ConsoleUI_BL
                                                 
                                                   CustomerId = id
                                             }
-                                            
+                                           
                                             
                                         };
                                         Console.WriteLine("Enter Id of target: ");
@@ -612,7 +612,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine("no stations exist\n");
                                         }
                                         break;
                                     }
@@ -625,7 +625,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine("no drones exist\n");
                                         }
                                         break;
                                     }
@@ -638,7 +638,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine("no customer exists\n");
                                         }
                                         break;
                                     }
@@ -651,7 +651,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine("No parcels exist\n");
                                         }
                                         break;
                                     }
@@ -664,7 +664,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine("no such parcels exist\n");
                                         }
                                         break;
                                     }
@@ -677,7 +677,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine("no such stations exist\n");
                                         }
 
                                         break;
