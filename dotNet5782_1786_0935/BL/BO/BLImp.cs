@@ -591,7 +591,7 @@ namespace BL
             }
             catch(IDAL.DO.DoesntExistException exc)
             {
-                throw exc;
+                throw new IBL.BO.DoesntExistException( exc.Message);
             }
         }
         #endregion
@@ -995,7 +995,7 @@ namespace BL
                 foreach (var p in parcelDal)
                 { parcel.Add(GetParcel(p.ParcelId)); }
             }
-            catch (ArgumentException) { throw new IBL.BO.DoesntExistException(); }
+            catch (ArgumentException) { throw new IBL.BO.DoesntExistException("no parcels exist\n"); }
             return parcel;
 
 
