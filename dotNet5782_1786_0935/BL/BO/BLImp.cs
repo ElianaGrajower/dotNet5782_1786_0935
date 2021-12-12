@@ -330,10 +330,10 @@ namespace BL
                 throw new InvalidCastException("customer id not valid\n");
             if (!CustomertoAdd.Phone.All(OnlyDigits))
                 throw new InvalidCastException("customer phone not valid- must contain only numbers\n");
-            if (CustomertoAdd.Location.Lattitude < 30.5 || CustomertoAdd.Location.Lattitude > 34.5)
-                throw new InvalidCastException("lattitude coordinates out of range\n");   
-            if (CustomertoAdd.Location.Longitude < 34.3 || CustomertoAdd.Location.Longitude > 35.5)
-                throw new InvalidCastException("longitude coordinates out of range\n");
+            //if (CustomertoAdd.Location.Lattitude < 30.5 || CustomertoAdd.Location.Lattitude > 34.5)
+            //    throw new InvalidCastException("lattitude coordinates out of range\n");   
+            //if (CustomertoAdd.Location.Longitude < 34.3 || CustomertoAdd.Location.Longitude > 35.5)
+            //    throw new InvalidCastException("longitude coordinates out of range\n");
 
 
 
@@ -364,10 +364,10 @@ namespace BL
 
             if (StationtoAdd.StationId <= 0)
                 throw new IBL.BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
-            if (StationtoAdd.location.Lattitude < 30.5 || StationtoAdd.location.Lattitude > 34.5)
-                throw new IBL.BO.InvalidInputException("station coordinates not valid-lattitude coordinates out of range\n");
-            if (StationtoAdd.location.Longitude < 34.3 || StationtoAdd.location.Longitude > 35.5)
-                throw new IBL.BO.InvalidInputException("station coordinates not valid-longitude coordinates out of range\n");
+            //if (StationtoAdd.location.Lattitude < 30.5 || StationtoAdd.location.Lattitude > 34.5)
+            //    throw new IBL.BO.InvalidInputException("station coordinates not valid-lattitude coordinates out of range\n");
+            //if (StationtoAdd.location.Longitude < 34.3 || StationtoAdd.location.Longitude > 35.5)
+            //    throw new IBL.BO.InvalidInputException("station coordinates not valid-longitude coordinates out of range\n");
             if (StationtoAdd.chargeSlots <= 0)
                 throw new IBL.BO.InvalidInputException("invalid amount of chargeslots- must be a positive number");
 
@@ -1062,7 +1062,9 @@ namespace BL
             var temp=GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
-
+             
+            
+            { throw new IBL.BO.AlreadyExistsException(exc.Message); }
         }
         #endregion
 
