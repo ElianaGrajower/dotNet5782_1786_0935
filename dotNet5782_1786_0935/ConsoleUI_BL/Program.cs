@@ -103,7 +103,7 @@ namespace ConsoleUI_BL
 
                                         d.Model = Console.ReadLine();
                                         Console.WriteLine("Choose maximum weight drone can hold:\n" +
-                                            "1- light, 2-average, 3-heavy\n");
+                                            "1- light, 2-average, 3-heavy");
                                         IBL.BO.WeightCategories weightChoice;
 
                                         input = Console.ReadLine();
@@ -211,7 +211,7 @@ namespace ConsoleUI_BL
                                             CustomerId = id
                                         };
                                         Console.WriteLine("Choose  weight of parcel:\n" +
-                                            " 1-light,2- average, 3-heavy\n");
+                                            "1-light,2- average, 3-heavy");
                                         IBL.BO.WeightCategories weightChoice;
 
                                         input = Console.ReadLine();
@@ -235,7 +235,7 @@ namespace ConsoleUI_BL
 
                                         }
                                         Console.WriteLine("Choose priority of parcel:\n" +
-                                          " 1-regular,2- fast,3- emergency \n");
+                                          "1-regular,2- fast,3- emergency");
                                         IBL.BO.Priorities priorities;
 
                                         input = Console.ReadLine();

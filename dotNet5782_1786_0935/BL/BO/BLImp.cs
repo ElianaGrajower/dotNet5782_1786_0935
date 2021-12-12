@@ -953,7 +953,7 @@ namespace BL
             throw (new UnableToCompleteRequest());
         }
         #endregion
-        #region GetDroneList
+        #region GetDronesList
         public List<IBL.BO.Drone> GetDronesList()
         {
             List<IBL.BO.Drone> drone = new List<IBL.BO.Drone>();
@@ -965,8 +965,6 @@ namespace BL
             }
             catch (ArgumentException) { throw new IBL.BO.DoesntExistException(); }
             return drone;
-
-
         }
         #endregion  
         #region GetCustomersList
