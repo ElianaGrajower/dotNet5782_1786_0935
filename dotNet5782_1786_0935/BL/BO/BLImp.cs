@@ -723,7 +723,7 @@ namespace BL
             }
             catch (IDAL.DO.DoesntExistException exc)
             {
-                Console.WriteLine(exc);
+                throw exc;
             }
         }
         #endregion
