@@ -391,6 +391,7 @@ namespace BL
         public void AddParcel(IBL.BO.Parcel ParceltoAdd)
         {
             ParceltoAdd.ParcelId = dal.getParcelId();
+           
             if (ParceltoAdd.Sender.CustomerId > 999999999 || ParceltoAdd.Sender.CustomerId < 100000000)
                 throw new InvalidCastException("sender id not valid\n");
             if (ParceltoAdd.Target.CustomerId > 999999999 || ParceltoAdd.Target.CustomerId < 100000000)
@@ -958,7 +959,7 @@ namespace BL
             List<IBL.BO.Drone> drone = new List<IBL.BO.Drone>();
             try
             {
-
+                
                 foreach (var d in drones)
                 { drone.Add(GetDrone(d.droneId)); }
             }

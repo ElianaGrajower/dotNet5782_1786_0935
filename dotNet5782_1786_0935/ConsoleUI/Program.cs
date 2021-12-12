@@ -57,7 +57,7 @@ namespace ConsoleUI
                                 case 'A': //adds a station
                                     {
                                         Console.WriteLine("Enter name of station: ");
-                                        Station s = new Station() { Name = int.Parse(Console.ReadLine()) };
+                                        Station s = new Station() { Name =Console.ReadLine() };
                                         Console.WriteLine("Enter ID of station: ");
                                         s.StationId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
@@ -168,11 +168,11 @@ namespace ConsoleUI
                                     {
                                         Console.WriteLine("Enter drone id: ");
                                         int droneId = int.Parse(Console.ReadLine());
-                                        int stationNum;
+                                        string stationNum;
                                         Console.WriteLine("List of available charging sttaions:");
                                         foreach (Station item in Data.printStationsList()) { if (item.ChargeSlots != 0) Console.WriteLine(item.ToString() + "\n"); }; //prints list of available charging stations
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
-                                        stationNum = int.Parse(Console.ReadLine());
+                                        stationNum = Console.ReadLine();
                                         Console.WriteLine(Data.chargeDrone(Data.findDrone(droneId), stationNum) + "\n"); //charges and prints if completed successfully
                                         break;
                                     }
