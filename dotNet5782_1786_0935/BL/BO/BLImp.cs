@@ -716,7 +716,7 @@ namespace BL
                 var tempDrone = dal.findDrone(droneID);
                 tempDrone.Model = dModel;
                 dal.UpdateDrone(tempDrone);
-                IBL.BO.DroneToList dr = drones.Find(p => p.droneId == droneID).;
+                IBL.BO.DroneToList dr = drones.Find(p => p.droneId == droneID);
                 drones.Remove(dr);
                 dr.Model = dModel;
                 drones.Add(dr);
