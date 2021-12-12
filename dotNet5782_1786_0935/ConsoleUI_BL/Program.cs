@@ -314,7 +314,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -336,11 +336,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IBL.BO.UnableToCompleteRequest exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
 
 
@@ -363,7 +363,7 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -378,19 +378,19 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IBL.BO.UnableToCompleteRequest exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IBL.BO.unavailableException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (Exception exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                        
                                         break;
@@ -409,11 +409,15 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IBL.BO.UnableToCompleteRequest exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
+                                        }
+                                        catch (IBL.BO.InvalidInputException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
                                         }
 
 
@@ -431,11 +435,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IBL.BO.unavailableException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -450,11 +454,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IBL.BO.UnableToCompleteRequest exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -469,11 +473,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IBL.BO.UnableToCompleteRequest exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -512,11 +516,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IDAL.DO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -531,11 +535,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IDAL.DO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -550,11 +554,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IDAL.DO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
@@ -569,11 +573,11 @@ namespace ConsoleUI_BL
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         catch (IDAL.DO.DoesntExistException exc)
                                         {
-                                            Console.WriteLine(exc);
+                                            Console.WriteLine(exc.Message);
                                         }
                                         break;
                                     }
