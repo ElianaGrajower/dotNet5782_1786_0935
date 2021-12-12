@@ -326,7 +326,7 @@ namespace BL
             if (!CustomertoAdd.Phone.All(OnlyDigits))
                 throw new InvalidCastException("customer phone not valid- must contain only numbers\n");
             if (CustomertoAdd.Location.Lattitude < 30.5 || CustomertoAdd.Location.Lattitude > 34.5)
-                throw new InvalidCastException("lattitude coordinates out of range\n");
+                throw new InvalidCastException("lattitude coordinates out of range\n");   
             if (CustomertoAdd.Location.Longitude < 34.3 || CustomertoAdd.Location.Longitude > 35.5)
                 throw new InvalidCastException("longitude coordinates out of range\n");
 
