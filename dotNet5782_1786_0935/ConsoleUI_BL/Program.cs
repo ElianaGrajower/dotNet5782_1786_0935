@@ -43,7 +43,7 @@ namespace ConsoleUI_BL
                                 "C- add a new customer\n" +
                                 "D- add a parcel for delivery");
                             string data;
-                            bool flag;
+                            bool flag;   
                             char addingChoice;
                             data = Console.ReadLine();
                             flag = char.TryParse(input, out char wrong);
