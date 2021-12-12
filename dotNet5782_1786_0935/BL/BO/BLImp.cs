@@ -125,9 +125,16 @@ namespace BL
                 throw new IBL.BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");//should this be frased differently?
             DronetoAdd.battery = rand.Next(20, 40);
             DronetoAdd.droneStatus = DroneStatus.maintenance;
-            double StationLattitude = dal.findStation(StationId).Lattitude;
-            double StationLongitude = dal.findStation(StationId).Longitude;
-            DronetoAdd.location = new Location(StationLattitude, StationLongitude);
+            try
+            {
+                double StationLattitude = dal.findStation(StationId).Lattitude;
+                double StationLongitude = dal.findStation(StationId).Longitude;
+                DronetoAdd.location = new Location(StationLattitude, StationLongitude);
+            }
+            catch(IDAL.DO.DoesntExistException exc)
+            {
+                throw new IBL.BO.DoesntExistException(exc.Message);
+            }
 
             IDAL.DO.Drone newDrone = new IDAL.DO.Drone()
             {
@@ -567,7 +574,7 @@ namespace BL
                 return parcel;
 
             }
-            catch(IBL.BO.DoesntExistException exc)
+            catch(IDAL.DO.DoesntExistException exc)
             {
                 throw exc;
             }
@@ -1061,7 +1068,7 @@ namespace BL
 
             var drn = drones.Find(x => x.droneId == id);
             if (drn == null)
-                throw new IBL.BO.DoesntExistException("Error! the drone doesn't found");
+                throw new IBL.BO.DoesntExistException("The drone doesn't exist in system");
             IBL.BO.Drone d = new IBL.BO.Drone();
             d.DroneId = drn.droneId;
             d.Model = drn.Model;
@@ -1081,7 +1088,7 @@ namespace BL
                 }
                 catch (Exception)
                 {
-                    throw new IBL.BO.DoesntExistException("Error! the parcel not found");
+                    throw new IBL.BO.DoesntExistException("The parcel doesn't exist in system");
                 }
                 if (p.PickedUp == DateTime.MinValue)
                     pt.parcelStatus = false;

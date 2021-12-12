@@ -21,7 +21,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("2- To update item");
             Console.WriteLine("3- To print item details");
             Console.WriteLine("4- To print list of items");
-             choice = int.Parse(Console.ReadLine());
+            choice = int.Parse(Console.ReadLine());
             //try
             //{
             //    choice = int.Parse(Console.ReadLine());
@@ -41,7 +41,7 @@ namespace ConsoleUI_BL
                     case 1:
                         {
                             Console.WriteLine("Enter your choice:");
-                            Console.WriteLine("A- add a statsion\n " +
+                            Console.WriteLine("A- add a statsion\n" +
                                 "B- add a drone\n" +
                                 "C- add a new customer\n" +
                                 "D- add a parcel for delivery");
@@ -122,6 +122,10 @@ namespace ConsoleUI_BL
                                             Console.WriteLine(exc.Message);
                                         }
                                         catch (AlreadyExistsException exc)
+                                        {
+                                            Console.WriteLine(exc.Message);
+                                        }
+                                        catch (DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
@@ -226,7 +230,7 @@ namespace ConsoleUI_BL
                     case 2:
                         {
                             Console.WriteLine("Enter your choice:");
-                            Console.WriteLine("A- update the name of a drone\n " +
+                            Console.WriteLine("A- update the name of a drone\n" +
                                 "B- update stations details\n" +
                                 "C- update customers information\n" +
                                 "D- charge drone\n" +
@@ -417,7 +421,7 @@ namespace ConsoleUI_BL
                     case 3:
                         {
                             Console.WriteLine("Enter your choice:");
-                            Console.WriteLine("A- print station\n " +
+                            Console.WriteLine("A- print station\n" +
                                 "B- print drone\n" +
                                 "C- print customer\n" +
                                 "D- print parcel\n");
@@ -448,6 +452,10 @@ namespace ConsoleUI_BL
                                         {
                                             Console.WriteLine(exc);
                                         }
+                                        catch (IDAL.DO.DoesntExistException exc)
+                                        {
+                                            Console.WriteLine(exc);
+                                        }
                                         break;
                                     }
                                 case 'B':
@@ -459,6 +467,10 @@ namespace ConsoleUI_BL
                                             Console.WriteLine("\n" + Data.GetDrone(droneId).ToString() + "\n");
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
+                                        {
+                                            Console.WriteLine(exc);
+                                        }
+                                        catch (IDAL.DO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc);
                                         }
@@ -476,6 +488,10 @@ namespace ConsoleUI_BL
                                         {
                                             Console.WriteLine(exc);
                                         }
+                                        catch (IDAL.DO.DoesntExistException exc)
+                                        {
+                                            Console.WriteLine(exc);
+                                        }
                                         break;
                                     }
                                 case 'D':
@@ -487,6 +503,10 @@ namespace ConsoleUI_BL
                                             Console.WriteLine("\n" + Data.GetParcel(parcelId).ToString() + "\n");
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
+                                        {
+                                            Console.WriteLine(exc);
+                                        }
+                                        catch (IDAL.DO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc);
                                         }

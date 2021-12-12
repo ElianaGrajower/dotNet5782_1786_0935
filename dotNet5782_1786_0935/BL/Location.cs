@@ -24,7 +24,7 @@ namespace IBL.BO
         }
         public override string ToString()
         {
-            return String.Format($"Location: ( { Math.Round(Lattitude,3)} , {Math.Round(Longitude,3)} )\n");
+            return String.Format($"( { Math.Round(Lattitude,3)} , {Math.Round(Longitude,3)} )");
         }
     }
 }

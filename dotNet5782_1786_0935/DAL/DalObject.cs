@@ -375,7 +375,7 @@ namespace DAL
             {
                 if (findDrone(droneId).DroneId != 0)
                     return findDrone(droneId).ToString();
-                throw new DoesntExistException("The station doesn't exist in system");
+                throw new DoesntExistException("The drone doesn't exist in system");
             }
             #endregion
             #region PrintCustomer
@@ -383,7 +383,7 @@ namespace DAL
             {
                 if (findCustomer(customerId).CustomerId != 0)
                     return findCustomer(customerId).ToString();
-                throw new DoesntExistException("The station doesn't exist in system");
+                throw new DoesntExistException("The customer doesn't exist in system");
             }
             #endregion
             #region PrintParcel
@@ -391,7 +391,7 @@ namespace DAL
             {
                 if (findParcel(parcelId).ParcelId != 0)
                     return findParcel(parcelId).ToString();
-                throw new DoesntExistException("The station doesn't exist in system");
+                throw new DoesntExistException("The parcel doesn't exist in system");
             }
             #endregion
             #region findParcel
@@ -422,17 +422,17 @@ namespace DAL
                 throw new DoesntExistException("The customer doesn't exist in system");
             }
             #endregion
-            public DroneCharge findDroneCharge(int droneId,int stationId) //finds a customer using its id
+            public DroneCharge findDroneCharge(int droneId,int stationId) 
             {
 
-                for (int i = 0; i < DataSource.DroneChargeList.Count(); i++) //goes over customer list
+                for (int i = 0; i < DataSource.DroneChargeList.Count(); i++) 
                 {
                     if (DataSource.DroneChargeList[i].DroneId == droneId && DataSource.DroneChargeList[i].StationId == stationId) //if id matches
                     {
                         return (DataSource.DroneChargeList[i]);
                     }
                 }
-                throw new DoesntExistException("The customer doesn't exist in system");
+                throw new DoesntExistException("The drone or station doesn't exist in system");
             }
             #region findDrone
             public Drone findDrone(int droneId) //finds a drone using its id
