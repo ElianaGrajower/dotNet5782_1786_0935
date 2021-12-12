@@ -226,7 +226,7 @@ namespace ConsoleUI_BL
                                         int stationName = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter new amount of charges at station:");
                                         int numOfCharges = int.Parse(Console.ReadLine());
-                                        //if nothing is put in it should not update it- this isnt done!!!!!!!!!!!!***********
+                                        Data.updateStation(stationId, stationName, numOfCharges);
                                         break;
                                     }
                                 case 'C':
@@ -253,8 +253,8 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("Enter id of drone");
                                         int droneId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter the amount of time that the drone has been charging:");
-                                        double chargeTime = double.Parse(Console.ReadLine());
-                                        //dont know the name
+                                        int chargeTime = int.Parse(Console.ReadLine());
+                                        Data.ReleaseDroneFromCharge(droneId, chargeTime);
                                         break;
                                     }
                                 case 'F':
@@ -376,8 +376,9 @@ namespace ConsoleUI_BL
                                         foreach (Station item in Data.GetAvailableStationsList()) { Console.WriteLine(item.ToString() + "\n"); };
                                         break;
                                     }
-
-
+                                default:
+                                    Console.WriteLine("ERROR INVALID CHOICE");
+                                    break;
                             }
                             break;
                         }

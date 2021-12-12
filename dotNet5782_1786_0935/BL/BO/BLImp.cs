@@ -745,7 +745,6 @@ namespace BL
                         throw new UnableToCompleteRequest("the amount of drone charging slots is invalid!\n");
                     stationDl.ChargeSlots = AvlblDCharges;
                     dal.DeleteStation(stationID);
-
                     dal.AddStation( stationDl);
                 }
             }
@@ -1009,7 +1008,10 @@ namespace BL
             var temp=GetDrone(drones[droneIndex].droneId);
             AddDrone(temp, station.StationId);
             IDAL.DO.DroneCharge DC = new DroneCharge { DroneId = droneID, StationId = station.StationId };
-            dal.AddDroneCharge(DC);
+            try
+            { dal.AddDroneCharge(DC); }
+            catch (IDAL.DO.AlreadyExistException exc)
+            { throw new IBL.BO.AlreadyExistsException(exc.Message); }
         }
         #endregion
         #region GetDrone
