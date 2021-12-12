@@ -103,9 +103,9 @@ namespace ConsoleUI_BL
 
                                         d.Model = Console.ReadLine();
                                         Console.WriteLine("Choose maximum weight drone can hold:\n" +
-                                            " light, average, heavy\n");
+                                            "1- light, 2-average, 3-heavy\n");
                                         IBL.BO.WeightCategories weightChoice;
-                                        
+
                                         input = Console.ReadLine();
                                         check = int.TryParse(input, out error);
                                         if (check)
@@ -121,14 +121,12 @@ namespace ConsoleUI_BL
                                             case WeightCategories.average:
                                                 d.MaxWeight = WeightCategories.average;
                                                 break;
-                                            case WeightCategories.heavy:   
+                                            case WeightCategories.heavy:
                                                 d.MaxWeight = WeightCategories.heavy;
                                                 break;
-                                            default:
-                                                Console.WriteLine("ERROR INVALID CHOICE");
-                                                break;
+                                            
                                         }
-                                        Console.WriteLine("Enter station number");
+                                                Console.WriteLine("Enter station number");
                                         int.TryParse(Console.ReadLine(), out stationId);
 
                                         try
@@ -207,7 +205,7 @@ namespace ConsoleUI_BL
                                             CustomerId = id
                                         };
                                         Console.WriteLine("Choose  weight of parcel:\n" +
-                                            " light, average, heavy\n");
+                                            " 1-light,2- average, 3-heavy\n");
                                         IBL.BO.WeightCategories weightChoice;
 
                                         input = Console.ReadLine();
@@ -228,13 +226,11 @@ namespace ConsoleUI_BL
                                             case WeightCategories.heavy:
                                                 p.Weight = WeightCategories.heavy;
                                                 break;
-                                            default:
-                                                Console.WriteLine("ERROR INVALID CHOICE");
-                                                break;
+
                                         }
                                         Console.WriteLine("Choose priority of parcel:\n" +
-                                          " regular, fast, emergency \n");
-                                        IBL.BO.Priorities priorityChoice;
+                                          " 1-regular,2- fast,3- emergency \n");
+                                        IBL.BO.Priorities priorities;
 
                                         input = Console.ReadLine();
                                         check = int.TryParse(input, out error);
@@ -242,11 +238,11 @@ namespace ConsoleUI_BL
                                             choice = int.Parse(input);
                                         else
                                             choice = -1;
-                                        priorityChoice = (IBL.BO.Priorities)choice;
-                                        switch (priorityChoice)
+                                        priorities = (IBL.BO.Priorities)choice;
+                                        switch (priorities)
                                         {
                                             case Priorities.regular:
-                                                p.Priority = Priorities.regular;
+                                                p.Priority= Priorities.regular;
                                                 break;
                                             case Priorities.fast:
                                                 p.Priority = Priorities.fast;
@@ -254,6 +250,7 @@ namespace ConsoleUI_BL
                                             case Priorities.emergency:
                                                 p.Priority = Priorities.emergency;
                                                 break;
+
                                         }
                                         try
                                         {
@@ -335,6 +332,11 @@ namespace ConsoleUI_BL
                                         {
                                             Console.WriteLine(exc);
                                         }
+                                        catch (IBL.BO.UnableToCompleteRequest exc)
+                                        {
+                                            Console.WriteLine(exc);
+                                        }
+
 
                                         break;
                                     }

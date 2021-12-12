@@ -145,6 +145,7 @@ namespace BL
             try
             {
                 dal.AddDrone(newDrone);
+                drones.Add(returnsDrone(DronetoAdd.DroneId));
                 
             }
             catch (AlreadyExistException exc)
