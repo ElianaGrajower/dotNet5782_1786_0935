@@ -1165,8 +1165,8 @@ namespace BL
             {
                 var parcelDal = dal.printParcelsList().ToList();
                 //shortens list to unmatched parcel
-                parcelDal.Where(parcel => parcel.DroneId == 0);
-                foreach (var p in parcelDal)
+                
+                foreach (var p in parcelDal.Where(parcel => parcel.DroneId == 0))
                     //calls on get to convert
                 { parcel.Add(GetParcel(p.ParcelId)); }
             }
