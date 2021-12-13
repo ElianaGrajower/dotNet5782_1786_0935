@@ -19,6 +19,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("2- To update item");
             Console.WriteLine("3- To print item details");
             Console.WriteLine("4- To print list of items");
+            Console.WriteLine("5- To exit");
             string input;
             bool check;
             int choice;
@@ -716,6 +717,7 @@ namespace ConsoleUI_BL
                 Console.WriteLine("2- To update item");
                 Console.WriteLine("3- To print item details");
                 Console.WriteLine("4- To print list of items");
+                Console.WriteLine("5- To exit");
                 input = Console.ReadLine();
                 check = int.TryParse(input, out error);
                 if (check)
