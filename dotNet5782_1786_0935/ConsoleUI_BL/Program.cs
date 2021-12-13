@@ -1,6 +1,8 @@
 ﻿using System;
 using IBL.BO;
 using BL;
+//Adina Schulma 328620935
+//Eliana Grajower 328781786
 
 
 
@@ -193,6 +195,7 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out id);
                                         Parcel p = new Parcel()
                                         {
+                                            
                                             Sender = new CustomerInParcel()
                                             {
                                                 
@@ -201,6 +204,7 @@ namespace ConsoleUI_BL
                                            
                                             
                                         };
+                                       
                                         Console.WriteLine("Enter Id of target: ");
                                         int.TryParse(Console.ReadLine(), out id);
                                         p.Target = new CustomerInParcel()
@@ -257,8 +261,8 @@ namespace ConsoleUI_BL
                                         }
                                         try
                                         {
-                                            Data.AddParcel(p); //builds and adds a parcel using the information the user provided
-                                            Console.WriteLine("Parcel ID: " + p.ParcelId);
+                                            int t=Data.AddParcel(p); //builds and adds a parcel using the information the user provided
+                                            Console.WriteLine("Parcel ID: " + t);
                                         }
                                         catch (InvalidInputException exc)
                                         {
@@ -361,7 +365,7 @@ namespace ConsoleUI_BL
                                         string phone = Console.ReadLine();
                                         try
                                         { 
-                                            Data.UpdateCustomerName(customerId, customerName, phone); 
+                                            Data.UpdateCustomer(customerId, customerName, phone); 
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -421,6 +425,10 @@ namespace ConsoleUI_BL
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
+                                        //catch (IBL.BO.AlreadyExistsException exc)
+                                        //{
+                                        //    Console.WriteLine(exc.Message);
+                                        //}
 
 
                                         break;

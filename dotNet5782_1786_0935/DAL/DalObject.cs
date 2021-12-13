@@ -137,7 +137,7 @@ namespace DAL
             {
 
                 if (DataSource.CustomerList.Count(x => x.CustomerId == customerToAdd.CustomerId) != 0)
-                    throw new AlreadyExistException("The station already exist in the system");
+                    throw new AlreadyExistException("The customer already exist in the system");
                 DataSource.CustomerList.Add(customerToAdd);
             }
             #endregion
@@ -145,7 +145,7 @@ namespace DAL
             public void AddParcel(Parcel parcelToAdd) //adds parcel to list
             {
                 if (DataSource.ParcelList.Count(x => x.ParcelId == parcelToAdd.ParcelId) != 0)
-                    throw new AlreadyExistException("The station already exist in the system");
+                    throw new AlreadyExistException("The parcel already exist in the system");
                 DataSource.ParcelList.Add(parcelToAdd);
             }
             #endregion
@@ -557,7 +557,7 @@ namespace DAL
             {
                 Drone tmpD = GetDrone(dID);
                 Parcel tmpP = GetParcel(pID);
-                DataSource.ParcelList.RemoveAll(m => m.ParcelId == tmpP.DroneId);   //removing all the data from the place in the list the equal to tmpP id
+                DataSource.ParcelList.RemoveAll(m => m.ParcelId == tmpP.ParcelId);   //removing all the data from the place in the list the equal to tmpP id
                 tmpP.DroneId = tmpD.DroneId;        //attribute drones id to parcel 
                 tmpP.Scheduled = DateTime.Now; //changing the time to be right now
                 DataSource.ParcelList.Add(tmpP); //adding to the parcel list tmpP

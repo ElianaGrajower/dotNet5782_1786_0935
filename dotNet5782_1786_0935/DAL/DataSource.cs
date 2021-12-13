@@ -20,18 +20,19 @@ namespace DAL
             {
                 public static int assignParcelId = 1001; //assigns a random id to a parcel
                 public static double available=0;
-                public static double lightLoad=0.1;
-                public static double mediumLoad=0.2;
-                public static double heavyLoad=0.3;
-                public static double chargeSpeed=0.3;
+                public static double lightLoad=0.01;
+                public static double mediumLoad=0.02;
+                public static double heavyLoad=0.03;
+                public static double chargeSpeed=0.5;
 
             }
             public static void Initialize()
             {
                 CreateStation(); //creats a station with random information
                 CreateDrone(); //creats a drone with random information
-                CreateParcel(); //creats a parcel with random information
+                
                 CreateCustomer(); //creats a customer with random information
+               // CreateParcel(); //creats a parcel with random information
 
             }
 
@@ -60,17 +61,18 @@ namespace DAL
                     });
             }
 
-            static void CreateParcel() //creats a parcel with random information
-            {
-                for (int i = 0; i < 10; i++) //creates 10 parcels with information
-                    ParcelList.Add(new Parcel()
-                    {
-                        ParcelId = config.assignParcelId++,
-                        Weight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a weight from light, average, heavy
-                        Requested = DateTime.Now,
+            //static void CreateParcel() //creats a parcel with random information
+            //{
+            //    for (int i = 0; i < 10; i++) //creates 10 parcels with information
+            //        ParcelList.Add(new Parcel()
+            //        {
+            //            ParcelId = config.assignParcelId++,
+            //            Weight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a weight from light, average, heavy
+            //            Requested = DateTime.Now,
 
-                    });
-            }
+                        
+            //        });
+            //}
             static void CreateCustomer() //creats a customer with random information
             {
                 for (int i = 0; i < 10; i++) //creates 10 customers with information
