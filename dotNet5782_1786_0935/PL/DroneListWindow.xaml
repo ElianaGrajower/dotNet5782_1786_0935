@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="DroneList" Height="450" Width="800">
     <Grid>
-        
+        <ComboBox Name="StatusSelector"  HorizontalAlignment="Stretch" Margin="63,41,0,0" VerticalAlignment="Stretch" Width="120" Grid.Column="1"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="115,104,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+        <ListView x:Name="DronesListView" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Window>
