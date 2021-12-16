@@ -544,6 +544,16 @@ namespace DAL
                 }
             }
             #endregion
+            //#region GetPartialParcelsList
+
+            //public IEnumerable<Parcel> GetPartialParcelsList(Predicate<> predicate) //prints parcel list
+            //{
+            //    foreach (Parcel item in DataSource.ParcelList)
+            //    {
+            //        yield return item;
+            //    }
+            //}
+            //#endregion
             #region printDroneChargeList
             public IEnumerable<DroneCharge> printDroneChargeList() //prints DroneCharge list
             {
