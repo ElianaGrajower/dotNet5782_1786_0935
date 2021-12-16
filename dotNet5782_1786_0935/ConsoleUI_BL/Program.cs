@@ -640,7 +640,7 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("List of drones:\n");
                                         try
                                         {
-                                            foreach (Drone item in Data.GetDronesList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                           Data.GetDronesList().ForEach(item=> { Console.WriteLine(item.ToString() + "\n"); });
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {

@@ -31,6 +31,11 @@ namespace BL
             return chargeCapacity;
         }
         #endregion
+        private int getUnvailableChargeSlots(int stationId)
+        {
+            int count = dal.printDroneChargeList().Where(c => c.StationId == stationId).Count();
+            return count;
+        }
         #region GetStationsList
         //this function returns a list of all the stations
         public List<IBL.BO.Station> GetStationsList()
@@ -219,6 +224,7 @@ namespace BL
                 station.name = tempStation.Name;
                 station.location=new Location(tempStation.Lattitude, tempStation.Longitude);
                 station.chargeSlots = tempStation.ChargeSlots;
+                station.numberOfSlotsInUse = getUnvailableChargeSlots(tempStation.StationId);
                 //finds the rest of the info from dronecharging ist
                 station.DronesatStation = dal.printDroneChargeList().Where(item=>item.StationId== stationId)
                     .Select(drone => new DroneInCharging()
@@ -420,9 +426,9 @@ namespace BL
 
             //checks validity of input
             if (!(parcelToAdd.Sender.CustomerId >= 10000000 && parcelToAdd.Sender.CustomerId <= 1000000000))
-                throw new IBL.BO.InvalidInputException("the id sender number of the pardel is invalid\n");
+                throw new IBL.BO.InvalidInputException("the id number of sender of the the parcel is invalid\n");
             if (!(parcelToAdd.Target.CustomerId >= 10000000 && parcelToAdd.Target.CustomerId <= 1000000000))
-                throw new IBL.BO.InvalidInputException("the id receive number of the parcel is invalid\n");
+                throw new IBL.BO.InvalidInputException("the id   number of receiver of the parcel is invalid\n");
             if (!(parcelToAdd.Weight >= (IBL.BO.WeightCategories)1 && parcelToAdd.Weight <= (IBL.BO.WeightCategories)3))
                 throw new IBL.BO.InvalidInputException("the given weight is not valid\n");
             if (!(parcelToAdd.Priority >= (IBL.BO.Priorities)0 && parcelToAdd.Priority <= (IBL.BO.Priorities)3))
@@ -742,7 +748,7 @@ namespace BL
                     }
                     drones.Add(drt);
 
-                    Console.WriteLine(drt.ToString());
+                    //Console.WriteLine(drt.ToString());
 
 
                 }
@@ -1108,14 +1114,14 @@ namespace BL
         #endregion
         #region GetDronesList
         //returns dronelist
-        public List<IBL.BO.Drone> GetDronesList()
+        public List<IBL.BO.DroneToList> GetDronesList()
         {
-            List<IBL.BO.Drone> drone = new List<IBL.BO.Drone>();
+            List<IBL.BO.DroneToList> drone = new List<IBL.BO.DroneToList>();
             try
             {
                 //calls get drone to convert to ibl
                 foreach (var d in drones)
-                { drone.Add(GetDrone(d.droneId)); }
+                { drone.Add(returnsDrone(d.droneId)); }
             }
             catch (ArgumentException) { throw new IBL.BO.DoesntExistException(); }
             return drone;
