@@ -102,7 +102,7 @@ namespace PL
             Drone newDrone = new Drone();
             newDrone.DroneId = Convert.ToInt32(idText.Text);
             newDrone.battery = Convert.ToInt32(batteryText.Text); //???
-            // newDrone.MaxWeight = (weight)(WeightCategories.SelectedItem);
+            // newDrone.MaxWeight = (weight)(WeightCategories.SelectedItem);    
             // newDrone.droneStatus =
             if ((IBL.BO.WeightCategories)weight.SelectedItem != null)
                 newDrone.MaxWeight = (IBL.BO.WeightCategories)weight.SelectedItem;
