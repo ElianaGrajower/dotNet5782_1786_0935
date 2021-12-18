@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="640" Width="800">
-    <Grid Name="MainGrid">
+        Title="MainWindow" Height="640" Width="800" Background="#FF7A9AC3">
+    <Grid Name="MainGrid" Background="#FF7A9AC3">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
@@ -20,5 +20,7 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
         </Grid>
+        <Image HorizontalAlignment="Center" Height="598" Margin="0,10,0,0" VerticalAlignment="Top" Width="800" Source="/a-drone-carrying-a-box.jpg" Opacity="0.6" Grid.RowSpan="2" OpacityMask="#FFC74D64"/>
+        <Button Content="press to start" HorizontalAlignment="Center" Margin="0,426,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click" Width="143" Height="48" Background="#FF468BE1" FontWeight="Bold" FontSize="16"/>
     </Grid>
 </Window>

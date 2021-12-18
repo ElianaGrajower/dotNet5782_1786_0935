@@ -6,7 +6,34 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid RenderTransformOrigin="0.5,0.5" Background="#FF7D9BC0">
+        <TextBox x:Name="idText" HorizontalAlignment="Left" Margin="367,76,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="batteryText" HorizontalAlignment="Left" Margin="367,106,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="modelText" HorizontalAlignment="Left" Margin="367,166,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="deliveryText" HorizontalAlignment="Left" Margin="367,226,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="lattitudeText" HorizontalAlignment="Left" Margin="367,256,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="367,286,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="StatusSelector" Margin="367,196,313,219"></ComboBox>
+        <ComboBox x:Name="WeightSelector" Margin="49,115,631,300"></ComboBox>
+
+        <TextBlock HorizontalAlignment="Left" Margin="273,76,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="273,106,0,0" Text="Battery:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="273,136,0,0" Text="Max Weight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="273,166,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="273,196,0,0" Text="Status:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="273,226,0,0" Text="Delivery:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="273,256,0,0" Text="Latitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="273,286,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" FontWeight="Normal"/>
+        <Button Content="close" HorizontalAlignment="Left" Margin="672,344,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click" Background="#FFC74D64" FontStyle="Normal" AutomationProperties.IsOffscreenBehavior="Default"/>
+        <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="586,124,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="add_Click" Visibility="Visible"/>
+        <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="586,124,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="Button_Click_1" Visibility="Visible"/>
+        <Button x:Name="chargeDrone" Content="charge drone" HorizontalAlignment="Left" Margin="586,164,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible"/>
+        <Button x:Name="releaseDrone" Content="release drone" HorizontalAlignment="Left" Margin="586,164,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="releaseDrone_Click" Visibility="Visible"/>
+        <Button x:Name="matchUpParcel" Content="match up parcel" HorizontalAlignment="Left" Margin="586,204,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible"/>
+        <Button x:Name="pickupParcel" Content="pickup parcel" HorizontalAlignment="Left" Margin="586,204,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible"/>
+        <Button x:Name="deliverParcel" Content="deliver parcel" HorizontalAlignment="Left" Margin="586,204,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible"/>
+        <ComboBox x:Name="status" Margin="367,0,313,381" SelectionChanged="status_SelectionChanged"></ComboBox>
+        <ComboBox x:Name="weight" Margin="657,27,23,389" SelectionChanged="weight_SelectionChanged"></ComboBox>
+
     </Grid>
 </Window>
