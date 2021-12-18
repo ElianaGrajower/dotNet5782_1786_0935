@@ -25,9 +25,9 @@ namespace PL
         public DroneWindow(IBL.BO.DroneToList drone)//update drone
         {
             InitializeComponent();
-            //checkVisibility(1);
-            status.ItemsSource = Enum.GetValues(typeof(DroneStatus));
+            //ShowInfo();
             weight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+           // stationIdCombo.ItemsSource = Bl.GetStationsList();/////////////////////
             add.Visibility = Visibility.Hidden;
             update.Visibility = Visibility.Visible;
             if (drone.droneStatus==IBL.BO.DroneStatus.available)
@@ -45,15 +45,10 @@ namespace PL
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Hidden;
             }
-            matchUpParcel.Visibility = Visibility.Visible;    //////change these 3 lines!!!
+            matchUpParcel.Visibility = Visibility.Visible;    
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
 
-            if(modelText.Text!=null)
-            {
-                Bl.UpdateDroneName(Convert.ToInt32(idText.Text), modelText.Text);
-            }
-           // if()
 
 
         }
@@ -61,9 +56,8 @@ namespace PL
         {
             InitializeComponent();
             this.Bl = drone;
-            status.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             weight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            //checkVisibility(2);
+    //        stationIdCombo.Items.Add(Bl.GetStationsList());
             add.Visibility = Visibility.Visible;
             update.Visibility = Visibility.Hidden;
             chargeDrone.Visibility = Visibility.Visible;
@@ -79,48 +73,28 @@ namespace PL
             Close();
         }
 
-        //private void checkVisibility(int i)
-        //{
-        //    if (i == 1) 
-        //    {
-        //        add.Visibility = Visibility.Hidden;
-        //        update.Visibility = Visibility.Visible;
-        //    }
-        //    else
-        //    {
-        //        add.Visibility = Visibility.Visible;
-        //        update.Visibility = Visibility.Hidden;
-        //    }
-        //}
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
+            if (modelText.Text != null)
+            {
+                Bl.UpdateDroneName(Convert.ToInt32(idText.Text), modelText.Text);
+            }
         }
         private void add_Click(object sender, RoutedEventArgs e)
         {
             Drone newDrone = new Drone();
             newDrone.DroneId = Convert.ToInt32(idText.Text);
-            newDrone.battery = Convert.ToInt32(batteryText.Text); //???
-            // newDrone.MaxWeight = (weight)(WeightCategories.SelectedItem);    
-            // newDrone.droneStatus =
-            if ((IBL.BO.WeightCategories)weight.SelectedItem != null)
-                newDrone.MaxWeight = (IBL.BO.WeightCategories)weight.SelectedItem;
+            newDrone.MaxWeight = (WeightCategories)weight.SelectedItem;
             newDrone.Model = modelText.Text;
-            newDrone.droneStatus = (IBL.BO.DroneStatus)status.SelectedItem;  ///???
-            //whats delivery??????????
-            newDrone.location.Lattitude = Convert.ToDouble(lattitudeText.Text);
-            newDrone.location.Longitude = Convert.ToDouble(longitudeText.Text);
-            Location newLocation = new Location(Convert.ToDouble(lattitudeText.Text), Convert.ToDouble(longitudeText.Text));
-            int stationId = Bl.FindStation(newLocation);
+            int stationId = Convert.ToInt32(stationIdText.Text);
             try
             { 
                 Bl.AddDrone(newDrone, stationId);
-                MessageBox.Show("ERROR drone not added");
+                MessageBox.Show("added drone succesfully");
             }
             catch 
-            { MessageBox.Show("added drone succesfully"); }
-
+            { MessageBox.Show("ERROR drone not added"); }
 
         }
 
@@ -136,17 +110,32 @@ namespace PL
 
         private void releaseDrone_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Enter drone charge time");
+            int time = 78;
+            try
+            {
+                Bl.ReleaseDroneFromCharge(Convert.ToInt32(idText.Text), time);
+                MessageBox.Show("drone released succesfully");
+            }
+            catch
+            {
+                MessageBox.Show("ERROR");
+            }
         }
 
         private void status_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          //  status.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+
         }
 
         private void weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             weight.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

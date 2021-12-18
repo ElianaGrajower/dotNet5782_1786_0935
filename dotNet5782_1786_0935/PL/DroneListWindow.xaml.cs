@@ -22,16 +22,29 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         BL.BLImp bl;
+        static WeightCategories? weightFilter;
+        static DroneStatus? statusFilter;
         public DroneListWindow()
         {
             InitializeComponent();
 
+        }
+        private void ShowInfo()
+        {
+            IEnumerable<DroneToList> d = new List<DroneToList>();
+            d = bl.GetDronesList();
+            if (StatusSelector.Text != "")
+                d = this.bl.allDrones(x => x.weight == (WeightCategories)weightFilter);
+            if (WeightSelector.Text != "")
+                d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
+            DronesListView.ItemsSource = d;
         }
         public DroneListWindow(BL.BLImp b)
         {
             InitializeComponent();
             this.bl = b;
             DronesListView.ItemsSource = b.GetDronesList();
+            ShowInfo();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
@@ -68,12 +81,25 @@ namespace PL
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (WeightSelector.SelectedIndex != -1)
+            {
+                weightFilter = (WeightCategories)WeightSelector.SelectedItem;
+                DronesListView.ItemsSource = bl.allDrones(x => x.weight == weightFilter);
+            }
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+            if (StatusSelector.SelectedIndex != -1)
+            {
+                statusFilter = (DroneStatus)StatusSelector.SelectedItem;
+                DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+            }
+            //if (WeightSelector.SelectedIndex != -1)
+            //{
+            //    statusFilter = (DroneStatus)StatusSelector.SelectedItem;
+            //    DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+            //}
         }
         //private void DoubleClick(object sender, MouseButtonEventArgs e)
         //{
