@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BL;
 using IBL.BO;
 
+
 namespace PL
 {
     /// <summary>
@@ -21,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        BL.BLImp bl;
+         BL.BLImp bl;
         static WeightCategories? weightFilter;
         static DroneStatus? statusFilter;
         public DroneListWindow()
@@ -34,7 +35,7 @@ namespace PL
             IEnumerable<DroneToList> d = new List<DroneToList>();
             d = bl.GetDronesList();
             if (StatusSelector.Text != "")
-                d = this.bl.allDrones(x => x.weight == (WeightCategories)weightFilter);
+                d = bl.allDrones(x => x.weight == (WeightCategories)weightFilter);
             if (WeightSelector.Text != "")
                 d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
             DronesListView.ItemsSource = d;
@@ -47,6 +48,7 @@ namespace PL
             ShowInfo();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            
         }
         private void IBL(BLImp b)
         {

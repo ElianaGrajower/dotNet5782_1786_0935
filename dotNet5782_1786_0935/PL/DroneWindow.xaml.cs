@@ -93,8 +93,15 @@ namespace PL
                 Bl.AddDrone(newDrone, stationId);
                 MessageBox.Show("added drone succesfully");
             }
-            catch 
-            { MessageBox.Show("ERROR drone not added"); }
+            catch(IBL.BO.DoesntExistException exc)
+            { 
+                MessageBox.Show(exc.Message);
+            }
+            catch (IBL.BO.InvalidInputException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+
 
         }
 
