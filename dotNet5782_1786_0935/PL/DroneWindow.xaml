@@ -7,36 +7,36 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
     <Grid RenderTransformOrigin="0.5,0.5" Background="#FF7D9BC0">
-        <TextBox x:Name="idText" HorizontalAlignment="Left" Margin="317,113,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="modelText" HorizontalAlignment="Left" Margin="317,183,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="idText" HorizontalAlignment="Left" Margin="317,113,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
+        <TextBox x:Name="modelText" HorizontalAlignment="Left" Margin="317,183,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
         <TextBlock HorizontalAlignment="Left" Margin="223,113,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="223,148,0,0" Text="Max Weight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="223,183,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock x:Name="stationRead" HorizontalAlignment="Left" Margin="223,218,0,0" Text="station ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="672,344,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click" Background="#FFC74D64" FontStyle="Normal" AutomationProperties.IsOffscreenBehavior="Default"/>
-        <Button x:Name="add" Content="add new drone" HorizontalAlignment="Left" Margin="586,143,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="add_Click" Visibility="Visible"/>
-        <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="586,104,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="Button_Click_1" Visibility="Visible"/>
+        <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="586,143,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="add_Click" Visibility="Visible"/>
+        <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="586,143,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="Button_Click_1" Visibility="Visible"/>
         <Button x:Name="chargeDrone" Content="charge drone" HorizontalAlignment="Left" Margin="586,183,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="chargeDrone_Click"/>
         <Button x:Name="releaseDrone" Content="release drone" HorizontalAlignment="Left" Margin="586,183,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="releaseDrone_Click" Visibility="Visible"/>
         <Button x:Name="matchUpParcel" Content="match up parcel" HorizontalAlignment="Left" Margin="586,223,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="matchUpParcel_Click"/>
         <Button x:Name="pickupParcel" Content="pickup parcel" HorizontalAlignment="Left" Margin="586,223,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="pickupParcel_Click"/>
         <Button x:Name="deliverParcel" Content="deliver parcel" HorizontalAlignment="Left" Margin="586,223,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="deliverParcel_Click"/>
-        <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="317,148,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="stationIdText" HorizontalAlignment="Left" Margin="317,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Canvas x:Name="releaseCanvas" Margin="250,69,304,188" Background="White" Visibility="Collapsed">
-            <TextBlock Canvas.Left="35" Canvas.Top="24" TextWrapping="Wrap" Height="55"><Run Text="Enter the amount of time the "/><LineBreak/><Run Text="drone has been charging: "/></TextBlock>
-            <TextBox x:Name="releaseTime" Canvas.Left="63" Canvas.Top="84" TextWrapping="Wrap" Width="120"/>
-            <Button x:Name="ok" Content="ok" Canvas.Left="100" Canvas.Top="118" Width="46" Click="ok_Click"/>
-        </Canvas>
+        <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="317,148,0,0" VerticalAlignment="Top" Width="139"/>
         <TextBlock x:Name="lattitudeRead" HorizontalAlignment="Left" Margin="223,218,0,0" Text="Lattitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Visibility="Visible"/>
-        <TextBox x:Name="lattitudeText" HorizontalAlignment="Left" Margin="317,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="Visible" IsReadOnlyCaretVisible="True"/>
+        <TextBox x:Name="lattitudeText" HorizontalAlignment="Left" Margin="317,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Visibility="Hidden" IsReadOnly="True"/>
         <TextBlock x:Name="longitudeRead" HorizontalAlignment="Left" Margin="223,252,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="66"/>
-        <TextBox x:Name="LongitudeText" HorizontalAlignment="Left" Margin="317,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" Visibility="Visible" IsReadOnlyCaretVisible="True"/>
+        <TextBox x:Name="LongitudeText" HorizontalAlignment="Left" Margin="317,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" TextChanged="TextBox_TextChanged" Visibility="Visible" IsReadOnly="True"/>
+        <TextBox x:Name="weightText" HorizontalAlignment="Left" Margin="317,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
+        <ComboBox x:Name="stationIdCombo" HorizontalAlignment="Left" Margin="317,216,0,0" VerticalAlignment="Top" Width="139"/>
         <Canvas x:Name="addAnotherDrone" Background="White" Margin="294,114,287,183" Visibility="Collapsed">
             <TextBlock Canvas.Left="51" Canvas.Top="37" TextWrapping="Wrap"><Run Text="would you like to add "/><LineBreak/><Run Text="another drone?"/></TextBlock>
             <Button Content="no" Canvas.Left="40" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59" Click="Button_Click_2"/>
             <Button Content="yes" Canvas.Left="130" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59" Click="Button_Click_3"/>
         </Canvas>
-        <TextBox x:Name="weightText" HorizontalAlignment="Left" Margin="317,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Canvas x:Name="releaseCanvas" Margin="250,69,304,188" Background="White" Visibility="Collapsed">
+            <TextBlock Canvas.Left="35" Canvas.Top="24" TextWrapping="Wrap" Height="55"><Run Text="Enter the amount of time the "/><LineBreak/><Run Text="drone has been charging: "/></TextBlock>
+            <TextBox x:Name="releaseTime" Canvas.Left="63" Canvas.Top="84" TextWrapping="Wrap" Width="120"/>
+            <Button x:Name="ok" Content="ok" Canvas.Left="100" Canvas.Top="118" Width="46" Click="ok_Click"/>
+        </Canvas>
     </Grid>
 </Window>

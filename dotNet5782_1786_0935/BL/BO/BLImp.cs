@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IDAL.DO;
 using DAL.DalObject;
 using IBL.BO;
+using IBL;
 
 
 
@@ -13,7 +14,7 @@ using IBL.BO;
 namespace BL
 {
     
-    public class BLImp           
+    public class BLImp        
     {
         
         public double[] chargeCapacity;    
@@ -765,7 +766,7 @@ namespace BL
         {
             //checks id drone exits
             int dIndex = drones.FindIndex(x => x.droneId == droneID);
-            if (dIndex == 0)
+            if (dIndex == -1)
             {
                 throw new IBL.BO.DoesntExistException("drone does not exist");
             }
@@ -817,13 +818,15 @@ namespace BL
                     //drones.RemoveAll(D => D.droneId == droneId);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery += chargeTime * usage.chargeSpeed;
+                if (tempDrone.battery > 100)
+                    tempDrone.battery = 100;
                 //tempDrone.droneStatus = DroneStatus.available;
                 dal.DeleteDroneCharge(tempDrone.DroneId, possibleStation.StationId);
                // AddDrone(tempDrone, possibleStation.StationId);
                
-                drones.ForEach(d => { if (d.droneId == droneId) { d.droneStatus = DroneStatus.available; d.battery += chargeTime * usage.chargeSpeed; } });
+                drones.ForEach(d => { if (d.droneId == droneId) { d.droneStatus = DroneStatus.available; d.battery = tempDrone.battery; } });
                 
-
+                
                 dal.DeleteStation(possibleStation.StationId);
                 possibleStation.addChargeSlots();
                 AddStation(possibleStation);
@@ -988,9 +991,7 @@ namespace BL
                 };
                 drones.Add(tempD);
 
-                //drones.ForEach(d => { if (d.droneId == myDrone.DroneId) d.droneStatus = DroneStatus.delivery;
-                //    d.parcelId = myParcel.ParcelId;
-                //});
+                
             }
             catch (IBL.BO.DoesntExistException exp) { throw new IBL.BO.DoesntExistException(exp.Message); }
 
@@ -1321,6 +1322,38 @@ namespace BL
                 return drones.Take(drones.Count).ToList();
             }
             return drones.Where(predicate).ToList();
+        }
+
+        public IEnumerable<IBL.BO.Station> allStations(Func<IBL.BO.Station, bool> predicate = null)
+        {
+            var station = GetStationsList();
+            if (predicate == null)
+            {
+
+
+                return station.Take(station.Count).ToList();
+            }
+            return station.Where(predicate).ToList();
+        }
+
+
+        public IEnumerable<IBL.BO.Parcel> allParcels(Func<IBL.BO.Parcel, bool> predicate = null)
+        {
+            var parcel = GetParcelsList();
+            if (predicate == null)
+            {
+                return parcel.Take(parcel.Count).ToList();
+            }
+            return parcel.Where(predicate).ToList();
+        }
+        public IEnumerable<IBL.BO.Customer> allCustomers(Func<IBL.BO.Customer, bool> predicate = null)
+        {
+            var customer = GetCustomersList();
+            if (predicate == null)
+            {
+                return customer.Take(customer.Count).ToList();
+            }
+            return customer.Where(predicate).ToList();
         }
     }
 

@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using BL;
 using IBL.BO;
 
-
 namespace PL
 {
     /// <summary>
@@ -22,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-         BL.BLImp bl;
+        BL.BLImp bl;
         static WeightCategories? weightFilter;
         static DroneStatus? statusFilter;
         public DroneListWindow()
@@ -35,9 +34,11 @@ namespace PL
             IEnumerable<DroneToList> d = new List<DroneToList>();
             d = bl.GetDronesList();
             if (StatusSelector.Text != "")
-                d = bl.allDrones(x => x.weight == (WeightCategories)weightFilter);
+                d = this.bl.allDrones(x => x.weight == (WeightCategories)weightFilter);
             if (WeightSelector.Text != "")
                 d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
+            if (WeightSelector.Text != "" && StatusSelector.Text != "")
+                d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter && x.weight == (WeightCategories)weightFilter);
             DronesListView.ItemsSource = d;
         }
         public DroneListWindow(BL.BLImp b)
@@ -52,33 +53,36 @@ namespace PL
         }
         private void IBL(BLImp b)
         {
-            
+
         }
 
         private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));     ////////******i think theyre supposed to be here
+            //StatusSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));     ////////****i think theyre supposed to be here
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl).Show();
+            ShowInfo();
 
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
+
         }
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneToList updateDrone = new DroneToList();
             updateDrone = (DroneToList)DronesListView.SelectedItem;
-            new DroneWindow(updateDrone).ShowDialog();
+            new DroneWindow(bl,updateDrone).ShowDialog();
+            ShowInfo();
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,7 +90,27 @@ namespace PL
             if (WeightSelector.SelectedIndex != -1)
             {
                 weightFilter = (WeightCategories)WeightSelector.SelectedItem;
+                if((int)weightFilter!=4)
                 DronesListView.ItemsSource = bl.allDrones(x => x.weight == weightFilter);
+                else
+                    DronesListView.ItemsSource = bl.allDrones();
+            }
+            if (StatusSelector.SelectedIndex != -1 && WeightSelector.SelectedIndex != -1)
+            {
+                weightFilter = (WeightCategories)WeightSelector.SelectedItem;
+                statusFilter = (DroneStatus)StatusSelector.SelectedItem;
+                if ((int)weightFilter != 4 && (int)statusFilter != 4)
+                    DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter && x.weight == weightFilter);
+                else
+                  if ((int)statusFilter != 4)
+                    DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+                else
+                {
+                    if ((int)weightFilter != 4)
+                        DronesListView.ItemsSource = bl.allDrones(x => x.weight == weightFilter);
+                    else
+                        DronesListView.ItemsSource = bl.allDrones();
+                }
             }
         }
 
@@ -95,8 +119,30 @@ namespace PL
             if (StatusSelector.SelectedIndex != -1)
             {
                 statusFilter = (DroneStatus)StatusSelector.SelectedItem;
-                DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+                if ((int)statusFilter != 4)
+                    DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+                else
+                    DronesListView.ItemsSource = bl.allDrones();
             }
+            if (StatusSelector.SelectedIndex != -1 && WeightSelector.SelectedIndex != -1)
+            {
+                statusFilter = (DroneStatus)StatusSelector.SelectedItem;
+                weightFilter = (WeightCategories)WeightSelector.SelectedItem;
+                if ((int)weightFilter != 4 && (int)statusFilter != 4)
+                    DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter && x.weight == weightFilter);
+                else
+                    if((int)statusFilter != 4)
+                        DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+                    else
+                    {  
+                        if ((int)weightFilter != 4 )
+                        DronesListView.ItemsSource = bl.allDrones(x =>  x.weight == weightFilter);
+                         else
+                        DronesListView.ItemsSource = bl.allDrones();
+                    }
+                
+            }
+         
             //if (WeightSelector.SelectedIndex != -1)
             //{
             //    statusFilter = (DroneStatus)StatusSelector.SelectedItem;

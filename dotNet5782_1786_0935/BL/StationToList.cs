@@ -9,7 +9,7 @@ namespace IBL.BO
     class StationToList
     {
         public int stationId;
-        public int name;  
+        public string name;  
         public int numberOfAvailableSlots;
         public int numberOfSlotsInUse;  
 

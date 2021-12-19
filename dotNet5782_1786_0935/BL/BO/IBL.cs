@@ -43,5 +43,6 @@ namespace IBL
         public List<IBL.BO.Parcel> GetUnmatchedParcelsList();
         public IBL.BO.Drone GetDrone(int id);
         public IBL.BO.DroneToList returnsDrone(int id);
+        public IEnumerable<IBL.BO.Station> allStations(Func<IBL.BO.Station, bool> predicate = null);
     }     
 }
