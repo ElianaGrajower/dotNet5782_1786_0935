@@ -34,9 +34,9 @@ namespace PL
             IEnumerable<DroneToList> d = new List<DroneToList>();
             d = bl.GetDronesList();
             if (StatusSelector.Text != "")
-                d = this.bl.allDrones(x => x.weight == (WeightCategories)weightFilter);
+                d = this.bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
             if (WeightSelector.Text != "")
-                d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
+                d = bl.allDrones(x => x.weight == (WeightCategories)weightFilter);
             if (WeightSelector.Text != "" && StatusSelector.Text != "")
                 d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter && x.weight == (WeightCategories)weightFilter);
             DronesListView.ItemsSource = d;

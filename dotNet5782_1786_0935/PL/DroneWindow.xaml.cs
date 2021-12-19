@@ -154,8 +154,20 @@ namespace PL
         }
         private void ok_Click(object sender, RoutedEventArgs e)
         {
-            int time = Convert.ToInt32(releaseTime.Text);
+            int time;
             try
+            {
+                if (Convert.ToInt32(releaseTime.Text) == null)
+                    throw new IBL.BO.InvalidInputException("Invalid input!\n");
+            }
+
+            catch(InvalidInputException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+           
+            time = Convert.ToInt32(releaseTime.Text);
+                try
             {
                 Bl.ReleaseDroneFromCharge(Convert.ToInt32(idText.Text), time);
                 MessageBox.Show("drone released succesfully");
