@@ -37,14 +37,14 @@ namespace PL
         }
         private void IBL(BLImp b)
         {
-            
+
         }
 
         private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));     ////////******i think theyre supposed to be here
+            //StatusSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));     ////////****i think theyre supposed to be here
 
         }
 
@@ -73,7 +73,7 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
         }
         //private void DoubleClick(object sender, MouseButtonEventArgs e)
         //{

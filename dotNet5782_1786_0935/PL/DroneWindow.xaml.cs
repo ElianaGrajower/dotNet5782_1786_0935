@@ -30,7 +30,7 @@ namespace PL
             weight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             add.Visibility = Visibility.Hidden;
             update.Visibility = Visibility.Visible;
-            if (drone.droneStatus==IBL.BO.DroneStatus.available)
+            if (drone.droneStatus == IBL.BO.DroneStatus.available)
             {
                 chargeDrone.Visibility = Visibility.Visible;
                 releaseDrone.Visibility = Visibility.Hidden;
@@ -49,11 +49,11 @@ namespace PL
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
 
-            if(modelText.Text!=null)
+            if (modelText.Text != null)
             {
                 Bl.UpdateDroneName(Convert.ToInt32(idText.Text), modelText.Text);
             }
-           // if()
+            // if()
 
 
         }
@@ -114,11 +114,11 @@ namespace PL
             Location newLocation = new Location(Convert.ToDouble(lattitudeText.Text), Convert.ToDouble(longitudeText.Text));
             int stationId = Bl.FindStation(newLocation);
             try
-            { 
+            {
                 Bl.AddDrone(newDrone, stationId);
                 MessageBox.Show("ERROR drone not added");
             }
-            catch 
+            catch
             { MessageBox.Show("added drone succesfully"); }
 
 
@@ -141,7 +141,7 @@ namespace PL
 
         private void status_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          //  status.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+            //  status.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
         }
 
         private void weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
