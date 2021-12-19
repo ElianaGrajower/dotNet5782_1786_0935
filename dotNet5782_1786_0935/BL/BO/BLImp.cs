@@ -1314,15 +1314,23 @@ namespace BL
             return droneBo;
         }
         #endregion
-
-
-
-
-
-
-
+        public IEnumerable<DroneToList> allDrones(Func<DroneToList, bool> predicate = null)
+        {
+            if (predicate == null)
+            {
+                return drones.Take(drones.Count).ToList();
+            }
+            return drones.Where(predicate).ToList();
+        }
     }
+
+
+
+
+
+
 }
+
                       
 
 
