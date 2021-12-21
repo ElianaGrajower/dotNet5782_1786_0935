@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 
 namespace DAL
 {
     namespace DalObject
     {
-        internal class DataSource
+        internal static  class DataSource
         {
             internal static List<Parcel> ParcelList = new List<Parcel>(); //a list of parcels
             internal static List<Drone> DroneList = new List<Drone>(); //a list of drones
@@ -18,7 +18,7 @@ namespace DAL
             internal static List<DroneCharge> DroneChargeList = new List<DroneCharge>(); //a list of all the drones that are being charged
             internal class config
             {
-                public static int assignParcelId = 1001; //assigns a random id to a parcel
+                public static int assignparcelId = 1001; //assigns a random id to a parcel
                 public static double available=0;
                 public static double lightLoad=0.01;
                 public static double mediumLoad=0.02;
@@ -28,61 +28,64 @@ namespace DAL
             }
             public static void Initialize()
             {
-                CreateStation(); //creats a station with random information
-                CreateDrone(); //creats a drone with random information
+                createStation(); //creats a station with random information
+                createDrone(); //creats a drone with random information
                 
-                CreateCustomer(); //creats a customer with random information
-               // CreateParcel(); //creats a parcel with random information
+                createCustomer(); //creats a customer with random information
+                createParcel(); //creats a parcel with random information
 
             }
 
-            static void CreateStation() //creats a station with random information
+            static void createStation() //creats a station with random information
             {
                 for (int i = 0; i < 2; i++) //creates 2 stations with information
                     StationList.Add(new Station()
                     {
-                        StationId = DalObject.r.Next(100000000, 999999999),
-                        Name =  DalObject.r.Next(1, 99).ToString(),
-                        Longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90) 
-                        Lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
-                        ChargeSlots = DalObject.r.Next(1, 100)
+                        stationId = DalObject.r.Next(100000000, 999999999),
+                        name =  DalObject.r.Next(1, 99).ToString(),
+                        longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90) 
+                        lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                        chargeSlots = DalObject.r.Next(1, 100)
                     });
             }
-            static void CreateDrone() //creats a drone with random information
+            static void createDrone() //creats a drone with random information
             {
                 for (int i = 0; i < 5; i++) //creates 5 drones with information
                     DroneList.Add(new Drone()
                     {
-                        DroneId = DalObject.r.Next(100000000, 999999999),
-                        Model = "Model-" + i,
+                        droneId = DalObject.r.Next(100000000, 999999999),
+                        model = "Model-" + i,
                         // Battery=100,
-                        MaxWeight = (IDAL.DO.WeightCategories)DalObject.r.Next(1, 3), //chooses a max weight from light, average, heavy
+                        maxWeight = (DO.weightCategories)DalObject.r.Next(1, 3), //chooses a max weight from light, average, heavy
                                                                                       //  Status = 0, //chooses a status from available, maintenance, delivery
                     });
             }
 
-            //static void CreateParcel() //creats a parcel with random information
-            //{
-            //    for (int i = 0; i < 10; i++) //creates 10 parcels with information
-            //        ParcelList.Add(new Parcel()
-            //        {
-            //            ParcelId = config.assignParcelId++,
-            //            Weight = (IDAL.DO.WeightCategories)DalObject.r.Next(0, 2), //chooses a weight from light, average, heavy
-            //            Requested = DateTime.Now,
-
-                        
-            //        });
-            //}
-            static void CreateCustomer() //creats a customer with random information
+           
+            static void createCustomer() //creats a customer with random information
             {
                 for (int i = 0; i < 10; i++) //creates 10 customers with information
                     CustomerList.Add(new Customer()
                     {
-                        CustomerId = DalObject.r.Next(100000000, 999999999),
-                        Name = "Customer-" + i,
+                        customerId = DalObject.r.Next(100000000, 999999999),
+                        name = "Customer-" + i,
                         Phone = "05" + DalObject.r.Next(00000000, 99999999),
-                        Longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90)
-                        Lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                        longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90)
+                        lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                    });
+            }
+            static void createParcel() //creats a parcel with random information
+            {
+                for (int i = 0; i < 10; i++) //creates 10 parcels with information
+                    ParcelList.Add(new Parcel()
+                    {
+                        parcelId = config.assignparcelId++,
+                        weight = (DO.weightCategories)DalObject.r.Next(0, 2), //chooses a weight from light, average, heavy
+                        requested = DateTime.Now,
+                        senderId = CustomerList[0].customerId,
+                        targetId = CustomerList[4].customerId,
+                        droneId = DroneList[1].droneId
+
                     });
             }
         }

@@ -10,20 +10,20 @@ namespace IBL.BO
 {
     public class Parcel
     {
-        public int ParcelId { set; get; }
-        public CustomerInParcel Sender { set; get; } //the id of the customer who is sending the parcel
-        public CustomerInParcel Target { set; get; } //the id of the customer who is receiving the parcel
-        public WeightCategories Weight { set; get; } //light, average, heavy
-        public Priorities Priority { set; get; } //regular, fast, emergency   
-        public DroneInParcel Drone { set; get; }   
-        public DateTime? Requested { set; get; } //The time the parcel is made
-        public DateTime? Scheduled { set; get; } //The time the parcel is matched up with a drone
-        public DateTime? PickedUp { set; get; } //The time the drones picks up the parcel from the sender
-        public DateTime? Delivered { set; get; } //The time the customer receives the parcel
-        public bool Fragile { set; get; } //if the parcel is fragile    //******should we take it out?
+        public int parcelId { set; get; }
+        public CustomerInParcel sender { set; get; } //the id of the customer who is sending the parcel
+        public CustomerInParcel target { set; get; } //the id of the customer who is receiving the parcel
+        public weightCategories weight { set; get; } //light, average, heavy
+        public Priorities priority { set; get; } //regular, fast, emergency   
+        public DroneInParcel drone { set; get; }   
+        public DateTime? requested { set; get; } //The time the parcel is made
+        public DateTime? scheduled { set; get; } //The time the parcel is matched up with a drone
+        public DateTime? pickedUp { set; get; } //The time the drones picks up the parcel from the sender
+        public DateTime? delivered { set; get; } //The time the customer receives the parcel
+        public bool fragile { set; get; } //if the parcel is fragile    //******should we take it out?
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {ParcelId}\nSender: {Sender}\nTarget: {Target}\nWeight: {Weight}\nPriority: {Priority}\nDrone: {Drone}\nRequested: {Requested}\nScheduled: {Scheduled}\nPicked Up: { PickedUp }\nDelivered: { Delivered}\nFragile: {Fragile}");
+            return String.Format($"Parcel Id: {parcelId}\nSender: {sender}\nTarget: {target}\nweight: {weight}\npriority: {priority}\nDrone: {drone}\nrequested: {requested}\nscheduled: {scheduled}\nPicked Up: { pickedUp }\ndelivered: { delivered}\nfragile: {fragile}");
         }
     }
 }

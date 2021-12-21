@@ -9,15 +9,16 @@ namespace IBL.BO
 {
     public class Customer
     {
-        public int CustomerId { set; get; }
-        public string Name { set; get; }    
-        public string Phone { set; get; }
-        public Location Location{ set; get; }
-        public IEnumerable<ParcelinCustomer> ParcelsOrdered;
-        public IEnumerable<ParcelinCustomer> ParcelsDelivered;
+        public int customerId { set; get; }
+        public string name { set; get; }    
+        public string phone { set; get; }
+        public Location location{ set; get; }
+        public IEnumerable<ParcelinCustomer> parcelsdelivered;
+        public IEnumerable<ParcelinCustomer> parcelsOrdered;
+        
         public override string ToString()
         {
-            return String.Format($"Customer Id: {CustomerId}\nCustomer Name: {Name}\nPhone: {Phone}\nLocation: {Location}\n");
+            return String.Format($"Customer Id: {customerId}\nCustomer name: {name}\nPhone: {phone}\nLocation: {location}\n");
         }
 
     }

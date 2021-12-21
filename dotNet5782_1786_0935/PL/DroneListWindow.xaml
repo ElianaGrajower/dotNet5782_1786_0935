@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="800">
     <Grid Background="#FF7D9BC0">
-        <ComboBox Name="WeightSelector" Margin="550,20,80,365" SelectionChanged="WeightSelector_SelectionChanged"/>
+        <ComboBox Name="weightSelector" Margin="550,20,80,365" SelectionChanged="weightSelector_SelectionChanged"/>
         <ComboBox x:Name="StatusSelector" Margin="188,20,452,365" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
-        <Label Content="Drone Max Weight:" HorizontalAlignment="Left" Margin="399,20,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
+        <Label Content="Drone Max weight:" HorizontalAlignment="Left" Margin="399,20,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
         <Label Content="Drone Status:" Margin="80,20,597,365" FontSize="16"></Label>
         <ListView x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged" Margin="0,90,0,94" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
             <ListView.View>

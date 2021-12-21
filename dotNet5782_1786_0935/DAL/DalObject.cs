@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 
-
-//dont think i have any of the delelyes
-//basically just recheck my crud
 
 namespace DAL
 {
@@ -20,8 +17,8 @@ namespace DAL
            
             
            
-            #region  GetStation
-            public Station GetStation(int stationId)
+            #region  getStation
+            public Station getStation(int stationId)
             {
                 try
                 {
@@ -33,8 +30,8 @@ namespace DAL
                 }
             }
             #endregion
-            #region GetDrone
-            public Drone GetDrone(int droneId)
+            #region getDrone
+            public Drone getDrone(int droneId)
             {
                 try
                 {
@@ -46,8 +43,8 @@ namespace DAL
                 }
             }
             #endregion
-            #region GetCustomer
-            public Customer GetCustomer(int customerId)
+            #region getCustomer
+            public Customer getCustomer(int customerId)
             {
                 try
                 {
@@ -59,8 +56,8 @@ namespace DAL
                 }
             }
             #endregion
-            #region GetParcel
-            public Parcel GetParcel(int parcelId)
+            #region getParcel
+            public Parcel getParcel(int parcelId)
             {
                 try
                 {
@@ -68,14 +65,14 @@ namespace DAL
                 }
                 catch (DoesntExistException exc)
                 {
-                    throw exc;
+                    throw new DoesntExistException(exc.Message);
                 }
             }
             #endregion
             public void UpdateDrone(Drone droneToUpdate)
             {
 
-                DataSource.DroneList.RemoveAll(x => x.DroneId == droneToUpdate.DroneId);
+                DataSource.DroneList.RemoveAll(x => x.droneId == droneToUpdate.droneId);
                 DataSource.DroneList.Add(droneToUpdate);
 
 
@@ -83,7 +80,7 @@ namespace DAL
             public void UpdateStation(Station stationToUpdate)
             {
 
-                DataSource.StationList.RemoveAll(x => x.StationId == stationToUpdate.StationId);
+                DataSource.StationList.RemoveAll(x => x.stationId == stationToUpdate.stationId);
                 DataSource.StationList.Add(stationToUpdate);
 
 
@@ -92,7 +89,7 @@ namespace DAL
             public void UpdateCustomer(Customer customerToUpdate)
             {
 
-                DataSource.CustomerList.RemoveAll(x => x.CustomerId == customerToUpdate.CustomerId);
+                DataSource.CustomerList.RemoveAll(x => x.customerId == customerToUpdate.customerId);
                 DataSource.CustomerList.Add(customerToUpdate);
 
 
@@ -100,7 +97,7 @@ namespace DAL
             public void UpdateParcel(Parcel parcelToUpdate)
             {
 
-                DataSource.ParcelList.RemoveAll(x => x.ParcelId == parcelToUpdate.ParcelId);
+                DataSource.ParcelList.RemoveAll(x => x.parcelId == parcelToUpdate.parcelId);
                 DataSource.ParcelList.Add(parcelToUpdate);
 
 
@@ -108,7 +105,7 @@ namespace DAL
             #region AddStation
             public void AddStation(Station stationToAdd) //adds station to list
             {
-                if (DataSource.StationList.Count(x => x.StationId == stationToAdd.StationId) != 0)
+                if (DataSource.StationList.Count(x => x.stationId == stationToAdd.stationId) != 0)
                     throw new AlreadyExistException("The station already exist in the system");
                 DataSource.StationList.Add(stationToAdd);
             }
@@ -116,7 +113,7 @@ namespace DAL
             #region  AddDrone
             public void AddDrone(Drone droneToAdd) //adds drone to list
             {
-                if (DataSource.DroneList.Count(x => x.DroneId == droneToAdd.DroneId) != 0)
+                if (DataSource.DroneList.Count(x => x.droneId == droneToAdd.droneId) != 0)
                     throw new AlreadyExistException("The drone already exist in the system");
                 DataSource.DroneList.Add(droneToAdd);
 
@@ -124,7 +121,7 @@ namespace DAL
             }
             public void AddDroneCharge(DroneCharge droneChargeToAdd) //adds drone to list
             {
-                if (DataSource.DroneChargeList.Count(x => x.DroneId == droneChargeToAdd.DroneId) != 0)
+                if (DataSource.DroneChargeList.Count(x => x.droneId == droneChargeToAdd.droneId) != 0)
                     throw new AlreadyExistException("The drone is already being charged at a station");
                 DataSource.DroneChargeList.Add(droneChargeToAdd);
 
@@ -136,7 +133,7 @@ namespace DAL
             public void AddCustomer(Customer customerToAdd) //adds customer to list
             {
 
-                if (DataSource.CustomerList.Count(x => x.CustomerId == customerToAdd.CustomerId) != 0)
+                if (DataSource.CustomerList.Count(x => x.customerId == customerToAdd.customerId) != 0)
                     throw new AlreadyExistException("The customer already exist in the system");
                 DataSource.CustomerList.Add(customerToAdd);
             }
@@ -144,12 +141,12 @@ namespace DAL
             #region AddParcel
             public void AddParcel(Parcel parcelToAdd) //adds parcel to list
             {
-                if (DataSource.ParcelList.Count(x => x.ParcelId == parcelToAdd.ParcelId) != 0)
+                if (DataSource.ParcelList.Count(x => x.parcelId == parcelToAdd.parcelId) != 0)
                     throw new AlreadyExistException("The parcel already exist in the system");
                 DataSource.ParcelList.Add(parcelToAdd);
             }
             #endregion
-            public void DeleteDrone(int id)
+            public void deleteDrone(int id)
             {
                 try
                 {
@@ -162,7 +159,7 @@ namespace DAL
                 }
 
             }
-            public void DeleteCustomer(int id)
+            public void deleteCustomer(int id)
             {
 
                 try
@@ -172,11 +169,11 @@ namespace DAL
                 }
                 catch (DoesntExistException exc)
                 {
-                    throw exc;
+                    throw new DoesntExistException(exc.Message);
                 }
 
             }
-            public void DeleteParcel(int id)
+            public void deleteParcel(int id)
             {
 
                 try
@@ -186,11 +183,11 @@ namespace DAL
                 }
                 catch (DoesntExistException exc)
                 {
-                    throw exc;
+                    throw new DoesntExistException(exc.Message);
                 }
 
             }
-            public void DeleteStation(int id)
+            public void deleteStation(int id)
             {
                 try
                 {
@@ -204,7 +201,7 @@ namespace DAL
                
 
             }
-            public void DeleteDroneCharge(int droneId,int stationId)
+            public void deleteDroneCharge(int droneId,int stationId)
             {
 
                 try
@@ -222,20 +219,20 @@ namespace DAL
             #region matchUpParcel
             public string matchUpParcel(Parcel parcelToUpdate) //matches up package with drone
             {
-                Parcel myParcel = DataSource.ParcelList.Find(x => x.ParcelId == parcelToUpdate.ParcelId);
-                if (myParcel.ParcelId == 0)
+                Parcel myParcel = DataSource.ParcelList.Find(x => x.parcelId == parcelToUpdate.parcelId);
+                if (myParcel.parcelId == 0)
                     throw new DoesntExistException("This parcel doesn't exist in the system");
                 string complete = "Your request was completed successfully";
                 Drone drone = new Drone();
-                drone = (DataSource.DroneList.Find(temp => /*temp.Status == DroneStatuses.available &&*/ temp.MaxWeight >= parcelToUpdate.Weight)); //finds avail drone that can contain weight of pckg
-                DataSource.DroneList.RemoveAll(temp => temp.DroneId == drone.DroneId); //removes the availabe drone
-                if (drone.DroneId != 0 && parcelToUpdate.ParcelId != 0) //if found drone updates info to match pckg
+                drone = (DataSource.DroneList.Find(temp => /*temp.Status == DroneStatuses.available &&*/ temp.maxWeight >= parcelToUpdate.weight)); //finds avail drone that can contain weight of pckg
+                DataSource.DroneList.RemoveAll(temp => temp.droneId == drone.droneId); //removes the availabe drone
+                if (drone.droneId != 0 && parcelToUpdate.parcelId != 0) //if found drone updates info to match pckg
                 {
-                    parcelToUpdate.DroneId = drone.DroneId;
-                    parcelToUpdate.Scheduled = DateTime.Now;
+                    parcelToUpdate.droneId = drone.droneId;
+                    parcelToUpdate.scheduled = DateTime.Now;
                     // drone.Status = DroneStatuses.delivery;
                     DataSource.DroneList.Add(drone);
-                    DataSource.ParcelList.RemoveAll(temp => temp.ParcelId == parcelToUpdate.ParcelId);
+                    DataSource.ParcelList.RemoveAll(temp => temp.parcelId == parcelToUpdate.parcelId);
                     DataSource.ParcelList.Add(parcelToUpdate); //adds updates parcel back into list of parcel
                     
                 }
@@ -247,23 +244,23 @@ namespace DAL
             #region pickUpParcel
             public string pickUpParcel(Customer customerToUpdate, Parcel parcelToUpdate) //matches up packg with sender of pckg
             {
-                Parcel myParcel = DataSource.ParcelList.Find(x => x.ParcelId == parcelToUpdate.ParcelId);
-                Customer myCustomer = DataSource.CustomerList.Find(x => x.CustomerId == customerToUpdate.CustomerId);
-                if (myParcel.ParcelId == 0)
+                Parcel myParcel = DataSource.ParcelList.Find(x => x.parcelId == parcelToUpdate.parcelId);
+                Customer myCustomer = DataSource.CustomerList.Find(x => x.customerId == customerToUpdate.customerId);
+                if (myParcel.parcelId == 0)
                     throw new DoesntExistException("This parcel doesn't exist in the system");
-                if (myCustomer.CustomerId == 0)
+                if (myCustomer.customerId == 0)
                     throw new DoesntExistException("This customer doesn't exist in the system");
                 string complete = "Your request was completed successfully";
-                parcelToUpdate.SenderId = customerToUpdate.CustomerId;
-                parcelToUpdate.PickedUp = DateTime.Now;
+                parcelToUpdate.senderId = customerToUpdate.customerId;
+                parcelToUpdate.pickedUp = DateTime.Now;
                 Drone drone = new Drone(); //builds new drone
-                drone = (DataSource.DroneList.Find(temp => temp.DroneId == parcelToUpdate.DroneId)); //make new droe equal the one matched up with parcel
-                if (drone.DroneId != 0 && parcelToUpdate.ParcelId != 0) //if such a drone exists updaed drone
+                drone = (DataSource.DroneList.Find(temp => temp.droneId == parcelToUpdate.droneId)); //make new droe equal the one matched up with parcel
+                if (drone.droneId != 0 && parcelToUpdate.parcelId != 0) //if such a drone exists updaed drone
                 {
                     //  drone.Status = DroneStatuses.delivery;
-                    DataSource.DroneList.RemoveAll(temp => temp.DroneId == drone.DroneId);
+                    DataSource.DroneList.RemoveAll(temp => temp.droneId == drone.droneId);
                     DataSource.DroneList.Add(drone);
-                    DataSource.ParcelList.RemoveAll(temp => temp.ParcelId == parcelToUpdate.ParcelId);
+                    DataSource.ParcelList.RemoveAll(temp => temp.parcelId == parcelToUpdate.parcelId);
                     DataSource.ParcelList.Add(parcelToUpdate);
 
                 }
@@ -276,27 +273,27 @@ namespace DAL
             public string deliverParcel(Customer customerToUpdate, Parcel parcelToUpdate, int priorityLevel) //matches up parcel with buyer
             {
 
-                Parcel myParcel = DataSource.ParcelList.Find(x => x.ParcelId == parcelToUpdate.ParcelId);
-                Customer myCustomer = DataSource.CustomerList.Find(x => x.CustomerId == customerToUpdate.CustomerId);
-                if (myParcel.ParcelId == 0 || myCustomer.CustomerId == 0)
+                Parcel myParcel = DataSource.ParcelList.Find(x => x.parcelId == parcelToUpdate.parcelId);
+                Customer myCustomer = DataSource.CustomerList.Find(x => x.customerId == customerToUpdate.customerId);
+                if (myParcel.parcelId == 0 || myCustomer.customerId == 0)
                     throw new DoesntExistException("This parcel doesn't exist in the system");
 
                 string complete = "Your request was completed successfully";
-                parcelToUpdate.TargetId = customerToUpdate.CustomerId;
-                parcelToUpdate.Delivered = DateTime.Now;
-                parcelToUpdate.Priority = (Priorities)priorityLevel;
+                parcelToUpdate.targetId = customerToUpdate.customerId;
+                parcelToUpdate.delivered = DateTime.Now;
+                parcelToUpdate.priority = (Priorities)priorityLevel;
                 Drone drone = new Drone(); //builds new drone
-                drone = (DataSource.DroneList.Find(temp => temp.DroneId == parcelToUpdate.DroneId));
-                if (drone.DroneId != 0) //ensures drone exists and updates its status
+                drone = (DataSource.DroneList.Find(temp => temp.droneId == parcelToUpdate.droneId));
+                if (drone.droneId != 0) //ensures drone exists and updates its status
                 {
                     //   drone.Status = DroneStatuses.available;
-                    DataSource.DroneList.RemoveAll(temp => temp.DroneId == parcelToUpdate.DroneId);
+                    DataSource.DroneList.RemoveAll(temp => temp.droneId == parcelToUpdate.droneId);
                     DataSource.DroneList.Add(drone);
                 }
 
-                if (parcelToUpdate.ParcelId != 0) //ensures parcel exists and updates its status
+                if (parcelToUpdate.parcelId != 0) //ensures parcel exists and updates its status
                 {
-                    DataSource.ParcelList.RemoveAll(temp => temp.ParcelId == parcelToUpdate.ParcelId);
+                    DataSource.ParcelList.RemoveAll(temp => temp.parcelId == parcelToUpdate.parcelId);
                     DataSource.ParcelList.Add(parcelToUpdate);
 
                 }
@@ -308,21 +305,21 @@ namespace DAL
             public string chargeDrone(Drone droneToUpdate, string stationNum) //charges drone
             {
 
-                Drone myDrone = DataSource.DroneList.Find(x => x.DroneId == droneToUpdate.DroneId);
-                if (myDrone.DroneId == 0)
+                Drone myDrone = DataSource.DroneList.Find(x => x.droneId == droneToUpdate.droneId);
+                if (myDrone.droneId == 0)
                     throw new DoesntExistException("This drone doesn't exist in the system");
                 string complete = "Your request was completed successfully";
                 //  drone.Status = DroneStatuses.maintenance;
                 //  drone.Battery = 0;
-                Station station = DataSource.StationList.Find(temp => (temp.Name == stationNum)); //builds station
-                if (station.StationId != 0 && droneToUpdate.DroneId != 0) //if station exists updates it
+                Station station = DataSource.StationList.Find(temp => (temp.name == stationNum)); //builds station
+                if (station.stationId != 0 && droneToUpdate.droneId != 0) //if station exists updates it
                 {
                     DataSource.StationList.Remove(station); //removes station
-                    DataSource.DroneList.RemoveAll(temp => temp.DroneId == droneToUpdate.DroneId); //removes station
-                    station.ChargeSlots--;
+                    DataSource.DroneList.RemoveAll(temp => temp.droneId == droneToUpdate.droneId); //removes station
+                    station.chargeSlots--;
                     DroneCharge charge = new DroneCharge();
-                    charge.DroneId = droneToUpdate.DroneId;
-                    charge.StationId = station.StationId;
+                    charge.droneId = droneToUpdate.droneId;
+                    charge.stationId = station.stationId;
                     DataSource.DroneChargeList.Add(charge); //adds new charge to chargedroen list
                     DataSource.StationList.Add(station); //adds updated station
                     DataSource.DroneList.Add(droneToUpdate); //adds updated drone
@@ -335,37 +332,37 @@ namespace DAL
             #region releaseDrone
             public string releaseDrone(DroneCharge charge) //releases drone from charge
             {
-                Drone myDrone = DataSource.DroneList.Find(temp => (temp.DroneId == charge.DroneId)); //pulls correct drone
-                if (myDrone.DroneId == 0)
+                Drone myDrone = DataSource.DroneList.Find(temp => (temp.droneId == charge.droneId)); //pulls correct drone
+                if (myDrone.droneId == 0)
                     throw new DoesntExistException("This drone doesn't exist in the system");
                 string complete = "Your request was completed successfully";
 
-                if (myDrone.DroneId != 0) //if droen exists updates  
+                if (myDrone.droneId != 0) //if droen exists updates  
                 {
                     // drone.Status = DroneStatuses.available;
                     //drone.Battery = 100;
-                    DataSource.DroneList.RemoveAll(m => (m.DroneId == charge.DroneId));
+                    DataSource.DroneList.RemoveAll(m => (m.droneId == charge.droneId));
                     DataSource.DroneList.Add(myDrone);
                 }
 
-                Station myStation = DataSource.StationList.Find(s => (s.StationId == charge.StationId)); //pulls correct station
-                if (myStation.StationId == 0)
+                Station myStation = DataSource.StationList.Find(s => (s.stationId == charge.stationId)); //pulls correct station
+                if (myStation.stationId == 0)
                     throw new DoesntExistException("This drone doesn't exist in the system");
-                if (myStation.StationId != 0) //if station exists updates
+                if (myStation.stationId != 0) //if station exists updates
                 {
-                    myStation.ChargeSlots++;
-                    DataSource.StationList.RemoveAll(temp => (temp.StationId == charge.StationId));
+                    myStation.chargeSlots++;
+                    DataSource.StationList.RemoveAll(temp => (temp.stationId == charge.stationId));
                     DataSource.StationList.Add(myStation);
                 }
 
-                DataSource.DroneChargeList.RemoveAll(temp => temp.DroneId == charge.DroneId);
+                DataSource.DroneChargeList.RemoveAll(temp => temp.droneId == charge.droneId);
                 return complete;
             }
             #endregion
             #region PrintStation
             public string PrintStation(int stationId) //prints a station
             {
-                if (findStation(stationId).StationId != 0)
+                if (findStation(stationId).stationId != 0)
                     return findStation(stationId).ToString();
                 throw new DoesntExistException("The station doesn't exist in system");
             }
@@ -373,7 +370,7 @@ namespace DAL
             #region PrintDrone
             public string PrintDrone(int droneId) //prints a drone
             {
-                if (findDrone(droneId).DroneId != 0)
+                if (findDrone(droneId).droneId != 0)
                     return findDrone(droneId).ToString();
                 throw new DoesntExistException("The drone doesn't exist in system");
             }
@@ -381,7 +378,7 @@ namespace DAL
             #region PrintCustomer
             public string PrintCustomer(int customerId) //prints a customer
             {
-                if (findCustomer(customerId).CustomerId != 0)
+                if (findCustomer(customerId).customerId != 0)
                     return findCustomer(customerId).ToString();
                 throw new DoesntExistException("The customer doesn't exist in system");
             }
@@ -389,7 +386,7 @@ namespace DAL
             #region PrintParcel
             public string PrintParcel(int parcelId) //prints a parcel
             {
-                if (findParcel(parcelId).ParcelId != 0)
+                if (findParcel(parcelId).parcelId != 0)
                     return findParcel(parcelId).ToString();
                 throw new DoesntExistException("The parcel doesn't exist in system");
             }
@@ -400,7 +397,7 @@ namespace DAL
 
                 for (int i = 0; i < DataSource.ParcelList.Count(); i++) //goes over parcel list
                 {
-                    if (DataSource.ParcelList[i].ParcelId == parcelId) //if id matches
+                    if (DataSource.ParcelList[i].parcelId == parcelId) //if id matches
                     {
                         return (DataSource.ParcelList[i]);
                     }
@@ -414,7 +411,7 @@ namespace DAL
 
                 for (int i = 0; i < DataSource.CustomerList.Count(); i++) //goes over customer list
                 {
-                    if (DataSource.CustomerList[i].CustomerId == customerId) //if id matches
+                    if (DataSource.CustomerList[i].customerId == customerId) //if id matches
                     {
                         return (DataSource.CustomerList[i]);
                     }
@@ -427,7 +424,7 @@ namespace DAL
 
                 for (int i = 0; i < DataSource.DroneChargeList.Count(); i++) 
                 {
-                    if (DataSource.DroneChargeList[i].DroneId == droneId && DataSource.DroneChargeList[i].StationId == stationId) //if id matches
+                    if (DataSource.DroneChargeList[i].droneId == droneId && DataSource.DroneChargeList[i].stationId == stationId) //if id matches
                     {
                         return (DataSource.DroneChargeList[i]);
                     }
@@ -440,7 +437,7 @@ namespace DAL
 
                 for (int i = 0; i < DataSource.DroneList.Count(); i++) //goes over drone list
                 {
-                    if (DataSource.DroneList[i].DroneId == droneId) //if id matches
+                    if (DataSource.DroneList[i].droneId == droneId) //if id matches
                     {
                         return (DataSource.DroneList[i]);
                     }
@@ -454,7 +451,7 @@ namespace DAL
 
                 for (int i = 0; i < DataSource.StationList.Count(); i++) //goes over station list
                 {
-                    if (DataSource.StationList[i].StationId == stationId) //if id matches
+                    if (DataSource.StationList[i].stationId == stationId) //if id matches
                     {
                         return (DataSource.StationList[i]);
                     }
@@ -469,7 +466,7 @@ namespace DAL
 
                 for (int i = 0; i < DataSource.DroneChargeList.Count(); i++) //goes over dronecharge list
                 {
-                    if (DataSource.DroneChargeList[i].DroneId == droneChargeId) //if ifd match
+                    if (DataSource.DroneChargeList[i].droneId == droneChargeId) //if ifd match
                     {
                         return (DataSource.DroneChargeList[i]);
                     }
@@ -480,7 +477,7 @@ namespace DAL
             #region getParcelId
             public int getParcelId() //returns parcel id
             {
-                return DataSource.config.assignParcelId++; //genrates parcel id
+                return DataSource.config.assignparcelId++; //genrates parcel id
             }
             #endregion
             #region distance
@@ -544,16 +541,6 @@ namespace DAL
                 }
             }
             #endregion
-            //#region GetPartialParcelsList
-
-            //public IEnumerable<Parcel> GetPartialParcelsList(Predicate<> predicate) //prints parcel list
-            //{
-            //    foreach (Parcel item in DataSource.ParcelList)
-            //    {
-            //        yield return item;
-            //    }
-            //}
-            //#endregion
             #region printDroneChargeList
             public IEnumerable<DroneCharge> printDroneChargeList() //prints DroneCharge list
             {
@@ -563,15 +550,17 @@ namespace DAL
                 }
             }
             #endregion
+            #region attribute
             public void attribute(int dID, int pID)//the function attribute parcel to drone
             {
-                Drone tmpD = GetDrone(dID);
-                Parcel tmpP = GetParcel(pID);
-                DataSource.ParcelList.RemoveAll(m => m.ParcelId == tmpP.ParcelId);   //removing all the data from the place in the list the equal to tmpP id
-                tmpP.DroneId = tmpD.DroneId;        //attribute drones id to parcel 
-                tmpP.Scheduled = DateTime.Now; //changing the time to be right now
+                Drone tmpD = getDrone(dID);
+                Parcel tmpP = getParcel(pID);
+                DataSource.ParcelList.RemoveAll(m => m.parcelId == tmpP.parcelId);   //removing all the data from the place in the list the equal to tmpP id
+                tmpP.droneId = tmpD.droneId;        //attribute drones id to parcel 
+                tmpP.scheduled = DateTime.Now; //changing the time to be right now
                 DataSource.ParcelList.Add(tmpP); //adding to the parcel list tmpP
             }
+            #endregion
 
 
 

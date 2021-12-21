@@ -10,21 +10,21 @@ namespace IBL.BO
 {
     public class Location
     {
-        public double Lattitude;
-        public double Longitude;
+        public double lattitude;
+        public double longitude;
         public Location(char a,double x,char b,double y,char c) 
         {
-            Lattitude = x;
-            Longitude = y;
+            lattitude = x;
+            longitude = y;
         }
         public Location(double x,double y)
         {
-            Lattitude = x;
-            Longitude = y;
+            lattitude = x;
+            longitude = y;
         }
         public override string ToString()
         {
-            return String.Format($"( { Math.Round(Lattitude,3)} , {Math.Round(Longitude,3)} )");
+            return String.Format($" { Math.Round(lattitude,3)} °N, {Math.Round(longitude,3)} °W");
         }
     }
 }

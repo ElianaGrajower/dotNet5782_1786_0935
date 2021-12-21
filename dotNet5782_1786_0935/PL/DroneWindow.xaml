@@ -10,7 +10,7 @@
         <TextBox x:Name="idText" HorizontalAlignment="Left" Margin="317,113,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
         <TextBox x:Name="modelText" HorizontalAlignment="Left" Margin="317,183,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
         <TextBlock HorizontalAlignment="Left" Margin="223,113,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
-        <TextBlock HorizontalAlignment="Left" Margin="223,148,0,0" Text="Max Weight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="223,148,0,0" Text="Max weight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="223,183,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock x:Name="stationRead" HorizontalAlignment="Left" Margin="223,218,0,0" Text="station ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="672,344,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click" Background="#FFC74D64" FontStyle="Normal" AutomationProperties.IsOffscreenBehavior="Default"/>
@@ -22,10 +22,10 @@
         <Button x:Name="pickupParcel" Content="pickup parcel" HorizontalAlignment="Left" Margin="586,223,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="pickupParcel_Click"/>
         <Button x:Name="deliverParcel" Content="deliver parcel" HorizontalAlignment="Left" Margin="586,223,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="deliverParcel_Click"/>
         <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="317,148,0,0" VerticalAlignment="Top" Width="139"/>
-        <TextBlock x:Name="lattitudeRead" HorizontalAlignment="Left" Margin="223,218,0,0" Text="Lattitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Visibility="Visible"/>
+        <TextBlock x:Name="lattitudeRead" HorizontalAlignment="Left" Margin="223,218,0,0" Text="lattitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Visibility="Visible"/>
         <TextBox x:Name="lattitudeText" HorizontalAlignment="Left" Margin="317,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Visibility="Hidden" IsReadOnly="True"/>
-        <TextBlock x:Name="longitudeRead" HorizontalAlignment="Left" Margin="223,252,0,0" Text="Longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="66"/>
-        <TextBox x:Name="LongitudeText" HorizontalAlignment="Left" Margin="317,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" TextChanged="TextBox_TextChanged" Visibility="Visible" IsReadOnly="True"/>
+        <TextBlock x:Name="longitudeRead" HorizontalAlignment="Left" Margin="223,252,0,0" Text="longitude:" TextWrapping="Wrap" VerticalAlignment="Top" Width="66"/>
+        <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="317,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" TextChanged="TextBox_TextChanged" Visibility="Visible" IsReadOnly="True"/>
         <TextBox x:Name="weightText" HorizontalAlignment="Left" Margin="317,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
         <ComboBox x:Name="stationIdCombo" HorizontalAlignment="Left" Margin="317,216,0,0" VerticalAlignment="Top" Width="139"/>
         <Canvas x:Name="addAnotherDrone" Background="White" Margin="294,114,287,183" Visibility="Collapsed">

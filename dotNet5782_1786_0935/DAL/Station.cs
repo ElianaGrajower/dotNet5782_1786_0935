@@ -4,32 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //asap fix the extra made up availabledronecharge
-namespace IDAL
-{
+
     namespace DO
     {
         public struct Station
         {
-            public Station(int id, string name, double lat, double lon, int slots)
+            public Station(int id, string tempname, double lat, double lon, int slots)
             {
-                StationId = id;
-                Name = name;
-                Lattitude=lat;
-                Longitude = lon;
-                ChargeSlots = slots;
-                availableChargeSlots = slots;
+                stationId = id;
+                name = tempname;
+                lattitude=lat;
+                longitude = lon;
+                chargeSlots = slots;
+              //  availablechargeSlots = slots;
 
             }
-            public int StationId { set; get; } 
-            public string Name { set; get; }
-            public double Lattitude { set; get; }
-            public double Longitude { set; get; }
-            public int ChargeSlots { set; get; }
-            public int availableChargeSlots { set; get; }
+            public int stationId { set; get; } 
+            public string name { set; get; }
+            public double lattitude { set; get; }
+            public double longitude { set; get; }
+            public int chargeSlots { set; get; }
+           // public int availablechargeSlots { set; get; }
             public override string ToString()
             {
-                return String.Format($"Id: {StationId}\nName: {Name}\nLongitude: {Longitude}Lattitude: {Lattitude}\nChargeSlots: {ChargeSlots}");
+                return String.Format($"Id: {stationId}\nname: {name}\nlongitude: {longitude}lattitude: {lattitude}\nchargeSlots: {chargeSlots}");
             }
         }
     }
-}
+

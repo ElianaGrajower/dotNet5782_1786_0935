@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 //updated and needed
 namespace IBL.BO
 {
-    class StationToList
+    public class StationToList
     {
         public int stationId;
         public string name;  
@@ -15,7 +15,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return String.Format($"Station Id: {stationId}\nName: {name}\nNmber Of Available Slots: {numberOfAvailableSlots}\nNumber Of Slots In Use: {numberOfSlotsInUse}\n");
+            return String.Format($"Station Id: {stationId} name: {name} Nmber Of Available Slots: {numberOfAvailableSlots} Number Of Slots In Use: {numberOfSlotsInUse}\n");
         }
     }
 }

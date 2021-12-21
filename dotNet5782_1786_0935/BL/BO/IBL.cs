@@ -12,36 +12,36 @@ namespace IBL
     public interface IBI
     {
         public chargeCapacity GetChargeCapacity();
-        public List<IBL.BO.Station> GetStationsList();
+        public List<IBL.BO.Station> getStationsList();
         public int FindStation(Location location);
         public void AddDrone(IBL.BO.Drone DronetoAdd, int stationId);
         public bool OnlyDigits(char x);
-        public IBL.BO.Station GetStation(int stationId);
-        public List<IBL.BO.Station> GetStations();
+        public IBL.BO.Station getStation(int stationId);
+        public List<IBL.BO.Station> getStations();
         public List<IBL.BO.Station> GetAvailableStationsList();
         public int AvailableChargingSlots();
         public void AddCustomer(IBL.BO.Customer CustomertoAdd);
         public void AddStation(IBL.BO.Station StationtoAdd);
         public void AddParcel(IBL.BO.Parcel ParceltoAdd);
-        public void DeleteStation(int StationId);
-        public void DeleteParcel(int ParcelId);
+        public void DeleteStation(int stationId);
+        public void DeleteParcel(int parcelId);
         public void DeleteCustomer(int CustomerId);
-        public void DeleteDrone(int DroneId);
-        public IBL.BO.Customer GetCustomer(int customerId);
-        public IBL.BO.Parcel GetParcel(int parcelId);
-        public void UpdateDroneName(int droneID, string dModel);
-        public void UpdateCustomerName(int CustomerId, string name, string number); // 
+        public void DeleteDrone(int droneId);
+        public IBL.BO.Customer getCustomer(int customerId);
+        public IBL.BO.Parcel getParcel(int parcelId);
+        public void UpdateDronename(int droneId, string dModel);
+        public void UpdateCustomername(int CustomerId, string name, string number); // 
         public void ReleaseDroneFromCharge(int droneId, int chargeTime); //releases the drone from its charge
-        public void updateStation(int stationID, int AvlblDCharges, string Name = " ");
+        public void updateStation(int stationId, int AvlblDCharges, string name = " ");
         public void MatchDroneWithPacrel(int droneId);
         public void PickUpParcel(int droneId);
-        public void DeliveredParcel(int droneId);
-        public List<IBL.BO.Drone> GetDronesList();
-        public List<IBL.BO.Customer> GetCustomersList();
-        public List<IBL.BO.Parcel> GetParcelsList();
-        public void SendDroneToCharge(int droneID);
+        public void deliveredParcel(int droneId);
+        public List<IBL.BO.Drone> getDronesList();
+        public List<IBL.BO.Customer> getCustomersList();
+        public List<IBL.BO.Parcel> getParcelsList();
+        public void SendDroneToCharge(int droneId);
         public List<IBL.BO.Parcel> GetUnmatchedParcelsList();
-        public IBL.BO.Drone GetDrone(int id);
+        public IBL.BO.Drone getDrone(int id);
         public IBL.BO.DroneToList returnsDrone(int id);
         public IEnumerable<IBL.BO.Station> allStations(Func<IBL.BO.Station, bool> predicate = null);
     }     

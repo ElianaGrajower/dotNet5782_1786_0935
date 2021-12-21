@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 
-namespace IDAL  
-{
     namespace DO
     {
-        public interface IDal
+        public interface DalApi
         {
             // public DalObject();// { DataSource.Initialize(); } // default constructer calls on initialize func
             public void AddStation(Station station); //adds station to list
@@ -41,4 +39,4 @@ namespace IDAL
 
         }
     }
-}
+

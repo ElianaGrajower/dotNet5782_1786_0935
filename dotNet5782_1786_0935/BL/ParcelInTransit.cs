@@ -12,7 +12,7 @@ namespace IBL.BO
         public int parcelId;
         public bool parcelStatus; //true if matched with drone
         public Priorities priority;
-        public WeightCategories weight;
+        public weightCategories weight;
         public CustomerInParcel sender;   
         public CustomerInParcel target;
         public Location pickupLocation;
@@ -22,7 +22,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {parcelId}\nParcel Status: {parcelStatus}\nPriority: {priority}\nWeight: {weight}\nSender: {sender}\nTarget: {target}\nPickup Location: {pickupLocation}\nTarget Location: {targetLocation}\ndistance: {distance}\n");
+            return String.Format($"Parcel Id: {parcelId}\nParcel Status: {parcelStatus}\npriority: {priority}\nweight: {weight}\nSender: {sender}\nTarget: {target}\nPickup Location: {pickupLocation}\nTarget Location: {targetLocation}\ndistance: {distance}\n");
         }
     }
 }

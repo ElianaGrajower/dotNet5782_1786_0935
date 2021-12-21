@@ -28,8 +28,8 @@ namespace PL
             //ShowInfo();
             this.Bl = b;
 
-            weight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            stationIdCombo.ItemsSource = Bl.allStations(s=>s.chargeSlots-s.numberOfSlotsInUse>0).Select(s=>s.StationId);
+            weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
+            stationIdCombo.ItemsSource = Bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
             update.Visibility = Visibility.Visible;
             add.Visibility = Visibility.Hidden;
             if (drone.droneStatus == IBL.BO.DroneStatus.available)
@@ -53,7 +53,7 @@ namespace PL
             
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
-            LongitudeText.Visibility = Visibility.Visible;
+            longitudeText.Visibility = Visibility.Visible;
             lattitudeText.Visibility = Visibility.Visible;
             stationIdCombo.Visibility = Visibility.Hidden;
             longitudeRead.Visibility = Visibility.Visible;
@@ -62,9 +62,9 @@ namespace PL
             weightText.Visibility = Visibility.Visible;
             weight.Visibility = Visibility.Hidden;
             idText.Text = drone.droneId.ToString();
-            modelText.Text = drone.Model.ToString();
-            lattitudeText.Text = drone.location.Lattitude.ToString();
-            LongitudeText.Text = drone.location.Longitude.ToString();
+            modelText.Text = drone.model.ToString();
+            lattitudeText.Text = drone.location.lattitude.ToString();
+            longitudeText.Text = drone.location.longitude.ToString();
             weightText.Text = drone.weight.ToString();
             weightText.IsReadOnly = true;
             idText.IsReadOnly = true;
@@ -73,9 +73,9 @@ namespace PL
         {
             InitializeComponent();
             this.Bl = drone;
-            weight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            stationIdCombo.ItemsSource = Bl.allStations(s => s.chargeSlots - s.numberOfSlotsInUse > 0).Select(s=>s.StationId);
-            //  stationIdCombo.Items.Add(Bl.GetStationsList());
+            weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
+            stationIdCombo.ItemsSource = Bl.allStations(s => s.numberOfAvailableSlots > 0).Select(s=>s.stationId);
+            //  stationIdCombo.Items.Add(Bl.getStationsList());
             update.Visibility = Visibility.Hidden;
             add.Visibility = Visibility.Visible;
             chargeDrone.Visibility = Visibility.Visible;
@@ -83,7 +83,7 @@ namespace PL
             matchUpParcel.Visibility = Visibility.Visible;
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
-            LongitudeText.Visibility = Visibility.Hidden;
+            longitudeText.Visibility = Visibility.Hidden;
             lattitudeText.Visibility = Visibility.Hidden;
             stationIdCombo.Visibility = Visibility.Visible;
             longitudeRead.Visibility = Visibility.Hidden;
@@ -103,11 +103,12 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            int id = Convert.ToInt32(idText.Text);
+            
             string name = modelText.Text.ToString();
             try
             {
-                Bl.UpdateDroneName(id, name);
+                int id = Convert.ToInt32(idText.Text);
+                Bl.UpdateDronename(id, name);
                 MessageBox.Show("drone model updated succesfuly");
             }
             catch(DoesntExistException exc)
@@ -120,8 +121,8 @@ namespace PL
             Drone newDrone = new Drone();
             //try
             //{
-            //    newDrone.DroneId = Convert.ToInt32(idText.Text);
-            //    newDrone.MaxWeight = (WeightCategories)weight.SelectedItem;
+            //    newDrone.droneId = Convert.ToInt32(idText.Text);
+            //    newDrone.Maxweight = (weightCategories)weight.SelectedItem;
             //    newDrone.Model = modelText.Text;
             //    int stationId = Convert.ToInt32(stationIdText.Text);
             //}
@@ -129,11 +130,11 @@ namespace PL
             //{ MessageBox.Show("input incurect"); }
             try
             {
-                newDrone.DroneId = Convert.ToInt32(idText.Text);
-                newDrone.MaxWeight = (WeightCategories)weight.SelectedItem;
-                newDrone.Model = modelText.Text;
+                newDrone.droneId = Convert.ToInt32(idText.Text);
+                newDrone.maxWeight = (weightCategories)weight.SelectedItem;
+                newDrone.model = modelText.Text;
                 int stationId = Convert.ToInt32(stationIdCombo.SelectedItem);
-                Bl.AddDrone(newDrone, stationId);
+                Bl.addDrone(newDrone, stationId);
                 MessageBox.Show("added drone succesfully");
                 addAnotherDrone.Visibility = Visibility.Visible;
             }
@@ -143,10 +144,16 @@ namespace PL
             { MessageBox.Show(exc.Message); }
             catch (IBL.BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
+            catch(Exception exc)
+            {
+                MessageBox.Show("invalid input");
+            }
         }
         private void releaseDrone_Click(object sender, RoutedEventArgs e)
         {
             releaseCanvas.Visibility = Visibility.Visible;
+           
+            
         }
         private void weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -190,7 +197,7 @@ namespace PL
         {
             try
             {
-                Bl.DeliveredParcel(Convert.ToInt32(idText.Text));
+                Bl.deliveredParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone delivered succesfully");
                 deliverParcel.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -233,7 +240,7 @@ namespace PL
             try
             {
                 Bl.PickUpParcel(Convert.ToInt32(idText.Text));
-                MessageBox.Show("drone pickedup succesfully");
+                MessageBox.Show("drone pickedUp succesfully");
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
             }

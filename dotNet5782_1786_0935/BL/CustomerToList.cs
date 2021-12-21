@@ -12,14 +12,14 @@ namespace IBL.BO
         public int customerId;
         public string customerName;
         public string phone;
-        public int parcelsDelivered;
+        public int parcelsdelivered;
         public int undeliveredParcels;
         public int recievedParcel;
         public int transitParcel;
             
         public override string ToString()
         {
-            return String.Format($"Customer Id: {customerId}\nCustomer Name: {customerName}\nPhone: {phone}\nParcels Delivered: {parcelsDelivered}\nundelivered Parcels: {undeliveredParcels}\nRecieved Parcel: {recievedParcel}\nTransit Parcel: {transitParcel}\n");
+            return String.Format($"Customer Id: {customerId} Customer name: {customerName} Phone: {phone} Parcels delivered: {parcelsdelivered} undelivered Parcels: {undeliveredParcels} Recieved Parcel: {recievedParcel} Transit Parcel: {transitParcel}\n");
         }
     }
 

@@ -9,9 +9,9 @@ namespace IBL.BO
 {
     public class Drone
     {     
-        public int DroneId { set; get; }
-        public string Model { set; get; }
-        public WeightCategories MaxWeight;  //light, average, heavy
+        public int droneId { set; get; }
+        public string model { set; get; }
+        public weightCategories maxWeight;  //light, average, heavy
         public double battery; //in percentages
         public DroneStatus droneStatus { set; get; }  //available, maintenance, delivery
         public ParcelInTransit parcel;
@@ -19,7 +19,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return String.Format($"Id: {DroneId}\nModel: {Model}\nMax Weight: {MaxWeight}\nBattery: {battery}%\nDrone Status: {droneStatus}\nParcel in Transit: {parcel}\nLocation: {location}\n");
+            return String.Format($"Id: {droneId}\nModel: {model}\nMax weight: {maxWeight}\nBattery: {battery}%\nDrone Status: {droneStatus}\nParcel in Transit: {parcel}\nLocation: {location}\n");
         }
     }
 }

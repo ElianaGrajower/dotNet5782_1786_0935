@@ -9,14 +9,14 @@ namespace IBL.BO
 {
     public class ParcelinCustomer
     {
-        public int ParcelId { get; set; }   
-        public WeightCategories Weight { get; set; }
-        public Priorities Priority { get; set; }
-        public ParcelStatus ParcelStatus { get; set; }
-        public CustomerInParcel CustomerInParcel;
+        public int parcelId { get; set; }   
+        public weightCategories weight { get; set; }
+        public Priorities priority { get; set; }
+        public ParcelStatus parcelStatus { get; set; }
+        public CustomerInParcel customerInParcel;
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {ParcelId}\nParcel Weight: {Weight}\nPriority: {Priority}\nParcel status: {ParcelStatus}\nCustomer In Parcel: {CustomerInParcel}\n");
+            return String.Format($"Parcel Id: {parcelId}\nParcel weight: {weight}\npriority: {priority}\nParcel status: {parcelStatus}\nCustomer In Parcel: {customerInParcel}\n");
         }
 
     }

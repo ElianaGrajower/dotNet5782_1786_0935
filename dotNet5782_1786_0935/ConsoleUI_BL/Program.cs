@@ -62,22 +62,22 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("Enter ID of station: ");
                                         Station s = new Station(); 
                                         int.TryParse(Console.ReadLine(), out id);
-                                        s.StationId = id;
+                                        s.stationId = id;
                                         Console.WriteLine("Enter name of station: ");
                                         s.name = Console.ReadLine();
                                         Console.WriteLine("Enter lattitude and longitude of station:");
                                         s.location = new Location(0, 0);
                                         double.TryParse(Console.ReadLine(), out latitude);
-                                        s.location.Lattitude = latitude;
+                                        s.location.lattitude = latitude;
                                         double.TryParse(Console.ReadLine(), out longitude);
-                                        s.location.Longitude = longitude;
+                                        s.location.longitude = longitude;
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
                                         int.TryParse(Console.ReadLine(), out chargeSlots);
                                         s.chargeSlots = chargeSlots;
                                         
                                         try
                                         {
-                                            Data.AddStation(s);
+                                            Data.addStation(s);
                                         }
                                         catch(InvalidInputException exc)
                                         {
@@ -98,13 +98,13 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("Enter drone number");
                                         Drone d = new Drone();
                                         int.TryParse(Console.ReadLine(), out droneId);
-                                        d.DroneId = droneId;
+                                        d.droneId = droneId;
                                         Console.WriteLine("Enter name of model: ");
 
-                                        d.Model = Console.ReadLine();
+                                        d.model = Console.ReadLine();
                                         Console.WriteLine("Choose maximum weight drone can hold:\n" +
                                             "1- light, 2-average, 3-heavy");
-                                        IBL.BO.WeightCategories weightChoice;
+                                        IBL.BO.weightCategories weightChoice;
 
                                         input = Console.ReadLine();
                                         check = int.TryParse(input, out error);
@@ -112,17 +112,17 @@ namespace ConsoleUI_BL
                                             choice = int.Parse(input);
                                         else
                                             choice = -1;
-                                        weightChoice = (IBL.BO.WeightCategories)choice;
+                                        weightChoice = (IBL.BO.weightCategories)choice;
                                         switch (weightChoice)
                                         {
-                                            case WeightCategories.light:
-                                                d.MaxWeight = WeightCategories.light;
+                                            case weightCategories.light:
+                                                d.maxWeight = weightCategories.light;
                                                 break;
-                                            case WeightCategories.average:
-                                                d.MaxWeight = WeightCategories.average;
+                                            case weightCategories.average:
+                                                d.maxWeight = weightCategories.average;
                                                 break;
-                                            case WeightCategories.heavy:
-                                                d.MaxWeight = WeightCategories.heavy;
+                                            case weightCategories.heavy:
+                                                d.maxWeight = weightCategories.heavy;
                                                 break;
                                             
                                         }
@@ -131,7 +131,7 @@ namespace ConsoleUI_BL
 
                                         try
                                         {
-                                            Data.AddDrone(d,stationId); //builds and adds a drone using the information the user provided
+                                            Data.addDrone(d,stationId); //builds and adds a drone using the information the user provided
                                         }
                                         catch (InvalidInputException exc)
                                         {
@@ -147,7 +147,7 @@ namespace ConsoleUI_BL
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
-                                        Console.WriteLine("drone id: " + d.DroneId + "\n");
+                                        Console.WriteLine("drone id: " + d.droneId + "\n");
                                         break;
                                     }
                                 case 'C':
@@ -157,23 +157,23 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("Enter Id of customer: ");
                                         Customer c = new Customer();
                                         int.TryParse(Console.ReadLine(), out id);
-                                        c.CustomerId = id;
+                                        c.customerId = id;
                                         Console.WriteLine("Enter name of customer: ");
-                                        c.Name =  Console.ReadLine();
+                                        c.name =  Console.ReadLine();
                                         Console.WriteLine("Enter phone number of customer: ");
                                         
-                                        c.Phone = Console.ReadLine();
-                                        c.Location = new Location(0, 0);
+                                        c.phone = Console.ReadLine();
+                                        c.location = new Location(0, 0);
                                         Console.WriteLine("Enter Your lattitude coordinates: ");
                                         double.TryParse(Console.ReadLine(), out latitude);
                                         
                                         Console.WriteLine("Enter Your longitude coordinates: ");
                                         double.TryParse(Console.ReadLine(), out longitude);
-                                        c.Location = new Location(latitude, longitude);
+                                        c.location = new Location(latitude, longitude);
 
                                         try
                                         {
-                                            Data.AddCustomer(c); //builds and adds a customer using the information the user provided
+                                            Data.addCustomer(c); //builds and adds a customer using the information the user provided
                                         }
                                         catch (InvalidInputException exc)
                                         {
@@ -197,10 +197,10 @@ namespace ConsoleUI_BL
                                         Parcel p = new Parcel()
                                         {
                                             
-                                            Sender = new CustomerInParcel()
+                                            sender = new CustomerInParcel()
                                             {
                                                 
-                                                  CustomerId = id
+                                                  customerId = id
                                             }
                                            
                                             
@@ -208,13 +208,13 @@ namespace ConsoleUI_BL
                                        
                                         Console.WriteLine("Enter Id of target: ");
                                         int.TryParse(Console.ReadLine(), out id);
-                                        p.Target = new CustomerInParcel()
+                                        p.target = new CustomerInParcel()
                                         {
-                                            CustomerId = id
+                                            customerId = id
                                         };
                                         Console.WriteLine("Choose  weight of parcel:\n" +
                                             "1-light,2- average, 3-heavy");
-                                        IBL.BO.WeightCategories weightChoice;
+                                        IBL.BO.weightCategories weightChoice;
 
                                         input = Console.ReadLine();
                                         check = int.TryParse(input, out error);
@@ -222,17 +222,17 @@ namespace ConsoleUI_BL
                                             choice = int.Parse(input);
                                         else
                                             choice = -1;
-                                        weightChoice = (IBL.BO.WeightCategories)choice;
+                                        weightChoice = (IBL.BO.weightCategories)choice;
                                         switch (weightChoice)
                                         {
-                                            case WeightCategories.light:
-                                                p.Weight = WeightCategories.light;
+                                            case weightCategories.light:
+                                                p.weight = weightCategories.light;
                                                 break;
-                                            case WeightCategories.average:
-                                                p.Weight = WeightCategories.average;
+                                            case weightCategories.average:
+                                                p.weight = weightCategories.average;
                                                 break;
-                                            case WeightCategories.heavy:
-                                                p.Weight = WeightCategories.heavy;
+                                            case weightCategories.heavy:
+                                                p.weight = weightCategories.heavy;
                                                 break;
 
                                         }
@@ -250,19 +250,19 @@ namespace ConsoleUI_BL
                                         switch (priorities)
                                         {
                                             case Priorities.regular:
-                                                p.Priority= Priorities.regular;
+                                                p.priority= Priorities.regular;
                                                 break;
                                             case Priorities.fast:
-                                                p.Priority = Priorities.fast;
+                                                p.priority = Priorities.fast;
                                                 break;
                                             case Priorities.emergency:
-                                                p.Priority = Priorities.emergency;
+                                                p.priority = Priorities.emergency;
                                                 break;
 
                                         }
                                         try
                                         {
-                                            int t=Data.AddParcel(p); //builds and adds a parcel using the information the user provided
+                                            int t=Data.addParcel(p); //builds and adds a parcel using the information the user provided
                                             Console.WriteLine("Parcel ID: " + t);
                                         }
                                         catch (InvalidInputException exc)
@@ -317,7 +317,7 @@ namespace ConsoleUI_BL
                                         string model = Console.ReadLine();
                                         try
                                         {
-                                            Data.UpdateDroneName(droneId, model);
+                                            Data.UpdateDronename(droneId, model);
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -333,13 +333,13 @@ namespace ConsoleUI_BL
                                          int.TryParse(Console.ReadLine(),out stationId);
                                         Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
                                         Console.WriteLine("Enter new name of station:");
-                                        string stationName = Console.ReadLine();
+                                        string stationname = Console.ReadLine();
                                         Console.WriteLine("Enter new amount of charges at station:");
                                         int numOfCharges;
                                         int.TryParse(Console.ReadLine(), out numOfCharges);
                                         try
                                         {
-                                            Data.updateStation(stationId, numOfCharges,stationName);
+                                            Data.updateStation(stationId, numOfCharges,stationname);
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -361,12 +361,12 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out customerId);
                                         Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
                                         Console.WriteLine("Enter a new customer name:");
-                                        string customerName = Console.ReadLine();
+                                        string customername = Console.ReadLine();
                                         Console.WriteLine("Enter a new phone number:");
                                         string phone = Console.ReadLine();
                                         try
                                         { 
-                                            Data.UpdateCustomer(customerId, customerName, phone); 
+                                            Data.UpdateCustomer(customerId, customername, phone); 
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -484,7 +484,7 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         try
                                         {
-                                            Data.DeliveredParcel(droneId); 
+                                            Data.deliveredParcel(droneId); 
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -527,13 +527,13 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out stationId);
                                         try
                                         {
-                                            Console.WriteLine("\n" + Data.GetStation(stationId).ToString() + "\n");
+                                            Console.WriteLine("\n" + Data.getStation(stationId).ToString() + "\n");
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
-                                        catch (IDAL.DO.DoesntExistException exc)
+                                        catch (DO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
@@ -546,13 +546,13 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         try
                                         {
-                                            Console.WriteLine("\n" + Data.GetDrone(droneId).ToString() + "\n");
+                                            Console.WriteLine("\n" + Data.getDrone(droneId).ToString() + "\n");
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
-                                        catch (IDAL.DO.DoesntExistException exc)
+                                        catch (DO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
@@ -565,13 +565,13 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out customerId);
                                         try
                                         {
-                                            Console.WriteLine("\n" + Data.GetCustomer(customerId).ToString() + "\n");
+                                            Console.WriteLine("\n" + Data.getCustomer(customerId).ToString() + "\n");
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
-                                        catch (IDAL.DO.DoesntExistException exc)
+                                        catch (DO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
@@ -584,13 +584,13 @@ namespace ConsoleUI_BL
                                         int.TryParse(Console.ReadLine(), out parcelId);
                                         try
                                         {
-                                            Console.WriteLine("\n" + Data.GetParcel(parcelId).ToString() + "\n");
+                                            Console.WriteLine("\n" + Data.getParcel(parcelId).ToString() + "\n");
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
-                                        catch (IDAL.DO.DoesntExistException exc)
+                                        catch (DO.DoesntExistException exc)
                                         {
                                             Console.WriteLine(exc.Message);
                                         }
@@ -627,7 +627,7 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("List of stations:\n");
                                         try
                                         { 
-                                            foreach (Station item in Data.GetStationsList()) { Console.WriteLine(item.ToString() + "\n"); }; 
+                                            foreach (StationToList item in Data.getStationsList()) { Console.WriteLine(item.ToString() + "\n"); }; 
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -640,7 +640,7 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("List of drones:\n");
                                         try
                                         {
-                                           Data.GetDronesList().ForEach(item=> { Console.WriteLine(item.ToString() + "\n"); });
+                                           Data.getDronesList().ForEach(item=> { Console.WriteLine(item.ToString() + "\n"); });
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -653,7 +653,7 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("List of customers:\n");
                                         try
                                         {
-                                            foreach (Customer item in Data.GetCustomersList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                            foreach (CustomerToList item in Data.getCustomersList()) { Console.WriteLine(item.ToString() + "\n"); };
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -666,7 +666,7 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("List of parcels:\n");
                                         try
                                         {
-                                            foreach (Parcel item in Data.GetParcelsList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                            foreach (ParcelToList item in Data.getParcelsList()) { Console.WriteLine(item.ToString() + "\n"); };
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -679,7 +679,7 @@ namespace ConsoleUI_BL
                                         Console.WriteLine("List of parcels that are not yet matched up to drone:\n");
                                         try
                                         {
-                                            foreach (Parcel item in Data.GetUnmatchedParcelsList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                            foreach (ParcelToList item in Data.getParcelsList()) { if(item.parcelStatus== ParcelStatus.created)Console.WriteLine(item.ToString() + "\n"); };
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
@@ -689,10 +689,10 @@ namespace ConsoleUI_BL
                                     }
                                 case 'F':
                                     {
-                                        Console.WriteLine("List of stations with availablechargeslots:\n");
+                                        Console.WriteLine("List of stations with availablechargeSlots:\n");
                                         try
                                         {
-                                            foreach (Station item in Data.GetAvailableStationsList()) { Console.WriteLine(item.ToString() + "\n"); };
+                                            foreach (StationToList item in Data.getStationsList()) {if(item.numberOfAvailableSlots>0) Console.WriteLine(item.ToString() + "\n"); };
                                         }
                                         catch (IBL.BO.DoesntExistException exc)
                                         {
