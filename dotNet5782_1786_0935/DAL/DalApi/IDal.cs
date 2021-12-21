@@ -19,7 +19,8 @@ using DO;
         public void UpdateCustomer(Customer customerToUpdate);
         public void UpdateParcel(Parcel parcelToUpdate);
         public void AddStation(Station station); //adds station to list
-        public void SendDroneToCharge(int droneId);
+        public void AddDroneCharge(DroneCharge droneChargeToAdd);
+        //public void SendDroneToCharge(int droneId);
         public void AddDrone(Drone drone); //adds drone to list
         public void AddCustomer(Customer customer); //adds customer to list
         public void AddParcel(Parcel parcel); //adds parcel to list
@@ -29,10 +30,10 @@ using DO;
         public void deleteStation(int id);
         public void deleteDroneCharge(int droneId, int stationId);
         public string matchUpParcel(Parcel parcel); //matches up package with drone
-        public string pickUpParcel(Customer customer, Parcel parcel); //matches up packg with sender of pckg
-        public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel); //matches up parcel with buyer
-        public string chargeDrone(Drone drone, int stationNum); //charges drone
-        public string releaseDrone(DroneCharge charge); //releases drone from charge
+      //  public string pickUpParcel(Customer customer, Parcel parcel); //matches up packg with sender of pckg
+      //  public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel); //matches up parcel with buyer
+      //  public string chargeDrone(Drone drone, int stationNum); //charges drone
+      //  public string releaseDrone(DroneCharge charge); //releases drone from charge
         public string PrintStation(int stationId); //prints a station
         public string PrintDrone(int droneId); //prints a drone
         public string PrintCustomer(int customerId); //prints a customer
@@ -45,7 +46,7 @@ using DO;
         public DroneCharge findDroneCharge(int droneChargeId); //finds a drone charge using its id
         public int getParcelId(); //returns parcel id
         public double distance(double lattitude1, double longitute1, double lattitude2, double longitute2); //calculates distance between coordinates for bonus
-        public double[] ChargeCopacity();
+        public double[] ChargeCapacity();
         public IEnumerable<Station> printStationsList(); //prints list of stations 
         public IEnumerable<Drone> printDronesList(); //prints list of drone
         public IEnumerable<Customer> printCustomersList(); //prints customer list

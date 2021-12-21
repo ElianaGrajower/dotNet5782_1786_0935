@@ -16,7 +16,7 @@ using BlApi;
 namespace BL
 {
     
-    sealed class BL: IBL
+     sealed internal class BL: IBL
     {
 
         static readonly IBL instance = new BL();
@@ -644,7 +644,7 @@ namespace BL
          BL()
         {
             {
-                dal = new DAL.DalObject.DalObject();
+                //dal = new Dal.DalObject();
                 drones = new List<BO.DroneToList>();
                 bool flag = false;
                 Random rnd = new Random();

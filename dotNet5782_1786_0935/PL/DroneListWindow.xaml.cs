@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BL;
-using IBL.BO;
+using BO;
+using BlApi;
 
 namespace PL
 {
@@ -21,7 +22,8 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        BL.BLImp bl;
+
+        internal readonly IBL bl = BlFactory.GetBl();
         static weightCategories? weightFilter;
         static DroneStatus? statusFilter;
         public DroneListWindow()
@@ -41,7 +43,7 @@ namespace PL
                 d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter && x.weight == (weightCategories)weightFilter);
             DronesListView.ItemsSource = d;
         }
-        public DroneListWindow(BL.BLImp b)
+        public DroneListWindow(IBL b)
         {
             InitializeComponent();
             this.bl = b;
@@ -51,7 +53,7 @@ namespace PL
             weightSelector.ItemsSource = Enum.GetValues(typeof(weightCategories));
             
         }
-        private void IBL(BLImp b)
+        private void IBL(IBL b)
         {
 
         }

@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BL;
-using IBL.BO;
+using BO;
+using BlApi;
+
 
 namespace PL
 {
@@ -21,8 +23,8 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        BL.BLImp Bl;
-        public DroneWindow(BL.BLImp b,IBL.BO.DroneToList drone)//update drone
+        internal readonly IBL Bl = BlFactory.GetBl();
+        public DroneWindow(IBL b,BO.DroneToList drone)//update drone
         {
             InitializeComponent();
             //ShowInfo();
@@ -32,19 +34,19 @@ namespace PL
             stationIdCombo.ItemsSource = Bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
             update.Visibility = Visibility.Visible;
             add.Visibility = Visibility.Hidden;
-            if (drone.droneStatus == IBL.BO.DroneStatus.available)
+            if (drone.droneStatus == BO.DroneStatus.available)
             {
                 chargeDrone.Visibility = Visibility.Visible;
                 releaseDrone.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Visible;
             }
-            if (drone.droneStatus == IBL.BO.DroneStatus.maintenance)
+            if (drone.droneStatus == BO.DroneStatus.maintenance)
             {
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
             }
-            if (drone.droneStatus == IBL.BO.DroneStatus.delivery)
+            if (drone.droneStatus == BO.DroneStatus.delivery)
             {
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Hidden;
@@ -69,7 +71,7 @@ namespace PL
             weightText.IsReadOnly = true;
             idText.IsReadOnly = true;
         }
-        public DroneWindow(BL.BLImp drone)//new drone
+        public DroneWindow(IBL drone)//new drone
         {
             InitializeComponent();
             this.Bl = drone;
@@ -138,11 +140,11 @@ namespace PL
                 MessageBox.Show("added drone succesfully");
                 addAnotherDrone.Visibility = Visibility.Visible;
             }
-            catch(IBL.BO.AlreadyExistsException exc)
+            catch(BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.InvalidInputException exc)
+            catch (BO.InvalidInputException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.UnableToCompleteRequest exc)
+            catch (BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
             catch(Exception exc)
             {
@@ -165,7 +167,7 @@ namespace PL
             try
             {
                 if (Convert.ToInt32(releaseTime.Text) == null)
-                    throw new IBL.BO.InvalidInputException("Invalid input!\n");
+                    throw new BO.InvalidInputException("Invalid input!\n");
             }
 
             catch(InvalidInputException exc)
@@ -176,17 +178,17 @@ namespace PL
             time = Convert.ToInt32(releaseTime.Text);
                 try
             {
-                Bl.ReleaseDroneFromCharge(Convert.ToInt32(idText.Text), time);
+                Bl.releaseDroneFromCharge(Convert.ToInt32(idText.Text), time);
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Visible;
                 
             }
-            catch (IBL.BO.DoesntExistException exc)
+            catch (BO.DoesntExistException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.InvalidInputException exc)
+            catch (BO.InvalidInputException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.UnableToCompleteRequest exc)
+            catch (BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
             releaseCanvas.Visibility = Visibility.Collapsed;
             
@@ -202,11 +204,11 @@ namespace PL
                 deliverParcel.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
             }
-            catch (IBL.BO.AlreadyExistsException exc)
+            catch (BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.InvalidInputException exc)
+            catch (BO.InvalidInputException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.UnableToCompleteRequest exc)
+            catch (BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
             catch
             {
@@ -218,16 +220,16 @@ namespace PL
         {
             try
             {
-                Bl.MatchDroneWithPacrel(Convert.ToInt32(idText.Text));
+                Bl.matchDroneWithPacrel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone matched up succesfully");
                 matchUpParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Visible;
             }
-             catch(IBL.BO.DoesntExistException exc)
+             catch(BO.DoesntExistException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.InvalidInputException exc)
+            catch (BO.InvalidInputException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.UnableToCompleteRequest exc)
+            catch (BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
             catch
             {
@@ -239,16 +241,16 @@ namespace PL
         {
             try
             {
-                Bl.PickUpParcel(Convert.ToInt32(idText.Text));
+                Bl.pickUpParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone pickedUp succesfully");
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
             }
-            catch (IBL.BO.AlreadyExistsException exc)
+            catch (BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.InvalidInputException exc)
+            catch (BO.InvalidInputException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.UnableToCompleteRequest exc)
+            catch (BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
             catch
             {
@@ -265,11 +267,11 @@ namespace PL
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
             }
-            catch (IBL.BO.AlreadyExistsException exc)
+            catch (BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.InvalidInputException exc)
+            catch (BO.InvalidInputException exc)
             { MessageBox.Show(exc.Message); }
-            catch (IBL.BO.UnableToCompleteRequest exc)
+            catch (BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
             catch
             {
