@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace DAL
+namespace DalObject
 {
     public class Class1
     {
-
     }
 }

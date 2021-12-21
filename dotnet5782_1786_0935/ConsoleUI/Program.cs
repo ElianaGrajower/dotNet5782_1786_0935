@@ -1,15 +1,11 @@
 ﻿using System;
-using IDAL.DO;
-using DAL.DalObject;
+using DO;
+using DAL;
 //Adina Schulman 328620935
 //Eliana Grajower 328781786
 //this code allows you to build drone,parcel,station ,and customer and use different functions to use them
 
 
-//need ideas if what to add to add extra connections between structs
-//kind of want to build a coordinates class- should find out if exists in c# library
-//not really sure y uenum doesnt work
-//find out how to add connections between the different classes- pretty important
 
 
 
@@ -57,15 +53,15 @@ namespace ConsoleUI
                                 case 'A': //adds a station
                                     {
                                         Console.WriteLine("Enter name of station: ");
-                                        Station s = new Station() { Name =Console.ReadLine() };
+                                        Station s = new Station() { name =Console.ReadLine() };
                                         Console.WriteLine("Enter ID of station: ");
-                                        s.StationId = int.Parse(Console.ReadLine());
+                                        s.stationId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter amount of charge slots that station has: ");
-                                        s.ChargeSlots = int.Parse(Console.ReadLine());
+                                        s.chargeSlots = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter Your longitude coordinates: ");
-                                        s.Longitude = double.Parse(Console.ReadLine());
+                                        s.longitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter Your lattitude coordinates: ");
-                                        s.Lattitude = double.Parse(Console.ReadLine());
+                                        s.lattitude = double.Parse(Console.ReadLine());
                                         Data.AddStation(s); //builds and adds a station using the information the user provided
 
                                         break;
@@ -73,36 +69,36 @@ namespace ConsoleUI
                                 case 'B': //adds a drone
                                     {
                                         Console.WriteLine("Enter name of model: ");
-                                        Drone d = new Drone() { DroneId = DalObject.r.Next(100000000, 999999999), Model = "Model-" + (Console.ReadLine()) };
+                                        Drone d = new Drone() { droneId = DalObject.r.Next(100000000, 999999999), model = "Model-" + (Console.ReadLine()) };
                                         Console.WriteLine("Enter maximum weight drone can hold: ");
-                                        d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
+                                        d.maxWeight = (weightCategories)int.Parse(Console.ReadLine());
                                         //  d.Battery = 100; 
                                         // d.Status = DroneStatuses.available;
                                         Data.AddDrone(d); //builds and adds a drone using the information the user provided
-                                        Console.WriteLine("drone id: " + d.DroneId + "\n");
+                                        Console.WriteLine("drone id: " + d.droneId + "\n");
                                         break;
                                     }
                                 case 'C': //adds a customer
                                     {
                                         Console.WriteLine("Enter name of customer: ");
-                                        Customer c = new Customer() { Name = "Customer-" + (Console.ReadLine()) };
+                                        Customer c = new Customer() { name = "Customer-" + (Console.ReadLine()) };
                                         Console.WriteLine("Enter Id of customer: ");
-                                        c.CustomerId = int.Parse(Console.ReadLine());
+                                        c.customerId = int.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter phone number of customer: ");
                                         c.Phone = Console.ReadLine();
                                         Console.WriteLine("Enter Your longitude coordinates: ");
-                                        c.Longitude = double.Parse(Console.ReadLine());
+                                        c.longitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("Enter Your lattitude coordinates: ");
-                                        c.Lattitude = double.Parse(Console.ReadLine());
+                                        c.lattitude = double.Parse(Console.ReadLine());
                                         Data.AddCustomer(c); //builds and adds a customer using the information the user provided
                                         break;
                                     }
                                 case 'D': //adds a parcel
                                     {
                                         Console.WriteLine("Enter Parcel weight: ");
-                                        Parcel p = new Parcel() { ParcelId = Data.getParcelId(), Weight = (WeightCategories)int.Parse(Console.ReadLine()), Requested = DateTime.Now, };
+                                        Parcel p = new Parcel() { parcelId = Data.getParcelId(), weight = (weightCategories)int.Parse(Console.ReadLine()), requested = DateTime.Now, };
                                         Data.AddParcel(p); //builds and adds a parcel using the information the user provided
-                                        Console.WriteLine("parcel id: " + p.ParcelId + "\n");
+                                        Console.WriteLine("parcel id: " + p.parcelId + "\n");
                                         break;
                                     }
                                 default:
@@ -170,7 +166,7 @@ namespace ConsoleUI
                                         int droneId = int.Parse(Console.ReadLine());
                                         string stationNum;
                                         Console.WriteLine("List of available charging sttaions:");
-                                        foreach (Station item in Data.printStationsList()) { if (item.ChargeSlots != 0) Console.WriteLine(item.ToString() + "\n"); }; //prints list of available charging stations
+                                        foreach (Station item in Data.printStationsList()) { if (item.chargeSlots != 0) Console.WriteLine(item.ToString() + "\n"); }; //prints list of available charging stations
                                         Console.WriteLine("Enter name of station you want to charge drone at:");
                                         stationNum = Console.ReadLine();
                                         Console.WriteLine(Data.chargeDrone(Data.findDrone(droneId), stationNum) + "\n"); //charges and prints if completed successfully
@@ -190,7 +186,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter latitude coordinates: ");
                                         double latitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("the distance is:");
-                                        foreach (Station item in Data.printStationsList()) { Console.WriteLine(item.Name + ": " + Data.distance(item.Lattitude, item.Longitude, latitude, longitutde)); }; //prints the distance
+                                        foreach (Station item in Data.printStationsList()) { Console.WriteLine(item.name + ": " + Data.distance(item.lattitude, item.longitude, latitude, longitutde)); }; //prints the distance
                                         break;
                                     }
                                 case 'G': //finds distance from customer
@@ -200,7 +196,7 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter latitude coordinates: ");
                                         double latitude = double.Parse(Console.ReadLine());
                                         Console.WriteLine("the distance is:");
-                                        foreach (Customer item in Data.printCustomersList()) { Console.WriteLine(item.Name + ": " + Data.distance(item.Lattitude, item.Longitude, latitude, longitutde)); }; //prints the distances
+                                        foreach (Customer item in Data.printCustomersList()) { Console.WriteLine(item.name + ": " + Data.distance(item.lattitude, item.longitude, latitude, longitutde)); }; //prints the distances
                                         break;
                                     }
                                 default:
@@ -327,7 +323,7 @@ namespace ConsoleUI
                                         bool check = true;
                                         foreach (Parcel item in Data.printParcelsList())
                                         {
-                                            if (item.DroneId != 0)
+                                            if (item.droneId != 0)
                                             {
                                                 check = false;
                                                 break;
@@ -340,7 +336,7 @@ namespace ConsoleUI
                                             break;
                                         }
                                         Console.WriteLine("List of parcel not matched up with drones:\n");
-                                        foreach (Parcel item in Data.printParcelsList()) { if (item.DroneId == 0) Console.WriteLine(item.ToString() + "\n"); };
+                                        foreach (Parcel item in Data.printParcelsList()) { if (item.droneId == 0) Console.WriteLine(item.ToString() + "\n"); };
                                         break;
                                     }
                                 case 'F': //prints charge station with available charge list
@@ -348,7 +344,7 @@ namespace ConsoleUI
                                         bool check = true;
                                         foreach (Station item in Data.printStationsList())
                                         {
-                                            if (item.ChargeSlots != 0)
+                                            if (item.chargeSlots != 0)
                                             {
                                                 check = false;
                                                 break;
@@ -361,7 +357,7 @@ namespace ConsoleUI
                                             break;
                                         }
                                         Console.WriteLine("List of stations with available charging drone:\n");
-                                        foreach (Station item in Data.printStationsList()) { if (item.ChargeSlots != 0) Console.WriteLine(item.ToString() + "\n"); };
+                                        foreach (Station item in Data.printStationsList()) { if (item.chargeSlots != 0) Console.WriteLine(item.ToString() + "\n"); };
                                         break;
                                     }
                                 default:

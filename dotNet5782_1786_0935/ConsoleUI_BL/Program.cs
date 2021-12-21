@@ -1,5 +1,7 @@
 ﻿using System;
-using IBL.BO;
+using BO;
+using BlApi;
+using DalApi;
 using BL;
 //Adina Schulma 328620935
 //Eliana Grajower 328781786
@@ -10,10 +12,10 @@ namespace ConsoleUI_BL
 {
     public class Program
     {
-        static BLImp Data;
+        static BL Data;
         static void Main(string[] args)
         {
-            Data = new BLImp();
+            Data = new BL();
             Console.WriteLine("Choose from the following options:");
             Console.WriteLine("1- To add new item");
             Console.WriteLine("2- To update item");

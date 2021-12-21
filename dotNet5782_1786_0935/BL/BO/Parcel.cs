@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BL;
 //uodated and needed
 
-namespace IBL.BO
+namespace BO
 {
     public class Parcel
     {

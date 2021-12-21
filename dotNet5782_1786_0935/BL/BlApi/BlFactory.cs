@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace BlApi
 {
-    public static class DalFactory
+    public static class BlFactory
     {
+        public static IBL GetBl() => BL.BL.Instance;
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL.BO
+namespace BO
 {
     [Serializable]
     public class DoesntExistException : Exception  //if the item doesn't exist

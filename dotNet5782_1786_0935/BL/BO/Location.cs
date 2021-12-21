@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BL;
 //updated and needed
 
-namespace IBL.BO   
+namespace BO   
 {
     public class Location
     {

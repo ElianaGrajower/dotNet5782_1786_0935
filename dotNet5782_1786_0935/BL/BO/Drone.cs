@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BL;
 //updaetd and needed
-namespace IBL.BO
+namespace BO
 {
     public class Drone
     {     

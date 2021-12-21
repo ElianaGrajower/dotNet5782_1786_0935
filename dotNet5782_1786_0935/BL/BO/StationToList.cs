@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //updated and needed
-namespace IBL.BO
+namespace BO
 {
     public class StationToList
     {
