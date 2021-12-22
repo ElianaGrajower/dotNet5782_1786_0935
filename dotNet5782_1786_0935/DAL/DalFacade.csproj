@@ -1,11 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Targil0\Targil0.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="DalObject.cs" />
+		<Compile Remove="DataSource.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Targil0\Targil0.csproj" />
+	</ItemGroup>
 
 </Project>

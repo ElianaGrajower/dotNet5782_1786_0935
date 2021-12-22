@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 
-    namespace DalApi
-    {
+namespace DalApi
+{
     public interface IDal
     {
         // public DalObject();// { DataSource.Initialize(); } // default constructer calls on initialize func
@@ -29,11 +29,11 @@ using DO;
         public void deleteParcel(int id);
         public void deleteStation(int id);
         public void deleteDroneCharge(int droneId, int stationId);
-        public string matchUpParcel(Parcel parcel); //matches up package with drone
-      //  public string pickUpParcel(Customer customer, Parcel parcel); //matches up packg with sender of pckg
-      //  public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel); //matches up parcel with buyer
-      //  public string chargeDrone(Drone drone, int stationNum); //charges drone
-      //  public string releaseDrone(DroneCharge charge); //releases drone from charge
+        //public string matchUpParcel(Parcel parcel); //matches up package with drone
+                                                    //  public string pickUpParcel(Customer customer, Parcel parcel); //matches up packg with sender of pckg
+                                                    //  public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel); //matches up parcel with buyer
+                                                    //  public string chargeDrone(Drone drone, int stationNum); //charges drone
+                                                    //  public string releaseDrone(DroneCharge charge); //releases drone from charge
         public string PrintStation(int stationId); //prints a station
         public string PrintDrone(int droneId); //prints a drone
         public string PrintCustomer(int customerId); //prints a customer
@@ -53,7 +53,7 @@ using DO;
         public IEnumerable<Parcel> printParcelsList(); //prints parcel list
         public IEnumerable<DroneCharge> printDroneChargeList(); //prints DroneCharge listdefr
         public void attribute(int dID, int pID);//the function attribute parcel to drone
-    
-    }
-    }
+
+    } 
+   }
 

@@ -11,8 +11,10 @@ using DAL;
 namespace Dal
 {
 
-    sealed class DalObject : IDal
+    sealed internal class DalObject : IDal
     {
+        static readonly IDal instance = new DalObject();
+        public static IDal Instance { get => instance; }
         public static Random r = new Random();
         public DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
 
@@ -225,7 +227,7 @@ namespace Dal
                 throw new DoesntExistException("This parcel doesn't exist in the system");
             string complete = "Your request was completed successfully";
             Drone drone = new Drone();
-            drone = (DataSource.DroneList.Find(temp => /*temp.Status == DroneStatuses.available &&*/ temp.maxWeight >= parcelToUpdate.weight)); //finds avail drone that can contain weight of pckg
+            drone = (DataSource.DroneList.Find(temp => / temp.Status == DroneStatuses.available &&/ temp.maxWeight >= parcelToUpdate.weight)); //finds avail drone that can contain weight of pckg
             DataSource.DroneList.RemoveAll(temp => temp.droneId == drone.droneId); //removes the availabe drone
             if (drone.droneId != 0 && parcelToUpdate.parcelId != 0) //if found drone updates info to match pckg
             {
@@ -569,4 +571,3 @@ namespace Dal
 
 
 }
-

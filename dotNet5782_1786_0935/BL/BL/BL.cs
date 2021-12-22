@@ -20,9 +20,11 @@ namespace BL
     {
 
         static readonly IBL instance = new BL();
+       
         public static IBL Instance { get => instance; }
-
         internal IDal dal = DalFactory.GetDal();
+
+
 
         public double[] chargeCapacity;    
         private List<BO.DroneToList> drones; 
@@ -643,7 +645,7 @@ namespace BL
         #region BL
          BL()
         {
-            {
+            
                 //dal = new Dal.DalObject();
                 drones = new List<BO.DroneToList>();
                 bool flag = false;
@@ -755,7 +757,7 @@ namespace BL
                     //Console.WriteLine(drt.ToString());
 
 
-                }
+                
                 
 
             }
