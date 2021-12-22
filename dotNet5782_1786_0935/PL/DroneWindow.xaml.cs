@@ -39,12 +39,16 @@ namespace PL
                 chargeDrone.Visibility = Visibility.Visible;
                 releaseDrone.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Visible;
+                pickupParcel.Visibility = Visibility.Hidden;
+                deliverParcel.Visibility = Visibility.Hidden;
             }
             if (drone.droneStatus == BO.DroneStatus.maintenance)
             {
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
+                deliverParcel.Visibility = Visibility.Hidden;
+                pickupParcel.Visibility = Visibility.Hidden;
             }
             if (drone.droneStatus == BO.DroneStatus.delivery)
             {
@@ -52,9 +56,6 @@ namespace PL
                 releaseDrone.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Hidden;
             }
-            
-            pickupParcel.Visibility = Visibility.Hidden;
-            deliverParcel.Visibility = Visibility.Hidden;
             longitudeText.Visibility = Visibility.Visible;
             lattitudeText.Visibility = Visibility.Visible;
             stationIdCombo.Visibility = Visibility.Hidden;
@@ -80,9 +81,9 @@ namespace PL
             //  stationIdCombo.Items.Add(Bl.getStationsList());
             update.Visibility = Visibility.Hidden;
             add.Visibility = Visibility.Visible;
-            chargeDrone.Visibility = Visibility.Visible;
+            chargeDrone.Visibility = Visibility.Hidden;
             releaseDrone.Visibility = Visibility.Hidden;
-            matchUpParcel.Visibility = Visibility.Visible;
+            matchUpParcel.Visibility = Visibility.Hidden;
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
             longitudeText.Visibility = Visibility.Hidden;
@@ -154,8 +155,6 @@ namespace PL
         private void releaseDrone_Click(object sender, RoutedEventArgs e)
         {
             releaseCanvas.Visibility = Visibility.Visible;
-           
-            
         }
         private void weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -201,8 +200,10 @@ namespace PL
             {
                 Bl.deliveredParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone delivered succesfully");
-                deliverParcel.Visibility = Visibility.Visible;
-                matchUpParcel.Visibility = Visibility.Hidden;
+                deliverParcel.Visibility = Visibility.Hidden;
+                matchUpParcel.Visibility = Visibility.Visible;
+                pickupParcel.Visibility = Visibility.Hidden;
+                chargeDrone.Visibility = Visibility.Visible;
             }
             catch (BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
@@ -224,6 +225,8 @@ namespace PL
                 MessageBox.Show("drone matched up succesfully");
                 matchUpParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Visible;
+                deliverParcel.Visibility = Visibility.Hidden;
+                chargeDrone.Visibility = Visibility.Hidden;
             }
              catch(BO.DoesntExistException exc)
             { MessageBox.Show(exc.Message); }
@@ -245,6 +248,7 @@ namespace PL
                 MessageBox.Show("drone pickedUp succesfully");
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
+                matchUpParcel.Visibility = Visibility.Hidden;
             }
             catch (BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
@@ -294,5 +298,7 @@ namespace PL
         {
 
         }
+     
+
     }
 }

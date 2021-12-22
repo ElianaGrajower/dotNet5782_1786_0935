@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
     <Grid RenderTransformOrigin="0.5,0.5" Background="#FF7D9BC0">
-        <TextBox x:Name="idText" HorizontalAlignment="Left" Margin="317,113,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
+        <TextBox x:Name="idText" HorizontalAlignment="Left" Margin="317,113,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Background="White"/>
         <TextBox x:Name="modelText" HorizontalAlignment="Left" Margin="317,183,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
-        <TextBlock HorizontalAlignment="Left" Margin="223,113,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="223,113,0,0" Text="Drone Id:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="223,148,0,0" Text="Max weight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="223,183,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock x:Name="stationRead" HorizontalAlignment="Left" Margin="223,218,0,0" Text="station ID:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>

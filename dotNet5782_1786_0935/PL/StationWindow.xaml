@@ -1,0 +1,33 @@
+﻿<Window x:Class="PL.StationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="StationWindow" Height="450" Width="800">
+    <Grid Background="#FF7D9BC0">
+        <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="620,294,0,0" VerticalAlignment="Top" Width="85" Click="update_Click" Background="#FF468BE1"/>
+        <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="620,354,0,0" VerticalAlignment="Top" Width="85" Click="add_Click" Background="#FF468BE1"/>
+        <Button x:Name="delete" Content="delete" HorizontalAlignment="Left" Margin="620,354,0,0" VerticalAlignment="Top" Width="85" Click="delete_Click" Background="#FF468BE1"/>
+        <Button x:Name="close" Content="close" HorizontalAlignment="Left" Margin="106,354,0,0" VerticalAlignment="Top" Width="85" Click="close_Click" Background="#FFC74D64"/>
+        <Label Content="Station Id:" HorizontalAlignment="Left" Margin="273,87,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="stationIdText" HorizontalAlignment="Left" Margin="377,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="273,131,0,0" VerticalAlignment="Top" Width="51"/>
+        <TextBox x:Name="nameText" HorizontalAlignment="Left" Margin="377,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Lattitude:" HorizontalAlignment="Left" Margin="275,175,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="lattitudeText" HorizontalAlignment="Left" Margin="377,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Charge Slots:" HorizontalAlignment="Left" Margin="273,255,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="slotsText" HorizontalAlignment="Left" Margin="377,259,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <Label x:Name="inUseRead" Content="Charges In Use:" HorizontalAlignment="Left" Margin="273,296,0,0" VerticalAlignment="Top" Width="99"/>
+        <TextBox x:Name="inUseText" HorizontalAlignment="Left" Margin="377,300,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="273,217,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="377,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Canvas x:Name="checkDelete" Margin="298,109,248,194" Background="White" Visibility="Collapsed">
+            <TextBlock Canvas.Left="41" Canvas.Top="24" TextWrapping="Wrap"><Run Text="Are you sure you want to delete "/><LineBreak/><Run Text="this station?"/></TextBlock>
+            <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
+            <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
+        </Canvas>
+
+    </Grid>
+</Window>
