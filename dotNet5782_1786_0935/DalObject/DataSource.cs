@@ -59,7 +59,7 @@ namespace DAL
         #region createDrone
         static void createDrone() //creats a drone with random information
         {
-            for (int i = 0; i < 20; i++) //creates 5 drones with information
+            for (int i = 0; i < 10; i++) //creates 5 drones with information
                 DroneList.Add(new Drone()
                 {
                     droneId = DalObject.r.Next(100000000, 999999999),
@@ -91,8 +91,8 @@ namespace DAL
                     customerId = DalObject.r.Next(100000000, 999999999),
                     name = customerName[i],
                     Phone = "05" + DalObject.r.Next(00000000, 99999999),
-                    longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90)
-                    latitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                    longitude = (DalObject.r.NextDouble() + DalObject.r.Next(34, 35)) + 0.57, //gets coordinates for (-90 - 90) 
+                    latitude = (DalObject.r.NextDouble() + DalObject.r.Next(29, 33)) + 0.207, //gets coordinates for (-180 - 180)
                     password = letters[i] + p,
                     isCustomer = false,
                     active = true

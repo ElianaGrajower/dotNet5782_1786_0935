@@ -394,7 +394,7 @@ namespace BL
             //chelcs validity of input
             if(customertoAdd.location.latitude< 29.207 || customertoAdd.location.latitude > 33.207)
                 throw new BO.InvalidInputException("latitude is out of range\n");
-            if (customertoAdd.location.longitude < 34.571 || customertoAdd.location.longitude > 35.572)
+            if (customertoAdd.location.longitude < 34.572 || customertoAdd.location.longitude > 35.572)
                 throw new BO.InvalidInputException("longitude is out of range\n");
             if (customertoAdd.customerId > 999999999 || customertoAdd.customerId < 100000000)
                 throw new BO.InvalidInputException("customer id not valid\n");
@@ -437,7 +437,7 @@ namespace BL
                 throw new BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
             if (StationtoAdd.location.latitude < 29.207 || StationtoAdd.location.latitude > 33.207)
                 throw new BO.InvalidInputException("latitude is out of range\n");
-            if (StationtoAdd.location.longitude < 34.571 || StationtoAdd.location.longitude > 35.572)
+            if (StationtoAdd.location.longitude < 34.572 || StationtoAdd.location.longitude > 35.572)
                 throw new BO.InvalidInputException("longitude is out of range\n");
             if (StationtoAdd.chargeSlots <= 0)
                 throw new BO.InvalidInputException("invalid amount of chargeSlots- must be a positive number");
@@ -744,7 +744,7 @@ namespace BL
                           //  if (minBatery == 0) { minBatery = 1; }
                             drt.battery = rnd.Next((int)minBatery, 101); // 100/;
                          //  if (drt.location == null)
-                           // drt.location = new Location(29, 34);
+                         //   drt.location = new Location(29.208, 34.57);
                             flag = true;
                             break;
                         }
@@ -772,8 +772,8 @@ namespace BL
                             dal.AddDroneCharge(DC);
                             drt.location = new Location( s.latitude,  s.longitude );
                             drt.battery = rnd.Next(1, 21); // 100/;
-                        //if (drt.location == null)
-                          //  drt.location = new Location(29, 34);
+                        if (drt.location == null)
+                            drt.location = new Location(29.208, 34.57);
                     }
                         else
                         {
@@ -800,8 +800,8 @@ namespace BL
 
                             if (minBatery > 100) { minBatery = 100; }
                            // if (minBatery == 0) { minBatery = 1; }
-                     //   if (drt.location == null)
-                         //   drt.location = new Location(29, 34);
+                       // if (drt.location == null)
+                         //   drt.location = new Location(29.207, 34.5);
                         drt.battery = rnd.Next((int)minBatery, 101);
                         }
 
