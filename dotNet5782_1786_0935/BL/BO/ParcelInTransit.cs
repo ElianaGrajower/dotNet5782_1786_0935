@@ -10,7 +10,7 @@ namespace BO
     public class ParcelInTransit
     {
         public int parcelId;
-        public bool parcelStatus; //true if matched with drone
+       // public bool parcelStatus; //true if matched with drone
         public Priorities priority;
         public weightCategories weight;
         public CustomerInParcel sender;   
@@ -18,6 +18,7 @@ namespace BO
         public Location pickupLocation;
         public Location targetLocation;
         public double distance;
+        public ParcelStatus parcelStatus;
 
 
         public override string ToString()

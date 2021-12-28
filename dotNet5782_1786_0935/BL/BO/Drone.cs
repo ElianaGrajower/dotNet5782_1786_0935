@@ -13,6 +13,7 @@ namespace BO
         public string model { set; get; }
         public weightCategories maxWeight;  //light, average, heavy
         public double battery; //in percentages
+        public bool active;
         public DroneStatus droneStatus { set; get; }  //available, maintenance, delivery
         public ParcelInTransit parcel;
         public Location location;

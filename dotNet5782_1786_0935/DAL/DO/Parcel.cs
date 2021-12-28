@@ -20,8 +20,9 @@ using System.Threading.Tasks;
             public DateTime? pickedUp { set; get; } //The time the drones picks up the parcel from the sender
             public DateTime? delivered { set; get; } //The time the customer receives the oarcel
             public bool fragile { set; get; } //if the parcel is fragile    //***should we take it out???
+            public bool active { set; get; }
 
-            public override string ToString()
+        public override string ToString()
             {
                 return String.Format($"Parcel Id: {parcelId}\nSender Id: {senderId}\nTarget Id: {targetId}\nDrone Id: {droneId}\nweight: {weight}\npriority: {priority}\nrequested: { requested}\nscheduled: {scheduled}\nPicked Up: { pickedUp }\ndelivered: { delivered}");
             }

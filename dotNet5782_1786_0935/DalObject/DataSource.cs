@@ -12,7 +12,7 @@ namespace DAL
 {
 
     internal static class DataSource
-    {
+    {   internal static string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J","1111aaa" };
         internal static string[] stationName = { "Raanana", "Tel Aviv" };
         internal static string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
         internal static string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
@@ -31,16 +31,17 @@ namespace DAL
             public static double chargeSpeed = 0.5;
 
         }
+        #region Initialize
         public static void Initialize()
         {
             createStation(); //creats a station with random information
             createDrone(); //creats a drone with random information
-
             createCustomer(); //creats a customer with random information
             createParcel(); //creats a parcel with random information
 
         }
-
+        #endregion
+        #region createStation
         static void createStation() //creats a station with random information
         {
             for (int i = 0; i < 2; i++) //creates 2 stations with information
@@ -50,25 +51,29 @@ namespace DAL
                     name = stationName[i],
                     longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90) 
                     lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
-                    chargeSlots = DalObject.r.Next(1, 100)
+                    chargeSlots = DalObject.r.Next(1, 100),
+                    active = true
                 });
         }
+        #endregion
+        #region createDrone
         static void createDrone() //creats a drone with random information
         {
-            for (int i = 0; i < 20; i++) //creates 11 drones with information
+            for (int i = 0; i < 20; i++) //creates 5 drones with information
                 DroneList.Add(new Drone()
                 {
                     droneId = DalObject.r.Next(100000000, 999999999),
                     model = droneName[i],
-                    maxWeight = (DO.weightCategories)DalObject.r.Next(1, 3), //chooses a max weight from light, average, heavy
-                                                                             //  Status = 0, //chooses a status from available, maintenance, delivery
+                    maxWeight = (DO.weightCategories)DalObject.r.Next(1, 3),
+                    active = true 
                 });
         }
-
-
+        #endregion
+        #region createCustomer
         static void createCustomer() //creats a customer with random information
         {
-            for (int i = 0; i < 10; i++) //creates 10 customers with information
+            string p = letters[10];
+            for (int i = 0; i < 8; i++) //creates 8 customers with information
                 CustomerList.Add(new Customer()
                 {
                     customerId = DalObject.r.Next(100000000, 999999999),
@@ -76,8 +81,25 @@ namespace DAL
                     Phone = "05" + DalObject.r.Next(00000000, 99999999),
                     longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90)
                     lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                    password = letters[i] + p,
+                    isCustomer = true,
+                    active=true
+                }) ;
+            for (int i = 8; i < 10; i++) //creates 2 workers
+                CustomerList.Add(new Customer()
+                {
+                    customerId = DalObject.r.Next(100000000, 999999999),
+                    name = customerName[i],
+                    Phone = "05" + DalObject.r.Next(00000000, 99999999),
+                    longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90)
+                    lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                    password = letters[i] + p,
+                    isCustomer = false,
+                    active = true
                 });
         }
+        #endregion
+        #region createParcel
         static void createParcel() //creats a parcel with random information
         {
             for (int i = 0; i < 10; i++) //creates 10 parcels with information
@@ -87,14 +109,16 @@ namespace DAL
                     weight = (DO.weightCategories)DalObject.r.Next(1, 3), //chooses a weight from light, average, heavy
                     priority = (DO.Priorities)DalObject.r.Next(1, 3),
                     requested = DateTime.Now,
-                    senderId = CustomerList[0].customerId,
-                    targetId = CustomerList[4].customerId,
+                    scheduled=DateTime.Now,//this was just added its untested
+                    senderId = CustomerList[i].customerId,
+                    targetId = CustomerList[3].customerId,
                     droneId = DroneList[i].droneId,
-                    scheduled = DateTime.Now,//this was just added its untested
-                    pickedUp = DateTime.Now,
-                    delivered = DateTime.Now
+                    active = true,
+                    
+
                 });
         }
+        #endregion
     }
 
 }

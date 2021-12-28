@@ -8,6 +8,7 @@ namespace BO
 {
     public class DroneInCharging
     {
+        public DateTime chargeTime;
         public int droneId;   
         public double battery; //in percentages
 

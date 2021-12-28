@@ -41,11 +41,11 @@ namespace DalApi
         public Parcel findParcel(int parcelId); //finds a parcel using its id
         public Customer findCustomer(int customerId); //finds a customer using its id
         public DroneCharge findDroneCharge(int droneId, int stationId);
-        public Drone findDrone(int droneId); //finds a drone using its id
+       public Drone findDrone(int droneId); //finds a drone using its id
         public Station findStation(int stationId); //finds a station using its id
         public DroneCharge findDroneCharge(int droneChargeId); //finds a drone charge using its id
-        public int getParcelId(); //returns parcel id
-        public double distance(double lattitude1, double longitute1, double lattitude2, double longitute2); //calculates distance between coordinates for bonus
+       public int getParcelId(); //returns parcel id
+      //  public double distance(double lattitude1, double longitute1, double lattitude2, double longitute2); //calculates distance between coordinates for bonus
         public double[] ChargeCapacity();
         public IEnumerable<Station> printStationsList(); //prints list of stations 
         public IEnumerable<Drone> printDronesList(); //prints list of drone
@@ -53,6 +53,9 @@ namespace DalApi
         public IEnumerable<Parcel> printParcelsList(); //prints parcel list
         public IEnumerable<DroneCharge> printDroneChargeList(); //prints DroneCharge listdefr
         public void attribute(int dID, int pID);//the function attribute parcel to drone
+        public Customer returnCustomer(string name, string password);
+        public Customer checkCustomer(string name, string password);
+        public DroneCharge getDroneCharge(int droneId);
 
     } 
    }

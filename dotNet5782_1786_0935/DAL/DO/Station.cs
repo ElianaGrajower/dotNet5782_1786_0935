@@ -16,6 +16,8 @@ using System.Threading.Tasks;
                 lattitude=lat;
                 longitude = lon;
                 chargeSlots = slots;
+                active = true;
+                
               //  availablechargeSlots = slots;
 
             }
@@ -24,8 +26,9 @@ using System.Threading.Tasks;
             public double lattitude { set; get; }
             public double longitude { set; get; }
             public int chargeSlots { set; get; }
-           // public int availablechargeSlots { set; get; }
-            public override string ToString()
+            public bool active { set; get; }
+        // public int availablechargeSlots { set; get; }
+        public override string ToString()
             {
                 return String.Format($"Id: {stationId}\nname: {name}\nlongitude: {longitude}lattitude: {lattitude}\nchargeSlots: {chargeSlots}");
             }

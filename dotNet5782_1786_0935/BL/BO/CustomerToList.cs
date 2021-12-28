@@ -16,6 +16,7 @@ namespace BO
         public int undeliveredParcels;
         public int recievedParcel;
         public int transitParcel;
+        public bool isCustomer;
             
         public override string ToString()
         {
