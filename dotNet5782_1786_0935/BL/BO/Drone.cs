@@ -11,12 +11,12 @@ namespace BO
     {     
         public int droneId { set; get; }
         public string model { set; get; }
-        public weightCategories maxWeight;  //light, average, heavy
-        public double battery; //in percentages
-        public bool active;
+        public weightCategories maxWeight { set; get; }  //light, average, heavy
+        public double battery { set; get; } //in percentages
+        public bool active { set; get; }
         public DroneStatus droneStatus { set; get; }  //available, maintenance, delivery
-        public ParcelInTransit parcel;
-        public Location location;
+        public ParcelInTransit parcel { set; get; }
+        public Location location { set; get; }
 
         public override string ToString()
         {

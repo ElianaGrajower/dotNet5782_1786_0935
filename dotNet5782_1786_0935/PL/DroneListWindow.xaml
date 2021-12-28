@@ -12,7 +12,7 @@
         <ComboBox x:Name="StatusSelector" Margin="192,36,448,349" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
         <Label Content="Drone Max weight:" HorizontalAlignment="Left" Margin="403,36,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
         <Label Content="Drone Status:" Margin="84,36,593,349" FontSize="16"></Label>
-        <ListView x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged" Margin="0,90,0,94" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
+        <ListView x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged" Margin="0,90,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

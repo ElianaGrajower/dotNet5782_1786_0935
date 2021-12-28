@@ -34,7 +34,7 @@ namespace PL
             try
             {
                 string user = userNameText.Text;
-                string password = passwordText.Text;
+                string password = (string)passwordText.Password.ToString();
                 if(bl.isEmployee(user,password))
                 {
                     new MainWindow().Show();

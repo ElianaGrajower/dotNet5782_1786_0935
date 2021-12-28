@@ -36,23 +36,25 @@ namespace PL
             DataContext = stationObservableCollection;
 
         }
-        private void ShowInfo()  /////add filter
-        {
-            IEnumerable<StationToList> d = new List<StationToList>();
-            if (filterSlots.Text != "")
-                StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
-            else
-            {
-                if (availableChargesSelector.SelectedItem == "available charges slots")
-                    StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
-                else
-                    StationsListView.ItemsSource = bl.getStationsList();
-            }
-        }
+        //private void ShowInfo()  /////add filter
+        //{
+        //    IEnumerable<StationToList> d = new List<StationToList>();
+        //    if (filterSlots.Text != "")
+        //        StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
+        //    else
+        //    {
+        //        if (availableChargesSelector.SelectedItem == "available charges slots")
+        //            StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
+        //        else
+        //            StationsListView.ItemsSource = bl.getStationsList();
+        //    }
+        //}
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new StationWindow(bl).ShowDialog();
-            ShowInfo();
+            stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
+            DataContext = stationObservableCollection;
+            // ShowInfo();
         }
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {

@@ -1277,8 +1277,6 @@ namespace BL
         //something wrong with when battery us 0 throws location exception
         public void SendDroneToCharge(int droneId) 
         {
-
-
             BO.Drone drone = new();
             BO.Station station = new();
             try
