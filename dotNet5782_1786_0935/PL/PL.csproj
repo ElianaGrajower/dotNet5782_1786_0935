@@ -12,6 +12,7 @@
     <None Remove="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <None Remove="Calendar-icon.png" />
     <None Remove="inline_image_preview.jpg" />
+    <None Remove="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <None Remove="sky+photo+for+website+home+page.jpeg" />
     <None Remove="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />
   </ItemGroup>
@@ -26,6 +27,7 @@
     <Resource Include="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <Resource Include="Calendar-icon.png" />
     <Resource Include="inline_image_preview.jpg" />
+    <Resource Include="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <Resource Include="sky+photo+for+website+home+page.jpeg" />
     <Resource Include="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />
   </ItemGroup>

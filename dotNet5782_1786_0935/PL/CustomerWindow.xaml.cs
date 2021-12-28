@@ -71,7 +71,8 @@ namespace PL
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
             addButton.Visibility = Visibility.Hidden;
-           
+            passwordRead.Visibility = Visibility.Hidden;
+            passwordText.Visibility = Visibility.Hidden;
 
         }
 
@@ -169,6 +170,11 @@ namespace PL
         {
             continueButton.IsEnabled = true;
          //   checkBoxTerms.Foreground = "#FF268E75";
+
+        }
+
+        private void passwordText_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }

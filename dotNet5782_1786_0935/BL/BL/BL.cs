@@ -25,6 +25,17 @@ namespace BL
         public double[] chargeCapacity;    
         private List<BO.DroneToList> drones; 
         public static Random rand = new Random();
+        public bool isEmployee(string userName, string password)
+        {
+            int id = getCustomersList().Where(c => c.customerName == userName).Select(s => s.customerId).FirstOrDefault();
+            if (id == null)
+                throw new BO.DoesntExistException("this userName doest exist\n");
+            if (getCustomer(id).password != password)
+                throw new BO.InvalidInputException("the password is incorrect\n");
+            if (getCustomer(id).isCustomer == true)
+                return false;
+            return true;
+        }
         #region passwordProtection
         private bool passwordProtection(string password)
         {

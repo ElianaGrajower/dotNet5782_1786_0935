@@ -42,8 +42,23 @@ namespace PL
             targetText.Visibility = Visibility.Hidden;
             deleteButton.Visibility = Visibility.Hidden;
             updateButton.Visibility = Visibility.Hidden;
+            parcelIdText.Visibility = Visibility.Hidden;
+            parcelIdRead.Visibility = Visibility.Hidden;
+            droneIdText.Visibility = Visibility.Hidden;
+            droneIdRead.Visibility = Visibility.Hidden;
+            requestedRead.Visibility = Visibility.Hidden;
+            requestedText.Visibility = Visibility.Hidden;
+            scheduleText.Visibility = Visibility.Hidden;
+            scheduledRead.Visibility = Visibility.Hidden;
+            pickedupText.Visibility = Visibility.Hidden;
+            pickUpRead.Visibility = Visibility.Hidden;
+            deliveredRead.Visibility = Visibility.Hidden;
+            deliveryText.Visibility = Visibility.Hidden;
 
-            
+
+
+
+
 
         }
         public ParcelWindow(IBL b, Parcel parcel) //update

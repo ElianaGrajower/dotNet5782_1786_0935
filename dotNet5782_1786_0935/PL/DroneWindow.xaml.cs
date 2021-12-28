@@ -167,32 +167,24 @@ namespace PL
         }
         private void releaseDrone_Click(object sender, RoutedEventArgs e)
         {
-            releaseCanvas.Visibility = Visibility.Visible;
-        }
-        private void weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            weight.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
-        }
-        private void ok_Click(object sender, RoutedEventArgs e)
-        {
-            int time;
-            try
-            {
-                if (Convert.ToInt32(releaseTime.Text) == null)
-                    throw new BO.InvalidInputException("Invalid input!\n");
-            }
+            //int time;
+            //try
+            //{
+            //    if (Convert.ToInt32(releaseTime.Text) == null)
+            //        throw new BO.InvalidInputException("Invalid input!\n");
+            //}
 
-            catch(InvalidInputException exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-           
-            time = Convert.ToInt32(releaseTime.Text);
-                try
+            //catch (InvalidInputException exc)
+            //{
+            //    MessageBox.Show(exc.Message);
+            //}
+
+            //time = Convert.ToInt32(releaseTime.Text);
+            try
             {
                 bl.releaseDroneFromCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone released succesfully");
-                releaseDrone.Visibility = Visibility.Hidden;
+                releaseDrone.Visibility = Visibility.Hidden;    
                 chargeDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Visible;
                 ///////////////////////up to here
@@ -204,9 +196,11 @@ namespace PL
             { MessageBox.Show(exc.Message); }
             catch (BO.UnableToCompleteRequest exc)
             { MessageBox.Show(exc.Message); }
-            releaseCanvas.Visibility = Visibility.Collapsed;
-            
 
+        }
+        private void weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            weight.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
         }
 
         private void deliverParcel_Click(object sender, RoutedEventArgs e)
