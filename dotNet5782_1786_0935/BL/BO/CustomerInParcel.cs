@@ -9,9 +9,9 @@ namespace BO
 {
     public class CustomerInParcel
     {
-        public int customerId;
-        public string customerName;
-            
+        public int customerId { set; get; }
+        public string customerName { set; get; }
+
         public override string ToString()
         {
             return String.Format($"Customer Id: {customerId}\nCustomer name: {customerName}\n");

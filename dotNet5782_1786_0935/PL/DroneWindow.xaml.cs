@@ -24,7 +24,7 @@ namespace PL
     public partial class DroneWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
-        public DroneWindow(IBL b,BO.DroneToList drone)//update drone
+        public DroneWindow(IBL b,BO.Drone drone)//update drone
         {
             InitializeComponent();
             //ShowInfo();
@@ -56,19 +56,26 @@ namespace PL
                 releaseDrone.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Hidden;
             }
-            longitudeText.Visibility = Visibility.Visible;
-            lattitudeText.Visibility = Visibility.Visible;
+            locationText.Visibility = Visibility.Visible;
             stationIdCombo.Visibility = Visibility.Hidden;
-            longitudeRead.Visibility = Visibility.Visible;
-            lattitudeRead.Visibility = Visibility.Visible;
+            locationRead.Visibility = Visibility.Visible;
             stationRead.Visibility = Visibility.Hidden;
             weightText.Visibility = Visibility.Visible;
             weight.Visibility = Visibility.Hidden;
             idText.Text = drone.droneId.ToString();
             modelText.Text = drone.model.ToString();
-            lattitudeText.Text = drone.location.lattitude.ToString();
-            longitudeText.Text = drone.location.longitude.ToString();
-            weightText.Text = drone.weight.ToString();
+            locationText.Text = drone.location.ToString();
+            weightText.Text = drone.maxWeight.ToString();
+            batteryText.Text = drone.battery.ToString();
+            statusText.Text = drone.droneStatus.ToString();
+            if (statusText.Text == "delivery")
+                parcelIdText.Text = drone.parcel.ToString();
+            else
+            {
+                parcelIdRead.Visibility = Visibility.Hidden;
+                parcelIdText.Visibility = Visibility.Hidden;
+                parcelButton.Visibility = Visibility.Hidden;
+            }
             weightText.IsReadOnly = true;
             idText.IsReadOnly = true;
         }
@@ -86,14 +93,20 @@ namespace PL
             matchUpParcel.Visibility = Visibility.Hidden;
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
-            longitudeText.Visibility = Visibility.Hidden;
-            lattitudeText.Visibility = Visibility.Hidden;
+            locationText.Visibility = Visibility.Hidden;
             stationIdCombo.Visibility = Visibility.Visible;
-            longitudeRead.Visibility = Visibility.Hidden;
-            lattitudeRead.Visibility = Visibility.Hidden;
+            locationRead.Visibility = Visibility.Hidden;
             stationRead.Visibility = Visibility.Visible;
             weightText.Visibility = Visibility.Hidden;
             weight.Visibility = Visibility.Visible;
+            batteryRead.Visibility = Visibility.Hidden;
+            batteryText.Visibility = Visibility.Hidden;
+            statusRead.Visibility = Visibility.Hidden;
+            statusText.Visibility = Visibility.Hidden;
+            parcelIdRead.Visibility = Visibility.Hidden;
+            parcelIdText.Visibility = Visibility.Hidden;
+            parcelButton.Visibility = Visibility.Hidden;
+
             weightText.IsReadOnly = false;
             idText.IsReadOnly = false;
 
@@ -181,7 +194,9 @@ namespace PL
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Visible;
-                
+                matchUpParcel.Visibility = Visibility.Visible;
+                ///////////////////////up to here
+                //////////binde for battery,status......
             }
             catch (BO.DoesntExistException exc)
             { MessageBox.Show(exc.Message); }
@@ -204,6 +219,7 @@ namespace PL
                 matchUpParcel.Visibility = Visibility.Visible;
                 pickupParcel.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Visible;
+                statusText.Text = "available";
             }
             catch (BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
@@ -227,8 +243,9 @@ namespace PL
                 pickupParcel.Visibility = Visibility.Visible;
                 deliverParcel.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Hidden;
+                statusText.Text = "delivery";
             }
-             catch(BO.DoesntExistException exc)
+            catch (BO.DoesntExistException exc)
             { MessageBox.Show(exc.Message); }
             catch (BO.InvalidInputException exc)
             { MessageBox.Show(exc.Message); }
@@ -270,6 +287,8 @@ namespace PL
                 MessageBox.Show("drone charging succesfully");
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
+                matchUpParcel.Visibility = Visibility.Hidden;
+                statusText.Text = "maintenance";
             }
             catch (BO.AlreadyExistsException exc)
             { MessageBox.Show(exc.Message); }
@@ -286,11 +305,11 @@ namespace PL
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Close();
-            addAnotherDrone.Visibility = Visibility.Collapsed;
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            Close();
             new DroneWindow(bl).Show();
         }
 
@@ -298,7 +317,13 @@ namespace PL
         {
 
         }
-     
 
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            //Parcel updateParcel = new Parcel();
+            //updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
+            //new ParcelWindow(bl, updateParcel).ShowDialog();
+            //ShowInfo();
+        }
     }
 }

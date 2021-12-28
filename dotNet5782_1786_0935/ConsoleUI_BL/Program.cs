@@ -15,7 +15,7 @@ namespace ConsoleUI_BL
         static IBL bl = BlFactory.GetBl();
         static void Main(string[] args)
         {
-           
+            
         }
     }
 }

@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="800">
     <Grid Background="#FF7D9BC0">
-        
-        <ComboBox Name="weightSelector" Margin="550,20,80,365" SelectionChanged="weightSelector_SelectionChanged"/>
-        <ComboBox x:Name="StatusSelector" Margin="188,20,452,365" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
-        <Label Content="Drone Max weight:" HorizontalAlignment="Left" Margin="399,20,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
-        <Label Content="Drone Status:" Margin="80,20,597,365" FontSize="16"></Label>
+
+        <ComboBox Name="weightSelector" Margin="554,36,76,349" SelectionChanged="weightSelector_SelectionChanged"/>
+        <ComboBox x:Name="StatusSelector" Margin="192,36,448,349" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
+        <Label Content="Drone Max weight:" HorizontalAlignment="Left" Margin="403,36,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
+        <Label Content="Drone Status:" Margin="84,36,593,349" FontSize="16"></Label>
         <ListView x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged" Margin="0,90,0,94" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
             <ListView.View>
                 <GridView>
@@ -19,7 +19,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="add new drone" Margin="609,358,60,32" Click="Button_Click" Background="#FF468BE1"/>
+        <Button Content="add new drone" Margin="607,352,62,30" Click="Button_Click" Background="#FF468BE1"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="84,358,0,32" VerticalAlignment="Top" Width="91" Height="22" Click="Button_Click_1" Background="#FFC74D64"/>
 
     </Grid>

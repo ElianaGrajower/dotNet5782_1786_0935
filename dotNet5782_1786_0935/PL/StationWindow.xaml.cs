@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using System.Collections.ObjectModel;
+
 
 namespace PL
 {
@@ -22,39 +24,67 @@ namespace PL
     public partial class StationWindow : Window
     {
         internal readonly IBL Bl = BlFactory.GetBl();
+        ObservableCollection<DroneInCharging> droneAtStationObservableCollection;
+        Station s;
+
         public StationWindow(IBL Station) //new
         {
             InitializeComponent();
             this.Bl = Station;
+            s = new Station();
+            s.location = new Location();
+            DataContext = s;
+
             add.Visibility = Visibility.Visible;
             update.Visibility = Visibility.Hidden;
             delete.Visibility = Visibility.Hidden;
             inUseRead.Visibility = Visibility.Hidden;
             inUseText.Visibility = Visibility.Hidden;
-            stationIdText.IsReadOnly = false;
-            lattitudeText.IsReadOnly = false;
-            longitudeText.IsReadOnly = false;
-            inUseText.IsReadOnly = false;
+            listOfDronesAtStation.Visibility = Visibility.Hidden;
+            dronesAtStationRead.Visibility = Visibility.Hidden;
+            locationRead.Visibility = Visibility.Hidden;
+            locationText.Visibility = Visibility.Hidden;
         }
 
-        public StationWindow(IBL b, BO.StationToList station) //update
+        public StationWindow(IBL b, BO.Station station) //update
         {
             InitializeComponent();
             this.Bl = b;
+            //s = new Station();
+            //s.location = new Location();
+            //DataContext = s;
+            s = station;
+
             add.Visibility = Visibility.Hidden;
             update.Visibility = Visibility.Visible;
             delete.Visibility = Visibility.Visible;
             inUseRead.Visibility = Visibility.Visible;
             inUseText.Visibility = Visibility.Visible;
-            ////switch to data binding
-            stationIdText.Text = station.stationId.ToString();
-
-
+            latitudeText.Visibility = Visibility.Hidden;
+            latitudeRead.Visibility = Visibility.Hidden;
+            longitudeText.Visibility = Visibility.Hidden;
+            longitudeRead.Visibility = Visibility.Hidden;
+            ////switch to data binding?????????
+            //   stationIdText.Text = station.stationId.ToString();
+            //   nameText.Text = station.name.ToString();
+            //   slotsText.Text = station.chargeSlots.ToString();
+            //   inUseText.Text = station.numberOfSlotsInUse.ToString();
+            //   allChargeText.Text = (station.chargeSlots + station.numberOfSlotsInUse).ToString();
+            //   locationText.Text = station.location.ToString();  // it will work when we make it a station
+            ////   Station realStation = new Station();
+            ////   realStation = Bl.getStation(station.stationId);
+            //   listOfDronesAtStation.ItemsSource = station.dronesAtStation;
             ////////
+            ///
+            this.DataContext = station;
+            droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(station.dronesAtStation);
+            listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
+
             stationIdText.IsReadOnly = true;
-            lattitudeText.IsReadOnly = true;
+            latitudeText.IsReadOnly = true;
             longitudeText.IsReadOnly = true;
             inUseText.IsReadOnly = true;
+            locationText.IsReadOnly = true;
         }
 
         private void close_Click(object sender, RoutedEventArgs e)
@@ -64,22 +94,35 @@ namespace PL
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            Station newStation = new Station();
+            //Station newStation = new Station();
+            //try
+            //{
+            //    ///not allowed???????????FIX????????????
+            //    newStation.stationId = Convert.ToInt32(stationIdText.Text);
+            //    newStation.name = nameText.Text;
+            //    Location newLocation = new Location(Convert.ToDouble(latitudeText.Text), Convert.ToDouble(longitudeText.Text));
+            //    newStation.location = newLocation;
+            //    newStation.chargeSlots = Convert.ToInt32(allChargeText.Text);
+            //    Bl.addStation(newStation);
+            //    MessageBox.Show("station added succesfully");
+            //    addAnotherStation.Visibility = Visibility.Visible;
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("ERROR invalid input");
+            //}
             try
             {
-                ///not allowed!!!!!!!!!!!!!!!!! FIX!!!!!!!!!!!!!!
-                newStation.stationId = Convert.ToInt32(stationIdText.Text);
-                newStation.name = nameText.Text;
-                newStation.location.lattitude = Convert.ToInt32(lattitudeText.Text);
-                newStation.location.longitude = Convert.ToInt32(longitudeText.Text);
-                newStation.chargeSlots = Convert.ToInt32(slotsText.Text);
-                Bl.addStation(newStation);
+                Bl.addStation(s);
                 MessageBox.Show("station added succesfully");
+                s = new Station();
+                s.location = new Location();
+                DataContext = s;
                 Close();
             }
             catch
             {
-                MessageBox.Show("ERROR invalid input");
+                MessageBox.Show("ERROR can not add station");
             }
         }
 
@@ -88,10 +131,11 @@ namespace PL
             try 
             {
                 int stationId = Convert.ToInt32(stationIdText.Text);
-                int chargeSlots = Convert.ToInt32(slotsText.Text);
+                int chargeSlots = Convert.ToInt32(allChargeText.Text);
                 string name = nameText.Text;
                 Bl.updateStation(stationId, chargeSlots, name);
                 MessageBox.Show("station updated succesfully");
+                DataContext = s;
             }
             catch
             {
@@ -107,7 +151,6 @@ namespace PL
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
             checkDelete.Visibility = Visibility.Collapsed;
-            Close();
         }
 
         private void yes_Click(object sender, RoutedEventArgs e)
@@ -122,8 +165,46 @@ namespace PL
             }
             catch
             {
-                MessageBox.Show("ERROR invalid input");
+                MessageBox.Show("ERROR");
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void listOfDronesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e) //write this!!
+        {
+            DroneInCharging updateDrone = new DroneInCharging();
+            updateDrone = (DroneInCharging)listOfDronesAtStation.SelectedItem;
+            Drone realDrone = new Drone();
+            realDrone = Bl.getDrone(updateDrone.droneId);
+            new DroneWindow(Bl, realDrone).ShowDialog();
+            //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(s.dronesAtStation);
+            //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
+            DataContext = s;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void yesButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+            new StationWindow(Bl).ShowDialog();
+        }
+
+        private void listOfDronesAtStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void stationIdText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

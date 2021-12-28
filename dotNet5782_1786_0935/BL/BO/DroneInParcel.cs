@@ -8,11 +8,11 @@ namespace BO
 {
     public class DroneInParcel
     {
-        public int droneId;
-        public double battery; //in percentages
-        public Location location;
-   
-          
+        public int droneId { set; get; }
+        public double battery { set; get; } //in percentages
+        public Location location { set; get; }
+
+
         public override string ToString()
         {
             return String.Format($"Drone Id: {droneId}\nBattery: {battery}\nLocation: {location}\n");

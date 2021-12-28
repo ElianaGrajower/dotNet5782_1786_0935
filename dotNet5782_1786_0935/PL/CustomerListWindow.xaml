@@ -1,0 +1,21 @@
+﻿<Window x:Class="PL.CustomerListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="CustomerListWindow" Height="450" Width="800">
+    <Grid Background="#FF7D9BC0">
+        <ListView x:Name="CustomersListView" Margin="0,64,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionChanged="CustomersListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="80,365,0,0" VerticalAlignment="Top" Width="77" Click="closeButton_Click" Background="#FFC74D64"/>
+        <Button x:Name="addNewButton" Content="add new customer" HorizontalAlignment="Left" Margin="577,365,0,0" VerticalAlignment="Top" Width="143" Click="addNewButton_Click" Background="#FF468BE1"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="PL.ParcelListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ParcelListWindow" Height="450" Width="800">
+    <Grid Background="#FF7D9BC0">
+        <ListView x:Name="ParcelsListView" Margin="0,90,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="ParcelsListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="90,355,0,0" VerticalAlignment="Top" Width="79" Background="#FFC74D64" Click="closeButton_Click"/>
+        <Button Content="add new customer" HorizontalAlignment="Left" Margin="596,355,0,0" VerticalAlignment="Top" Width="124" Background="#FF468BE1" Click="Button_Click"/>
+        <Label Content="Type:" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="typeSelector" HorizontalAlignment="Left" Margin="91,40,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="231,36,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="statusSelector" HorizontalAlignment="Left" Margin="281,40,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Margin="501,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Label x:Name="dateSelector" Content="Date Range:" HorizontalAlignment="Left" Margin="422,36,0,0" VerticalAlignment="Top"/>
+        <Calendar x:Name="calender" HorizontalAlignment="Left" Margin="609,63,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <DatePicker HorizontalAlignment="Left" Margin="648,40,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

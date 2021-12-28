@@ -10,8 +10,8 @@ namespace BO
 {
     public class Location
     {
-        public double lattitude;
-        public double longitude;
+        public double lattitude { set; get; }
+        public double longitude { set; get; }
         public Location(char a,double x,char b,double y,char c) 
         {
             lattitude = x;
@@ -21,6 +21,11 @@ namespace BO
         {
             lattitude = x;
             longitude = y;
+        }
+
+        public Location()
+        {
+            //////what is supposed to go here??????
         }
         public override string ToString()
         {

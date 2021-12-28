@@ -1,0 +1,45 @@
+﻿<Window x:Class="PL.ParcelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ParcelWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg"/>
+        </Grid.Background>
+        <Label Content="Sender Id:" HorizontalAlignment="Left" Margin="270,115,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="senderText" HorizontalAlignment="Left" Margin="361,119,0,0" Text="{Binding sender.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <ComboBox x:Name="senderSelect" HorizontalAlignment="Left" Margin="361,119,0,0" Text="{Binding sender.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120" IsEnabled="True"/>
+        <Label Content="Target Id:" HorizontalAlignment="Left" Margin="270,152,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="targetText" HorizontalAlignment="Left" Margin="361,156,0,0" Text="{Binding target.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <ComboBox x:Name="targetSelect" HorizontalAlignment="Left" Margin="361,156,0,0" Text="{Binding target.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120" IsEnabled="True"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" Margin="270,190,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="parcelIdText" HorizontalAlignment="Left" Margin="361,51,0,0" Text="{Binding parcelId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label Content="Priority:" HorizontalAlignment="Left" Margin="270,224,0,0" VerticalAlignment="Top"/>
+        <Label Content="Parcel Id:" HorizontalAlignment="Left" Margin="270,47,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="weightText" HorizontalAlignment="Left" Margin="361,190,0,0" VerticalAlignment="Top" Width="120" Text="{Binding weight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False"/>
+        <ComboBox x:Name="weightSelect" HorizontalAlignment="Left" Margin="361,190,0,0" VerticalAlignment="Top" Width="120" Text="{Binding weight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True"/>
+        <TextBox x:Name="priorityText" HorizontalAlignment="Left" Margin="361,228,0,0" VerticalAlignment="Top" Width="120" Text="{Binding priority,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False"/>
+        <ComboBox x:Name="prioritySelect" HorizontalAlignment="Left" Margin="361,228,0,0" VerticalAlignment="Top" Width="120" Text="{Binding priority,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True" SelectionChanged="prioritySelect_SelectionChanged"/>
+        <Label Content="Drone Id:" HorizontalAlignment="Left" Margin="270,82,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="droneIdText" HorizontalAlignment="Left" Margin="361,86,0,0" Text="{Binding drone.droneId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Button x:Name="senderButton" Content="sender" HorizontalAlignment="Left" Margin="500,118,0,0" VerticalAlignment="Top" Width="60" Background="#FF468BE1" Click="Button_Click_2"/>
+        <Button x:Name="targetButton" Content="target" HorizontalAlignment="Left" Margin="500,153,0,0" VerticalAlignment="Top" Width="60" Background="#FF468BE1" Click="Button_Click_3"/>
+        <Button x:Name="droneButton" Content="drone" HorizontalAlignment="Left" Margin="500,85,0,0" VerticalAlignment="Top" Width="60" Background="#FF468BE1" Click="Button_Click_1"/>
+        <Label Content="Requested:" HorizontalAlignment="Left" Margin="270,259,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="requestedText" HorizontalAlignment="Left" Margin="361,263,0,0" Text="{Binding requested,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label Content="Scheduled:" HorizontalAlignment="Left" Margin="270,292,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="scheduleText" HorizontalAlignment="Left" Margin="361,296,0,0" Text="{Binding scheduled,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label Content="Pickedup:" HorizontalAlignment="Left" Margin="270,324,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="pickedupText" HorizontalAlignment="Left" Margin="361,328,0,0" Text="{Binding pickedUp,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label Content="Delivered:" HorizontalAlignment="Left" Margin="270,355,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="deliveryText" HorizontalAlignment="Left" Margin="361,359,0,0" Text="{Binding delivered,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Button Content="close" HorizontalAlignment="Left" Margin="80,359,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Background="#FFC74D64"/>
+        <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="addButton_Click"/>
+        <Button x:Name="updateButton" Content="update?" HorizontalAlignment="Left" Margin="627,322,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1"/>
+        <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="deleteButton_Click"/>
+    </Grid>
+</Window>

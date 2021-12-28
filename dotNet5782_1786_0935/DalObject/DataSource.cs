@@ -14,7 +14,7 @@ namespace DAL
     internal static class DataSource
     {
         internal static string[] stationName = { "Raanana", "Tel Aviv" };
-        internal static string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer" };
+        internal static string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
         internal static string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
         internal static List<Parcel> ParcelList = new List<Parcel>(); //a list of parcels
         internal static List<Drone> DroneList = new List<Drone>(); //a list of drones
@@ -55,7 +55,7 @@ namespace DAL
         }
         static void createDrone() //creats a drone with random information
         {
-            for (int i = 0; i < 5; i++) //creates 5 drones with information
+            for (int i = 0; i < 20; i++) //creates 11 drones with information
                 DroneList.Add(new Drone()
                 {
                     droneId = DalObject.r.Next(100000000, 999999999),
@@ -89,8 +89,10 @@ namespace DAL
                     requested = DateTime.Now,
                     senderId = CustomerList[0].customerId,
                     targetId = CustomerList[4].customerId,
-                    droneId = DroneList[1].droneId
-
+                    droneId = DroneList[i].droneId,
+                    scheduled = DateTime.Now,//this was just added its untested
+                    pickedUp = DateTime.Now,
+                    delivered = DateTime.Now
                 });
         }
     }

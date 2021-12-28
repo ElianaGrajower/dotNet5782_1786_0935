@@ -83,7 +83,9 @@ namespace PL
         {
             DroneToList updateDrone = new DroneToList();
             updateDrone = (DroneToList)DronesListView.SelectedItem;
-            new DroneWindow(bl,updateDrone).ShowDialog();
+            Drone realDrone = new Drone();
+            realDrone = bl.getDrone(updateDrone.droneId);
+            new DroneWindow(bl,realDrone).ShowDialog();
             ShowInfo();
         }
 

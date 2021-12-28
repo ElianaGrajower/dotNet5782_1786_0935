@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.Collections.ObjectModel;
+
 
 namespace PL
 {
@@ -22,31 +24,34 @@ namespace PL
     public partial class StationListWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
+        ObservableCollection<StationToList> stationObservableCollection;
+
         public StationListWindow(IBL b) 
         {
             InitializeComponent();
             this.bl = b;
-            StationsListView.ItemsSource = b.getStationsList();
-            ShowInfo();
+            //  StationsListView.ItemsSource = b.getStationsList();
+            //  ShowInfo();
+            stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
+            DataContext = stationObservableCollection;
 
         }
-        private void ShowInfo()
+        private void ShowInfo()  /////add filter
         {
             IEnumerable<StationToList> d = new List<StationToList>();
-            d = bl.getStationsList();
-            //make this for a station!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**************************************************
-
-            //if (availableChargesSelector.Text != "")
-            //    d = this.bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
-            //if (weightSelector.Text != "")
-            //    d = bl.allDrones(x => x.weight == (weightCategories)weightFilter);
-            //if (weightSelector.Text != "" && StatusSelector.Text != "")
-            //    d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter && x.weight == (weightCategories)weightFilter);
-            //DronesListView.ItemsSource = d;
+            if (filterSlots.Text != "")
+                StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
+            else
+            {
+                if (availableChargesSelector.SelectedItem == "available charges slots")
+                    StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
+                else
+                    StationsListView.ItemsSource = bl.getStationsList();
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new StationWindow(bl).Show();
+            new StationWindow(bl).ShowDialog();
             ShowInfo();
         }
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -56,10 +61,62 @@ namespace PL
 
         private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            StationToList updateStation = new StationToList();
-            updateStation = (StationToList)StationsListView.SelectedItem;
+            StationToList updateStationList = new StationToList();
+            updateStationList = (StationToList)StationsListView.SelectedItem;
+            Station updateStation = new Station();
+            updateStation = bl.getStation(updateStationList.stationId);
             new StationWindow(bl, updateStation).ShowDialog();
-            ShowInfo();
+            // ShowInfo();
+            if (filterSlots.Text != "")
+            {
+                stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text)));
+                StationsListView.DataContext = stationObservableCollection;
+            }
+            if (availableChargesSelector.SelectedIndex == 0)
+            {
+                stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots > 0));
+                StationsListView.DataContext = stationObservableCollection;
+            }  
+            else
+            {
+                stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
+                StationsListView.DataContext = stationObservableCollection;
+            }
+        }
+
+        private void availableChargesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (availableChargesSelector.SelectedIndex == 0)
+            {
+                stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots > 0));
+                StationsListView.DataContext = stationObservableCollection;
+            }
+            else
+            {
+                stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
+                StationsListView.DataContext = stationObservableCollection;
+            }
+            filterSlots.Text = "";
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (filterSlots.Text != "")
+            {
+                stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text)));
+                StationsListView.DataContext = stationObservableCollection;
+            }
+            else
+            {
+                stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
+                StationsListView.DataContext = stationObservableCollection;
+            }
+            availableChargesSelector.SelectedIndex = 1;
+        }
+
+        private void StationsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
