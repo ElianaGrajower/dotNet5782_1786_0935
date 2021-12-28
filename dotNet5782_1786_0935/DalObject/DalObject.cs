@@ -168,7 +168,7 @@ namespace Dal
         {
             try
             {
-                //if (findDrone(id).active)
+                //if (findDrone(id).active==true)
                 //{
                 //    var temp = DataSource.DroneList.Find(d => d.droneId == id);
                 //    var rid = DataSource.DroneList.Find(d => d.droneId == id);
@@ -176,7 +176,7 @@ namespace Dal
                 //    DataSource.DroneList.Remove(rid);
                 //    DataSource.DroneList.Add(temp);
                 //}
-                DataSource.DroneList.Remove(findDrone(id));
+                 DataSource.DroneList.Remove(findDrone(id));
 
             }
             catch (DoesntExistException exc)
@@ -215,7 +215,7 @@ namespace Dal
 
             try
             {
-                //if (findParcel(id).active)
+                //if (findParcel(id).active==true && findParcel(id).scheduled==DateTime.MinValue)
                 //{
                 //    var temp = DataSource.ParcelList.Find(d => d.parcelId == id);
                 //    var rid = DataSource.ParcelList.Find(d => d.parcelId == id);
@@ -237,20 +237,20 @@ namespace Dal
         {
             try
             {
-                   // findStation(id);
-                   // DataSource.StationList.ForEach(s => { if (s.stationId == id) s.active = false; });
+                // findStation(id);
+                // DataSource.StationList.ForEach(s => { if (s.stationId == id) s.active = false; });
 
-                //if (findStation(id).active==true)
+                //if (findStation(id).active == true)
                 //{
                 //    var temp = DataSource.StationList.Find(d => d.stationId == id);
-                //   // var rid = DataSource.StationList.Find(d => d.stationId == id);
+                //    // var rid = DataSource.StationList.Find(d => d.stationId == id);
                 //    temp.active = false;
                 //    DataSource.StationList.Remove(findStation(id));
                 //    DataSource.StationList.Add(temp);
                 //}
                 //else
-                //    throw new DoesntExistException("station doesnt exist\n");
-                DataSource.StationList.Remove(findStation(id));
+                //   throw new DoesntExistException("station doesnt exist\n");
+                 DataSource.StationList.Remove(findStation(id));
             }
             catch (DoesntExistException exc)
             {
@@ -274,7 +274,7 @@ namespace Dal
                 //    DataSource.DroneChargeList.Remove(rid);
                 //    DataSource.DroneChargeList.Add(temp);
                 //}
-                 DataSource.DroneChargeList.Remove(findDroneCharge(droneId));
+                  DataSource.DroneChargeList.Remove(findDroneCharge(droneId));
             }
             catch (DoesntExistException exc)
             {

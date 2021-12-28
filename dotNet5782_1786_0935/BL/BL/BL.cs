@@ -371,6 +371,17 @@ namespace BL
             return drones.ToList().Find(drone => drone.droneId == droneId).battery;
         }
         #endregion
+        public bool isEmployee(string userName ,string password)
+        {
+           int id= getCustomersList().Where(c => c.customerName == userName).Select(s => s.customerId).FirstOrDefault();
+            if (id == null)
+                throw new BO.DoesntExistException("this userName doest exist\n");
+            if(getCustomer(id).password!=password)
+                throw new BO.InvalidInputException("the password is incorrect\n");
+            if (getCustomer(id).isCustomer == true)
+                return false;
+            return true;
+        }
         #region addCustomer
         //adds customer
         public void addCustomer(BO.Customer customertoAdd)
@@ -1169,7 +1180,9 @@ namespace BL
                         undeliveredParcels = getCustomer(c.customerId).parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
                         recievedParcel = getCustomer(c.customerId).parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
                         transitParcel = getCustomer(c.customerId).parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
-                        isCustomer= getCustomer(c.customerId).isCustomer
+                        isCustomer= getCustomer(c.customerId).isCustomer,
+                        
+                        
                     };
                     customer.Add(temp);
                 }
