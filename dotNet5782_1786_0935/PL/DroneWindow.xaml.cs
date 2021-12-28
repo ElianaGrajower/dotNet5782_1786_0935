@@ -23,15 +23,15 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        internal readonly IBL Bl = BlFactory.GetBl();
+        internal readonly IBL bl = BlFactory.GetBl();
         public DroneWindow(IBL b,BO.DroneToList drone)//update drone
         {
             InitializeComponent();
             //ShowInfo();
-            this.Bl = b;
+            this.bl = b;
 
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
-            stationIdCombo.ItemsSource = Bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
+            stationIdCombo.ItemsSource = bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
             update.Visibility = Visibility.Visible;
             add.Visibility = Visibility.Hidden;
             if (drone.droneStatus == BO.DroneStatus.available)
@@ -75,9 +75,9 @@ namespace PL
         public DroneWindow(IBL drone)//new drone
         {
             InitializeComponent();
-            this.Bl = drone;
+            this.bl = drone;
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
-            stationIdCombo.ItemsSource = Bl.allStations(s => s.numberOfAvailableSlots > 0).Select(s=>s.stationId);
+            stationIdCombo.ItemsSource = bl.allStations(s => s.numberOfAvailableSlots > 0).Select(s=>s.stationId);
             //  stationIdCombo.Items.Add(Bl.getStationsList());
             update.Visibility = Visibility.Hidden;
             add.Visibility = Visibility.Visible;
@@ -111,7 +111,7 @@ namespace PL
             try
             {
                 int id = Convert.ToInt32(idText.Text);
-                Bl.UpdateDronename(id, name);
+                bl.UpdateDronename(id, name);
                 MessageBox.Show("drone model updated succesfuly");
             }
             catch(DoesntExistException exc)
@@ -137,7 +137,7 @@ namespace PL
                 newDrone.maxWeight = (weightCategories)weight.SelectedItem;
                 newDrone.model = modelText.Text;
                 int stationId = Convert.ToInt32(stationIdCombo.SelectedItem);
-                Bl.addDrone(newDrone, stationId);
+                bl.addDrone(newDrone, stationId);
                 MessageBox.Show("added drone succesfully");
                 addAnotherDrone.Visibility = Visibility.Visible;
             }
@@ -177,7 +177,7 @@ namespace PL
             time = Convert.ToInt32(releaseTime.Text);
                 try
             {
-                Bl.releaseDroneFromCharge(Convert.ToInt32(idText.Text), time);
+                bl.releaseDroneFromCharge(Convert.ToInt32(idText.Text), time);
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Visible;
@@ -198,7 +198,7 @@ namespace PL
         {
             try
             {
-                Bl.deliveredParcel(Convert.ToInt32(idText.Text));
+                bl.deliveredParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone delivered succesfully");
                 deliverParcel.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Visible;
@@ -221,7 +221,7 @@ namespace PL
         {
             try
             {
-                Bl.matchDroneWithPacrel(Convert.ToInt32(idText.Text));
+                bl.matchDroneWithPacrel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone matched up succesfully");
                 matchUpParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Visible;
@@ -244,7 +244,7 @@ namespace PL
         {
             try
             {
-                Bl.pickUpParcel(Convert.ToInt32(idText.Text));
+                bl.pickUpParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone pickedUp succesfully");
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
@@ -266,7 +266,7 @@ namespace PL
         {
             try
             {
-                Bl.SendDroneToCharge(Convert.ToInt32(idText.Text));
+                bl.SendDroneToCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone charging succesfully");
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
@@ -291,7 +291,7 @@ namespace PL
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(Bl).Show();
+            new DroneWindow(bl).Show();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

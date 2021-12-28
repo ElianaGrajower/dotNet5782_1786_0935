@@ -23,7 +23,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal readonly IBL bL = BlFactory.GetBl();  ///supposed to be IBL
+        internal readonly IBL bl = BlFactory.GetBl();  ///supposed to be IBL
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace PL
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DroneListWindow(bL).Show();
+            new DroneListWindow(bl).Show();
         }
 
     }

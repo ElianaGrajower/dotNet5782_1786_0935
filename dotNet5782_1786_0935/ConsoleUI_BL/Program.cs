@@ -1,19 +1,24 @@
-﻿//using System;
-//using BO;
-//using BlApi;
-//using DalApi;
-//using BL;
-////Adina Schulma 328620935
-////Eliana Grajower 328781786
+﻿using System;
+using BO;
+using BlApi;
+using DalApi;
+using BL;
+//Adina Schulma 328620935
+//Eliana Grajower 328781786
 
 
 
-//namespace ConsoleUI_BL
-//{
-//    public class Program
-//    {
-//        static IBL bl = BlFactory.GetBl();
-//        static void Main(string[] args)
+namespace ConsoleUI_BL
+{
+    public class Program
+    {
+        static IBL bl = BlFactory.GetBl();
+        static void Main(string[] args)
+        {
+           
+        }
+    }
+}
 //        {
 //           // bl = new BL();
 //            Console.WriteLine("Choose from the following options:");
@@ -76,7 +81,7 @@
 //                                        Console.WriteLine("Enter amount of charge slots that station has: ");
 //                                        int.TryParse(Console.ReadLine(), out chargeSlots);
 //                                        s.chargeSlots = chargeSlots;
-                                        
+
 //                                        try
 //                                        {
 //                                            bl.addStation(s);
@@ -84,7 +89,7 @@
 //                                        catch(InvalidInputException exc)
 //                                        {
 //                                            Console.WriteLine( exc.Message);
-                                            
+
 //                                        }
 //                                        catch (AlreadyExistsException exc)
 //                                        {
@@ -96,7 +101,7 @@
 //                                case 'B':
 //                                    {
 //                                        int droneId, stationId;
-                                        
+
 //                                        Console.WriteLine("Enter drone number");
 //                                        Drone d = new Drone();
 //                                        int.TryParse(Console.ReadLine(), out droneId);
@@ -126,7 +131,7 @@
 //                                            case weightCategories.heavy:
 //                                                d.maxWeight = weightCategories.heavy;
 //                                                break;
-                                            
+
 //                                        }
 //                                                Console.WriteLine("Enter station number:");
 //                                        int.TryParse(Console.ReadLine(), out stationId);
@@ -163,12 +168,12 @@
 //                                        Console.WriteLine("Enter name of customer: ");
 //                                        c.name =  Console.ReadLine();
 //                                        Console.WriteLine("Enter phone number of customer: ");
-                                        
+
 //                                        c.phone = Console.ReadLine();
 //                                        c.location = new Location(0, 0);
 //                                        Console.WriteLine("Enter Your lattitude coordinates: ");
 //                                        double.TryParse(Console.ReadLine(), out latitude);
-                                        
+
 //                                        Console.WriteLine("Enter Your longitude coordinates: ");
 //                                        double.TryParse(Console.ReadLine(), out longitude);
 //                                        c.location = new Location(latitude, longitude);
@@ -198,16 +203,16 @@
 //                                        int.TryParse(Console.ReadLine(), out id);
 //                                        Parcel p = new Parcel()
 //                                        {
-                                            
+
 //                                            sender = new CustomerInParcel()
 //                                            {
-                                                
+
 //                                                  customerId = id
 //                                            }
-                                           
-                                            
+
+
 //                                        };
-                                       
+
 //                                        Console.WriteLine("Enter Id of target: ");
 //                                        int.TryParse(Console.ReadLine(), out id);
 //                                        p.target = new CustomerInParcel()
@@ -314,7 +319,7 @@
 //                                        int droneId;
 //                                        Console.WriteLine("Enter Id of drone:");
 //                                        int.TryParse(Console.ReadLine(), out droneId);
-                                        
+
 //                                        Console.WriteLine("Enter model of drone:");
 //                                        string model = Console.ReadLine();
 //                                        try
@@ -401,7 +406,7 @@
 //                                        {
 //                                            Console.WriteLine(exc.Message);
 //                                        }
-                                       
+
 //                                        break;
 //                                    }
 //                                case 'E':
