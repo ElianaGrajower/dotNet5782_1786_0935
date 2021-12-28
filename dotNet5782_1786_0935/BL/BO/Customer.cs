@@ -13,8 +13,11 @@ namespace BO
         public string name { set; get; }    
         public string phone { set; get; }
         public Location location{ set; get; }
+        public bool isCustomer;
+        public string password;
         public IEnumerable<ParcelinCustomer> parcelsdelivered;
         public IEnumerable<ParcelinCustomer> parcelsOrdered;
+        public bool active;
         
         public override string ToString()
         {

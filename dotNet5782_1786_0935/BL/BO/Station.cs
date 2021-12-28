@@ -17,6 +17,7 @@ namespace BO
         public int numberOfSlotsInUse;
         public void addChargeSlots() { chargeSlots++; } //add a charge slot
         public List<DroneInCharging> dronesAtStation; //drones being charged at the station
+        public bool active;
         public override string ToString()
         {
             return String.Format($"Station Id: {stationId}\nStation name: {name}\nStation Location: {location}\nAvailable chargeSlots: {chargeSlots- numberOfSlotsInUse}\n Drones charging: {dronesAtStation}");

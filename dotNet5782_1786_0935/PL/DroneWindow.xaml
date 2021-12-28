@@ -34,7 +34,7 @@
             <Button Content="yes" Canvas.Left="130" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59" Click="Button_Click_3"/>
         </Canvas>
         <Canvas x:Name="releaseCanvas" Margin="250,69,304,188" Background="White" Visibility="Collapsed">
-            <TextBlock Canvas.Left="35" Canvas.Top="24" TextWrapping="Wrap" Height="55"><Run Text="Enter the amount of time the "/><LineBreak/><Run Text="drone has been charging: "/></TextBlock>
+           <TextBlock Canvas.Left="35" Canvas.Top="24" TextWrapping="Wrap" Height="55"><Run Text="Enter the amount of time the "/><LineBreak/><Run Text="drone has been charging: "/></TextBlock>
             <TextBox x:Name="releaseTime" Canvas.Left="63" Canvas.Top="84" TextWrapping="Wrap" Width="120"/>
             <Button x:Name="ok" Content="ok" Canvas.Left="100" Canvas.Top="118" Width="46" Click="ok_Click"/>
         </Canvas>

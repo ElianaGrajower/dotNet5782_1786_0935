@@ -178,7 +178,7 @@ namespace PL
             time = Convert.ToInt32(releaseTime.Text);
                 try
             {
-                bl.releaseDroneFromCharge(Convert.ToInt32(idText.Text), time);
+                bl.releaseDroneFromCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Visible;

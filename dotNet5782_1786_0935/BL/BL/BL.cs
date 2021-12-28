@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DAL;
-
 using BO;
 using DalApi;
 using BlApi;
@@ -23,15 +22,43 @@ namespace BL
        
         public static IBL Instance { get => instance; }
         internal IDal dal = DalFactory.GetDal();
-
-
-
         public double[] chargeCapacity;    
         private List<BO.DroneToList> drones; 
-        public static Random rand = new Random(); 
+        public static Random rand = new Random();
+        #region passwordProtection
+        private bool passwordProtection(string password)
+        {
+            bool flag = false;
+            if (password.Length < 8)
+                return false;
+            for(int i=0;i<password.Length;i++)
+            {
+                if (password[i] >= 65 && password[i] <= 90)
+                {
+                    flag = true;
+                    break;
+                }
+                    
+            }
+            if (!flag)
+                return false;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (password[i] >= 48 && password[i] <= 57)
+                {
+                    flag = true;
+                    break;
+                }
 
+            }
+            if (!flag)
+                return false;
+
+            return true;
+        }
+        #endregion
         #region getChargeCapacity
-       //this function returns an arr of chargecapacity
+        //this function returns an arr of chargecapacity
         public chargeCapacity getChargeCapacity()
         {
         
@@ -179,13 +206,15 @@ namespace BL
             {
                 //updates the list that contain info
                 dal.AddDrone(newDrone);
-                //if(drones.Where(d=>dtl.droneId==d.droneId).Count()==0)
+               // if(drones.Where(d=>dtl.droneId==d.droneId).Count()==0)
+                if(drones.Count(x => getDrone(x.droneId).active == true) == 0)
                 drones.Add(dtl);
-                DO.DroneCharge dc = new DO.DroneCharge { droneId = droneToAdd.droneId, stationId = stationId };
+                DO.DroneCharge dc = new DO.DroneCharge { droneId = droneToAdd.droneId, stationId = stationId ,active=true};
                 var tempstation = getStation(stationId);
-                if (drones.Where(d => dtl.droneId == d.droneId).Count() == 0)
+                if (drones.Where(d => dtl.droneId == d.droneId).Count() == 0 )
                     tempstation.decreaseChargeSlots();
                 updateStation(tempstation.stationId, tempstation.chargeSlots, "");
+                
                   dal.AddDroneCharge(dc);
             }
             catch (BO.AlreadyExistsException exc)
@@ -277,16 +306,6 @@ namespace BL
             return stations;
         }
         #endregion
-
-        //#region AvailableChargingSlots
-        ////returns amount of chargeSlots
-        //public int availableChargingSlots()
-        //{
-
-        //    BO.Station station = new BO.Station();
-        //    return station.chargeSlots;
-        //}
-        //#endregion
         #region stationLocationslist
         //returns a list of all the the station locations
         private List<Location> stationLocationslist()
@@ -361,9 +380,11 @@ namespace BL
             customertoAdd.parcelsdelivered = new List<ParcelinCustomer>();
             //chelcs validity of input
             if (customertoAdd.customerId > 999999999 || customertoAdd.customerId < 100000000)
-                throw new InvalidCastException("customer id not valid\n");
+                throw new BO.InvalidInputException("customer id not valid\n");
             if (!customertoAdd.phone.All(onlyDigits))
-                throw new InvalidCastException("customer phone not valid- must contain only numbers\n");
+                throw new BO.InvalidInputException("customer phone not valid- must contain only numbers\n");
+            if (!passwordProtection(customertoAdd.password))
+                throw new BO.InvalidInputException("Password must be at least eight digits and contain at least one uppercase letter and one digit\n");
         
 
             //builds idal customer
@@ -373,7 +394,8 @@ namespace BL
                 name = customertoAdd.name,
                 Phone = customertoAdd.phone,
                 lattitude = customertoAdd.location.lattitude,
-                longitude = customertoAdd.location.longitude
+                longitude = customertoAdd.location.longitude,
+                password=customertoAdd.password
             };
             try
             {
@@ -409,6 +431,7 @@ namespace BL
                 lattitude = StationtoAdd.location.lattitude,
                 longitude = StationtoAdd.location.longitude,
                 chargeSlots = StationtoAdd.chargeSlots
+             //   active=true
             };
             try
             {
@@ -538,6 +561,8 @@ namespace BL
                     customerId = temp.customerId,
                     name = temp.name,
                     phone = temp.Phone,
+                    password=temp.password,
+                    isCustomer=temp.isCustomer,
                     location = new Location(temp.lattitude, temp.longitude)
                     {
                         lattitude = temp.lattitude,
@@ -667,10 +692,12 @@ namespace BL
                     drt.numOfParcelsdelivered = dal.printParcelsList().Count(x => x.droneId == drt.droneId);
                     int parcelId = dal.printParcelsList().ToList().Find(x => x.droneId == drt.droneId).parcelId;
                     drt.parcelId = parcelId;
+              
                     var baseStationLocations =stationLocationslist();
                     //goes over every parcel in list
                     foreach (var pr in parcels)
                     {
+                   // pr.sta
                         //if not yet delivered updates info
                         if (pr.droneId == item.droneId && pr.delivered == DateTime.MinValue)
                         {
@@ -718,7 +745,7 @@ namespace BL
                                     break;
                                 i++;
                             }
-                            DO.DroneCharge DC = new DO.DroneCharge { droneId=drt.droneId, stationId=s.stationId };
+                            DO.DroneCharge DC = new DO.DroneCharge { droneId=drt.droneId, stationId=s.stationId,chargeTime=DateTime.Now,active=true };
                             dal.AddDroneCharge(DC);
                             drt.location = new Location( s.lattitude,  s.longitude );
                             drt.battery = rnd.Next(0, 21); // 100/;
@@ -808,17 +835,19 @@ namespace BL
         #endregion
         #region releaseDroneFromCharge
         //this function releases drone from charge
-        public void releaseDroneFromCharge(int droneId,int chargeTime)
+        public void releaseDroneFromCharge(int droneId)
         {
             
-            
+                
                 var tempDrone = getDrone(droneId);
                 var temp = returnsDrone(droneId);
+                double chargeTime = DateTime.Now.Subtract(dal.getDroneCharge(droneId).chargeTime).TotalMinutes;
             //checks if drone is charging
                 if (tempDrone.droneStatus == DroneStatus.maintenance)
                 {
                     //updates info
-                    var possibleStation = getStation(dal.printStationsList().ToList().Find(station => station.lattitude == tempDrone.location.lattitude && station.longitude == tempDrone.location.longitude).stationId);
+                    var possibleStation = getStation(dal.printStationsList().ToList()
+                                            .Find(station => station.lattitude == tempDrone.location.lattitude && station.longitude == tempDrone.location.longitude).stationId);
                     BatteryUsage usage = new BatteryUsage();
                     tempDrone.battery += chargeTime * usage.chargeSpeed;
                     if (tempDrone.battery > 100)
@@ -844,6 +873,8 @@ namespace BL
                 DO.Station stationDl = new DO.Station();
                 //updates info
                 stationDl = dal.getStation(stationId);
+                if(!stationDl.active)
+                    throw new BO.DoesntExistException("The station doesnt exist in the system\n");
                 if (name !=  "")
                     stationDl.name = name;
                 if (AvlblDCharges != 0)
@@ -970,7 +1001,7 @@ namespace BL
                 
                 myDrone.parcel = new ParcelInTransit();
                 myDrone.parcel.parcelId = myParcel.parcelId;
-              
+                myDrone.parcel.parcelStatus = ParcelStatus.matched;
                 var tempParcel = myParcel;
                 tempParcel.droneId = droneId;
                 tempParcel.scheduled = DateTime.Now;
@@ -1010,7 +1041,7 @@ namespace BL
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.location.lattitude = tempDrone.parcel.pickupLocation.lattitude;
                 tempDrone.location.longitude = tempDrone.parcel.pickupLocation.longitude;
-                tempDrone.parcel.parcelStatus= true;
+                tempDrone.parcel.parcelStatus= ParcelStatus.pickedUp;
                 
                 //AddDrone(tempDrone,FindStation(tempDrone.location));
                 var tempD = new DroneToList()
@@ -1072,6 +1103,7 @@ namespace BL
                 tempDrone.location.lattitude = getCustomer(tempDrone.parcel.target.customerId).location.lattitude;
                 tempDrone.location.longitude = getCustomer(tempDrone.parcel.target.customerId).location.longitude;
                 tempDrone.droneStatus = DroneStatus.available;
+                tempDrone.parcel.parcelStatus = ParcelStatus.delivered;
                 var tempD = new DroneToList()
                 {
                     droneId = tempDrone.droneId,
@@ -1132,11 +1164,12 @@ namespace BL
                     {
                         customerId= c.customerId,
                         customerName= getCustomer(c.customerId).name,
-                        phone= getCustomer(c.customerId).phone,
-                        parcelsdelivered= getCustomer(c.customerId).parcelsdelivered.Where(s=>s.parcelStatus==ParcelStatus.delivered).Count(),
+                        phone = getCustomer(c.customerId).phone,
+                        parcelsdelivered = getCustomer(c.customerId).parcelsdelivered.Where(s=>s.parcelStatus==ParcelStatus.delivered).Count(),
                         undeliveredParcels = getCustomer(c.customerId).parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
                         recievedParcel = getCustomer(c.customerId).parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
-                        transitParcel = getCustomer(c.customerId).parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count()
+                        transitParcel = getCustomer(c.customerId).parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        isCustomer= getCustomer(c.customerId).isCustomer
                     };
                     customer.Add(temp);
                 }
@@ -1221,6 +1254,9 @@ namespace BL
             {
                 //ensures drone exists
                 drone = getDrone(droneId);
+              //  if(!drone.active)
+                 //   throw new BO.DoesntExistException("this drone doesnt exist in the system\n");
+
             }
             catch (DO.DoesntExistException exp)
             {
@@ -1239,8 +1275,8 @@ namespace BL
             drones[droneIndex].battery -= minBatteryRequired(drones[droneIndex].droneId);
             drones[droneIndex].location = station.location;
             drones[droneIndex].droneStatus = DroneStatus.maintenance;
-            var temp = getDrone(drones[droneIndex].droneId);
-            DO.DroneCharge DC = new DroneCharge { droneId = droneId, stationId = station.stationId };
+            //var temp = getDrone(drones[droneIndex].droneId);
+            DO.DroneCharge DC = new DroneCharge { droneId = droneId, stationId = station.stationId,chargeTime=DateTime.Now};
             dal.AddDroneCharge(DC);
         }
         #endregion
@@ -1274,10 +1310,16 @@ namespace BL
                 {
                     throw new BO.DoesntExistException("The parcel doesn't exist in system");
                 }
-                if (p.pickedUp == DateTime.MinValue)
-                    pt.parcelStatus = false;
+                if (p.requested == DateTime.MinValue)
+                    pt.parcelStatus = ParcelStatus.created;
                 else
-                    pt.parcelStatus = true;
+                if (p.pickedUp == DateTime.MinValue)
+                    pt.parcelStatus = ParcelStatus.matched;
+                else
+                    if (p.delivered == DateTime.MinValue)
+                    pt.parcelStatus = ParcelStatus.pickedUp;
+                else
+                    pt.parcelStatus = ParcelStatus.delivered;
                 pt.priority = (BO.Priorities)p.priority;
                 pt.weight = (BO.weightCategories)p.weight;
                 pt.sender = new BO.CustomerInParcel();
@@ -1289,7 +1331,6 @@ namespace BL
                 DO.Customer sender = dal.getCustomer(p.senderId);
                 DO.Customer target = dal.getCustomer(p.targetId);
                 pt.pickupLocation = new BO.Location(sender.lattitude, sender.longitude);
-                
                 pt.targetLocation = new BO.Location(target.lattitude,target.longitude);
                 
                 pt.distance = distance(pt.pickupLocation, pt.targetLocation);
@@ -1333,6 +1374,7 @@ namespace BL
             return droneBo;
         }
         #endregion
+        #region allDrones
         public IEnumerable<DroneToList> allDrones(Func<DroneToList, bool> predicate = null)
         {
             if (predicate == null)
@@ -1341,6 +1383,8 @@ namespace BL
             }
             return drones.Where(predicate).ToList();
         }
+        #endregion
+        #region allStations
 
         public IEnumerable<BO.StationToList> allStations(Func<BO.StationToList, bool> predicate = null)
         {
@@ -1353,8 +1397,8 @@ namespace BL
             }
             return station.Where(predicate).ToList();
         }
-
-
+        #endregion
+        #region allParcels
         public IEnumerable<BO.ParcelToList> allParcels(Func<BO.ParcelToList, bool> predicate = null)
         {
             var parcel = getParcelsList();
@@ -1364,6 +1408,8 @@ namespace BL
             }
             return parcel.Where(predicate).ToList();
         }
+        #endregion
+        #region allCustomers
         public IEnumerable<BO.CustomerToList> allCustomers(Func<BO.CustomerToList, bool> predicate = null)
         {
             var customer = getCustomersList();
@@ -1373,6 +1419,75 @@ namespace BL
             }
             return customer.Where(predicate).ToList();
         }
+        #endregion
+        #region returnCustomer
+        //returns customer
+        public BO.Customer returnCustomer(string name,string password)
+        {
+            try
+            {
+                //gets customer from dal list
+                DO.Customer temp = dal.returnCustomer(name,password);
+                //starts building bo customer
+                BO.Customer customer = new BO.Customer()
+                {
+                    customerId = temp.customerId,
+                    name = temp.name,
+                    phone = temp.Phone,
+                    password=temp.password,
+                    isCustomer=temp.isCustomer,
+                    location = new Location(temp.lattitude, temp.longitude)
+                    {
+                        lattitude = temp.lattitude,
+                        longitude = temp.longitude,
+
+                    },
+                    parcelsOrdered = dal.printParcelsList().Where(parcel => parcel.targetId == temp.customerId).Select(Parcel => new ParcelinCustomer()
+
+                    {
+                        parcelId = Parcel.parcelId,
+                        weight = (BO.weightCategories)((int)Parcel.weight),
+                        priority = (BO.Priorities)((int)Parcel.priority),
+                        parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
+                        customerInParcel = new CustomerInParcel()
+                        {
+                            customerId = Parcel.senderId,
+                            customerName = dal.getCustomer(Parcel.senderId).name
+                        }
+                    }),
+
+                    parcelsdelivered = dal.printParcelsList().Where(parcel => parcel.senderId == temp.customerId).Select(Parcel => new ParcelinCustomer()
+
+                    {
+                        parcelId = Parcel.parcelId,
+                        weight = (BO.weightCategories)((int)Parcel.weight),
+                        priority = (BO.Priorities)((int)Parcel.priority),
+                        parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
+                        customerInParcel = new CustomerInParcel()
+                        {
+                            customerId = Parcel.targetId,
+                            customerName = dal.getCustomer(Parcel.targetId).name
+                        }
+
+                    })
+
+                };
+
+                return customer;
+
+            }
+            catch (BO.DoesntExistException exc)
+            {
+                throw exc;
+            }
+            catch (DO.DoesntExistException exc)
+            {
+                throw new BO.DoesntExistException(exc.Message);
+            }
+
+        }
+        #endregion
+
     }
 
 

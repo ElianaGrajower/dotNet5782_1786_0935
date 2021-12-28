@@ -1,26 +1,26 @@
-﻿using System;
-using BO;
-using BlApi;
-using DalApi;
-using BL;
-//Adina Schulma 328620935
-//Eliana Grajower 328781786
+﻿//using System;
+//using BO;
+//using BlApi;
+//using DalApi;
+//using BL;
+////Adina Schulman 328620935
+////Eliana Grajower 328781786
 
 
 
-namespace ConsoleUI_BL
-{
-    public class Program
-    {
-        static IBL bl = BlFactory.GetBl();
-        static void Main(string[] args)
-        {
-           
-        }
-    }
-}
+//namespace ConsoleUI_BL
+//{
+//    public class Program
+//    {
+//        static IBL bl = BlFactory.GetBl();
+//        static void Main(string[] args)
 //        {
-//           // bl = new BL();
+
+
+
+
+
+//            // bl = new BL();
 //            Console.WriteLine("Choose from the following options:");
 //            Console.WriteLine("1- To add new item");
 //            Console.WriteLine("2- To update item");
@@ -38,7 +38,7 @@ namespace ConsoleUI_BL
 //                choice = -1;
 
 
-//            while (choice!=5)
+//            while (choice != 5)
 //            {
 //                switch (choice)
 //                {
@@ -50,8 +50,8 @@ namespace ConsoleUI_BL
 //                                "C- add a new customer\n" +
 //                                "D- add a parcel for delivery");
 //                            string bl;
-//                            bool flag;   
-//                            char addingChoice;     
+//                            bool flag;
+//                            char addingChoice;
 //                            bl = Console.ReadLine();
 //                            flag = char.TryParse(bl, out char wrong);
 //                            if (flag)
@@ -64,10 +64,10 @@ namespace ConsoleUI_BL
 //                            {
 //                                case 'A':
 //                                    {
-//                                        int id, chargeSlots,name;
+//                                        int id, chargeSlots, name;
 //                                        double longitude, latitude;
 //                                        Console.WriteLine("Enter ID of station: ");
-//                                        Station s = new Station(); 
+//                                        Station s = new Station();
 //                                        int.TryParse(Console.ReadLine(), out id);
 //                                        s.stationId = id;
 //                                        Console.WriteLine("Enter name of station: ");
@@ -86,9 +86,9 @@ namespace ConsoleUI_BL
 //                                        {
 //                                            bl.addStation(s);
 //                                        }
-//                                        catch(InvalidInputException exc)
+//                                        catch (InvalidInputException exc)
 //                                        {
-//                                            Console.WriteLine( exc.Message);
+//                                            Console.WriteLine(exc.Message);
 
 //                                        }
 //                                        catch (AlreadyExistsException exc)
@@ -133,12 +133,12 @@ namespace ConsoleUI_BL
 //                                                break;
 
 //                                        }
-//                                                Console.WriteLine("Enter station number:");
+//                                        Console.WriteLine("Enter station number:");
 //                                        int.TryParse(Console.ReadLine(), out stationId);
 
 //                                        try
 //                                        {
-//                                            bl.addDrone(d,stationId); //builds and adds a drone using the information the user provided
+//                                            bl.addDrone(d, stationId); //builds and adds a drone using the information the user provided
 //                                        }
 //                                        catch (InvalidInputException exc)
 //                                        {
@@ -166,7 +166,7 @@ namespace ConsoleUI_BL
 //                                        int.TryParse(Console.ReadLine(), out id);
 //                                        c.customerId = id;
 //                                        Console.WriteLine("Enter name of customer: ");
-//                                        c.name =  Console.ReadLine();
+//                                        c.name = Console.ReadLine();
 //                                        Console.WriteLine("Enter phone number of customer: ");
 
 //                                        c.phone = Console.ReadLine();
@@ -190,7 +190,7 @@ namespace ConsoleUI_BL
 //                                        {
 //                                            Console.WriteLine(exc.Message);
 //                                        }
-//                                        catch(InvalidCastException exc)
+//                                        catch (InvalidCastException exc)
 //                                        {
 //                                            Console.WriteLine(exc.Message);
 //                                        }
@@ -207,7 +207,7 @@ namespace ConsoleUI_BL
 //                                            sender = new CustomerInParcel()
 //                                            {
 
-//                                                  customerId = id
+//                                                customerId = id
 //                                            }
 
 
@@ -257,7 +257,7 @@ namespace ConsoleUI_BL
 //                                        switch (priorities)
 //                                        {
 //                                            case Priorities.regular:
-//                                                p.priority= Priorities.regular;
+//                                                p.priority = Priorities.regular;
 //                                                break;
 //                                            case Priorities.fast:
 //                                                p.priority = Priorities.fast;
@@ -269,7 +269,7 @@ namespace ConsoleUI_BL
 //                                        }
 //                                        try
 //                                        {
-//                                            int t=bl.addParcel(p); //builds and adds a parcel using the information the user provided
+//                                            int t = bl.addParcel(p); //builds and adds a parcel using the information the user provided
 //                                            Console.WriteLine("Parcel ID: " + t);
 //                                        }
 //                                        catch (InvalidInputException exc)
@@ -337,7 +337,7 @@ namespace ConsoleUI_BL
 
 //                                        Console.WriteLine("Enter id of station:");
 //                                        int stationId;
-//                                         int.TryParse(Console.ReadLine(),out stationId);
+//                                        int.TryParse(Console.ReadLine(), out stationId);
 //                                        Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
 //                                        Console.WriteLine("Enter new name of station:");
 //                                        string stationname = Console.ReadLine();
@@ -346,7 +346,7 @@ namespace ConsoleUI_BL
 //                                        int.TryParse(Console.ReadLine(), out numOfCharges);
 //                                        try
 //                                        {
-//                                            bl.updateStation(stationId, numOfCharges,stationname);
+//                                            bl.updateStation(stationId, numOfCharges, stationname);
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -364,7 +364,7 @@ namespace ConsoleUI_BL
 //                                    {
 
 //                                        Console.WriteLine("Enter id of customer:");
-//                                        int customerId ;
+//                                        int customerId;
 //                                        int.TryParse(Console.ReadLine(), out customerId);
 //                                        Console.WriteLine("Enter one or more of the following, to skip press the enter key:");
 //                                        Console.WriteLine("Enter a new customer name:");
@@ -372,8 +372,8 @@ namespace ConsoleUI_BL
 //                                        Console.WriteLine("Enter a new phone number:");
 //                                        string phone = Console.ReadLine();
 //                                        try
-//                                        { 
-//                                            bl.UpdateCustomer(customerId, customername, phone); 
+//                                        {
+//                                            bl.UpdateCustomer(customerId, customername, phone);
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -418,7 +418,7 @@ namespace ConsoleUI_BL
 //                                        int chargeTime;
 //                                        int.TryParse(Console.ReadLine(), out chargeTime);
 //                                        try
-//                                        { 
+//                                        {
 //                                            bl.ReleaseDroneFromCharge(droneId, chargeTime);
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
@@ -471,8 +471,8 @@ namespace ConsoleUI_BL
 //                                        int droneId;
 //                                        int.TryParse(Console.ReadLine(), out droneId);
 //                                        try
-//                                        { 
-//                                            bl.PickUpParcel(droneId); 
+//                                        {
+//                                            bl.pickUpParcel(droneId);
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -491,7 +491,7 @@ namespace ConsoleUI_BL
 //                                        int.TryParse(Console.ReadLine(), out droneId);
 //                                        try
 //                                        {
-//                                            bl.deliveredParcel(droneId); 
+//                                            bl.deliveredParcel(droneId);
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -633,8 +633,8 @@ namespace ConsoleUI_BL
 //                                    {
 //                                        Console.WriteLine("List of stations:\n");
 //                                        try
-//                                        { 
-//                                            foreach (StationToList item in bl.getStationsList()) { Console.WriteLine(item.ToString() + "\n"); }; 
+//                                        {
+//                                            foreach (StationToList item in bl.getStationsList()) { Console.WriteLine(item.ToString() + "\n"); };
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -647,7 +647,7 @@ namespace ConsoleUI_BL
 //                                        Console.WriteLine("List of drones:\n");
 //                                        try
 //                                        {
-//                                           bl.getDronesList().ForEach(item=> { Console.WriteLine(item.ToString() + "\n"); });
+//                                            bl.getDronesList().ForEach(item => { Console.WriteLine(item.ToString() + "\n"); });
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -686,7 +686,7 @@ namespace ConsoleUI_BL
 //                                        Console.WriteLine("List of parcels that are not yet matched up to drone:\n");
 //                                        try
 //                                        {
-//                                            foreach (ParcelToList item in bl.getParcelsList()) { if(item.parcelStatus== ParcelStatus.created)Console.WriteLine(item.ToString() + "\n"); };
+//                                            foreach (ParcelToList item in bl.getParcelsList()) { if (item.parcelStatus == ParcelStatus.created) Console.WriteLine(item.ToString() + "\n"); };
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -699,7 +699,7 @@ namespace ConsoleUI_BL
 //                                        Console.WriteLine("List of stations with availablechargeSlots:\n");
 //                                        try
 //                                        {
-//                                            foreach (StationToList item in bl.getStationsList()) {if(item.numberOfAvailableSlots>0) Console.WriteLine(item.ToString() + "\n"); };
+//                                            foreach (StationToList item in bl.getStationsList()) { if (item.numberOfAvailableSlots > 0) Console.WriteLine(item.ToString() + "\n"); };
 //                                        }
 //                                        catch (BO.DoesntExistException exc)
 //                                        {
@@ -731,13 +731,14 @@ namespace ConsoleUI_BL
 //                    choice = int.Parse(input);
 //                else
 //                    choice = -1;
-
-
-
-
-
-
 //            }
 //        }
 //    }
 //}
+
+
+
+
+
+
+   
