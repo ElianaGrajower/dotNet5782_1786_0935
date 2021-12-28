@@ -45,7 +45,7 @@
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
             <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
         </Canvas>
-        <Canvas x:Name="termesConditions" Background="White" Margin="140,0,140,0" Visibility="Collapsed">
+        <Canvas x:Name="termesConditions" Background="White" Margin="140,0,140,0" Visibility="Hidden">
             <TextBlock Text="  DroneDrop" TextWrapping="Wrap" Width="520" Height="49" Background="#FF252526" FontSize="20" FontWeight="Bold" Foreground="White"/>
             <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above " Canvas.Left="52" Canvas.Top="331" Checked="CheckBox_Checked" Background="White" Foreground="Black"/>
             <Button x:Name="continueButton" Content="continue" Canvas.Left="372" Canvas.Top="370" Width="70" Click="continueButton_Click"/>
