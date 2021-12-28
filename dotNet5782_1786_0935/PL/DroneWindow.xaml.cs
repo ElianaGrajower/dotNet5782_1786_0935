@@ -184,7 +184,7 @@ namespace PL
             {
                 bl.releaseDroneFromCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone released succesfully");
-                releaseDrone.Visibility = Visibility.Hidden;
+                releaseDrone.Visibility = Visibility.Hidden;    
                 chargeDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Visible;
                 ///////////////////////up to here
