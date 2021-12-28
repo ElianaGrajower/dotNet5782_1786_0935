@@ -66,5 +66,9 @@ namespace PL
             DataContext = myObservableCollection;
         }
 
+        private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ////first filter
+        }
     }
 }
