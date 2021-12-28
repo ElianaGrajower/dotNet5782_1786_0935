@@ -11,6 +11,7 @@ namespace BlApi
 {
     public interface IBL
     {
+        public bool isEmployee(string userName, string password);
         public chargeCapacity getChargeCapacity();
         public List<BO.StationToList> getStationsList();
         public void addDrone(BO.Drone DronetoAdd, int stationId);

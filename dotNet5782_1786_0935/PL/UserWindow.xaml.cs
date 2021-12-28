@@ -31,8 +31,26 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
-            Close();
+            try
+            {
+                string user = userNameText.Text;
+                string password = passwordText.Text;
+                if(bl.isEmployee(user,password))
+                {
+                    new MainWindow().Show();
+                }
+                else
+                    new DroneWindow(bl).Show();///build a window!!!!!!!!
+                Close();
+            }
+            catch(DoesntExistException exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            catch(InvalidInputException exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private void logInButton_Click(object sender, RoutedEventArgs e)
@@ -43,6 +61,11 @@ namespace PL
         private void signUpButton_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bl).Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            userPassword.Visibility = Visibility.Collapsed;
         }
     }
 }
