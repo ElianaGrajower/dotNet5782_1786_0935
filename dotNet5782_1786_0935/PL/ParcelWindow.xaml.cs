@@ -111,28 +111,38 @@ namespace PL
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            //ParcelToList deleteParcel = new ParcelToList();
-            //deleteParcel = (ParcelToList)Bl.allParcels(x => x.parcelId == Convert.ToInt32()).Select(x => x);  ///read the text if this doesnt work
-            //if (deleteParcel.parcelStatus == (ParcelStatus)1)
-            //{
-            //    try
-            //    {
-            //        //int customerId = Convert.ToInt32(idText.Text);
-            //        Bl.deleteCustomer(p.parcelId);
-            //        MessageBox.Show("parcel deleted succesfully");
-            //        //  checkDelete.Visibility = Visibility.Collapsed;
-            //        Close();
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("ERROR");
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("parcel can not be deleted at this stage");
-            //}
+            checkDelete.Visibility = Visibility.Visible;
+        }
 
+        private void yes_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelToList deleteParcel = new ParcelToList();
+            int getParcelId = Convert.ToInt32(parcelIdText.Text);
+            deleteParcel = Bl.getParcelsList().Where(p => p.parcelId == getParcelId).FirstOrDefault();
+            if (deleteParcel.parcelStatus == (ParcelStatus)1)
+            {
+                try
+                {
+                    Bl.deleteParcel(getParcelId);
+                    MessageBox.Show("parcel deleted succesfully");
+                    checkDelete.Visibility = Visibility.Collapsed;
+                    Close();
+                }
+                catch
+                {
+                    MessageBox.Show("ERROR");
+                }
+            }
+            else
+            {
+                MessageBox.Show("parcel can not be deleted at this stage");
+                checkDelete.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            checkDelete.Visibility = Visibility.Collapsed;
         }
     }
 }

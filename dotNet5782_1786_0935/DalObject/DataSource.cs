@@ -109,14 +109,14 @@ namespace DAL
                     weight = (DO.weightCategories)DalObject.r.Next(1, 3), //chooses a weight from light, average, heavy
                     priority = (DO.Priorities)DalObject.r.Next(1, 3),
                     requested = DateTime.Now,
-                    scheduled=DateTime.Now,//this was just added its untested
-                    pickedUp=DateTime.MinValue,
-                    delivered=DateTime.MinValue,
+                    scheduled = DateTime.Now,//this was just added its untested
+                    pickedUp = DateTime.MinValue,
+                    delivered = DateTime.MinValue,
                     senderId = CustomerList[i].customerId,
                     targetId = CustomerList[3].customerId,
                     droneId = DroneList[i].droneId,
                     active = true,
-                    
+
 
                 });
         }
