@@ -25,6 +25,7 @@ namespace BL
         public double[] chargeCapacity;    
         private List<BO.DroneToList> drones; 
         public static Random rand = new Random();
+        #region isEmployee
         public bool isEmployee(string userName, string password)
         {
             int id = getCustomersList().Where(c => c.customerName == userName).Select(s => s.customerId).FirstOrDefault();
@@ -36,6 +37,7 @@ namespace BL
                 return false;
             return true;
         }
+        #endregion
         #region passwordProtection
         private bool passwordProtection(string password)
         {
@@ -165,7 +167,7 @@ namespace BL
         //this function finds a station based on coordinates that it recives
         private int findStation(Location location)
         {
-            var station = dal.printStationsList().Where(s => s.longitude == location.longitude && s.lattitude == location.lattitude);
+            var station = dal.printStationsList().Where(s => s.longitude == location.longitude && s.latitude == location.latitude);
             if (station.Count() == 0)
                 throw new BO.DoesntExistException("station with these coordinates doesnt exist\n" );
             var stationId = station.First().stationId;
@@ -188,9 +190,9 @@ namespace BL
             try
             {
                 //checks if station exists
-                double Stationlattitude = dal.findStation(stationId).lattitude;
+                double Stationlatitude = dal.findStation(stationId).latitude;
                 double Stationlongitude = dal.findStation(stationId).longitude;
-                droneToAdd.location = new Location(Stationlattitude, Stationlongitude);
+                droneToAdd.location = new Location(Stationlatitude, Stationlongitude);
             }
             catch (DO.DoesntExistException exc)
             {
@@ -204,7 +206,7 @@ namespace BL
             dtl.battery = droneToAdd.battery;
             dtl.droneStatus = droneToAdd.droneStatus; 
             dtl.location = new Location(0, 0);
-            dtl.location.lattitude = dal.findStation(stationId).lattitude;
+            dtl.location.latitude = dal.findStation(stationId).latitude;
             dtl.location.longitude = dal.findStation(stationId).longitude;
             //build DO.drone
             DO.Drone newDrone = new DO.Drone()
@@ -261,11 +263,11 @@ namespace BL
         private double distance(BO.Location l1, BO.Location l2)
         {
             var R = 6371; // Radius of the earth in km
-            var dLat = deg2rad(l2.lattitude - l1.lattitude);  // deg2rad below
+            var dLat = deg2rad(l2.latitude - l1.latitude);  // deg2rad below
             var dLon = deg2rad(l2.longitude - l1.longitude);
             var a =
               Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-              Math.Cos(deg2rad(l1.lattitude)) * Math.Cos(deg2rad(l2.lattitude)) *
+              Math.Cos(deg2rad(l1.latitude)) * Math.Cos(deg2rad(l2.latitude)) *
               Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
             var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             var d = R * c; // distance in km
@@ -283,7 +285,7 @@ namespace BL
                 DO.Station tempStation = dal.getStation(stationId);
                 station.stationId = tempStation.stationId;
                 station.name = tempStation.name;
-                station.location=new Location(tempStation.lattitude, tempStation.longitude);
+                station.location=new Location(tempStation.latitude, tempStation.longitude);
                 station.chargeSlots = tempStation.chargeSlots;
                 station.numberOfSlotsInUse = getUnvailablechargeSlots(tempStation.stationId);
                 //finds the rest of the info from dronecharging ist
@@ -325,7 +327,7 @@ namespace BL
             foreach (var station in getStations())
             {
                 //adds location of current station
-                locations.Add(new Location(station.location.lattitude, station.location.longitude));
+                locations.Add(new Location(station.location.latitude, station.location.longitude));
                 
             }
             return locations;
@@ -345,7 +347,7 @@ namespace BL
                 //if has chatgeslots
                 if (withChargeSlots)
                 {
-                    var station = getStations().ToList().Find(x => x.location.longitude == locations[i].longitude && x.location.lattitude == locations[i].lattitude);
+                    var station = getStations().ToList().Find(x => x.location.longitude == locations[i].longitude && x.location.latitude == locations[i].latitude);
 
                     //checks distance
                     if (distance(locations[i], currentLocation) < d && station.chargeSlots > 0)
@@ -382,17 +384,6 @@ namespace BL
             return drones.ToList().Find(drone => drone.droneId == droneId).battery;
         }
         #endregion
-        public bool isEmployee(string userName ,string password)
-        {
-           int id= getCustomersList().Where(c => c.customerName == userName).Select(s => s.customerId).FirstOrDefault();
-            if (id == null)
-                throw new BO.DoesntExistException("this userName doest exist\n");
-            if(getCustomer(id).password!=password)
-                throw new BO.InvalidInputException("the password is incorrect\n");
-            if (getCustomer(id).isCustomer == true)
-                return false;
-            return true;
-        }
         #region addCustomer
         //adds customer
         public void addCustomer(BO.Customer customertoAdd)
@@ -401,6 +392,10 @@ namespace BL
             customertoAdd.parcelsOrdered = new List<ParcelinCustomer>();
             customertoAdd.parcelsdelivered = new List<ParcelinCustomer>();
             //chelcs validity of input
+            if(customertoAdd.location.latitude< 29.207 || customertoAdd.location.latitude > 33.207)
+                throw new BO.InvalidInputException("latitude is out of range\n");
+            if (customertoAdd.location.longitude < 34.571 || customertoAdd.location.longitude > 35.572)
+                throw new BO.InvalidInputException("longitude is out of range\n");
             if (customertoAdd.customerId > 999999999 || customertoAdd.customerId < 100000000)
                 throw new BO.InvalidInputException("customer id not valid\n");
             if (!customertoAdd.phone.All(onlyDigits))
@@ -415,7 +410,7 @@ namespace BL
                 customerId = customertoAdd.customerId,
                 name = customertoAdd.name,
                 Phone = customertoAdd.phone,
-                lattitude = customertoAdd.location.lattitude,
+                latitude = customertoAdd.location.latitude,
                 longitude = customertoAdd.location.longitude,
                 password=customertoAdd.password
             };
@@ -440,7 +435,10 @@ namespace BL
             //checks validity of input
             if (StationtoAdd.stationId <= 0)
                 throw new BO.InvalidInputException("station id not valid- must be a posittive\n");//check error
-           
+            if (StationtoAdd.location.latitude < 29.207 || StationtoAdd.location.latitude > 33.207)
+                throw new BO.InvalidInputException("latitude is out of range\n");
+            if (StationtoAdd.location.longitude < 34.571 || StationtoAdd.location.longitude > 35.572)
+                throw new BO.InvalidInputException("longitude is out of range\n");
             if (StationtoAdd.chargeSlots <= 0)
                 throw new BO.InvalidInputException("invalid amount of chargeSlots- must be a positive number");
 
@@ -450,7 +448,7 @@ namespace BL
             {
                 stationId = StationtoAdd.stationId,
                 name = StationtoAdd.name,
-                lattitude = StationtoAdd.location.lattitude,
+                latitude = StationtoAdd.location.latitude,
                 longitude = StationtoAdd.location.longitude,
                 chargeSlots = StationtoAdd.chargeSlots
              //   active=true
@@ -585,9 +583,9 @@ namespace BL
                     phone = temp.Phone,
                     password=temp.password,
                     isCustomer=temp.isCustomer,
-                    location = new Location(temp.lattitude, temp.longitude)
+                    location = new Location(temp.latitude, temp.longitude)
                     {
-                        lattitude = temp.lattitude,
+                        latitude = temp.latitude,
                         longitude = temp.longitude,
 
                     },
@@ -676,7 +674,7 @@ namespace BL
                 else
                     parcel.drone.battery = 0;
                 if (temp.droneId != 0)
-                    parcel.drone.location = new Location(getDrone(temp.droneId).location.lattitude, getDrone(temp.droneId).location.longitude);
+                    parcel.drone.location = new Location(getDrone(temp.droneId).location.latitude, getDrone(temp.droneId).location.longitude);
                 else
                     parcel.drone.location = new Location(0, 0);
               
@@ -725,25 +723,28 @@ namespace BL
                         {
                             DO.Customer sender = dal.getCustomer(pr.senderId);
                             DO.Customer target = dal.getCustomer(pr.targetId);
-                            BO.Location senderLocation = new Location(sender.lattitude, sender.longitude );
-                            BO.Location targetLocation = new Location ( target.lattitude, target.longitude );
+                            BO.Location senderLocation = new Location(sender.latitude, sender.longitude );
+                            BO.Location targetLocation = new Location ( target.latitude, target.longitude );
                             drt.droneStatus = DroneStatus.delivery;
                             if (pr.pickedUp == DateTime.MinValue && pr.scheduled != DateTime.MinValue)
                             {
-                                drt.location = new Location( closestStation(senderLocation, false, baseStationLocations).lattitude,closestStation(senderLocation, false, baseStationLocations).longitude);
+                                drt.location = new Location( closestStation(senderLocation, false, baseStationLocations).latitude,closestStation(senderLocation, false, baseStationLocations).longitude);
                                 minBatery = distance(drt.location, senderLocation) * chargeCapacity.chargeCapacityArr[0];
                                 minBatery += distance(senderLocation, targetLocation) * chargeCapacity.chargeCapacityArr[(int)pr.weight];
-                                minBatery += distance(targetLocation, new Location(closestStation(targetLocation, false, baseStationLocations).lattitude,   closestStation(targetLocation, false, baseStationLocations).longitude )) * chargeCapacity.chargeCapacityArr[0];
+                                minBatery += distance(targetLocation, new Location(closestStation(targetLocation, false, baseStationLocations).latitude,   closestStation(targetLocation, false, baseStationLocations).longitude )) * chargeCapacity.chargeCapacityArr[0];
                             }
                             if (pr.pickedUp != DateTime.MinValue && pr.delivered == DateTime.MinValue)
                             {
                                 
                                 drt.location = senderLocation;
-                                minBatery = distance(targetLocation, new Location ( closestStation(targetLocation, false, baseStationLocations).lattitude,  closestStation(targetLocation, false, baseStationLocations).longitude )) * chargeCapacity.chargeCapacityArr[0];
+                                minBatery = distance(targetLocation, new Location ( closestStation(targetLocation, false, baseStationLocations).latitude,  closestStation(targetLocation, false, baseStationLocations).longitude )) * chargeCapacity.chargeCapacityArr[0];
                                 minBatery += distance(drt.location, targetLocation) * chargeCapacity.chargeCapacityArr[(int)pr.weight];
                             }
                             if (minBatery > 100) { minBatery = 100; }
+                          //  if (minBatery == 0) { minBatery = 1; }
                             drt.battery = rnd.Next((int)minBatery, 101); // 100/;
+                         //  if (drt.location == null)
+                           // drt.location = new Location(29, 34);
                             flag = true;
                             break;
                         }
@@ -769,9 +770,11 @@ namespace BL
                             }
                             DO.DroneCharge DC = new DO.DroneCharge { droneId=drt.droneId, stationId=s.stationId,chargeTime=DateTime.Now,active=true };
                             dal.AddDroneCharge(DC);
-                            drt.location = new Location( s.lattitude,  s.longitude );
-                            drt.battery = rnd.Next(0, 21); // 100/;
-                        }
+                            drt.location = new Location( s.latitude,  s.longitude );
+                            drt.battery = rnd.Next(1, 21); // 100/;
+                        //if (drt.location == null)
+                          //  drt.location = new Location(29, 34);
+                    }
                         else
                         {
                             List<DO.Customer> lst = new List<DO.Customer>();
@@ -790,14 +793,16 @@ namespace BL
                             }
                             int l = rnd.Next(0, lst.Count());
 
-                            drt.location = new Location (lst[l].lattitude, lst[l].longitude );
-                            Location Location1 = new Location (lst[l].lattitude,  lst[l].longitude );
+                            drt.location = new Location (lst[l].latitude, lst[l].longitude );
+                            Location Location1 = new Location (lst[l].latitude,  lst[l].longitude );
 
-                            minBatery += distance(drt.location, new Location ( closestStation(Location1, false, baseStationLocations).longitude, closestStation(Location1, false, baseStationLocations).lattitude )) * chargeCapacity.chargeCapacityArr[0];
+                            minBatery += distance(drt.location, new Location ( closestStation(Location1, false, baseStationLocations).longitude, closestStation(Location1, false, baseStationLocations).latitude )) * chargeCapacity.chargeCapacityArr[0];
 
                             if (minBatery > 100) { minBatery = 100; }
-
-                            drt.battery = rnd.Next((int)minBatery, 101);
+                           // if (minBatery == 0) { minBatery = 1; }
+                     //   if (drt.location == null)
+                         //   drt.location = new Location(29, 34);
+                        drt.battery = rnd.Next((int)minBatery, 101);
                         }
 
                     }
@@ -864,14 +869,15 @@ namespace BL
                 var tempDrone = getDrone(droneId);
                 var temp = returnsDrone(droneId);
                 double chargeTime = DateTime.Now.Subtract(dal.getDroneCharge(droneId).chargeTime).TotalMinutes;
+               
             //checks if drone is charging
                 if (tempDrone.droneStatus == DroneStatus.maintenance)
                 {
                     //updates info
                     var possibleStation = getStation(dal.printStationsList().ToList()
-                                            .Find(station => station.lattitude == tempDrone.location.lattitude && station.longitude == tempDrone.location.longitude).stationId);
+                                            .Find(station => station.latitude == tempDrone.location.latitude && station.longitude == tempDrone.location.longitude).stationId);
                     BatteryUsage usage = new BatteryUsage();
-                    tempDrone.battery += chargeTime * usage.chargeSpeed;
+                    tempDrone.battery += (chargeTime * usage.chargeSpeed);
                     if (tempDrone.battery > 100)
                        tempDrone.battery = 100;
                      dal.deleteDroneCharge(tempDrone.droneId, possibleStation.stationId);
@@ -942,13 +948,13 @@ namespace BL
             {
                 //checks if foudn parcel
                 customer = dal.getCustomer(item.senderId);
-                loc.lattitude = customer.lattitude;
+                loc.latitude = customer.latitude;
                 loc.longitude = customer.longitude;
                 chargeCapacity chargeCapacity = getChargeCapacity();
                 d = distance(a, loc);
                
-                    x = distance(loc, new BO.Location(dal.getCustomer(item.targetId).lattitude, dal.getCustomer(item.targetId).longitude));
-                    double fromCusToSta = distance(new BO.Location(dal.getCustomer(item.targetId).lattitude, dal.getCustomer(item.targetId).longitude), closestStation(new BO.Location(dal.getCustomer(item.targetId).lattitude, dal.getCustomer(item.targetId).longitude), false, stationLocationslist()));
+                    x = distance(loc, new BO.Location(dal.getCustomer(item.targetId).latitude, dal.getCustomer(item.targetId).longitude));
+                    double fromCusToSta = distance(new BO.Location(dal.getCustomer(item.targetId).latitude, dal.getCustomer(item.targetId).longitude), closestStation(new BO.Location(dal.getCustomer(item.targetId).latitude, dal.getCustomer(item.targetId).longitude), false, stationLocationslist()));
 
                     double butteryUse = x * chargeCapacity.chargeCapacityArr[(int)item.weight] + fromCusToSta * chargeCapacity.chargeCapacityArr[0] + d * chargeCapacity.chargeCapacityArr[0];
                     if (d < far && (battery - butteryUse) > 0 && item.scheduled == DateTime.MinValue && weight(we, (BO.weightCategories)item.weight) == true)
@@ -1010,7 +1016,7 @@ namespace BL
             {
                 var myDrone = getDrone(droneId);
                 var droneLoc = closestStation(myDrone.location, false, stationLocationslist());
-                var station = getStations().ToList().Find(x => x.location.longitude == droneLoc.longitude && x.location.lattitude == droneLoc.lattitude);
+                var station = getStations().ToList().Find(x => x.location.longitude == droneLoc.longitude && x.location.latitude == droneLoc.latitude);
                 if (myDrone.droneStatus != DroneStatus.available)
                     throw new unavailableException("the drone is unavailable\n");
                 DO.Parcel myParcel = findTheParcel(myDrone.maxWeight, myDrone.location, myDrone.battery, DO.Priorities.emergency);
@@ -1035,7 +1041,7 @@ namespace BL
                     battery = myDrone.battery,
                     weight=myDrone.maxWeight,
                     droneStatus = DroneStatus.delivery,
-                    location = new Location(myDrone.location.lattitude, myDrone.location.longitude),
+                    location = new Location(myDrone.location.latitude, myDrone.location.longitude),
                     parcelId = myDrone.parcel.parcelId,
                     numOfParcelsdelivered = dal.printParcelsList().Where(p => p.parcelId == myDrone.parcel.parcelId).Count()
                 };
@@ -1061,7 +1067,7 @@ namespace BL
                 int index = drones.FindIndex(d => d.droneId == droneId);
                 drones.RemoveAt(index);
                 BatteryUsage usage = new BatteryUsage();
-                tempDrone.location.lattitude = tempDrone.parcel.pickupLocation.lattitude;
+                tempDrone.location.latitude = tempDrone.parcel.pickupLocation.latitude;
                 tempDrone.location.longitude = tempDrone.parcel.pickupLocation.longitude;
                 tempDrone.parcel.parcelStatus= ParcelStatus.pickedUp;
                 
@@ -1073,7 +1079,7 @@ namespace BL
                     battery = tempDrone.battery,
                     weight=tempDrone.maxWeight,
                     droneStatus = DroneStatus.delivery,
-                    location = new Location(tempDrone.location.lattitude, tempDrone.location.longitude),
+                    location = new Location(tempDrone.location.latitude, tempDrone.location.longitude),
                     parcelId = tempDrone.parcel.parcelId,
                     numOfParcelsdelivered = dal.printParcelsList().Where(p => p.parcelId == tempDrone.parcel.parcelId).Count()
                 };
@@ -1122,7 +1128,7 @@ namespace BL
                     tempDrone.battery -= distance(tempDrone.location, getCustomer(tempDrone.parcel.target.customerId).location) * usage.medium;
                 if (amount == 3)
                     tempDrone.battery -= distance(tempDrone.location, getCustomer(tempDrone.parcel.target.customerId).location) * usage.heavy;
-                tempDrone.location.lattitude = getCustomer(tempDrone.parcel.target.customerId).location.lattitude;
+                tempDrone.location.latitude = getCustomer(tempDrone.parcel.target.customerId).location.latitude;
                 tempDrone.location.longitude = getCustomer(tempDrone.parcel.target.customerId).location.longitude;
                 tempDrone.droneStatus = DroneStatus.available;
                 tempDrone.parcel.parcelStatus = ParcelStatus.delivered;
@@ -1133,7 +1139,7 @@ namespace BL
                     battery = tempDrone.battery,
                     weight=tempDrone.maxWeight,
                     droneStatus = DroneStatus.available,
-                    location = new Location(tempDrone.location.lattitude, tempDrone.location.longitude),
+                    location = new Location(tempDrone.location.latitude, tempDrone.location.longitude),
                     parcelId = 0,
                     numOfParcelsdelivered = dal.printParcelsList().Where(p => p.parcelId == tempDrone.parcel.parcelId).Count()
                 };
@@ -1268,6 +1274,7 @@ namespace BL
         #endregion
         #region SendDroneToCharge
         //sends drone to charge at station
+        //something wrong with when battery us 0 throws location exception
         public void SendDroneToCharge(int droneId) 
         {
 
@@ -1291,13 +1298,19 @@ namespace BL
                 throw new unavailableException("not available");
             //find closest sation to charge at
             Location stationLocation = closestStation(drone.location, false, stationLocationslist());
-            station = getStations().Find(x => x.location.longitude == stationLocation.longitude && x.location.lattitude == stationLocation.lattitude);
+            
+            //station = getStations().Find(x => x.location.longitude == stationLocation.longitude && x.location.latitude == stationLocation.latitude);
             int droneIndex = drones.ToList().FindIndex(x => x.droneId == droneId);
+            if ((drone.battery - minBatteryRequired(drones[droneIndex].droneId) <= 0))
+                throw new UnableToCompleteRequest("the drone doesn't have enough charge");
             //updates info
             if (station.chargeSlots > 0)
                 station.decreaseChargeSlots();
-            drones[droneIndex].battery -= minBatteryRequired(drones[droneIndex].droneId);
-            drones[droneIndex].location = station.location;
+         //   if ((drone.battery - minBatteryRequired(drones[droneIndex].droneId) > 0))
+                drones[droneIndex].battery -= minBatteryRequired(drones[droneIndex].droneId);
+            if (drones[droneIndex].battery < 0)
+                drones[droneIndex].battery = 0;
+                drones[droneIndex].location = station.location;
             drones[droneIndex].droneStatus = DroneStatus.maintenance;
             //var temp = getDrone(drones[droneIndex].droneId);
             DO.DroneCharge DC = new DroneCharge { droneId = droneId, stationId = station.stationId,chargeTime=DateTime.Now};
@@ -1354,8 +1367,8 @@ namespace BL
                 pt.target.customerName = getCustomer(p.targetId).name;
                 DO.Customer sender = dal.getCustomer(p.senderId);
                 DO.Customer target = dal.getCustomer(p.targetId);
-                pt.pickupLocation = new BO.Location(sender.lattitude, sender.longitude);
-                pt.targetLocation = new BO.Location(target.lattitude,target.longitude);
+                pt.pickupLocation = new BO.Location(sender.latitude, sender.longitude);
+                pt.targetLocation = new BO.Location(target.latitude,target.longitude);
                 
                 pt.distance = distance(pt.pickupLocation, pt.targetLocation);
                 d.parcel = new BO.ParcelInTransit();
@@ -1460,9 +1473,9 @@ namespace BL
                     phone = temp.Phone,
                     password=temp.password,
                     isCustomer=temp.isCustomer,
-                    location = new Location(temp.lattitude, temp.longitude)
+                    location = new Location(temp.latitude, temp.longitude)
                     {
-                        lattitude = temp.lattitude,
+                        latitude = temp.latitude,
                         longitude = temp.longitude,
 
                     },

@@ -176,6 +176,8 @@ namespace PL
 
         private void listOfDronesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e) //write this!!
         {
+            //something here is veryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy wrong
+            //throwing a catch
             DroneInCharging updateDrone = new DroneInCharging();
             updateDrone = (DroneInCharging)listOfDronesAtStation.SelectedItem;
             Drone realDrone = new Drone();

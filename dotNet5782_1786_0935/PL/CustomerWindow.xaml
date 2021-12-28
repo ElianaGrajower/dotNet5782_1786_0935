@@ -37,7 +37,7 @@
         <TextBox x:Name="nameText" HorizontalAlignment="Left" Margin="255,69,0,0" Text="{Binding name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="phoneText" HorizontalAlignment="Left" Margin="526,38,0,0" Text="{Binding phone,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Latitude:" HorizontalAlignment="Left" Margin="412,65,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="526,69,0,0" Text="{Binding location.lattitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="526,69,0,0" Text="{Binding location.latitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <Label Content="Logitude:" HorizontalAlignment="Left" Margin="412,96,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="526,100,0,0" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="passwordRead" Content="Password:" HorizontalAlignment="Left" Margin="141,96,0,0" VerticalAlignment="Top"/>

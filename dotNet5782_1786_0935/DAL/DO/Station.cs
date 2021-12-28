@@ -13,7 +13,7 @@ using System.Threading.Tasks;
             {
                 stationId = id;
                 name = tempname;
-                lattitude=lat;
+                latitude=lat;
                 longitude = lon;
                 chargeSlots = slots;
                 active = true;
@@ -23,14 +23,14 @@ using System.Threading.Tasks;
             }
             public int stationId { set; get; } 
             public string name { set; get; }
-            public double lattitude { set; get; }
+            public double latitude { set; get; }
             public double longitude { set; get; }
             public int chargeSlots { set; get; }
             public bool active { set; get; }
         // public int availablechargeSlots { set; get; }
         public override string ToString()
             {
-                return String.Format($"Id: {stationId}\nname: {name}\nlongitude: {longitude}lattitude: {lattitude}\nchargeSlots: {chargeSlots}");
+                return String.Format($"Id: {stationId}\nname: {name}\nlongitude: {longitude}latitude: {latitude}\nchargeSlots: {chargeSlots}");
             }
         }
     }
