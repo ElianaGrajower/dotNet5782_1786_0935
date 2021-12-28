@@ -172,5 +172,10 @@ namespace PL
          //   checkBoxTerms.Foreground = "#FF268E75";
 
         }
+
+        private void passwordText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

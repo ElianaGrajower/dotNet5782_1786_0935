@@ -41,7 +41,7 @@
         <Label Content="Logitude:" HorizontalAlignment="Left" Margin="412,96,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="526,100,0,0" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="passwordRead" Content="Password:" HorizontalAlignment="Left" Margin="141,96,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="255,100,0,0" Text="{Binding password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="255,100,0,0" Text="{Binding password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="passwordText_TextChanged"/>
         <Canvas x:Name="checkDelete" Margin="298,109,248,194" Background="White" Visibility="Hidden">
             <TextBlock Canvas.Left="41" Canvas.Top="24" TextWrapping="Wrap"><Run Text="Are you sure you want to delete "/><LineBreak/><Run Text="this station?"/></TextBlock>
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
