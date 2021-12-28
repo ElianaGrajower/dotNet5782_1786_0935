@@ -1257,16 +1257,14 @@ namespace BL
         //sends drone to charge at station
         public void SendDroneToCharge(int droneId) 
         {
-
-
             BO.Drone drone = new();
             BO.Station station = new();
             try
             {
                 //ensures drone exists
                 drone = getDrone(droneId);
-              //  if(!drone.active)
-                 //   throw new BO.DoesntExistException("this drone doesnt exist in the system\n");
+                //  if(!drone.active)
+                //   throw new BO.DoesntExistException("this drone doesnt exist in the system\n");
 
             }
             catch (DO.DoesntExistException exp)
@@ -1284,10 +1282,12 @@ namespace BL
             if (station.chargeSlots > 0)
                 station.decreaseChargeSlots();
             drones[droneIndex].battery -= minBatteryRequired(drones[droneIndex].droneId);
+            if (drones[droneIndex].battery < 0)
+                drones[droneIndex].battery = 0;
             drones[droneIndex].location = station.location;
             drones[droneIndex].droneStatus = DroneStatus.maintenance;
             //var temp = getDrone(drones[droneIndex].droneId);
-            DO.DroneCharge DC = new DroneCharge { droneId = droneId, stationId = station.stationId,chargeTime=DateTime.Now};
+            DO.DroneCharge DC = new DroneCharge { droneId = droneId, stationId = station.stationId, chargeTime = DateTime.Now };
             dal.AddDroneCharge(DC);
         }
         #endregion

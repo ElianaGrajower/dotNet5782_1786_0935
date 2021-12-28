@@ -71,8 +71,8 @@ namespace PL
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
             addButton.Visibility = Visibility.Hidden;
-            passwordRead.Visibility = Visibility.Hidden;
-            passwordText.Visibility = Visibility.Hidden;
+            //passwordRead.Visibility = Visibility.Hidden;
+            //passwordText.Visibility = Visibility.Hidden;
 
         }
 

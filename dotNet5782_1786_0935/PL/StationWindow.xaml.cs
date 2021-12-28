@@ -46,7 +46,7 @@ namespace PL
             locationText.Visibility = Visibility.Hidden;
         }
 
-        public StationWindow(IBL b, BO.Station station) //update
+        public StationWindow(IBL b, Station station) //update
         {
             InitializeComponent();
             this.Bl = b;

@@ -40,16 +40,15 @@ namespace PL
             Close();
         }
 
-        private void ShowInfo()  /////add filter
-        {
-            IEnumerable<CustomerToList> d = new List<CustomerToList>();
-            CustomersListView.ItemsSource = bl.getCustomersList();
-        }
+        //private void ShowInfo()  /////add filter
+        //{
+        //    IEnumerable<CustomerToList> d = new List<CustomerToList>();
+        //    CustomersListView.ItemsSource = bl.getCustomersList();
+        //}
 
         private void addNewButton_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bl).ShowDialog();
-            // ShowInfo();
             myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
             DataContext = myObservableCollection;
         }

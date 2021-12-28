@@ -14,7 +14,7 @@ namespace BO
         public string phone { set; get; }
         public Location location{ set; get; }
         public bool isCustomer;
-        public string password;
+        public string password { set; get; }
         public IEnumerable<ParcelinCustomer> parcelsdelivered;
         public IEnumerable<ParcelinCustomer> parcelsOrdered;
         public bool active;

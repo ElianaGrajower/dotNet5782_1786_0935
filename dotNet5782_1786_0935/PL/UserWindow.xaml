@@ -16,7 +16,7 @@
             <Label Content="User Name:" Canvas.Left="33" Canvas.Top="37" FontWeight="Bold"/>
             <TextBox x:Name="userNameText" Canvas.Left="33" Canvas.Top="68" Text="" TextWrapping="Wrap" Width="120"/>
             <Label Content="Password:" Canvas.Left="37" Canvas.Top="108" FontWeight="Bold"/>
-            <TextBox x:Name="passwordText" Canvas.Left="33" Canvas.Top="139" Text="" TextWrapping="Wrap" Width="120"/>
+            <PasswordBox x:Name="passwordText" Canvas.Left="33" Canvas.Top="139" Width="120"/>
             <Button x:Name="enterButton" Content="Enter" Canvas.Left="59" Canvas.Top="187" Width="68" Click="Button_Click_1"/>
             <Button Content="cancel" Canvas.Left="59" Canvas.Top="222" Width="68" Click="Button_Click"/>
         </Canvas>

@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
     <Grid RenderTransformOrigin="0.5,0.5" Background="#FF7D9BC0">
-        <TextBox x:Name="idText" HorizontalAlignment="Center" Margin="0,85,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Background="White"/>
-        <TextBox x:Name="modelText" HorizontalAlignment="Center" Margin="0,122,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="idText" HorizontalAlignment="Center" Margin="0,85,0,0" Text="{Binding droneId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Background="White"/>
+        <TextBox x:Name="modelText" HorizontalAlignment="Center" Margin="0,122,0,0" Text="{Binding model,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
         <TextBlock HorizontalAlignment="Left" Margin="236,85,0,0" Text="Drone Id:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="236,155,0,0" Text="Max weight:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="236,122,0,0" Text="Model:" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"/>
@@ -21,10 +21,10 @@
         <Button x:Name="matchUpParcel" Content="match up parcel" HorizontalAlignment="Left" Margin="490,252,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="matchUpParcel_Click"/>
         <Button x:Name="pickupParcel" Content="pickup parcel" HorizontalAlignment="Left" Margin="490,252,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="pickupParcel_Click"/>
         <Button x:Name="deliverParcel" Content="deliver parcel" HorizontalAlignment="Left" Margin="490,252,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Visibility="Visible" Click="deliverParcel_Click"/>
-        <ComboBox x:Name="weight" HorizontalAlignment="Center" Margin="0,155,0,0" VerticalAlignment="Top" Width="140"/>
+        <ComboBox x:Name="weight" HorizontalAlignment="Center" Margin="0,155,0,0" VerticalAlignment="Top" Width="140" Text="{Binding maxWeight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <TextBlock x:Name="locationRead" HorizontalAlignment="Left" Margin="236,190,0,0" Text="Location:" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Visibility="Visible"/>
-        <TextBox x:Name="locationText" HorizontalAlignment="Center" Margin="0,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Visibility="Visible" IsReadOnly="True"/>
-        <TextBox x:Name="weightText" HorizontalAlignment="Center" Margin="0,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="locationText" HorizontalAlignment="Center" Margin="0,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Visibility="Visible" Text="{Binding location,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False"/>
+        <TextBox x:Name="weightText" HorizontalAlignment="Center" Margin="0,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Text="{Binding maxWeight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False"/>
         <ComboBox x:Name="stationIdCombo" HorizontalAlignment="Center" Margin="0,188,0,0" VerticalAlignment="Top" Width="140"/>
         <Canvas x:Name="addAnotherDrone" Background="White" Margin="294,114,287,183" Visibility="Collapsed">
             <TextBlock Canvas.Left="51" Canvas.Top="37" TextWrapping="Wrap"><Run Text="would you like to add "/><LineBreak/><Run Text="another drone?"/></TextBlock>
@@ -33,10 +33,10 @@
         </Canvas>
         <Label x:Name="batteryRead" Content="Battery:" HorizontalAlignment="Left" Margin="230,217,0,0" VerticalAlignment="Top"/>
         <Label x:Name="statusRead" Content="Drone Status:" HorizontalAlignment="Left" Margin="228,248,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="batteryText" HorizontalAlignment="Center" Margin="0,221,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsReadOnly="True"/>
-        <TextBox x:Name="statusText" HorizontalAlignment="Center" Margin="0,252,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsReadOnly="True"/>
+        <TextBox x:Name="batteryText" HorizontalAlignment="Center" Margin="0,221,0,0" Text="{Binding battery,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsEnabled="False"/>
+        <TextBox x:Name="statusText" HorizontalAlignment="Center" Margin="0,252,0,0" Text="{Binding droneStatus,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsEnabled="False"/>
         <Label x:Name="parcelIdRead" Content="Parcel Id:" HorizontalAlignment="Left" Margin="230,279,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="parcelIdText" HorizontalAlignment="Center" Margin="0,283,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsReadOnly="True"/>
+        <TextBox x:Name="parcelIdText" HorizontalAlignment="Center" Margin="0,283,0,0" Text="{Binding parcel.parcelId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsEnabled="False"/>
         <Button x:Name="parcelButton" Content="open parcel" HorizontalAlignment="Left" Margin="490,282,0,0" VerticalAlignment="Top" Width="96" Background="#FF468BE1" Click="Button_Click_4"/>
     </Grid>
 </Window>

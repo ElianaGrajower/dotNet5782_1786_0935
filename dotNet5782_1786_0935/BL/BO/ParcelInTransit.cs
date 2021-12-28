@@ -9,7 +9,7 @@ namespace BO
 {
     public class ParcelInTransit
     {
-        public int parcelId;
+        public int parcelId { set; get; }
        // public bool parcelStatus; //true if matched with drone
         public Priorities priority;
         public weightCategories weight;
