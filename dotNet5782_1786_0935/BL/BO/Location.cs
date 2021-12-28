@@ -10,16 +10,16 @@ namespace BO
 {
     public class Location
     {
-        public double lattitude { set; get; }
+        public double latitude { set; get; }
         public double longitude { set; get; }
         public Location(char a,double x,char b,double y,char c) 
         {
-            lattitude = x;
+            latitude = x;
             longitude = y;
         }
         public Location(double x,double y)
         {
-            lattitude = x;
+            latitude = x;
             longitude = y;
         }
 
@@ -29,7 +29,7 @@ namespace BO
         }
         public override string ToString()
         {
-            return String.Format($" { Math.Round(lattitude,3)} °N, {Math.Round(longitude,3)} °W");
+            return String.Format($" { Math.Round(latitude,3)} °N, {Math.Round(longitude,3)} °W");
         }
     }
 }

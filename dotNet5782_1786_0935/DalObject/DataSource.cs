@@ -25,10 +25,10 @@ namespace DAL
         {
             public static int assignparcelId = 1001; //assigns a random id to a parcel
             public static double available = 0;
-            public static double lightLoad = 0.01;
-            public static double mediumLoad = 0.02;
-            public static double heavyLoad = 0.03;
-            public static double chargeSpeed = 0.5;
+            public static double lightLoad = 0.001;
+            public static double mediumLoad = 0.002;
+            public static double heavyLoad = 0.003;
+            public static double chargeSpeed = 10;
 
         }
         #region Initialize
@@ -49,8 +49,8 @@ namespace DAL
                 {
                     stationId = DalObject.r.Next(100000000, 999999999),
                     name = stationName[i],
-                    longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90) 
-                    lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                    longitude = (DalObject.r.NextDouble() + DalObject.r.Next(34, 35)) +0.57, //gets coordinates for (-90 - 90) 
+                    latitude = (DalObject.r.NextDouble() + DalObject.r.Next(29, 33)) +0.207, //gets coordinates for (-180 - 180)
                     chargeSlots = DalObject.r.Next(1, 100),
                     active = true
                 });
@@ -79,8 +79,8 @@ namespace DAL
                     customerId = DalObject.r.Next(100000000, 999999999),
                     name = customerName[i],
                     Phone = "05" + DalObject.r.Next(00000000, 99999999),
-                    longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90)
-                    lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                    longitude = (DalObject.r.NextDouble() + DalObject.r.Next(34, 35)) + 0.57, //gets coordinates for (-90 - 90) 
+                    latitude = (DalObject.r.NextDouble() + DalObject.r.Next(29, 33)) + 0.207, //gets coordinates for (-180 - 180)
                     password = letters[i] + p,
                     isCustomer = true,
                     active=true
@@ -92,7 +92,7 @@ namespace DAL
                     name = customerName[i],
                     Phone = "05" + DalObject.r.Next(00000000, 99999999),
                     longitude = (DalObject.r.NextDouble() + DalObject.r.Next(-90, 89)), //gets coordinates for (-90 - 90)
-                    lattitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
+                    latitude = (DalObject.r.NextDouble() + DalObject.r.Next(-180, 179)), //gets coordinates for (-180 - 180)
                     password = letters[i] + p,
                     isCustomer = false,
                     active = true

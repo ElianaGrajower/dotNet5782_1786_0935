@@ -45,7 +45,7 @@ namespace DalApi
         public Station findStation(int stationId); //finds a station using its id
         public DroneCharge findDroneCharge(int droneChargeId); //finds a drone charge using its id
        public int getParcelId(); //returns parcel id
-      //  public double distance(double lattitude1, double longitute1, double lattitude2, double longitute2); //calculates distance between coordinates for bonus
+      //  public double distance(double latitude1, double longitute1, double latitude2, double longitute2); //calculates distance between coordinates for bonus
         public double[] ChargeCapacity();
         public IEnumerable<Station> printStationsList(); //prints list of stations 
         public IEnumerable<Drone> printDronesList(); //prints list of drone

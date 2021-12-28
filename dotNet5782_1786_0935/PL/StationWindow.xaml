@@ -19,7 +19,7 @@
         <Label Content="Name:" HorizontalAlignment="Left" Margin="122,95,0,0" VerticalAlignment="Top" Width="50"/>
         <TextBox x:Name="nameText" HorizontalAlignment="Left" Margin="242,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label x:Name="latitudeRead" Content="Latitude:" HorizontalAlignment="Left" Margin="121,171,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="242,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding location.lattitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
+        <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="242,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding location.latitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label x:Name="inUseRead" Content="Charges In Use:" HorizontalAlignment="Left" Margin="436,95,0,0" VerticalAlignment="Top" Width="99"/>
         <TextBox x:Name="inUseText" HorizontalAlignment="Left" Margin="557,99,0,0" Text="{Binding numberOfSlotsInUse,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="longitudeRead" Content="Longitude:" HorizontalAlignment="Left" Margin="121,213,0,0" VerticalAlignment="Top"/>

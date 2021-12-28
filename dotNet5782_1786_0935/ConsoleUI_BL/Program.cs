@@ -72,10 +72,10 @@
 //                                        s.stationId = id;
 //                                        Console.WriteLine("Enter name of station: ");
 //                                        s.name = Console.ReadLine();
-//                                        Console.WriteLine("Enter lattitude and longitude of station:");
+//                                        Console.WriteLine("Enter latitude and longitude of station:");
 //                                        s.location = new Location(0, 0);
 //                                        double.TryParse(Console.ReadLine(), out latitude);
-//                                        s.location.lattitude = latitude;
+//                                        s.location.latitude = latitude;
 //                                        double.TryParse(Console.ReadLine(), out longitude);
 //                                        s.location.longitude = longitude;
 //                                        Console.WriteLine("Enter amount of charge slots that station has: ");
@@ -171,7 +171,7 @@
 
 //                                        c.phone = Console.ReadLine();
 //                                        c.location = new Location(0, 0);
-//                                        Console.WriteLine("Enter Your lattitude coordinates: ");
+//                                        Console.WriteLine("Enter Your latitude coordinates: ");
 //                                        double.TryParse(Console.ReadLine(), out latitude);
 
 //                                        Console.WriteLine("Enter Your longitude coordinates: ");

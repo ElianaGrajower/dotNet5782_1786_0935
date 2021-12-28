@@ -12,7 +12,7 @@ using System.Threading.Tasks;
             public int customerId { set; get; }
             public string name { set; get; }
             public string Phone { set; get; }
-            public double lattitude { set; get; }
+            public double latitude { set; get; }
             public double longitude { set; get; }
             public string password { set; get; }
             public bool isCustomer { set; get; }
@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
         public override string ToString()
             {
-                return String.Format($"Id: {customerId}\nname: {name}\nPhone: {Phone}\nlattitude: {lattitude}\nlongitude: {longitude}\n");
+                return String.Format($"Id: {customerId}\nname: {name}\nPhone: {Phone}\nlatitude: {latitude}\nlongitude: {longitude}\n");
             }
         }
     }

@@ -160,6 +160,10 @@ namespace PL
                 DataContext = c;
                 Close();
             }
+            catch(InvalidInputException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
             catch
             {
                 MessageBox.Show("ERROR can not add customer");
