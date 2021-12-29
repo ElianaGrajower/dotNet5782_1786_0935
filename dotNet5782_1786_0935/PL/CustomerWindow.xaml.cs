@@ -122,16 +122,19 @@ namespace PL
         }
         private void sentParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
         {
-            //ParcelToList updateParcel = new ParcelToList();
-            //updateParcel = (ParcelToList)ParcelsListView.SelectedItem;
-            //Parcel realParcel = new Parcel();
-            //realParcel = Bl.getParcel(updateParcel.parcelId);
-            //new ParcelWindow(Bl, realParcel).ShowDialog();
-            new ParcelWindow(bl).ShowDialog();
+            ParcelinCustomer updateParcel = new ParcelinCustomer();
+            updateParcel = (ParcelinCustomer)sentParcelsList.SelectedItem;
+            Parcel realParcel = new Parcel();
+            realParcel = bl.getParcel(updateParcel.parcelId);
+            new ParcelWindow(bl, realParcel).ShowDialog();
         }
         private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
         {
-            new ParcelWindow(bl).ShowDialog();
+            ParcelinCustomer updateParcel = new ParcelinCustomer();
+            updateParcel = (ParcelinCustomer)receivedParcelsList.SelectedItem;
+            Parcel realParcel = new Parcel();
+            realParcel = bl.getParcel(updateParcel.parcelId);
+            new ParcelWindow(bl, realParcel).ShowDialog();
         }
 
         private void yes_Click(object sender, RoutedEventArgs e)

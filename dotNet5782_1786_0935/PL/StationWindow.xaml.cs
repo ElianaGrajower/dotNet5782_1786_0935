@@ -82,11 +82,11 @@ namespace PL
             //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(station.dronesAtStation);
             //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
 
-            stationIdText.IsReadOnly = true;
-            latitudeText.IsReadOnly = true;
-            longitudeText.IsReadOnly = true;
-            inUseText.IsReadOnly = true;
-            locationText.IsReadOnly = true;
+            stationIdText.IsEnabled = false;
+            latitudeText.IsEnabled = false;
+            longitudeText.IsEnabled = false;
+            inUseText.IsEnabled = false;
+            locationText.IsEnabled = false;
         }
 
         private void close_Click(object sender, RoutedEventArgs e)
@@ -187,7 +187,11 @@ namespace PL
             new DroneWindow(Bl, realDrone).ShowDialog();
             //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(s.dronesAtStation);
             //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
-            DataContext = s;
+            
+            DataContext = s;             ///////////doesnt work
+            listOfDronesAtStation.ItemsSource = s.dronesAtStation;
+
+            Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
