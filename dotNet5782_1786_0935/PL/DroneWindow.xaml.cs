@@ -59,7 +59,7 @@ namespace PL
                 releaseDrone.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Hidden;
             }
-         //   locationText.Visibility = Visibility.Visible;
+           //locationText.Visibility = Visibility.Visible;
             stationIdCombo.Visibility = Visibility.Hidden;
          //   locationRead.Visibility = Visibility.Visible;
             stationRead.Visibility = Visibility.Hidden;

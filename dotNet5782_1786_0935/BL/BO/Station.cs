@@ -15,7 +15,7 @@ namespace BO
         public int chargeSlots { set; get; } //the amount of available charge slots in the station
         public void decreaseChargeSlots() { chargeSlots--; } //dcrease a charge slot
         public int numberOfSlotsInUse { set; get; }
-        public void addChargeSlots() { chargeSlots++; } //add a charge slot
+      //  public void addChargeSlots() { chargeSlots++; } //add a charge slot
         public List<DroneInCharging> dronesAtStation; //drones being charged at the station
         public bool active;
         public override string ToString()

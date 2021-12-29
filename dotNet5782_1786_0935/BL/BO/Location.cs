@@ -25,7 +25,10 @@ namespace BO
 
         public Location()
         {
-            //////what is supposed to go here??????
+            ///added this on 29/12 not sure if correct it was empty before
+            latitude = 30;
+            longitude = 35;
+           
         }
         public override string ToString()
         {
