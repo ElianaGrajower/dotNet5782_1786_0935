@@ -16,7 +16,7 @@ namespace BO
         public CustomerInParcel customerInParcel;
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {parcelId}\nParcel weight: {weight}\npriority: {priority}\nParcel status: {parcelStatus}\nCustomer In Parcel: {customerInParcel}\n");
+            return String.Format($"Parcel Id: {parcelId} Parcel weight: {weight} priority: {priority} Parcel status: {parcelStatus} Customer In Parcel: {customerInParcel}\n");
         }
 
     }

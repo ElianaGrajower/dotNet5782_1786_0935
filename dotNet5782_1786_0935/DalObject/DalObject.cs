@@ -148,9 +148,11 @@ namespace Dal
         public void AddCustomer(Customer customerToAdd) //adds customer to list
         {
 
-            if (DataSource.CustomerList.Count(x => x.customerId == customerToAdd.customerId) !=0 && DataSource.CustomerList.Count(x => getCustomer(x.customerId).active == true) != 0)
-                throw new AlreadyExistException("The customer already exist in the system");
-           customerToAdd.active = true;
+            if ( DataSource.CustomerList.Count(x => x.customerId == customerToAdd.customerId) != 0 && DataSource.CustomerList.Count(x => getCustomer(x.customerId).active == true) != 0)
+                throw new AlreadyExistException("A customer with this id already exist in the system");
+            if(DataSource.CustomerList.Count(x => x.name == customerToAdd.name) != 0 && DataSource.CustomerList.Count(x => getCustomer(x.customerId).active == true) != 0)
+                throw new AlreadyExistException("A customer with this user name already exist in the system");
+            customerToAdd.active = true;
             DataSource.CustomerList.Add(customerToAdd);
         }
         #endregion

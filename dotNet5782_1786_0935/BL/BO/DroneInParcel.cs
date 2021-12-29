@@ -15,7 +15,7 @@ namespace BO
 
         public override string ToString()
         {
-            return String.Format($"Drone Id: {droneId}\nBattery: {battery}\nLocation: {location}\n");
+            return String.Format($"Drone Id: {droneId} Battery: {battery} Location: {location}\n");
         }
     }
 }

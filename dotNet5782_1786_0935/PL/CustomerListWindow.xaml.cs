@@ -31,8 +31,11 @@ namespace PL
             InitializeComponent();
             this.bl = b;
             myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-            DataContext = myObservableCollection;
-           // ShowInfo();
+            //List<CustomerToList> customers =
+             DataContext = myObservableCollection;
+            // CustomersListView.ItemsSource = bl.getCustomersList();
+            // DataContext;
+            // ShowInfo();
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)

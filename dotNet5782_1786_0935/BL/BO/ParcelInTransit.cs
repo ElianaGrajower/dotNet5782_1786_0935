@@ -23,7 +23,7 @@ namespace BO
 
         public override string ToString()
         {
-            return String.Format($"Parcel Id: {parcelId}\nParcel Status: {parcelStatus}\npriority: {priority}\nweight: {weight}\nSender: {sender}\nTarget: {target}\nPickup Location: {pickupLocation}\nTarget Location: {targetLocation}\ndistance: {distance}\n");
+            return String.Format($"Parcel Id: {parcelId} Parcel Status: {parcelStatus} priority: {priority} weight: {weight} Sender: {sender} Target: {target} Pickup Location: {pickupLocation} Target Location: {targetLocation} distance: {distance}\n");
         }
     }
 }

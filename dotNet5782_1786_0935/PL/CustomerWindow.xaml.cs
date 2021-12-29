@@ -153,6 +153,7 @@ namespace PL
             checkBoxTerms.IsChecked = false;
             try
             {
+                c.isCustomer = true; //adina added this-not yet tested with option to add employee
                 bl.addCustomer(c);
                 MessageBox.Show("added customer succesfully");
                 c = new Customer();
