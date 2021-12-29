@@ -49,8 +49,8 @@
         </Canvas>
         <Canvas x:Name="termesConditions" Background="White" Margin="163,0,154,0" Visibility="Hidden">
             <TextBox Canvas.Left="79" Canvas.Top="55" Text="DroneDrop" TextWrapping="Wrap" Width="120"/>
-            <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above " Canvas.Left="47" Canvas.Top="325"/>
-            <Button x:Name="continueButton" Content="continue" Canvas.Left="341" Canvas.Top="358" Width="73" IsEnabled="False"/>
+            <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above " Canvas.Left="47" Canvas.Top="325" Checked="checkBoxTerms_Checked"/>
+            <Button x:Name="continueButton" Content="continue" Canvas.Left="341" Canvas.Top="358" Width="73" Click="continueButton_Click_1" IsEnabled="False"/>
         </Canvas>
 
     </Grid>
