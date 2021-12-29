@@ -155,7 +155,23 @@ namespace PL
             checkDelete.Visibility = Visibility.Collapsed;
         }
 
-        private void continueButton_Click(object sender, RoutedEventArgs e)
+        private void passwordText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void checkBoxTerms_Checked(object sender, RoutedEventArgs e) //switch to binding!!!!!!!!!!!!!!!
+        {
+            continueButton.IsEnabled = true;
+            //  checkBoxTerms.Foreground = "#FF268E75";
+        }
+
+        private void continueButton_Click_1(object sender, RoutedEventArgs e)
         {
             termesConditions.Visibility = Visibility.Collapsed;
             checkBoxTerms.IsChecked = false;
@@ -169,7 +185,7 @@ namespace PL
                 DataContext = c;
                 Close();
             }
-            catch(InvalidInputException exc)
+            catch (InvalidInputException exc)
             {
                 MessageBox.Show(exc.Message);
             }
@@ -177,23 +193,6 @@ namespace PL
             {
                 MessageBox.Show("ERROR can not add customer");
             }
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e) //switch to binding!!!!!!!!!!!!!!!
-        {
-            continueButton.IsEnabled = true;
-          //  checkBoxTerms.Foreground = "#FF268E75";
-
-        }
-
-        private void passwordText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
