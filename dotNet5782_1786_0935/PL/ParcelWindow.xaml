@@ -46,6 +46,5 @@
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
             <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
         </Canvas>
-        <Image Margin="60,65,602,231" Stretch="Fill" Source="pack://siteoforigin:,,,/received-package-2441152-2037695.png"/>
     </Grid>
 </Window>

@@ -59,7 +59,7 @@ namespace DAL
         #region createDrone
         static void createDrone() //creats a drone with random information
         {
-            for (int i = 0; i < 20; i++) //creates 5 drones with information
+            for (int i = 0; i < 10; i++) //creates 5 drones with information
                 DroneList.Add(new Drone()
                 {
                     droneId = DalObject.r.Next(100000000, 999999999),

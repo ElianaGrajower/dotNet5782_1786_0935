@@ -24,14 +24,15 @@ namespace PL
     public partial class ParcelListWindow : Window
     {
         internal readonly IBL Bl = BlFactory.GetBl();
-        ObservableCollection<ParcelToList> myObservableCollection;
+      //  ObservableCollection<ParcelToList> myObservableCollection;
 
 
         public ParcelListWindow(IBL parcel)
         {
             InitializeComponent();
-            myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
-            DataContext = myObservableCollection;
+            //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
+            //DataContext = myObservableCollection;
+            ParcelsListView.ItemsSource = Bl.getParcelsList();
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,8 +53,10 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(Bl).ShowDialog();
-            myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
-            DataContext = myObservableCollection;
+            //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
+            //DataContext = myObservableCollection;
+            ParcelsListView.ItemsSource = Bl.getParcelsList();
+
         }
         private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -62,8 +65,10 @@ namespace PL
             Parcel realParcel = new Parcel();
             realParcel = Bl.getParcel(updateParcel.parcelId);
             new ParcelWindow(Bl, realParcel).ShowDialog();
-            myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
-            DataContext = myObservableCollection;
+            //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
+            //DataContext = myObservableCollection;
+            ParcelsListView.ItemsSource = Bl.getParcelsList();
+
         }
 
         private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

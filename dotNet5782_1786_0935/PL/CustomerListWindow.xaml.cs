@@ -24,15 +24,15 @@ namespace PL
     public partial class CustomerListWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
-        ObservableCollection<CustomerToList> myObservableCollection;
+       // ObservableCollection<CustomerToList> myObservableCollection;
 
         public CustomerListWindow(IBL b)
         {
             InitializeComponent();
             this.bl = b;
-            myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-            DataContext = myObservableCollection;
-           // ShowInfo();
+            //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
+            //DataContext = myObservableCollection;
+            ShowInfo();
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -40,17 +40,18 @@ namespace PL
             Close();
         }
 
-        //private void ShowInfo()  /////add filter
-        //{
-        //    IEnumerable<CustomerToList> d = new List<CustomerToList>();
-        //    CustomersListView.ItemsSource = bl.getCustomersList();
-        //}
+        private void ShowInfo()  /////add filter
+        {
+            IEnumerable<CustomerToList> d = new List<CustomerToList>();
+            CustomersListView.ItemsSource = bl.getCustomersList();
+        }
 
         private void addNewButton_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bl).ShowDialog();
-            myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-            DataContext = myObservableCollection;
+            ShowInfo();
+            //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
+            //DataContext = myObservableCollection;
         }
 
         private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)  ////why does it earase???
@@ -60,9 +61,9 @@ namespace PL
             Customer realCustomer = new Customer();
             realCustomer = bl.getCustomer(updateCustomer.customerId);
             new CustomerWindow(bl, realCustomer).ShowDialog();
-            myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-            CustomersListView.DataContext = myObservableCollection;
-            //    ShowInfo();
+            //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
+            //CustomersListView.DataContext = myObservableCollection;
+            ShowInfo();
         }
 
         private void CustomersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

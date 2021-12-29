@@ -11,6 +11,7 @@ namespace BlApi
 {
     public interface IBL
     {
+        public int searchCustomer(string userName);
         public bool isEmployee(string userName, string password);
         public chargeCapacity getChargeCapacity();
         public List<BO.StationToList> getStationsList();

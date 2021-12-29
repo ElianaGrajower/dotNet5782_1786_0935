@@ -25,8 +25,9 @@ namespace PL
     {
         internal readonly IBL bl = BlFactory.GetBl();
         Customer c;
-        ObservableCollection<ParcelinCustomer>deliverObservableCollection;
-        ObservableCollection<ParcelinCustomer>receiveObservableCollection;
+        Customer cutomerParcel;
+        //ObservableCollection<ParcelinCustomer>deliverObservableCollection;
+        //ObservableCollection<ParcelinCustomer>receiveObservableCollection;
 
         //public CustomerWindow()
         //{
@@ -62,11 +63,13 @@ namespace PL
             InitializeComponent();
             this.bl = b;
             this.DataContext = customer;
-
-            deliverObservableCollection = new ObservableCollection<ParcelinCustomer>(customer.parcelsdelivered);
-            sentParcelsList.DataContext = deliverObservableCollection;
-            receiveObservableCollection = new ObservableCollection<ParcelinCustomer>(customer.parcelsOrdered);
-            receivedParcelsList.DataContext = receiveObservableCollection;
+            cutomerParcel = customer;
+            sentParcelsList.ItemsSource = customer.parcelsdelivered;
+            receivedParcelsList.ItemsSource = customer.parcelsOrdered;
+            //deliverObservableCollection = new ObservableCollection<ParcelinCustomer>(customer.parcelsdelivered);
+            //sentParcelsList.DataContext = deliverObservableCollection;
+            //receiveObservableCollection = new ObservableCollection<ParcelinCustomer>(customer.parcelsOrdered);
+            //receivedParcelsList.DataContext = receiveObservableCollection;
             idText.IsEnabled = false;
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
@@ -117,11 +120,16 @@ namespace PL
             termesConditions.Visibility = Visibility.Visible;
             continueButton.IsEnabled = false;
         }
-        private void sentParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void sentParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
         {
+            //ParcelToList updateParcel = new ParcelToList();
+            //updateParcel = (ParcelToList)ParcelsListView.SelectedItem;
+            //Parcel realParcel = new Parcel();
+            //realParcel = Bl.getParcel(updateParcel.parcelId);
+            //new ParcelWindow(Bl, realParcel).ShowDialog();
             new ParcelWindow(bl).ShowDialog();
         }
-        private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
         {
             new ParcelWindow(bl).ShowDialog();
         }
@@ -173,11 +181,16 @@ namespace PL
         private void CheckBox_Checked(object sender, RoutedEventArgs e) //switch to binding!!!!!!!!!!!!!!!
         {
             continueButton.IsEnabled = true;
-         //   checkBoxTerms.Foreground = "#FF268E75";
+          //  checkBoxTerms.Foreground = "#FF268E75";
 
         }
 
         private void passwordText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

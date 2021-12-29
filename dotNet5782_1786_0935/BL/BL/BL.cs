@@ -25,6 +25,13 @@ namespace BL
         public double[] chargeCapacity;    
         private List<BO.DroneToList> drones; 
         public static Random rand = new Random();
+        #region searchCostumer
+        public int searchCustomer(string userName) //recieves the name of a customer and returns its id
+        {
+            int id = getCustomersList().Where(c => c.customerName == userName).Select(s => s.customerId).FirstOrDefault();
+            return id;
+        }
+        #endregion
         #region isEmployee
         public bool isEmployee(string userName, string password)
         {
@@ -569,7 +576,7 @@ namespace BL
         #endregion
         #region getCustomer
         //returns customer
-        public BO.Customer getCustomer(int customerId)
+        public BO.Customer getCustomer(int customerId)    //////////////////do we need this???? if yes add to the IBL
         {
             try
             {

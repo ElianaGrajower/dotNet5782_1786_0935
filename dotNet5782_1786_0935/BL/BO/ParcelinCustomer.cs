@@ -13,7 +13,7 @@ namespace BO
         public weightCategories weight { get; set; }
         public Priorities priority { get; set; }
         public ParcelStatus parcelStatus { get; set; }
-        public CustomerInParcel customerInParcel;
+        public CustomerInParcel customerInParcel { get; set; }
         public override string ToString()
         {
             return String.Format($"Parcel Id: {parcelId}\nParcel weight: {weight}\npriority: {priority}\nParcel status: {parcelStatus}\nCustomer In Parcel: {customerInParcel}\n");

@@ -35,12 +35,18 @@ namespace PL
             {
                 string user = userNameText.Text;
                 string password = (string)passwordText.Password.ToString();
-                if(bl.isEmployee(user,password))
+                if (bl.isEmployee(user, password))
                 {
                     new MainWindow().Show();
                 }
                 else
-                    new DroneWindow(bl).Show();///build a window!!!!!!!!
+                {
+                    Customer openCustomer = new Customer();
+                    int id = bl.searchCustomer(user);
+                    openCustomer = bl.getCustomer(id);
+                    new AccountWindow(openCustomer).Show();
+
+                }
                 Close();
             }
             catch(DoesntExistException exp)

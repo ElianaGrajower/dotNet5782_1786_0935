@@ -65,8 +65,8 @@ namespace ConsoleUI
         ////                                        s.chargeSlots = int.Parse(Console.ReadLine());
         ////                                        Console.WriteLine("Enter Your longitude coordinates: ");
         ////                                        s.longitude = double.Parse(Console.ReadLine());
-        ////                                        Console.WriteLine("Enter Your lattitude coordinates: ");
-        ////                                        s.lattitude = double.Parse(Console.ReadLine());
+        ////                                        Console.WriteLine("Enter Your latitude coordinates: ");
+        ////                                        s.latitude = double.Parse(Console.ReadLine());
         ////                                        Data.AddStation(s); //builds and adds a station using the information the user provided
 
         ////                                        break;
@@ -93,8 +93,8 @@ namespace ConsoleUI
         ////                                        c.Phone = Console.ReadLine();
         ////                                        Console.WriteLine("Enter Your longitude coordinates: ");
         ////                                        c.longitude = double.Parse(Console.ReadLine());
-        ////                                        Console.WriteLine("Enter Your lattitude coordinates: ");
-        ////                                        c.lattitude = double.Parse(Console.ReadLine());
+        ////                                        Console.WriteLine("Enter Your latitude coordinates: ");
+        ////                                        c.latitude = double.Parse(Console.ReadLine());
         ////                                        Data.AddCustomer(c); //builds and adds a customer using the information the user provided
         ////                                        break;
         ////                                    }
@@ -191,7 +191,7 @@ namespace ConsoleUI
         ////                                        Console.WriteLine("Enter latitude coordinates: ");
         ////                                        double latitude = double.Parse(Console.ReadLine());
         ////                                        Console.WriteLine("the distance is:");
-        ////                                        foreach (Station item in Data.printStationsList()) { Console.WriteLine(item.name + ": " + Data.distance(item.lattitude, item.longitude, latitude, longitutde)); }; //prints the distance
+        ////                                        foreach (Station item in Data.printStationsList()) { Console.WriteLine(item.name + ": " + Data.distance(item.latitude, item.longitude, latitude, longitutde)); }; //prints the distance
         ////                                        break;
         ////                                    }
         ////                                case 'G': //finds distance from customer
@@ -201,7 +201,7 @@ namespace ConsoleUI
         ////                                        Console.WriteLine("Enter latitude coordinates: ");
         ////                                        double latitude = double.Parse(Console.ReadLine());
         ////                                        Console.WriteLine("the distance is:");
-        ////                                        foreach (Customer item in Data.printCustomersList()) { Console.WriteLine(item.name + ": " + Data.distance(item.lattitude, item.longitude, latitude, longitutde)); }; //prints the distances
+        ////                                        foreach (Customer item in Data.printCustomersList()) { Console.WriteLine(item.name + ": " + Data.distance(item.latitude, item.longitude, latitude, longitutde)); }; //prints the distances
         ////                                        break;
         ////                                    }
         ////                                default:

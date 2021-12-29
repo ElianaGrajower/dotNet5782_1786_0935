@@ -24,7 +24,7 @@ namespace PL
     public partial class StationWindow : Window
     {
         internal readonly IBL Bl = BlFactory.GetBl();
-        ObservableCollection<DroneInCharging> droneAtStationObservableCollection;
+     //   ObservableCollection<DroneInCharging> droneAtStationObservableCollection;
         Station s;
 
         public StationWindow(IBL Station) //new
@@ -77,8 +77,10 @@ namespace PL
             ////////
             ///
             this.DataContext = station;
-            droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(station.dronesAtStation);
-            listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
+            listOfDronesAtStation.ItemsSource = station.dronesAtStation;
+
+            //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(station.dronesAtStation);
+            //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
 
             stationIdText.IsReadOnly = true;
             latitudeText.IsReadOnly = true;
