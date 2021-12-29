@@ -43,7 +43,7 @@ namespace PL
                 StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
             else
             {
-                if (availableChargesSelector.SelectedItem == "available charges slots")
+                if (availableChargesSelector.SelectedIndex == 0)
                     StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
                 else
                     StationsListView.ItemsSource = bl.getStationsList();
