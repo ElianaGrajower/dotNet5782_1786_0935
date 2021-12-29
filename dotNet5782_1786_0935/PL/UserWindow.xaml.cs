@@ -31,7 +31,7 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            try
+            try    
             {
                 string user = userNameText.Text;
                 string password = (string)passwordText.Password.ToString();
