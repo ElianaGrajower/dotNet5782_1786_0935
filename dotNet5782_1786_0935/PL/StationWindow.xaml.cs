@@ -191,7 +191,7 @@ namespace PL
             DataContext = s;             ///////////doesnt work
             listOfDronesAtStation.ItemsSource = s.dronesAtStation;
 
-
+            Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
