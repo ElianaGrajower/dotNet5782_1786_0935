@@ -94,8 +94,6 @@ namespace BL
             return count;
         }
         #endregion
-     
-        
         #region getStationsList
         //this function returns a list of all the stations
         public List<BO.StationToList> getStationsList()
@@ -1386,7 +1384,6 @@ namespace BL
                 DO.Customer target = dal.getCustomer(p.targetId);
                 pt.pickupLocation = new BO.Location(sender.latitude, sender.longitude);
                 pt.targetLocation = new BO.Location(target.latitude,target.longitude);
-                
                 pt.distance = distance(pt.pickupLocation, pt.targetLocation);
                 d.parcel = new BO.ParcelInTransit();
                 d.parcel = pt;

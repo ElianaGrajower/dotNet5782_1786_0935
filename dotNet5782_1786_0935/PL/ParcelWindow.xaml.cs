@@ -113,6 +113,10 @@ namespace PL
                 DataContext = p;
                 Close();
             }
+            catch(InvalidInputException exc )
+            {
+                MessageBox.Show(exc.Message);
+            }
             catch
             {
                 MessageBox.Show("ERROR can not add parcel");

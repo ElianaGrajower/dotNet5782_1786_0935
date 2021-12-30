@@ -100,6 +100,10 @@ namespace PL
                 MessageBox.Show("customer updated succesfully");
                 DataContext = c;
             }
+            catch(InvalidInputException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
             catch
             {
                 MessageBox.Show("ERROR invalid input");
