@@ -31,6 +31,7 @@ namespace PL
             p = new Parcel();
             p.sender = new CustomerInParcel();
             p.target = new CustomerInParcel();
+            p.drone = new DroneInParcel();
             DataContext = p;
             weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
             prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));

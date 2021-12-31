@@ -582,7 +582,7 @@ namespace BL
         #endregion
         #region getCustomer
         //returns customer
-        public BO.Customer getCustomer(int customerId)    //////////////////do we need this???? if yes add to the IBL
+        public BO.Customer getCustomer(int customerId)    
         {
             try
             {

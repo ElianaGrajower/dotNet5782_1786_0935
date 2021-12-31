@@ -75,5 +75,43 @@ namespace PL
         {
             ////first filter
         }
+
+        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if(statusSelector.SelectedIndex !=-1) //need to add the clear to the enum
+            //{
+
+            //}
+
+
+
+
+
+            //if (weightSelector.SelectedIndex != -1)
+            //{
+            //    weightFilter = (weightCategories)weightSelector.SelectedItem;
+            //    if ((int)weightFilter != 4)
+            //        DronesListView.ItemsSource = bl.allDrones(x => x.weight == weightFilter);
+            //    else
+            //        DronesListView.ItemsSource = bl.allDrones();
+            //}
+            //if (StatusSelector.SelectedIndex != -1 && weightSelector.SelectedIndex != -1)
+            //{
+            //    weightFilter = (weightCategories)weightSelector.SelectedItem;
+            //    statusFilter = (DroneStatus)StatusSelector.SelectedItem;
+            //    if ((int)weightFilter != 4 && (int)statusFilter != 4)
+            //        DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter && x.weight == weightFilter);
+            //    else
+            //      if ((int)statusFilter != 4)
+            //        DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+            //    else
+            //    {
+            //        if ((int)weightFilter != 4)
+            //            DronesListView.ItemsSource = bl.allDrones(x => x.weight == weightFilter);
+            //        else
+            //            DronesListView.ItemsSource = bl.allDrones();
+            //    }
+            //}
+        }
     }
 }

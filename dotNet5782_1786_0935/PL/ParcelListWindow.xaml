@@ -15,7 +15,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="90,355,0,0" VerticalAlignment="Top" Width="79" Background="#FFC74D64" Click="closeButton_Click"/>
-        <Button Content="add new customer" HorizontalAlignment="Left" Margin="596,355,0,0" VerticalAlignment="Top" Width="124" Background="#FF468BE1" Click="Button_Click"/>
+        <Button Content="add new parcel" HorizontalAlignment="Left" Margin="596,355,0,0" VerticalAlignment="Top" Width="124" Background="#FF468BE1" Click="Button_Click"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="typeSelector" HorizontalAlignment="Left" Margin="91,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="typeSelector_SelectionChanged"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="231,36,0,0" VerticalAlignment="Top"/>
