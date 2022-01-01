@@ -28,32 +28,37 @@ namespace PL
         internal readonly IBL bl = BlFactory.GetBl();
         static weightCategories? weightFilter;
         static DroneStatus? statusFilter;
-        ObservableCollection<DroneToList> droneObservableCollection;
+   //     ObservableCollection<DroneToList> droneObservableCollection;
 
         public DroneListWindow()
         {
             InitializeComponent();
-            droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
-            DataContext = droneObservableCollection;
+            //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
+            //DataContext = droneObservableCollection;
+            DronesListView.ItemsSource = bl.getDronesList();
+
 
         }
         private void ShowInfo()
         {
             IEnumerable<DroneToList> d = new List<DroneToList>();
             d = bl.getDronesList();
-            if (StatusSelector.Text != "")
-                d = this.bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
-            if (weightSelector.Text != "")
-                d = bl.allDrones(x => x.weight == (weightCategories)weightFilter);
-            if (weightSelector.Text != "" && StatusSelector.Text != "")
-                d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter && x.weight == (weightCategories)weightFilter);
+            if (weightSelector.SelectedIndex != 3)
+            {
+                if (StatusSelector.Text != "")
+                    d = this.bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter);
+                if (weightSelector.Text != "")
+                    d = bl.allDrones(x => x.weight == (weightCategories)weightFilter);
+                if (weightSelector.Text != "" && StatusSelector.Text != "")
+                    d = bl.allDrones(x => x.droneStatus == (DroneStatus)statusFilter && x.weight == (weightCategories)weightFilter);
+            }
             DronesListView.ItemsSource = d;
         }
         public DroneListWindow(IBL b)
         {
             InitializeComponent();
             this.bl = b;
-          //  DronesListView.ItemsSource = b.getDronesList();
+            DronesListView.ItemsSource = b.getDronesList();
             ShowInfo();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             weightSelector.ItemsSource = Enum.GetValues(typeof(weightCategories));

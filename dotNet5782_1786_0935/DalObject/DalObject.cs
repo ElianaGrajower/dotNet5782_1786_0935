@@ -479,7 +479,7 @@ namespace Dal
         #region printParcelsList
         public IEnumerable<Parcel> printParcelsList() //prints parcel list
         {
-            foreach (Parcel item in DataSource.ParcelList.Where(s => s.active == true))
+            foreach (Parcel item in DataSource.ParcelList/*.Where(s => s.active == true)*/)
             {
                 yield return item;
             }

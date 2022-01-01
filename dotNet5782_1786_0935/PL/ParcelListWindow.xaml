@@ -20,7 +20,13 @@
         <ComboBox x:Name="typeSelector" HorizontalAlignment="Left" Margin="91,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="typeSelector_SelectionChanged"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="231,36,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="statusSelector" HorizontalAlignment="Left" Margin="281,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="statusSelector_SelectionChanged"/>
-        <ComboBox HorizontalAlignment="Left" Margin="501,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox x:Name="dateRange" HorizontalAlignment="Left" Margin="501,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBoxItem Content="today"></ComboBoxItem>
+            <ComboBoxItem Content="this week"></ComboBoxItem>
+            <ComboBoxItem Content="this month"></ComboBoxItem>
+            <ComboBoxItem Content="this year"></ComboBoxItem>
+            <ComboBoxItem Content="clear"></ComboBoxItem>
+        </ComboBox>
         <Label x:Name="dateSelector" Content="Date Range:" HorizontalAlignment="Left" Margin="422,36,0,0" VerticalAlignment="Top"/>
         <Calendar x:Name="calender" HorizontalAlignment="Left" Margin="609,63,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <DatePicker HorizontalAlignment="Left" Margin="648,40,0,0" VerticalAlignment="Top"/>

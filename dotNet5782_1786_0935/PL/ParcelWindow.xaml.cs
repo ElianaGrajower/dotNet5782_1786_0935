@@ -42,7 +42,7 @@ namespace PL
             senderText.Visibility = Visibility.Hidden;
             targetText.Visibility = Visibility.Hidden;
             deleteButton.Visibility = Visibility.Hidden;
-            updateButton.Visibility = Visibility.Hidden;
+     //       updateButton.Visibility = Visibility.Hidden;
             parcelIdText.Visibility = Visibility.Hidden;
             parcelIdRead.Visibility = Visibility.Hidden;
             droneIdText.Visibility = Visibility.Hidden;
@@ -55,6 +55,10 @@ namespace PL
             pickUpRead.Visibility = Visibility.Hidden;
             deliveredRead.Visibility = Visibility.Hidden;
             deliveryText.Visibility = Visibility.Hidden;
+            droneButton.Visibility = Visibility.Hidden;
+            senderButton.Visibility = Visibility.Hidden;
+            targetButton.Visibility = Visibility.Hidden;
+
 
 
 
@@ -73,6 +77,22 @@ namespace PL
             senderSelect.Visibility = Visibility.Hidden;
             targetSelect.Visibility = Visibility.Hidden;
             addButton.Visibility = Visibility.Hidden;
+            try
+            {
+                ParcelToList statusParcel = new ParcelToList();
+                int getParcelId = parcel.parcelId;
+                statusParcel = Bl.getParcelsList().Where(x => x.parcelId == getParcelId).FirstOrDefault();
+                if (!(statusParcel.parcelStatus == (ParcelStatus)2 || statusParcel.parcelStatus == (ParcelStatus)3))
+                {
+                    droneButton.Visibility = Visibility.Hidden;
+                }
+            }
+            catch
+            {
+                droneButton.Visibility = Visibility.Hidden;
+            }
+
+
 
         }
 

@@ -11,14 +11,14 @@ namespace BO
     {
         public int parcelId { set; get; }
        // public bool parcelStatus; //true if matched with drone
-        public Priorities priority;
-        public weightCategories weight;
-        public CustomerInParcel sender;   
-        public CustomerInParcel target;
-        public Location pickupLocation;
-        public Location targetLocation;
-        public double distance;
-        public ParcelStatus parcelStatus;
+        public Priorities priority { set; get; }
+        public weightCategories weight { set; get; }
+        public CustomerInParcel sender { set; get; }
+        public CustomerInParcel target { set; get; }
+        public Location pickupLocation { set; get; }
+        public Location targetLocation { set; get; }
+        public double distance { set; get; }
+        public ParcelStatus parcelStatus { set; get; }
 
 
         public override string ToString()

@@ -94,8 +94,6 @@ namespace BL
             return count;
         }
         #endregion
-     
-        
         #region getStationsList
         //this function returns a list of all the stations
         public List<BO.StationToList> getStationsList()
