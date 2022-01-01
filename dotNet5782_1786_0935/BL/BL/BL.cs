@@ -14,16 +14,16 @@ using BlApi;
 
 namespace BL
 {
-    
-     sealed internal class BL: IBL
+
+    sealed internal class BL : IBL
     {
 
         static readonly IBL instance = new BL();
-       
+
         public static IBL Instance { get => instance; }
         internal IDal dal = DalFactory.GetDal();
-        public double[] chargeCapacity;    
-        private List<BO.DroneToList> drones; 
+        public double[] chargeCapacity;
+        private List<BO.DroneToList> drones;
         public static Random rand = new Random();
         #region searchCostumer
         public int searchCustomer(string userName) //recieves the name of a customer and returns its id
@@ -51,14 +51,14 @@ namespace BL
             bool flag = false;
             if (password.Length < 8)
                 return false;
-            for(int i=0;i<password.Length;i++)
+            for (int i = 0; i < password.Length; i++)
             {
                 if (password[i] >= 65 && password[i] <= 90)
                 {
                     flag = true;
                     break;
                 }
-                    
+
             }
             if (!flag)
                 return false;
@@ -81,9 +81,9 @@ namespace BL
         //this function returns an arr of chargecapacity
         public chargeCapacity getChargeCapacity()
         {
-        
+
             double[] arr = dal.ChargeCapacity();
-            var chargeCapacity=new chargeCapacity {  pwrLight=arr[0], pwrAverge= arr[1], pwrAvailable= arr[2],pwrHeavy= arr[3],pwrRateLoadingDrone= arr[4], chargeCapacityArr=arr};
+            var chargeCapacity = new chargeCapacity { pwrLight = arr[0], pwrAverge = arr[1], pwrAvailable = arr[2], pwrHeavy = arr[3], pwrRateLoadingDrone = arr[4], chargeCapacityArr = arr };
             return chargeCapacity;
         }
         #endregion
@@ -113,10 +113,10 @@ namespace BL
                         numberOfSlotsInUse = getStation(s.stationId).numberOfSlotsInUse,
                         //this was just updated
                         numberOfAvailableSlots = getStation(s.stationId).chargeSlots - getUnvailablechargeSlots(s.stationId)
-                      
+
 
                     };
-                    stations.Add(temp); 
+                    stations.Add(temp);
                 }
             }
             catch (ArgumentException) { throw new BO.DoesntExistException(); }
@@ -149,7 +149,7 @@ namespace BL
                     minValue = (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * droneToSender);
                     double senderToTarget = distance(sender.location, target.location);
                     minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)parcel.weight] * senderToTarget);
-                    Location baseStationlocation = closestStation(target.location, false,stationLocationslist());
+                    Location baseStationlocation = closestStation(target.location, false, stationLocationslist());
                     double targetToCharge = distance(target.location, baseStationlocation);
                     minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * targetToCharge);
                     return minValue;
@@ -165,7 +165,7 @@ namespace BL
                     minValue = (int)(getChargeCapacity().chargeCapacityArr[batteryUsage] * senderToTarget);
                     Location baseStationlocation = closestStation(target.location, false, stationLocationslist());
                     double targetToCharge = distance(target.location, baseStationlocation);
-                    minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * targetToCharge); 
+                    minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * targetToCharge);
                     return minValue;
                 }
             }
@@ -178,7 +178,7 @@ namespace BL
         {
             var station = dal.printStationsList().Where(s => s.longitude == location.longitude && s.latitude == location.latitude);
             if (station.Count() == 0)
-                throw new BO.DoesntExistException("station with these coordinates doesnt exist\n" );
+                throw new BO.DoesntExistException("station with these coordinates doesnt exist\n");
             var stationId = station.First().stationId;
             return stationId;
         }
@@ -192,7 +192,7 @@ namespace BL
                 throw new BO.InvalidInputException("drone id not valid- must be a posittive\n");
             if (droneToAdd.maxWeight != BO.weightCategories.light && droneToAdd.maxWeight != BO.weightCategories.average && droneToAdd.maxWeight != BO.weightCategories.heavy)
                 throw new BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");
-            if(droneToAdd.battery==0)
+            if (droneToAdd.battery == 0)
                 droneToAdd.battery = rand.Next(20, 40);
             if (droneToAdd.droneStatus == 0)
             { droneToAdd.droneStatus = DroneStatus.maintenance; }
@@ -207,13 +207,13 @@ namespace BL
             {
                 throw new BO.DoesntExistException(exc.Message);
             }
-           // builds new dronetolist
+            // builds new dronetolist
             DroneToList dtl = new DroneToList();
             dtl.droneId = droneToAdd.droneId;
             dtl.model = droneToAdd.model;
             dtl.weight = droneToAdd.maxWeight;
             dtl.battery = droneToAdd.battery;
-            dtl.droneStatus = droneToAdd.droneStatus; 
+            dtl.droneStatus = droneToAdd.droneStatus;
             dtl.location = new Location(30, 35);
             dtl.location.latitude = dal.findStation(stationId).latitude;
             dtl.location.longitude = dal.findStation(stationId).longitude;
@@ -228,16 +228,16 @@ namespace BL
             {
                 //updates the list that contain info
                 dal.AddDrone(newDrone);
-               // if(drones.Where(d=>dtl.droneId==d.droneId).Count()==0)
-                if(drones.Count(x => getDrone(x.droneId).active == true) == 0)
-                drones.Add(dtl);
-                DO.DroneCharge dc = new DO.DroneCharge { droneId = droneToAdd.droneId, stationId = stationId ,active=true};
+                // if(drones.Where(d=>dtl.droneId==d.droneId).Count()==0)
+                if (drones.Count(x => getDrone(x.droneId).active == true) == 0)
+                    drones.Add(dtl);
+                DO.DroneCharge dc = new DO.DroneCharge { droneId = droneToAdd.droneId, stationId = stationId, active = true };
                 var tempstation = getStation(stationId);
-                if (drones.Where(d => dtl.droneId == d.droneId).Count() == 0 )
+                if (drones.Where(d => dtl.droneId == d.droneId).Count() == 0)
                     tempstation.decreaseChargeSlots();
                 updateStation(tempstation.stationId, tempstation.chargeSlots, "");
-                
-                  dal.AddDroneCharge(dc);
+
+                dal.AddDroneCharge(dc);
             }
             catch (BO.AlreadyExistsException exc)
             {
