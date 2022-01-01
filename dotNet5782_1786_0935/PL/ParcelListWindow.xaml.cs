@@ -24,7 +24,9 @@ namespace PL
     public partial class ParcelListWindow : Window
     {
         internal readonly IBL Bl = BlFactory.GetBl();
-      //  ObservableCollection<ParcelToList> myObservableCollection;
+        //  ObservableCollection<ParcelToList> myObservableCollection;
+        static ParcelStatus? statusFilter;
+
 
 
         public ParcelListWindow(IBL parcel)
@@ -33,11 +35,39 @@ namespace PL
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
             //DataContext = myObservableCollection;
             ParcelsListView.ItemsSource = Bl.getParcelsList();
+            statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+
+        }
+        public void ShowInfo()
+        {
+            IEnumerable<ParcelToList> p = new List<ParcelToList>();
+            p = Bl.getParcelsList();
+            //   statusFilter = (ParcelStatus)statusSelector.SelectedItem;
+            if (statusSelector.SelectedIndex != 4)
+            {
+                if (statusSelector.Text != "")
+                    p = Bl.allParcels(x => x.parcelStatus == statusFilter);
+                else
+                    p = Bl.allParcels();
+            }
+            ParcelsListView.ItemsSource = p;
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            IEnumerable<ParcelToList> p = new List<ParcelToList>();
+            p = Bl.getParcelsList();
+            if (dateRange.SelectedIndex==0)
+            {
+               // p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested == DateTime.Today).Select(x=>Bl.allParcels().Where(x=>x.parcelId==???));
 
+            }
+            //if (dateRange.SelectedIndex == 1)
+            //{
+            //    p = Bl.allParcels(x => Bl.getParcel(x.parcelId).requested == (DateTime.Today-7));
+
+            //}
+            ParcelsListView.ItemsSource = p;
         }
 
         private void dateButton_Click(object sender, RoutedEventArgs e)
@@ -67,13 +97,56 @@ namespace PL
             new ParcelWindow(Bl, realParcel).ShowDialog();
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
             //DataContext = myObservableCollection;
-            ParcelsListView.ItemsSource = Bl.getParcelsList();
+        //    ParcelsListView.ItemsSource = Bl.getParcelsList();
+            ShowInfo();
 
         }
 
         private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ////first filter
+        }
+
+        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            statusFilter = (ParcelStatus)statusSelector.SelectedItem;
+            if ((int)statusFilter != 5)
+                ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
+            else
+                ParcelsListView.ItemsSource = Bl.allParcels();
+
+
+
+
+
+
+
+
+            //if (weightSelector.SelectedIndex != -1)
+            //{
+            //    weightFilter = (weightCategories)weightSelector.SelectedItem;
+            //    if ((int)weightFilter != 4)
+            //        DronesListView.ItemsSource = bl.allDrones(x => x.weight == weightFilter);
+            //    else
+            //        DronesListView.ItemsSource = bl.allDrones();
+            //}
+            //if (StatusSelector.SelectedIndex != -1 && weightSelector.SelectedIndex != -1)
+            //{
+            //    weightFilter = (weightCategories)weightSelector.SelectedItem;
+            //    statusFilter = (DroneStatus)StatusSelector.SelectedItem;
+            //    if ((int)weightFilter != 4 && (int)statusFilter != 4)
+            //        DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter && x.weight == weightFilter);
+            //    else
+            //      if ((int)statusFilter != 4)
+            //        DronesListView.ItemsSource = bl.allDrones(x => x.droneStatus == statusFilter);
+            //    else
+            //    {
+            //        if ((int)weightFilter != 4)
+            //            DronesListView.ItemsSource = bl.allDrones(x => x.weight == weightFilter);
+            //        else
+            //            DronesListView.ItemsSource = bl.allDrones();
+            //    }
+            //}
         }
     }
 }

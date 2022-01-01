@@ -58,8 +58,12 @@ namespace PL
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Hidden;
+                if(drone.parcel.parcelStatus==ParcelStatus.matched)
+                    deliverParcel.Visibility = Visibility.Hidden;
+                if (drone.parcel.parcelStatus == ParcelStatus.pickedUp)
+                    pickupParcel.Visibility = Visibility.Hidden;
             }
-           //locationText.Visibility = Visibility.Visible;
+            //locationText.Visibility = Visibility.Visible;
             stationIdCombo.Visibility = Visibility.Hidden;
          //   locationRead.Visibility = Visibility.Visible;
             stationRead.Visibility = Visibility.Hidden;
@@ -341,10 +345,10 @@ namespace PL
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            //Parcel updateParcel = new Parcel();
-            //updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
-            //new ParcelWindow(bl, updateParcel).ShowDialog();
-            //ShowInfo();
+            Parcel updateParcel = new Parcel();
+            updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
+            new ParcelWindow(bl, updateParcel).ShowDialog();
+            //ShowInfo(); have a way to update the info in the window
         }
     }
 }

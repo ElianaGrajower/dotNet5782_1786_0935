@@ -39,7 +39,6 @@
         <TextBox x:Name="deliveryText" HorizontalAlignment="Left" Margin="361,359,0,0" Text="{Binding delivered,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="80,359,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Background="#FFC74D64"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="addButton_Click"/>
-        <Button x:Name="updateButton" Content="update?" HorizontalAlignment="Left" Margin="627,322,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1"/>
         <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="deleteButton_Click"/>
         <Canvas x:Name="checkDelete" Margin="298,109,248,194" Background="White" Visibility="Collapsed">
             <TextBlock Canvas.Left="41" Canvas.Top="24" TextWrapping="Wrap"><Run Text="Are you sure you want to delete "/><LineBreak/><Run Text="this station?"/></TextBlock>

@@ -72,6 +72,8 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             userPassword.Visibility = Visibility.Collapsed;
+            userNameText.Text = "";
+            passwordText.Clear();
         }
     }
 }
