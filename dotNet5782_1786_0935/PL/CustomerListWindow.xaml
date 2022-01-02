@@ -15,7 +15,8 @@
             </ListView.View>
         </ListView>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="80,365,0,0" VerticalAlignment="Top" Width="77" Click="closeButton_Click" Background="#FFC74D64"/>
-        <Button x:Name="addNewButton" Content="add new customer" HorizontalAlignment="Left" Margin="577,365,0,0" VerticalAlignment="Top" Width="143" Click="addNewButton_Click" Background="#FF468BE1"/>
+        <Button x:Name="addCustomerButton" Content="add new customer" HorizontalAlignment="Left" Margin="577,365,0,0" VerticalAlignment="Top" Width="143" Click="addNewButton_Click" Background="#FF468BE1"/>
+        <Button x:Name="addEmployeeButton" Content="add new employee" HorizontalAlignment="Left" Margin="400,365,0,0" VerticalAlignment="Top" Width="143" Background="#FF468BE1" Click="addEmployeeButton_Click"/>
 
     </Grid>
 </Window>

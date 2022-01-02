@@ -41,12 +41,13 @@ namespace PL
         //    receivedRead.Visibility = Visibility.Hidden;
 
         //}
-        public CustomerWindow(IBL customer)//add new
+        public CustomerWindow(IBL customer, bool checkIsCustomer)//add new
         {
             InitializeComponent();
             this.bl = customer;
             c = new Customer();
             c.location = new Location();
+            c.isCustomer = checkIsCustomer;
             DataContext = c;
             sentParcelsList.Visibility = Visibility.Hidden;
             receivedParcelsList.Visibility = Visibility.Hidden;
@@ -74,8 +75,8 @@ namespace PL
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
             addButton.Visibility = Visibility.Hidden;
-            //passwordRead.Visibility = Visibility.Hidden;
-            //passwordText.Visibility = Visibility.Hidden;
+            passwordRead.Visibility = Visibility.Hidden;
+            passwordText.Visibility = Visibility.Hidden;
 
         }
 
@@ -180,7 +181,6 @@ namespace PL
             checkBoxTerms.IsChecked = false;
             try
             {
-                c.isCustomer = true; //adina added this-not yet tested with option to add employee
                 bl.addCustomer(c);
                 MessageBox.Show("added customer succesfully");
                 c = new Customer();
