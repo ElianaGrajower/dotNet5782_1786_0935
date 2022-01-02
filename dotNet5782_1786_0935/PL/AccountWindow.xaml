@@ -12,6 +12,7 @@
         </Grid.Background>
         <Button x:Name="viewAccount" Content="view account" HorizontalAlignment="Left" Margin="178,191,0,0" VerticalAlignment="Top" Height="69" Width="117" Click="viewAccount_Click"/>
         <Button x:Name="parcels" Content="parcels" HorizontalAlignment="Left" Margin="383,191,0,0" VerticalAlignment="Top" Height="69" Width="117" Click="parcels_Click"/>
+        <Button Content="log out" HorizontalAlignment="Left" Margin="605,68,0,0" VerticalAlignment="Top" Height="42" Width="96" Click="Button_Click"/>
 
     </Grid>
 </Window>

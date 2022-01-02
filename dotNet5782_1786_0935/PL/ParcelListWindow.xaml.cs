@@ -38,7 +38,7 @@ namespace PL
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
 
         }
-        public void ShowInfo()
+        public void ShowInfo()  /////majorly work on this!!!
         {
             IEnumerable<ParcelToList> p = new List<ParcelToList>();
             p = Bl.getParcelsList();
@@ -50,6 +50,20 @@ namespace PL
                 else
                     p = Bl.allParcels();
             }
+            if(dateRange.SelectedIndex!=-1)
+            {
+               // IEnumerable<ParcelToList> p = new List<ParcelToList>();
+                p = Bl.getParcelsList();
+                if (dateRange.SelectedIndex == 0)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
+                if (dateRange.SelectedIndex == 1)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
+                if (dateRange.SelectedIndex == 2)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
+                if (dateRange.SelectedIndex == 3)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
+              //  ParcelsListView.ItemsSource = p;
+            }
             ParcelsListView.ItemsSource = p;
         }
 
@@ -57,16 +71,14 @@ namespace PL
         {
             IEnumerable<ParcelToList> p = new List<ParcelToList>();
             p = Bl.getParcelsList();
-            if (dateRange.SelectedIndex==0)
-            {
-               // p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested == DateTime.Today).Select(x=>Bl.allParcels().Where(x=>x.parcelId==???));
-
-            }
-            //if (dateRange.SelectedIndex == 1)
-            //{
-            //    p = Bl.allParcels(x => Bl.getParcel(x.parcelId).requested == (DateTime.Today-7));
-
-            //}
+            if (dateRange.SelectedIndex == 0)
+                p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
+            if (dateRange.SelectedIndex == 1)
+                p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
+            if (dateRange.SelectedIndex == 2)
+                p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
+            if(dateRange.SelectedIndex==3)
+                p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
             ParcelsListView.ItemsSource = p;
         }
 
@@ -85,7 +97,8 @@ namespace PL
             new ParcelWindow(Bl).ShowDialog();
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
             //DataContext = myObservableCollection;
-            ParcelsListView.ItemsSource = Bl.getParcelsList();
+            //  ParcelsListView.ItemsSource = Bl.getParcelsList();
+            ShowInfo();
 
         }
         private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

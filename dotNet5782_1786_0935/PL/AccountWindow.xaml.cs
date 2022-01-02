@@ -39,5 +39,11 @@ namespace PL
         {
             new ParcelListWindow(bl).ShowDialog();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new UserWindow().ShowDialog();
+            Close();
+        }
     }
 }
