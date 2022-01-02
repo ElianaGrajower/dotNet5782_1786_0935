@@ -108,7 +108,7 @@ namespace DAL
                     parcelId = config.assignparcelId++,
                     weight = (DO.weightCategories)DalObject.r.Next(1, 3), //chooses a weight from light, average, heavy
                     priority = (DO.Priorities)DalObject.r.Next(1, 3),
-                    requested = DateTime.MinValue,
+                    requested = DateTime.Now.AddDays(-4*i),
                     scheduled = DateTime.Now,//this was just added its untested
                     pickedUp = DateTime.MinValue,
                     delivered = DateTime.MinValue,
