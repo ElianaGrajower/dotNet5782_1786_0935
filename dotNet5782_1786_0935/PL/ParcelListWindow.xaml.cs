@@ -26,17 +26,27 @@ namespace PL
         internal readonly IBL Bl = BlFactory.GetBl();
         //  ObservableCollection<ParcelToList> myObservableCollection;
         static ParcelStatus? statusFilter;
+        static Priorities? prioritiesFilter;
 
 
 
-        public ParcelListWindow(IBL parcel)
+        public ParcelListWindow(IBL parcel) //for an employee
         {
             InitializeComponent();
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
             //DataContext = myObservableCollection;
             ParcelsListView.ItemsSource = Bl.getParcelsList();
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
-
+            prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
+        }
+        public ParcelListWindow(IBL parcel, Customer customer) //for a customer
+        {
+            InitializeComponent();
+            //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
+            //DataContext = myObservableCollection;
+            ParcelsListView.ItemsSource = Bl.allParcels().Where(x => x.sendername == customer.name || x.recivername == customer.name);  ///have to change the showinfo accordingly
+            statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+            prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
         }
         public void ShowInfo()  /////majorly work on this!!!
         {
@@ -64,6 +74,17 @@ namespace PL
                     p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
               //  ParcelsListView.ItemsSource = p;
             }
+            if (pickDate.ToString() != "Select a date")
+            {
+                if (dateRange.SelectedIndex == 0)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
+                if (dateRange.SelectedIndex == 1)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
+                if (dateRange.SelectedIndex == 2)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
+                if (dateRange.SelectedIndex == 3)
+                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
+            }
             ParcelsListView.ItemsSource = p;
         }
 
@@ -80,6 +101,7 @@ namespace PL
             if(dateRange.SelectedIndex==3)
                 p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
             ParcelsListView.ItemsSource = p;
+            //pickDate.DataContext.Equals("select");
         }
 
         private void dateButton_Click(object sender, RoutedEventArgs e)
@@ -117,16 +139,52 @@ namespace PL
 
         private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ////first filter
+            prioritiesFilter = (Priorities)prioritySelector.SelectedItem;
+            if ((int)prioritiesFilter != 4)
+                ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter);
+            else
+                ParcelsListView.ItemsSource = Bl.allParcels();
         }
 
         private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            statusFilter = (ParcelStatus)statusSelector.SelectedItem;
-            if ((int)statusFilter != 5)
-                ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
+            if (prioritySelector.SelectedIndex == -1 && dateRange.SelectedIndex == -1 && pickDate.SelectedDate != DateTime.MinValue)
+            {
+                statusFilter = (ParcelStatus)statusSelector.SelectedItem;
+                if ((int)statusFilter != 5)
+                    ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
+                else
+                    ParcelsListView.ItemsSource = Bl.allParcels();
+            }
+            else if (prioritySelector.SelectedIndex != -1 && dateRange.SelectedIndex == -1 && pickDate.SelectedDate != DateTime.MinValue)
+            {
+                statusFilter = (ParcelStatus)statusSelector.SelectedItem;
+                prioritiesFilter = (Priorities)prioritySelector.SelectedItem;
+                if ((int)prioritiesFilter == 4)
+                    ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
+                else
+                {
+                    if ((int)statusFilter != 5)
+                        ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter && x.parcelStatus == statusFilter);
+                    else
+                        ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter);
+                }
+            }
             else
-                ParcelsListView.ItemsSource = Bl.allParcels();
+            {
+                statusFilter = (ParcelStatus)statusSelector.SelectedItem;
+                if ((int)statusFilter != 5)
+                    ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
+                else
+                    ParcelsListView.ItemsSource = Bl.allParcels();
+            }
+                //ParcelsListView.ItemsSource = Bl.allParcels();   //erase the else and continue this
+
+
+
+
+            //if (prioritySelector.SelectedIndex == -1 && dateRange.SelectedIndex != -1 && pickDate.SelectedDate != DateTime.MinValue)
+
 
 
 
@@ -160,6 +218,18 @@ namespace PL
             //            DronesListView.ItemsSource = bl.allDrones();
             //    }
             //}
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IEnumerable<ParcelToList> p = new List<ParcelToList>();
+            p = Bl.getParcelsList();
+            ParcelsListView.ItemsSource = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested >= pickDate.SelectedDate && Bl.getParcel(x.parcelId).requested < pickDate.SelectedDate.Value.AddDays(1));
+        }
+
+        private void DatePicker_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }

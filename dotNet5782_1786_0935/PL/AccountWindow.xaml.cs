@@ -37,12 +37,12 @@ namespace PL
 
         private void parcels_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelListWindow(bl).ShowDialog();
+            new ParcelListWindow(bl, c).ShowDialog();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new UserWindow().ShowDialog();
+            new UserWindow().Show();
             Close();
         }
     }

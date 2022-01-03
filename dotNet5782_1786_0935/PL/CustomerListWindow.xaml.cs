@@ -48,7 +48,7 @@ namespace PL
 
         private void addNewButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl).ShowDialog();
+            new CustomerWindow(bl, true).ShowDialog();
             ShowInfo();
             //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
             //DataContext = myObservableCollection;
@@ -69,6 +69,12 @@ namespace PL
         private void CustomersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void addEmployeeButton_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerWindow(bl, false).ShowDialog();
+            ShowInfo();
         }
     }
 }
