@@ -8,12 +8,12 @@
         Title="StationWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/inline_image_preview.jpg"/>
+            <ImageBrush ImageSource="/1280px-Sky.jpg"/>
         </Grid.Background>
         <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="84" Click="update_Click" Background="#FF468BE1"/>
-        <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="85" Click="add_Click" Background="#FF468BE1"/>
-        <Button x:Name="delete" Content="delete" HorizontalAlignment="Left" Margin="477,343,0,0" VerticalAlignment="Top" Width="85" Click="delete_Click" Background="#FF468BE1"/>
-        <Button x:Name="close" Content="close" HorizontalAlignment="Left" Margin="132,343,0,0" VerticalAlignment="Top" Width="85" Click="close_Click" Background="#FFC74D64"/>
+        <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="85" Click="add_Click" Background="#FF989B9E"/>
+        <Button x:Name="delete" Content="delete" HorizontalAlignment="Left" Margin="477,343,0,0" VerticalAlignment="Top" Width="85" Click="delete_Click" Background="#FF989B9E"/>
+        <Button x:Name="close" Content="close" HorizontalAlignment="Left" Margin="132,343,0,0" VerticalAlignment="Top" Width="85" Click="close_Click" Background="#FFDC637A"/>
         <Label Content="Station Id:" HorizontalAlignment="Left" Margin="122,57,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="stationIdText" HorizontalAlignment="Left" Margin="242,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="stationIdText_TextChanged" Text="{Binding stationId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="122,95,0,0" VerticalAlignment="Top" Width="50"/>
@@ -29,7 +29,9 @@
         <ListView x:Name="listOfDronesAtStation" Margin="90,217,90,115" DataContext="{Binding}" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="listOfDronesAtStation_MouseDoubleClick" SelectionChanged="listOfDronesAtStation_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Charge Time" Width="140" DisplayMemberBinding="{Binding chargeTime}"/>
+                    <GridViewColumn Header="Drone Id" Width="120" DisplayMemberBinding="{Binding droneId}"/>
+                    <GridViewColumn Header="Battery" Width="120" DisplayMemberBinding="{Binding battery}"/>
                 </GridView>
             </ListView.View>
         </ListView>

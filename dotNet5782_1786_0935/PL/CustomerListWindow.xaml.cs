@@ -32,6 +32,7 @@ namespace PL
             this.bl = b;
             //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
             //DataContext = myObservableCollection;
+            DataContext = b.getCustomersList();
             ShowInfo();
         }
 

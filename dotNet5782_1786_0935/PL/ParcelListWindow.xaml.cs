@@ -88,7 +88,7 @@ namespace PL
             ParcelsListView.ItemsSource = p;
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)  //date range
         {
             IEnumerable<ParcelToList> p = new List<ParcelToList>();
             p = Bl.getParcelsList();
@@ -137,7 +137,7 @@ namespace PL
 
         }
 
-        private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)  //priority
         {
             prioritiesFilter = (Priorities)prioritySelector.SelectedItem;
             if ((int)prioritiesFilter != 4)
@@ -146,7 +146,7 @@ namespace PL
                 ParcelsListView.ItemsSource = Bl.allParcels();
         }
 
-        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)  //status 
         {
             if (prioritySelector.SelectedIndex == -1 && dateRange.SelectedIndex == -1 && pickDate.SelectedDate != DateTime.MinValue)
             {
@@ -220,7 +220,7 @@ namespace PL
             //}
         }
 
-        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)  //calender
         {
             IEnumerable<ParcelToList> p = new List<ParcelToList>();
             p = Bl.getParcelsList();

@@ -6,17 +6,26 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="CustomerListWindow" Height="450" Width="800">
-    <Grid Background="#FF7D9BC0">
-        <ListView x:Name="CustomersListView" Margin="0,64,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionChanged="CustomersListView_SelectionChanged">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/1280px-Sky.jpg" Opacity="1"/>
+        </Grid.Background>
+        <ListView x:Name="CustomersListView" Margin="0,64,0,94" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionChanged="CustomersListView_SelectionChanged" Background="White">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Customer Id" Width="100" DisplayMemberBinding="{Binding customerId}"/>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding customerName}"/>
+                    <GridViewColumn Header="Phone Number" Width="110" DisplayMemberBinding="{Binding phone}"/>
+                    <GridViewColumn Header="Delivered Parcels" Width="110" DisplayMemberBinding="{Binding parcelsdelivered}"/>
+                    <GridViewColumn Header="Undelivered Parcels" Width="110" DisplayMemberBinding="{Binding undeliveredParcels}"/>
+                    <GridViewColumn Header="Recieved Parcels" Width="110" DisplayMemberBinding="{Binding recievedParcel}"/>
+                    <GridViewColumn Header="Transit Parcels" Width="110" DisplayMemberBinding="{Binding transitParcel}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="80,365,0,0" VerticalAlignment="Top" Width="77" Click="closeButton_Click" Background="#FFC74D64"/>
-        <Button x:Name="addCustomerButton" Content="add new customer" HorizontalAlignment="Left" Margin="577,365,0,0" VerticalAlignment="Top" Width="143" Click="addNewButton_Click" Background="#FF468BE1"/>
-        <Button x:Name="addEmployeeButton" Content="add new employee" HorizontalAlignment="Left" Margin="400,365,0,0" VerticalAlignment="Top" Width="143" Background="#FF468BE1" Click="addEmployeeButton_Click"/>
+        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="80,365,0,0" VerticalAlignment="Top" Width="77" Click="closeButton_Click" Background="#FFDC637A"/>
+        <Button x:Name="addCustomerButton" Content="add customer" HorizontalAlignment="Left" Margin="600,365,0,0" VerticalAlignment="Top" Width="120" Click="addNewButton_Click" Background="#FF989B9E"/>
+        <Button x:Name="addEmployeeButton" Content="add employee" HorizontalAlignment="Left" Margin="447,365,0,0" VerticalAlignment="Top" Width="120" Background="#FF989B9E" Click="addEmployeeButton_Click"/>
 
     </Grid>
 </Window>

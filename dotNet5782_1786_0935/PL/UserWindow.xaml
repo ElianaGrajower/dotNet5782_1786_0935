@@ -8,10 +8,11 @@
         Title="UserWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/sky+photo+for+website+home+page.jpeg"/>
+            <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="203,263,0,0" VerticalAlignment="Top" Height="48" Width="150" Background="#FF468BE1" FontSize="16" FontWeight="Bold" Click="logInButton_Click"/>
-        <Button x:Name="signUpButton" Content="Create Account" HorizontalAlignment="Left" Margin="433,263,0,0" VerticalAlignment="Top" Height="48" Width="150" Background="#FF468BE1" FontSize="16" FontWeight="Bold" Click="signUpButton_Click"/>
+        <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="154,281,0,0" VerticalAlignment="Top" Height="48" Width="180" Background="#FF94C9FF" FontSize="18" FontWeight="Normal" Click="logInButton_Click"/>
+        <Button x:Name="signUpButton" Content="Create Account" HorizontalAlignment="Left" Margin="460,281,0,0" VerticalAlignment="Top" Height="48" Width="180" Background="#FF94C9FF" FontSize="18" FontWeight="Normal" Click="signUpButton_Click"/>
+        <Image HorizontalAlignment="Center" Height="86" Margin="0,105,0,0" VerticalAlignment="Top" Width="290" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" Stretch="UniformToFill"/>
         <Canvas x:Name="userPassword" Margin="265,105,345,56" Background="White" Visibility="Hidden">
             <Label Content="User Name:" Canvas.Left="33" Canvas.Top="37" FontWeight="Bold"/>
             <TextBox x:Name="userNameText" Canvas.Left="33" Canvas.Top="68" Text="" TextWrapping="Wrap" Width="120"/>

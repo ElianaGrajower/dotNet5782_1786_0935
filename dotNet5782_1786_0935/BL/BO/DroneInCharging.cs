@@ -8,9 +8,9 @@ namespace BO
 {
     public class DroneInCharging
     {
-        public DateTime chargeTime;
-        public int droneId;   
-        public double battery; //in percentages
+        public DateTime chargeTime { get; set; }
+        public int droneId { get; set; }
+        public double battery { get; set; } //in percentages
 
 
         public override string ToString()

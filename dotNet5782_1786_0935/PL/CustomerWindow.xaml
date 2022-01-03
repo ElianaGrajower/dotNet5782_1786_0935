@@ -8,12 +8,12 @@
         Title="CustomerWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/another-wonderful-sunset-sky.jpg"/>
+            <ImageBrush ImageSource="/1280px-Sky.jpg" Opacity="1"/>
         </Grid.Background>
-        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="111,368,0,0" VerticalAlignment="Top" Width="69" Click="closeButton_Click" Background="#FFC74D64"/>
+        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="111,368,0,0" VerticalAlignment="Top" Width="69" Click="closeButton_Click" Background="#FFDC637A"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Background="#FF468BE1" Visibility="Visible" Click="addButton_Click"/>
-        <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Click="updateButton_Click" Background="#FF468BE1" Visibility="Visible"/>
-        <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="500,368,0,0" VerticalAlignment="Top" Width="74" Click="deleteButton_Click" Background="#FF468BE1"/>
+        <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Click="updateButton_Click" Background="#FF989B9E" Visibility="Visible"/>
+        <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="500,368,0,0" VerticalAlignment="Top" Width="74" Click="deleteButton_Click" Background="#FF989B9E"/>
         <Label Content="Customer Id:" HorizontalAlignment="Left" Margin="141,34,0,0" VerticalAlignment="Top"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="141,65,0,0" VerticalAlignment="Top"/>
         <Label Content="Phone:" HorizontalAlignment="Left" Margin="412,34,0,0" VerticalAlignment="Top"/>
@@ -21,7 +21,12 @@
         <ListView x:Name="sentParcelsList" Margin="77,138,76,206" DataContext="{Binding}" ItemsSource="{Binding}" SelectionChanged="sentParcelsList_SelectionChanged" MouseDoubleClick="sentParcelsList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Parcel Id" Width="120" DisplayMemberBinding="{Binding parcelId}"/>
+                    <GridViewColumn Header="Weight" Width="120" DisplayMemberBinding="{Binding weight}"/>
+                    <GridViewColumn Header="Priority" Width="120" DisplayMemberBinding="{Binding priority}"/>
+                    <GridViewColumn Header="Parcel Status" Width="120" DisplayMemberBinding="{Binding parcelStatus}"/>
+                    <GridViewColumn Header="Target Id" Width="120" DisplayMemberBinding="{Binding customerInParcel.customerId}"/>
+                    <GridViewColumn Header="Target Name" Width="120" DisplayMemberBinding="{Binding customerInParcel.customerName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -29,7 +34,12 @@
         <ListView x:Name="receivedParcelsList" Margin="76,259,76,85" DataContext="{Binding}" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="receivedParcelsList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Parcel Id" Width="120" DisplayMemberBinding="{Binding parcelId}"/>
+                    <GridViewColumn Header="Weight" Width="120" DisplayMemberBinding="{Binding weight}"/>
+                    <GridViewColumn Header="Priority" Width="120" DisplayMemberBinding="{Binding priority}"/>
+                    <GridViewColumn Header="Parcel Status" Width="120" DisplayMemberBinding="{Binding parcelStatus}"/>
+                    <GridViewColumn Header="Sender Id" Width="120" DisplayMemberBinding="{Binding customerInParcel.customerId}"/>
+                    <GridViewColumn Header="Sender Name" Width="120" DisplayMemberBinding="{Binding customerInParcel.customerName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -47,17 +57,30 @@
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
             <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
         </Canvas>
-        <Canvas x:Name="termesConditions" Background="White" Margin="163,0,154,0" Visibility="Collapsed">
-            <TextBox Text="   DroneDrop" TextWrapping="Wrap" Width="483" Height="50" Background="#FF333333" Foreground="White" FontWeight="Bold" FontSize="20"/>
-            <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above " Canvas.Left="47" Canvas.Top="325" Checked="checkBoxTerms_Checked"/>
-            <Button x:Name="continueButton" Content="continue" Canvas.Left="341" Canvas.Top="358" Width="73" Click="continueButton_Click_1" IsEnabled="False"/>
-        </Canvas>
-        <ScrollViewer Margin="59,12,59,-12">
-            <StackPanel Height="743" Width="666" Background="White">
-                <TextBlock Text="  DroneDrop" TextWrapping="Wrap" Width="666" Height="47" Background="#FF333333" Foreground="White" FontWeight="Bold" FontSize="24"/>
-                <TextBlock Text="Terms and conditions" TextWrapping="Wrap" Width="630" Height="24" FontWeight="Bold" FontSize="16" />
+        <ScrollViewer x:Name="termesConditions" Margin="59,12,59,-12" Visibility="Collapsed">
+            <StackPanel Height="1630" Width="666" Background="White">
+                <TextBlock Text="   DroneDrop" TextWrapping="Wrap" Width="666" Height="47" Background="#FF333333" Foreground="White" FontWeight="Bold" FontSize="24"/>
+                <TextBlock TextWrapping="Wrap" Width="630" Height="42.56" FontWeight="Bold" FontSize="16" ><Run/><LineBreak/><Run Text="Terms and conditions"/></TextBlock>
                 <TextBlock Text="These terms and conditions ('Agreement') set forth the general terms and conditions of your use of the&#xD;&#xA;'DroneDrop' mobile application ('Mobile Application' or 'Service') and any of its related products and services&#xD;&#xA;(collectively, 'Services'). This Agreement is legally binding between you ('User', 'you' or 'your') and this Mobile&#xD;&#xA;Application developer ('Operator', 'we', 'us' or 'our'). If you are entering into this agreement on behalf of a&#xD;&#xA;business or other legal entity, you represent that you have the authority to bind such entity to this agreement, in&#xD;&#xA;which case the terms 'User', 'you' or 'your' shall refer to such entity. If you do not have such authority, or if you do&#xD;&#xA;not agree with the terms of this agreement, you must not accept this agreement and may not access and use the&#xD;&#xA;Mobile Application and Services. By accessing and using the Mobile Application and Services, you acknowledge&#xD;&#xA;that you have read, understood, and agree to be bound by the terms of this Agreement. You acknowledge that this&#xD;&#xA;Agreement is a contract between you and the Operator, even though it is electronic and is not physically signed by&#xD;&#xA;you, and it governs your use of the Mobile Application and Services. This terms and conditions policy was created&#xD;&#xA;with the help of the terms and conditions generator.&#xD;These terms and conditions ('Agreement') set forth the general terms and conditions of your use of the&#xD;&#xA;'DroneDrop' mobile application ('Mobile Application' or 'Service') and any of its related products and services&#xD;&#xA;(collectively, 'Services'). This Agreement is legally binding between you ('User', 'you' or 'your') and this Mobile&#xD;&#xA;Application developer ('Operator', 'we', 'us' or 'our'). If you are entering into this agreement on behalf of a&#xD;&#xA;business or other legal entity, you represent that you have the authority to bind such entity to this agreement, in&#xD;&#xA;which case the terms 'User', 'you' or 'your' shall refer to such entity. If you do not have such authority, or if you do&#xD;&#xA;not agree with the terms of this agreement, you must not accept this agreement and may not access and use the&#xD;&#xA;Mobile Application and Services. By accessing and using the Mobile Application and Services, you acknowledge&#xD;&#xA;that you have read, understood, and agree to be bound by the terms of this Agreement. You acknowledge that this&#xD;&#xA;Agreement is a contract between you and the Operator, even though it is electronic and is not physically signed by&#xD;&#xA;you, and it governs your use of the Mobile Application and Services. This terms and conditions policy was created&#xD;&#xA;with the help of the terms and conditions generator.&#xD;" TextWrapping="Wrap" Width="630" Height="397"/>
-                <TextBlock Text="Accounts and membership" TextWrapping="Wrap" Width="630" FontWeight="Bold" FontSize="16"/>
+                <TextBlock TextWrapping="Wrap" Width="630" FontWeight="Bold" FontSize="16"><Run/><LineBreak/><Run Text="Accounts and membership"/></TextBlock>
+                <TextBlock Width="630" Text="You must be at least 13 years of age to use the Mobile Application and Services. By using the Mobile Application and Services and by agreeing to this Agreement you warrant and represent that you are at least 13 years of age. If you create an account in the Mobile Application, you are responsible for maintaining the security of your account and you are fully responsible for all activities that occur under the account and any other actions taken in connection with it. We may, but have no obligation to, monitor and review new accounts before you may sign in and start using the Services. Providing false contact information of any kind may result in the termination of your account. You must immediately notify us of any unauthorized uses of your account or any other breaches of security. We will not be liable for any acts or omissions by you, including any damages of any kind incurred as a result of such acts or omissions." TextWrapping="Wrap"/>
+                <TextBlock TextWrapping="Wrap" Width="630" FontWeight="Bold" FontSize="16"><Run/><LineBreak/><Run Text="Links to other resources"/></TextBlock>
+                <TextBlock Width="630" Text="Although the Mobile Application and Services may link to other resources (such as websites, mobile applications, etc.), we are not, directly or indirectly, implying any approval, association, sponsorship, endorsement, or affiliation with any linked resource, unless specifically stated herein. We are not responsible for examining or evaluating, and we do not warrant the offerings of, any businesses or individuals or the content of their resources. We do not assume any responsibility or liability for the actions, products, services, and content of any other third parties. You should carefully review the legal statements and other conditions of use of any resource which you access through a link in the Mobile Application. Your linking to any other off-site resources is at your own risk." TextWrapping="Wrap"/>
+                <TextBlock TextWrapping="Wrap" Width="630" FontWeight="Bold" FontSize="16"><Run/><LineBreak/><Run Text="Limitation of liability"/></TextBlock>
+                <TextBlock Width="630" Text="To the fullest extent permitted by applicable law, in no event will the Operator, its affiliates, directors, officers, employees, agents, suppliers or licensors be liable to any person for any indirect, incidental, special, punitive, cover or consequential damages (including, without limitation, damages for lost profits, revenue, sales, goodwill, use of content, impact on business, business interruption, loss of anticipated savings, loss of business opportunity) however caused, under any theory of liability, including, without limitation, contract, tort, warranty, breach of statutory duty, negligence or otherwise, even if the liable party has been advised as to the possibility of such damages or could have foreseen such damages. To the maximum extent permitted by applicable law, the aggregate liability of the Operator and its affiliates, officers, employees, agents, suppliers and licensors relating to the services will be limited to an amount no greater than one dollar or any amounts actually paid in cash by you to the Operator for the prior one month period prior to the first event or occurrence giving rise to such liability. The limitations and exclusions also apply if this remedy does not fully compensate you for any losses or fails of its essential purpose. " TextWrapping="Wrap"/>
+                <TextBlock Width="630" TextWrapping="Wrap" FontWeight="Bold" FontSize="16"><Run/><LineBreak/><Run Text="Dispute resolution"/></TextBlock>
+                <TextBlock Text="The formation, interpretation, and performance of this Agreement and any disputes arising out of it shall be governed by the substantive and procedural laws of Washington, United States without regard to its rules on conflicts or choice of law and, to the extent applicable, the laws of United States. The exclusive jurisdiction and venue for actions related to the subject matter hereof shall be the courts located in Washington, United States, and you hereby submit to the personal jurisdiction of such courts. You hereby waive any right to a jury trial in any proceeding arising out of or related to this Agreement. The United Nations Convention on Contracts for the International Sale of Goods does not apply to this Agreement. " TextWrapping="Wrap" Width="630"/>
+                <TextBlock TextWrapping="Wrap" Width="630" FontWeight="Bold" FontSize="16"><Run/><LineBreak/><Run Text="Changes and amendments "/></TextBlock>
+                <TextBlock Text="We reserve the right to modify this Agreement or its terms related to the Mobile Application and Services at any time at our discretion. When we do, we will post a notification in the Mobile Application. We may also provide notice to you in other ways at our discretion, such as through the contact information you have provided. An updated version of this Agreement will be effective immediately upon the posting of the revised Agreement unless otherwise specified. Your continued use of the Mobile Application and Services after the effective date of the revised Agreement (or such other act specified at that time) will constitute your consent to those changes. " TextWrapping="Wrap" Width="630"/>
+                <TextBlock Width="630" TextWrapping="Wrap" FontWeight="Bold" FontSize="16" ><Run/><LineBreak/><Run Text="Acceptance of these terms"/></TextBlock>
+                <TextBlock Width="630" Text="You acknowledge that you have read this Agreement and agree to all its terms and conditions. By accessing and using the Mobile Application and Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to access or use the Mobile Application and Services. " TextWrapping="Wrap"/>
+                <TextBlock TextWrapping="Wrap" Width="630" ><Run/><LineBreak/><Run Text="Contacting us" FontWeight="Bold" FontSize="16"/></TextBlock>
+                <TextBlock Text="If you have any questions, concerns, or complaints regarding this Agreement, we encourage you to contact us using the details below:" TextWrapping="Wrap" Width="630" Height="38"/>
+                <TextBlock Text="customerService@DroneDrop.com " TextWrapping="Wrap" Width="630" Height="23"/>
+                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above" Width="630"/>
+                <Button x:Name="continueButton" Content="continue" Width="111" HorizontalAlignment="Right" Margin="0,0,100,0" IsEnabled="{Binding ElementName=checkBoxTerms, Path=IsChecked}" Click="continueButton_Click" />
+                <TextBlock Text="" TextWrapping="Wrap" Background="White"/>
+                <TextBlock TextWrapping="Wrap" Width="666" Height="68" Background="#FFF0F0F0"><Run/><LineBreak/><Run Text="     DroneDrop"/></TextBlock>
                 <!--<TextBox Text="   DroneDrop" TextWrapping="Wrap" Width="483" Height="50" Background="#FF333333" Foreground="White" FontWeight="Bold" FontSize="20"/>
                 <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above " Canvas.Left="47" Canvas.Top="325" Checked="checkBoxTerms_Checked"/>
                 <Button x:Name="continueButton" Content="continue" Canvas.Left="341" Canvas.Top="358" Width="73" Click="continueButton_Click_1" IsEnabled="False"/>-->

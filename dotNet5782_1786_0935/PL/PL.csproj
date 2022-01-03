@@ -7,14 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="1.jpg" />
+    <None Remove="1280px-Sky.jpg" />
     <None Remove="a-drone-carrying-a-box.jpg" />
     <None Remove="another-wonderful-sunset-sky.jpg" />
     <None Remove="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <None Remove="Calendar-icon.png" />
+    <None Remove="clouds-blue-sky-light-31912398.jpg" />
     <None Remove="inline_image_preview.jpg" />
     <None Remove="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <None Remove="sky+photo+for+website+home+page.jpeg" />
+    <None Remove="sky-houses-lights-night.jpg" />
     <None Remove="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />
+    <None Remove="WhatsApp Image 2022-01-03 at 7.35.46 PM.jpeg" />
+    <None Remove="WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" />
+    <None Remove="WhatsApp Image 2022-01-03 at 8.42.51 PM.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,14 +29,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="1.jpg" />
+    <Resource Include="1280px-Sky.jpg" />
     <Resource Include="a-drone-carrying-a-box.jpg" />
     <Resource Include="another-wonderful-sunset-sky.jpg" />
     <Resource Include="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <Resource Include="Calendar-icon.png" />
+    <Resource Include="clouds-blue-sky-light-31912398.jpg" />
     <Resource Include="inline_image_preview.jpg" />
     <Resource Include="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <Resource Include="sky+photo+for+website+home+page.jpeg" />
+    <Resource Include="sky-houses-lights-night.jpg" />
     <Resource Include="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />
+    <Resource Include="WhatsApp Image 2022-01-03 at 7.35.46 PM.jpeg" />
+    <Resource Include="WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" />
+    <Resource Include="WhatsApp Image 2022-01-03 at 8.42.51 PM.jpeg" />
   </ItemGroup>
 
 </Project>

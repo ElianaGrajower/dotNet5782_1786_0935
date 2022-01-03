@@ -8,7 +8,7 @@
         Title="ParcelWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/sky+photo+for+website+home+page.jpeg" Opacity="0.5"/>
+            <ImageBrush ImageSource="/1280px-Sky.jpg" Opacity="1"/>
         </Grid.Background>
         <Label Content="Sender Id:" HorizontalAlignment="Left" Margin="270,115,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="senderText" HorizontalAlignment="Left" Margin="361,119,0,0" Text="{Binding sender.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
@@ -37,7 +37,7 @@
         <TextBox x:Name="pickedupText" HorizontalAlignment="Left" Margin="361,328,0,0" Text="{Binding pickedUp,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label x:Name="deliveredRead" Content="Delivered:" HorizontalAlignment="Left" Margin="270,355,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="deliveryText" HorizontalAlignment="Left" Margin="361,359,0,0" Text="{Binding delivered,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-        <Button Content="close" HorizontalAlignment="Left" Margin="80,359,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Background="#FFC74D64"/>
+        <Button Content="close" HorizontalAlignment="Left" Margin="80,359,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Background="#FFDC637A"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="addButton_Click"/>
         <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="deleteButton_Click"/>
         <Canvas x:Name="checkDelete" Margin="298,109,248,194" Background="White" Visibility="Collapsed">
