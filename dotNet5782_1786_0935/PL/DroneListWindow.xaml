@@ -11,27 +11,30 @@
             <ImageBrush ImageSource="/1280px-Sky.jpg"/>
         </Grid.Background>
 
-        <ComboBox Name="weightSelector" Margin="554,36,76,349" SelectionChanged="weightSelector_SelectionChanged"/>
-        <ComboBox x:Name="StatusSelector" Margin="192,36,448,349" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
-        <Label Content="Weight:" HorizontalAlignment="Left" Margin="475,36,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
-        <Label Content="Status:" Margin="118,36,559,349" FontSize="16"></Label>
+        <ComboBox Name="weightSelector" Margin="473,36,157,349" SelectionChanged="weightSelector_SelectionChanged"/>
+        <ComboBox x:Name="StatusSelector" Margin="144,36,496,349" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
+        <Label Content="Weight:" HorizontalAlignment="Left" Margin="394,36,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
+        <Label Content="Status:" Margin="70,36,607,349" FontSize="16"></Label>
         <ListView x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged" Margin="0,90,0,94" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Drone Id" Width="90" DisplayMemberBinding="{Binding droneId}"/>
                     <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding model}"/>
-                    <GridViewColumn Header="Weight" Width="110" DisplayMemberBinding="{Binding weight}"/>
-                    <GridViewColumn Header="Battery" Width="120" DisplayMemberBinding="{Binding battery}"/>
-                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding droneStatus}"/>
-                    <GridViewColumn Header="Latitude" Width="120" DisplayMemberBinding="{Binding location.latitude}"/>
-                    <GridViewColumn Header="Longitude" Width="120" DisplayMemberBinding="{Binding location.longitude}"/>
-                    <GridViewColumn Header="Parcel Id" Width="120" DisplayMemberBinding="{Binding parcelId}"/>
-                    <GridViewColumn Header="Parcels Delivered" Width="120" DisplayMemberBinding="{Binding numOfParcelsdelivered }"/>
+                    <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight}"/>
+                    <GridViewColumn Header="Battery" Width="70" DisplayMemberBinding="{Binding battery}"/>
+                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding droneStatus}"/>
+                    <GridViewColumn Header="Latitude" Width="130" DisplayMemberBinding="{Binding location.latitude}"/>
+                    <GridViewColumn Header="Longitude" Width="130" DisplayMemberBinding="{Binding location.longitude}"/>
+                    <GridViewColumn Header="Parcel Id" Width="70" DisplayMemberBinding="{Binding parcelId}"/>
+                    <GridViewColumn Header="Parcels Delivered" Width="100" DisplayMemberBinding="{Binding numOfParcelsdelivered }"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <Button Content="add drone" Margin="600,358,96,32" Click="Button_Click" Background="#FF989B9E"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="84,358,0,32" VerticalAlignment="Top" Width="91" Height="22" Click="Button_Click_1" Background="#FFDC637A"/>
+        <Button HorizontalAlignment="Left" Margin="681,36,0,0" VerticalAlignment="Top" Height="30" Width="30" Background="White" Click="Button_Click_2">
+            <Image Height="25" Width="25" Source="/download.png"/>
+        </Button>
 
     </Grid>
 </Window>

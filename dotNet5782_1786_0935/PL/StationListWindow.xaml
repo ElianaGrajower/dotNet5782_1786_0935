@@ -25,10 +25,13 @@
             <ComboBoxItem>available charges slots</ComboBoxItem>
             <ComboBoxItem>all stations</ComboBoxItem>
         </ComboBox>
-        <Label Content="Enter amount of available charge slots:" HorizontalAlignment="Left" Margin="353,36,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="filterSlots" HorizontalAlignment="Left" Margin="573,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Enter amount of available charge slots:" HorizontalAlignment="Left" Margin="326,36,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="filterSlots" HorizontalAlignment="Left" Margin="546,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22" TextChanged="TextBox_TextChanged"/>
         <Button x:Name="addNewButton" Content="add new station" HorizontalAlignment="Left" Margin="622,355,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click" Background="#FF989B9E"/>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="88,355,0,0" VerticalAlignment="Top" Width="66" Click="closeButton_Click" Background="#FFDC637A"/>
+        <Button HorizontalAlignment="Left" Margin="699,36,0,0" VerticalAlignment="Top" Width="30" Height="30" Background="White" Click="Button_Click_2">
+            <Image Height="25" Width="25" Source="/download.png"/>
+        </Button>
 
     </Grid>
 </Window>

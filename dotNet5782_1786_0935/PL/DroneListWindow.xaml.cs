@@ -166,5 +166,11 @@ namespace PL
 
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            DronesListView.ItemsSource = bl.allDrones();
+            StatusSelector.SelectedIndex = -1;
+            weightSelector.SelectedIndex = -1;
+        }
     }
 }

@@ -9,11 +9,13 @@
   <ItemGroup>
     <None Remove="1.jpg" />
     <None Remove="1280px-Sky.jpg" />
+    <None Remove="783503.png" />
     <None Remove="a-drone-carrying-a-box.jpg" />
     <None Remove="another-wonderful-sunset-sky.jpg" />
     <None Remove="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <None Remove="Calendar-icon.png" />
     <None Remove="clouds-blue-sky-light-31912398.jpg" />
+    <None Remove="download.png" />
     <None Remove="inline_image_preview.jpg" />
     <None Remove="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <None Remove="sky+photo+for+website+home+page.jpeg" />
@@ -31,11 +33,13 @@
   <ItemGroup>
     <Resource Include="1.jpg" />
     <Resource Include="1280px-Sky.jpg" />
+    <Resource Include="783503.png" />
     <Resource Include="a-drone-carrying-a-box.jpg" />
     <Resource Include="another-wonderful-sunset-sky.jpg" />
     <Resource Include="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <Resource Include="Calendar-icon.png" />
     <Resource Include="clouds-blue-sky-light-31912398.jpg" />
+    <Resource Include="download.png" />
     <Resource Include="inline_image_preview.jpg" />
     <Resource Include="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <Resource Include="sky+photo+for+website+home+page.jpeg" />
