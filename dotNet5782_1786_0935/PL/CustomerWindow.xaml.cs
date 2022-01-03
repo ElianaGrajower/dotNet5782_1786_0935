@@ -197,5 +197,10 @@ namespace PL
                 MessageBox.Show("ERROR can not add customer");
             }
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
