@@ -8,10 +8,10 @@ namespace BO
 {
     public class StationToList
     {
-        public int stationId;
-        public string name;  
-        public int numberOfAvailableSlots;
-        public int numberOfSlotsInUse;  
+        public int stationId { get; set; }
+        public string name { get; set; }
+        public int numberOfAvailableSlots { get; set; }
+        public int numberOfSlotsInUse { get; set; }
 
         public override string ToString()
         {

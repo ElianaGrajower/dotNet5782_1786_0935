@@ -8,14 +8,14 @@ namespace BO
 {
     public class DroneToList
     {
-        public int droneId;
+        public int droneId { get; set; }
         public string model { set; get; }
-        public weightCategories weight; //light, average, heavy
-        public double battery; //in percentages
-        public DroneStatus droneStatus; //available, maintenance, delivery
-        public Location location;   
-        public int parcelId;
-        public int numOfParcelsdelivered; //the number of parcels that the drone delivered
+        public weightCategories weight { get; set; } //light, average, heavy
+        public double battery { get; set; } //in percentages
+        public DroneStatus droneStatus { get; set; } //available, maintenance, delivery
+        public Location location { get; set; }
+        public int parcelId { get; set; }
+        public int numOfParcelsdelivered { get; set; } //the number of parcels that the drone delivered
 
         public override string ToString()
         {

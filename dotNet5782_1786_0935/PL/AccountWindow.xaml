@@ -8,11 +8,12 @@
         Title="AccountWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/inline_image_preview.jpg" Opacity="0.8"/>
+            <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <Button x:Name="viewAccount" Content="view account" HorizontalAlignment="Left" Margin="178,191,0,0" VerticalAlignment="Top" Height="69" Width="117" Click="viewAccount_Click"/>
-        <Button x:Name="parcels" Content="parcels" HorizontalAlignment="Left" Margin="383,191,0,0" VerticalAlignment="Top" Height="69" Width="117" Click="parcels_Click"/>
-        <Button Content="log out" HorizontalAlignment="Left" Margin="605,68,0,0" VerticalAlignment="Top" Height="42" Width="96" Click="Button_Click"/>
+        <Button x:Name="viewAccount" Content="view account" HorizontalAlignment="Left" Margin="173,296,0,0" VerticalAlignment="Top" Height="47" Width="124" Click="viewAccount_Click" Background="#FF94C9FF" FontSize="16"/>
+        <Button x:Name="parcels" Content="parcels" HorizontalAlignment="Left" Margin="476,296,0,0" VerticalAlignment="Top" Height="48" Width="124" Click="parcels_Click" Background="#FF94C9FF" FontSize="16"/>
+        <Button Content="log out" HorizontalAlignment="Left" Margin="612,71,0,0" VerticalAlignment="Top" Height="42" Width="96" Click="Button_Click" Background="#FF94C9FF"/>
+        <Image HorizontalAlignment="Left" Height="95" Margin="237,127,0,0" VerticalAlignment="Top" Width="301" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg"/>
 
     </Grid>
 </Window>

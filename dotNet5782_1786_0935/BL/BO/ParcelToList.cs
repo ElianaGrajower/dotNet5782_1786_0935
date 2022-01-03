@@ -9,12 +9,12 @@ namespace BO
 {
    public class ParcelToList
     {
-        public int parcelId;
-        public string sendername; //the name of the customer who is sending the parcel
-        public string recivername; //the name of the customer who is the target of the parcel
-        public weightCategories weight; //light, average, heavy
-        public Priorities priority; //regular, fast, emergency   
-        public ParcelStatus parcelStatus; 
+        public int parcelId { get; set; }
+        public string sendername { get; set; } //the name of the customer who is sending the parcel
+        public string recivername { get; set; } //the name of the customer who is the target of the parcel
+        public weightCategories weight { get; set; } //light, average, heavy
+        public Priorities priority { get; set; } //regular, fast, emergency   
+        public ParcelStatus parcelStatus { get; set; }
 
         public override string ToString()   
         {

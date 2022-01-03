@@ -6,16 +6,24 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ParcelListWindow" Height="450" Width="800">
-    <Grid Background="#FF7D9BC0">
-        <ListView x:Name="ParcelsListView" Margin="0,90,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="ParcelsListView_MouseDoubleClick">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/1280px-Sky.jpg"/>
+        </Grid.Background>
+        <ListView x:Name="ParcelsListView" Margin="0,90,0,94" MouseDoubleClick="ParcelsListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Parcel Id" Width="120" DisplayMemberBinding="{Binding parcelId}"/>
+                    <GridViewColumn Header="Sender" Width="120" DisplayMemberBinding="{Binding sendername}"/>
+                    <GridViewColumn Header="Receiver" Width="120" DisplayMemberBinding="{Binding recivername}"/>
+                    <GridViewColumn Header="Weight" Width="120" DisplayMemberBinding="{Binding weight}"/>
+                    <GridViewColumn Header="Priority" Width="120" DisplayMemberBinding="{Binding priority}"/>
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding parcelStatus}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="90,355,0,0" VerticalAlignment="Top" Width="79" Background="#FFC74D64" Click="closeButton_Click"/>
-        <Button Content="add new parcel" HorizontalAlignment="Left" Margin="596,355,0,0" VerticalAlignment="Top" Width="124" Background="#FF468BE1" Click="Button_Click"/>
+        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="90,355,0,0" VerticalAlignment="Top" Width="79" Background="#FFDC637A" Click="closeButton_Click"/>
+        <Button Content="add new parcel" HorizontalAlignment="Left" Margin="596,355,0,0" VerticalAlignment="Top" Width="124" Background="#FF989B9E" Click="Button_Click"/>
         <Label Content="Priority:" HorizontalAlignment="Left" Margin="30,36,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="prioritySelector" HorizontalAlignment="Left" Margin="91,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="typeSelector_SelectionChanged"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="231,36,0,0" VerticalAlignment="Top"/>

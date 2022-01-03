@@ -6,29 +6,39 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800" Background="#FF7A9AC3">
-    <Grid Name="MainGrid" Background="#FF7A9AC3">
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="400*"/>
+            <RowDefinition Height="160*"/>
+            <RowDefinition Height="160*"/>
+            <RowDefinition Height="160*"/>
+            <RowDefinition Height="160*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-VerticalAlignment="Stretch" Width="auto">
+        <Grid.Background>
+            <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>
+        </Grid.Background>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="111*"/>
+        </Grid.RowDefinitions>-->
+        <!--<Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-        </Grid>
-        <Image HorizontalAlignment="Center" Height="598" Margin="0,10,0,0" VerticalAlignment="Top" Width="800" Source="/a-drone-carrying-a-box.jpg" Opacity="0.6" Grid.RowSpan="2">
+        </Grid>-->
+        <!--<Image HorizontalAlignment="Center" Height="598" Margin="0,10,0,0" VerticalAlignment="Top" Width="800" Source="/a-drone-carrying-a-box.jpg" Opacity="0.6" Grid.RowSpan="3">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="/a-drone-carrying-a-box.jpg"/>
             </Image.OpacityMask>
-        </Image>
-        <Button Content="Drones" HorizontalAlignment="Left" Margin="182,335,0,0" VerticalAlignment="Top" Click="Button_Click" Width="142" Height="48" Background="#FF468BE1" FontWeight="Bold" FontSize="16" Grid.Row="1"/>
-        <Button x:Name="stationList" Content="Stations" HorizontalAlignment="Left" Margin="475,335,0,0" VerticalAlignment="Top" Click="stationList_Click" Width="144" Height="48" FontSize="16" FontWeight="Bold" Background="#FF468BE1" OpacityMask="#FF468BE1" Grid.Row="1"/>
-        <Button x:Name="customerList" Content="Customers" HorizontalAlignment="Left" Margin="477,428,0,0" Grid.Row="1" VerticalAlignment="Top" Height="48" Width="142" FontWeight="Bold" FontSize="16" Background="#FF468BE1" Click="customerList_Click"/>
-        <Button Content="Parcels" HorizontalAlignment="Left" Margin="182,428,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Height="48" Background="#FF468BE1" FontWeight="Bold" FontSize="16" Click="Button_Click_1"/>
-        <Button Content="log out" HorizontalAlignment="Left" Margin="613,31,0,0" Grid.Row="1" VerticalAlignment="Top" Width="122" Height="39" Background="#FF468BE1" FontWeight="Bold" FontSize="14" Click="Button_Click_2"/>
+        </Image>-->
+        <Button Content="Drones" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click" Width="160" Height="160" Background="#FF94C9FF" FontSize="16" Grid.ColumnSpan="1" Grid.Row="2" RenderTransformOrigin="0.485,0.123"/>
+        <Button x:Name="stationList" Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Center" Click="stationList_Click" Width="160" Height="160" FontSize="16" Background="#FF94C9FF" OpacityMask="#FF468BE1" Grid.Row="3"/>
+        <Button x:Name="customerList" Content="Customers" HorizontalAlignment="Left" VerticalAlignment="Center" Height="160" Width="160" FontSize="16" Background="#FF94C9FF" Click="customerList_Click"/>
+        <Button Content="Parcels" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160" Height="160" Background="#FF94C9FF" FontSize="16" Click="Button_Click_1" Grid.Row="1"/>
+        <Button Content="log out" HorizontalAlignment="Left" Margin="617,0,0,0" VerticalAlignment="Center" Width="120" Height="50" Background="#FF94C9FF" FontSize="16" Click="Button_Click_2"/>
+        <Image HorizontalAlignment="Left" Height="81" Margin="334,20,0,0" VerticalAlignment="Top" Width="304" Stretch="UniformToFill" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" Grid.Row="1" Visibility="Visible"/>
     </Grid>
 </Window>

@@ -6,23 +6,29 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="StationListWindow" Height="450" Width="800">
-    <Grid Background="#FF7D9BC0">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/1280px-Sky.jpg"/>
+        </Grid.Background>
         <ListView x:Name="StationsListView" Margin="0,90,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="StationsListView_MouseDoubleClick" SelectionChanged="StationsListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Station Id" Width="90" DisplayMemberBinding="{Binding stationId}"/>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding name}"/>
+                    <GridViewColumn Header="Available Slots" Width="110" DisplayMemberBinding="{Binding numberOfAvailableSlots}"/>
+                    <GridViewColumn Header="Slots In Use" Width="120" DisplayMemberBinding="{Binding numberOfSlotsInUse}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Filter:" HorizontalAlignment="Left" Margin="102,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.921,0.541"/>
-        <ComboBox x:Name="availableChargesSelector" HorizontalAlignment="Left" Margin="155,38,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="availableChargesSelector_SelectionChanged">
+        <Label Content="Availability:" HorizontalAlignment="Left" Margin="86,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.921,0.541"/>
+        <ComboBox x:Name="availableChargesSelector" HorizontalAlignment="Left" Margin="161,38,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="availableChargesSelector_SelectionChanged">
             <ComboBoxItem>available charges slots</ComboBoxItem>
             <ComboBoxItem>all stations</ComboBoxItem>
         </ComboBox>
         <Label Content="Enter amount of available charge slots:" HorizontalAlignment="Left" Margin="353,36,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="filterSlots" HorizontalAlignment="Left" Margin="573,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22" TextChanged="TextBox_TextChanged"/>
-        <Button x:Name="addNewButton" Content="add new station" HorizontalAlignment="Left" Margin="622,355,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click" Background="#FF468BE1"/>
-        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="88,355,0,0" VerticalAlignment="Top" Width="66" Click="closeButton_Click" Background="#FFC74D64"/>
+        <Button x:Name="addNewButton" Content="add new station" HorizontalAlignment="Left" Margin="622,355,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click" Background="#FF989B9E"/>
+        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="88,355,0,0" VerticalAlignment="Top" Width="66" Click="closeButton_Click" Background="#FFDC637A"/>
 
     </Grid>
 </Window>
