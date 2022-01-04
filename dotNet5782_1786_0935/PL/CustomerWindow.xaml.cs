@@ -130,16 +130,34 @@ namespace PL
             ParcelinCustomer updateParcel = new ParcelinCustomer();
             updateParcel = (ParcelinCustomer)sentParcelsList.SelectedItem;
             Parcel realParcel = new Parcel();
-            realParcel = bl.getParcel(updateParcel.parcelId);
-            new ParcelWindow(bl, realParcel).ShowDialog();
+            try
+            {
+                if (updateParcel == null)
+                    throw new Exception("wrong button click");
+                realParcel = bl.getParcel(updateParcel.parcelId);
+                new ParcelWindow(bl, realParcel).ShowDialog();
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("System malfunction please wait a moment then try again\n");
+            }
         }
         private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
         {
             ParcelinCustomer updateParcel = new ParcelinCustomer();
             updateParcel = (ParcelinCustomer)receivedParcelsList.SelectedItem;
             Parcel realParcel = new Parcel();
-            realParcel = bl.getParcel(updateParcel.parcelId);
-            new ParcelWindow(bl, realParcel).ShowDialog();
+            try
+            {
+                if(updateParcel==null)
+                    throw new Exception("wrong button click");
+                realParcel = bl.getParcel(updateParcel.parcelId);
+                new ParcelWindow(bl, realParcel).ShowDialog();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("System malfunction please wait a moment then try again\n");
+            }
         }
 
         private void yes_Click(object sender, RoutedEventArgs e)
