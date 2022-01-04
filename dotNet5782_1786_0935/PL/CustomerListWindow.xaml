@@ -22,10 +22,33 @@
                     <GridViewColumn Header="Transit Parcels" Width="110" DisplayMemberBinding="{Binding transitParcel}"/>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="80,365,0,0" VerticalAlignment="Top" Width="77" Click="closeButton_Click" Background="#FFDC637A"/>
         <Button x:Name="addCustomerButton" Content="add customer" HorizontalAlignment="Left" Margin="600,365,0,0" VerticalAlignment="Top" Width="120" Click="addNewButton_Click" Background="#FF989B9E"/>
         <Button x:Name="addEmployeeButton" Content="add employee" HorizontalAlignment="Left" Margin="447,365,0,0" VerticalAlignment="Top" Width="120" Background="#FF989B9E" Click="addEmployeeButton_Click"/>
-
+        <Button x:Name="groupButton" Content="Group" HorizontalAlignment="Left" Margin="96,21,0,0" VerticalAlignment="Top" Width="98" Click="groupButton_Click"/>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="54" Margin="630,5,0,0" VerticalAlignment="Top" Width="143" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

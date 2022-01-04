@@ -23,11 +23,14 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal readonly IBL bl = BlFactory.GetBl();  ///supposed to be IBL
-        public MainWindow()
+        internal readonly IBL bl = BlFactory.GetBl();  
+        Customer c = new Customer();
+
+        public MainWindow(Customer customer)
         {
             InitializeComponent();
-           
+            c = customer;
+            expanderHeader.Text = " " + c.name;
         }
         public void IBL()
         {
@@ -44,7 +47,7 @@ namespace PL
 
         private void customerList_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerListWindow(bl).Show();
+            new CustomerListWindow(bl, true).Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -53,6 +56,23 @@ namespace PL
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //new UserWindow().Show();
+            //Close();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            new CustomerListWindow(bl, false).Show();
+        }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //new UserWindow().Show();
+            //Close();
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
             Close();

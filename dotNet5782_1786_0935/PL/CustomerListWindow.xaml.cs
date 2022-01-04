@@ -24,16 +24,21 @@ namespace PL
     public partial class CustomerListWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
+        bool checkIsCustomer;
        // ObservableCollection<CustomerToList> myObservableCollection;
 
-        public CustomerListWindow(IBL b)
+        public CustomerListWindow(IBL b, bool isCustomer)
         {
             InitializeComponent();
             this.bl = b;
+            this.checkIsCustomer = isCustomer;
             //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
             //DataContext = myObservableCollection;
-            DataContext = b.getCustomersList();
-            ShowInfo();
+            if (isCustomer)
+                CustomersListView.ItemsSource = b.allCustomers().Where(x => x.isCustomer == true);
+            else
+                CustomersListView.ItemsSource = b.allCustomers().Where(x => x.isCustomer == false);
+          //  ShowInfo();
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -44,7 +49,10 @@ namespace PL
         private void ShowInfo()  /////add filter
         {
             IEnumerable<CustomerToList> d = new List<CustomerToList>();
-            CustomersListView.ItemsSource = bl.getCustomersList();
+            if (checkIsCustomer)
+                CustomersListView.ItemsSource = bl.allCustomers().Where(x => x.isCustomer == true);
+            else
+                CustomersListView.ItemsSource = bl.allCustomers().Where(x => x.isCustomer == false);
         }
 
         private void addNewButton_Click(object sender, RoutedEventArgs e)
@@ -86,6 +94,20 @@ namespace PL
         {
             new CustomerWindow(bl, false).ShowDialog();
             ShowInfo();
+        }
+
+        private void groupButton_Click(object sender, RoutedEventArgs e)
+        {
+            CustomersListView.ItemsSource = bl.allCustomers();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CustomersListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("isCustomer");
+            view.GroupDescriptions.Add(groupDescription);
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            Close();
         }
     }
 }

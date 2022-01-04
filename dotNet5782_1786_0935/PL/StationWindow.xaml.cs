@@ -231,5 +231,11 @@ namespace PL
         {
 
         }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            Close();
+        }
     }
 }

@@ -35,17 +35,16 @@ namespace PL
             {
                 string user = userNameText.Text;
                 string password = (string)passwordText.Password.ToString();
+                Customer openCustomer = new Customer();
+                int id = bl.searchCustomer(user);
+                openCustomer = bl.getCustomer(id);
                 if (bl.isEmployee(user, password))
                 {
-                    new MainWindow().Show();
+                    new MainWindow(openCustomer).Show();
                 }
                 else
                 {
-                    Customer openCustomer = new Customer();
-                    int id = bl.searchCustomer(user);
-                    openCustomer = bl.getCustomer(id);
                     new AccountWindow(openCustomer).Show();
-
                 }
                 Close();
             }

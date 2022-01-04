@@ -20,15 +20,32 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Availability:" HorizontalAlignment="Left" Margin="86,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.921,0.541"/>
-        <ComboBox x:Name="availableChargesSelector" HorizontalAlignment="Left" Margin="161,38,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="availableChargesSelector_SelectionChanged">
+        <Label Content="Availability:" HorizontalAlignment="Left" Margin="120,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.921,0.541"/>
+        <ComboBox x:Name="availableChargesSelector" HorizontalAlignment="Left" Margin="191,40,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="availableChargesSelector_SelectionChanged">
             <ComboBoxItem>available charges slots</ComboBoxItem>
             <ComboBoxItem>all stations</ComboBoxItem>
         </ComboBox>
-        <Label Content="Enter amount of available charge slots:" HorizontalAlignment="Left" Margin="353,36,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="filterSlots" HorizontalAlignment="Left" Margin="573,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Enter amount of available charge slots:" HorizontalAlignment="Left" Margin="339,37,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="filterSlots" HorizontalAlignment="Left" Margin="554,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22" TextChanged="TextBox_TextChanged"/>
         <Button x:Name="addNewButton" Content="add new station" HorizontalAlignment="Left" Margin="622,355,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click" Background="#FF989B9E"/>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="88,355,0,0" VerticalAlignment="Top" Width="66" Click="closeButton_Click" Background="#FFDC637A"/>
-
+        <Button HorizontalAlignment="Left" Margin="740,36,0,0" VerticalAlignment="Top" Width="30" Height="30" Background="White" Click="Button_Click_2">
+            <Image Height="25" Width="25" Source="/download.png"/>
+        </Button>
+        <Button Content="Sort" HorizontalAlignment="Left" Margin="682,40,0,0" VerticalAlignment="Top" Width="49" Click="Button_Click_4"/>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="15,15,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

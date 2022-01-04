@@ -137,12 +137,42 @@ namespace PL
                 //stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
                 //StationsListView.DataContext = stationObservableCollection;
             }
-            availableChargesSelector.SelectedIndex = 1;
+            availableChargesSelector.SelectedIndex = -1;
         }
 
         private void StationsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            StationsListView.ItemsSource = bl.allStations();
+            availableChargesSelector.SelectedIndex = -1;
+            filterSlots.Text = "";
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<StationToList> query = bl.allStations().OrderBy(x => x.numberOfAvailableSlots);
+            StationsListView.ItemsSource = query;
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            Close();
         }
     }
 }

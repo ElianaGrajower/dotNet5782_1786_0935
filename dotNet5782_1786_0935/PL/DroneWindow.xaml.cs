@@ -35,20 +35,16 @@ namespace PL
             d = drone;
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
             stationIdCombo.ItemsSource = bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
-         //   update.Visibility = Visibility.Visible;
             add.Visibility = Visibility.Hidden;
             if (drone.droneStatus == DroneStatus.available)
             {
-            //    chargeDrone.Visibility = Visibility.Visible;
                 releaseDrone.Visibility = Visibility.Hidden;
-            //    matchUpParcel.Visibility = Visibility.Visible;
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Hidden;
             }
             if (drone.droneStatus == BO.DroneStatus.maintenance)
             {
                 chargeDrone.Visibility = Visibility.Hidden;
-            //    releaseDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Hidden;
@@ -63,18 +59,9 @@ namespace PL
                 if (drone.parcel.parcelStatus == ParcelStatus.pickedUp)
                     pickupParcel.Visibility = Visibility.Hidden;
             }
-            //locationText.Visibility = Visibility.Visible;
             stationIdCombo.Visibility = Visibility.Hidden;
-         //   locationRead.Visibility = Visibility.Visible;
             stationRead.Visibility = Visibility.Hidden;
-         //   weightText.Visibility = Visibility.Visible;
             weight.Visibility = Visibility.Hidden;
-            //idText.Text = drone.droneId.ToString();
-            //modelText.Text = drone.model.ToString();
-            //locationText.Text = drone.location.ToString();
-            //weightText.Text = drone.maxWeight.ToString();
-            //batteryText.Text = drone.battery.ToString();
-            //statusText.Text = drone.droneStatus.ToString();
             if (drone.droneStatus == (DroneStatus)3)
                 parcelIdText.Text = drone.parcel.ToString();
             else
@@ -349,6 +336,12 @@ namespace PL
             updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
             new ParcelWindow(bl, updateParcel).ShowDialog();
             //ShowInfo(); have a way to update the info in the window
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            Close();
         }
     }
 }

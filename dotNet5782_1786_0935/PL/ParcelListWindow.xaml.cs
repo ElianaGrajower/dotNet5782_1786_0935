@@ -159,6 +159,7 @@ namespace PL
 
         private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)  //status 
         {
+
             if (prioritySelector.SelectedIndex == -1 && dateRange.SelectedIndex == -1 && pickDate.SelectedDate != DateTime.MinValue)
             {
                 statusFilter = (ParcelStatus)statusSelector.SelectedItem;
@@ -189,13 +190,12 @@ namespace PL
                 else
                     ParcelsListView.ItemsSource = Bl.allParcels();
             }
-                //ParcelsListView.ItemsSource = Bl.allParcels();   //erase the else and continue this
+            //ParcelsListView.ItemsSource = Bl.allParcels();   //erase the else and continue this
 
 
 
 
             //if (prioritySelector.SelectedIndex == -1 && dateRange.SelectedIndex != -1 && pickDate.SelectedDate != DateTime.MinValue)
-
 
 
 
@@ -241,6 +241,43 @@ namespace PL
         private void DatePicker_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ParcelsListView.ItemsSource = Bl.allParcels();
+            //dateRange.SelectedIndex = -1;
+            //statusSelector.SelectedIndex = -1;
+            //prioritySelector.SelectedIndex = -1;
+            SortBy.SelectedIndex = -1;
+            //the calander
+        }
+
+        private void SortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SortBy.SelectedIndex != -1)
+            {
+                if (SortBy.SelectedIndex == 0)
+                {
+                    ParcelsListView.ItemsSource = Bl.allParcels();
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("sendername");
+                    view.GroupDescriptions.Add(groupDescription);
+                }
+                else
+                {
+                    ParcelsListView.ItemsSource = Bl.allParcels();
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("recivername");
+                    view.GroupDescriptions.Add(groupDescription);
+                }
+            }
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            Close();
         }
     }
 }

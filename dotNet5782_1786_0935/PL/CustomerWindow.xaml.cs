@@ -99,7 +99,7 @@ namespace PL
                 string phone = phoneText.Text;
                 bl.UpdateCustomer(customerId, name, phone);
                 MessageBox.Show("customer updated succesfully");
-                DataContext = c;
+                //DataContext = c;
             }
             catch(InvalidInputException exc)
             {
@@ -209,7 +209,7 @@ namespace PL
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-            termesConditions.Visibility = Visibility.Collapsed;
+            termesConditions.Visibility = Visibility.Hidden;
             try
             {
                 bl.addCustomer(c);
@@ -227,6 +227,17 @@ namespace PL
             {
                 MessageBox.Show("ERROR can not add customer");
             }
+        }
+
+        private void checkBoxTerms_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            this.Close();
         }
     }
 }

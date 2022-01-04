@@ -8,9 +8,9 @@
         Title="StationWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/1280px-Sky.jpg"/>
+            <ImageBrush ImageSource="/clouds-blue-sky-light-31912398.jpg"/>
         </Grid.Background>
-        <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="84" Click="update_Click" Background="#FF468BE1"/>
+        <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="84" Click="update_Click" Background="#FF989B9E"/>
         <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="85" Click="add_Click" Background="#FF989B9E"/>
         <Button x:Name="delete" Content="delete" HorizontalAlignment="Left" Margin="477,343,0,0" VerticalAlignment="Top" Width="85" Click="delete_Click" Background="#FF989B9E"/>
         <Button x:Name="close" Content="close" HorizontalAlignment="Left" Margin="132,343,0,0" VerticalAlignment="Top" Width="85" Click="close_Click" Background="#FFDC637A"/>
@@ -49,5 +49,19 @@
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
             <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
         </Canvas>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="15,16,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

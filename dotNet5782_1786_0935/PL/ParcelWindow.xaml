@@ -26,9 +26,9 @@
         <ComboBox x:Name="prioritySelect" HorizontalAlignment="Left" Margin="361,228,0,0" VerticalAlignment="Top" Width="120" Text="{Binding priority,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True" SelectionChanged="prioritySelect_SelectionChanged"/>
         <Label x:Name="droneIdRead" Content="Drone Id:" HorizontalAlignment="Left" Margin="270,82,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="droneIdText" HorizontalAlignment="Left" Margin="361,86,0,0" Text="{Binding drone.droneId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-        <Button x:Name="senderButton" Content="sender" HorizontalAlignment="Left" Margin="500,118,0,0" VerticalAlignment="Top" Width="60" Background="#FF468BE1" Click="Button_Click_2"/>
-        <Button x:Name="targetButton" Content="target" HorizontalAlignment="Left" Margin="500,153,0,0" VerticalAlignment="Top" Width="60" Background="#FF468BE1" Click="Button_Click_3"/>
-        <Button x:Name="droneButton" Content="drone" HorizontalAlignment="Left" Margin="500,85,0,0" VerticalAlignment="Top" Width="60" Background="#FF468BE1" Click="Button_Click_1"/>
+        <Button x:Name="senderButton" Content="sender" HorizontalAlignment="Left" Margin="500,118,0,0" VerticalAlignment="Top" Width="60" Background="#FF989B9E" Click="Button_Click_2"/>
+        <Button x:Name="targetButton" Content="target" HorizontalAlignment="Left" Margin="500,153,0,0" VerticalAlignment="Top" Width="60" Background="#FF989B9E" Click="Button_Click_3"/>
+        <Button x:Name="droneButton" Content="drone" HorizontalAlignment="Left" Margin="500,85,0,0" VerticalAlignment="Top" Width="60" Background="#FF989B9E" Click="Button_Click_1"/>
         <Label x:Name="requestedRead" Content="Requested:" HorizontalAlignment="Left" Margin="270,259,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="requestedText" HorizontalAlignment="Left" Margin="361,263,0,0" Text="{Binding requested,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label x:Name="scheduledRead" Content="Scheduled:" HorizontalAlignment="Left" Margin="270,292,0,0" VerticalAlignment="Top"/>
@@ -39,11 +39,25 @@
         <TextBox x:Name="deliveryText" HorizontalAlignment="Left" Margin="361,359,0,0" Text="{Binding delivered,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="80,359,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Background="#FFDC637A"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="addButton_Click"/>
-        <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF468BE1" Click="deleteButton_Click"/>
+        <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="627,359,0,0" VerticalAlignment="Top" Width="80" Background="#FF989B9E" Click="deleteButton_Click"/>
         <Canvas x:Name="checkDelete" Margin="298,109,248,194" Background="White" Visibility="Collapsed">
             <TextBlock Canvas.Left="41" Canvas.Top="24" TextWrapping="Wrap"><Run Text="Are you sure you want to delete "/><LineBreak/><Run Text="this station?"/></TextBlock>
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
             <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
         </Canvas>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="21,20,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

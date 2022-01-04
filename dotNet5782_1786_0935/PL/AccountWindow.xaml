@@ -10,10 +10,32 @@
         <Grid.Background>
             <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <Button x:Name="viewAccount" Content="view account" HorizontalAlignment="Left" Margin="173,296,0,0" VerticalAlignment="Top" Height="47" Width="124" Click="viewAccount_Click" Background="#FF94C9FF" FontSize="16"/>
-        <Button x:Name="parcels" Content="parcels" HorizontalAlignment="Left" Margin="476,296,0,0" VerticalAlignment="Top" Height="48" Width="124" Click="parcels_Click" Background="#FF94C9FF" FontSize="16"/>
-        <Button Content="log out" HorizontalAlignment="Left" Margin="612,71,0,0" VerticalAlignment="Top" Height="42" Width="96" Click="Button_Click" Background="#FF94C9FF"/>
-        <Image HorizontalAlignment="Left" Height="95" Margin="237,127,0,0" VerticalAlignment="Top" Width="301" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg"/>
-
+        <Button x:Name="viewAccount" Click="viewAccount_Click" Background="#FF94C9FF" FontSize="16" Margin="198,232,452,52" Height="150" Width="150">
+            <StackPanel>
+                <Image Height="70" Width="70" Source="/man.png"/>
+                <Label Content="Account" FontWeight="Bold"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="parcels" Click="parcels_Click" Background="#FF94C9FF" FontSize="16" Margin="473,232,177,52" Height="150" Width="150">
+            <StackPanel>
+                <Image Height="70" Width="70" Source="/parcel.png"/>
+                <Label Content="Parcel" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
+            </StackPanel>
+        </Button>
+        <Image HorizontalAlignment="Left" Height="96" Margin="247,87,0,0" VerticalAlignment="Top" Width="301" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg"/>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="30,30,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>
