@@ -238,7 +238,35 @@ namespace PL
             //dateRange.SelectedIndex = -1;
             //statusSelector.SelectedIndex = -1;
             //prioritySelector.SelectedIndex = -1;
+            SortBy.SelectedIndex = -1;
             //the calander
+        }
+
+        private void SortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SortBy.SelectedIndex != -1)
+            {
+                if (SortBy.SelectedIndex == 0)
+                {
+                    ParcelsListView.ItemsSource = Bl.allParcels();
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("sendername");
+                    view.GroupDescriptions.Add(groupDescription);
+                }
+                else
+                {
+                    ParcelsListView.ItemsSource = Bl.allParcels();
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("recivername");
+                    view.GroupDescriptions.Add(groupDescription);
+                }
+            }
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            Close();
         }
     }
 }

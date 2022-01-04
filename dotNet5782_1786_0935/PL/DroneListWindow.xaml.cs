@@ -172,5 +172,19 @@ namespace PL
             StatusSelector.SelectedIndex = -1;
             weightSelector.SelectedIndex = -1;
         }
+
+        private void groupButton_Click(object sender, RoutedEventArgs e)
+        {
+            DronesListView.ItemsSource = bl.allDrones();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DronesListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("droneStatus");
+            view.GroupDescriptions.Add(groupDescription);
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            Close();
+        }
     }
 }

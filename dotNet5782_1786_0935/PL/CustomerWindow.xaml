@@ -77,16 +77,25 @@
                 <TextBlock TextWrapping="Wrap" Width="630" ><Run/><LineBreak/><Run Text="Contacting us" FontWeight="Bold" FontSize="16"/></TextBlock>
                 <TextBlock Text="If you have any questions, concerns, or complaints regarding this Agreement, we encourage you to contact us using the details below:" TextWrapping="Wrap" Width="630" Height="38"/>
                 <TextBlock Text="customerService@DroneDrop.com " TextWrapping="Wrap" Width="630" Height="23"/>
-                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above" Width="630" Checked="checkBoxTerms_Checked"/>
-                <Button x:Name="continueButton" Content="continue" Width="111" HorizontalAlignment="Right" Margin="0,0,100,0" Click="continueButton_Click" IsEnabled="False"/>
-                <!--IsEnabled="{Binding ElementName=checkBoxTerms, Path=IsChecked}"-->
+                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above" Width="630" Checked="checkBoxTerms_Checked" Foreground="{Binding ElementName=checkBoxTerms, Path=IsChecked}"/>
+                <Button x:Name="continueButton" Content="continue" Width="111" HorizontalAlignment="Right" Margin="0,0,100,0" Click="continueButton_Click" IsEnabled="{Binding ElementName=checkBoxTerms, Path=IsChecked, Mode=TwoWay}"/>
                 <TextBlock Text="" TextWrapping="Wrap" Background="White"/>
                 <TextBlock TextWrapping="Wrap" Width="666" Height="68" Background="#FFF0F0F0"><Run/><LineBreak/><Run Text="     DroneDrop"/></TextBlock>
-                <!--<TextBox Text="   DroneDrop" TextWrapping="Wrap" Width="483" Height="50" Background="#FF333333" Foreground="White" FontWeight="Bold" FontSize="20"/>
-                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above " Canvas.Left="47" Canvas.Top="325" Checked="checkBoxTerms_Checked"/>
-                <Button x:Name="continueButton" Content="continue" Canvas.Left="341" Canvas.Top="358" Width="73" Click="continueButton_Click_1" IsEnabled="False"/>-->
             </StackPanel>
         </ScrollViewer>
-
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="18,19,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

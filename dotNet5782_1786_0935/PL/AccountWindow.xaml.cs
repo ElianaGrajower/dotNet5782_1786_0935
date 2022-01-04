@@ -28,6 +28,7 @@ namespace PL
         {
             InitializeComponent();
             c = customer;
+            expanderHeader.Text = " " + c.name;
         }
 
         private void viewAccount_Click(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace PL
             new ParcelListWindow(bl, c).ShowDialog();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
             Close();

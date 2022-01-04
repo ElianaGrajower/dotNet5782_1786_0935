@@ -11,10 +11,10 @@
             <ImageBrush ImageSource="/1280px-Sky.jpg"/>
         </Grid.Background>
 
-        <ComboBox Name="weightSelector" Margin="473,36,157,349" SelectionChanged="weightSelector_SelectionChanged"/>
-        <ComboBox x:Name="StatusSelector" Margin="144,36,496,349" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
-        <Label Content="Weight:" HorizontalAlignment="Left" Margin="394,36,0,0" VerticalAlignment="Top" Grid.Column="0" FontSize="16"/>
-        <Label Content="Status:" Margin="70,36,607,349" FontSize="16"></Label>
+        <ComboBox Name="weightSelector" Margin="211,35,433,350" SelectionChanged="weightSelector_SelectionChanged"/>
+        <ComboBox x:Name="StatusSelector" Margin="454,35,190,350" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
+        <Label Content="Weight:" HorizontalAlignment="Left" Margin="387,35,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Status:" Margin="152,36,525,349" FontSize="16"></Label>
         <ListView x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged" Margin="0,90,0,94" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
             <ListView.View>
                 <GridView>
@@ -29,12 +29,35 @@
                     <GridViewColumn Header="Parcels Delivered" Width="100" DisplayMemberBinding="{Binding numOfParcelsdelivered }"/>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
         <Button Content="add drone" Margin="600,358,96,32" Click="Button_Click" Background="#FF989B9E"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="84,358,0,32" VerticalAlignment="Top" Width="91" Height="22" Click="Button_Click_1" Background="#FFDC637A"/>
-        <Button HorizontalAlignment="Left" Margin="681,36,0,0" VerticalAlignment="Top" Height="30" Width="30" Background="White" Click="Button_Click_2">
+        <Button HorizontalAlignment="Left" Margin="726,36,0,0" VerticalAlignment="Top" Height="30" Width="30" Background="White" Click="Button_Click_2">
             <Image Height="25" Width="25" Source="/download.png"/>
         </Button>
-
+        <Button x:Name="groupButton" Content="Group" HorizontalAlignment="Left" Margin="627,41,0,0" VerticalAlignment="Top" Width="70" Click="groupButton_Click"/>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="28,24,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

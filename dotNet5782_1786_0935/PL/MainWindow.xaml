@@ -7,11 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800" Background="#FF7A9AC3">
     <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180*"/>
+            <ColumnDefinition Width="160*"/>
+            <ColumnDefinition Width="160*"/>
+            <ColumnDefinition Width="160*"/>
+            <ColumnDefinition Width="160*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="160*"/>
-            <RowDefinition Height="160*"/>
-            <RowDefinition Height="160*"/>
-            <RowDefinition Height="160*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>
@@ -34,11 +42,52 @@
                 <ImageBrush ImageSource="/a-drone-carrying-a-box.jpg"/>
             </Image.OpacityMask>
         </Image>-->
-        <Button Content="Drones" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click" Width="160" Height="160" Background="#FF94C9FF" FontSize="16" Grid.ColumnSpan="1" Grid.Row="2" RenderTransformOrigin="0.485,0.123"/>
-        <Button x:Name="stationList" Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Center" Click="stationList_Click" Width="160" Height="160" FontSize="16" Background="#FF94C9FF" OpacityMask="#FF468BE1" Grid.Row="3"/>
-        <Button x:Name="customerList" Content="Customers" HorizontalAlignment="Left" VerticalAlignment="Center" Height="160" Width="160" FontSize="16" Background="#FF94C9FF" Click="customerList_Click"/>
-        <Button Content="Parcels" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160" Height="160" Background="#FF94C9FF" FontSize="16" Click="Button_Click_1" Grid.Row="1"/>
-        <Button Content="log out" HorizontalAlignment="Left" Margin="617,0,0,0" VerticalAlignment="Center" Width="120" Height="50" Background="#FF94C9FF" FontSize="16" Click="Button_Click_2"/>
-        <Image HorizontalAlignment="Left" Height="81" Margin="334,20,0,0" VerticalAlignment="Top" Width="304" Stretch="UniformToFill" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" Grid.Row="1" Visibility="Visible"/>
+        <Button Click="Button_Click" Background="#FF94C9FF" FontSize="16" Grid.Row="4" RenderTransformOrigin="0.485,0.123" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
+            <StackPanel>
+                <Image Height="70" Width="70" Source="/drone (1).png"/>
+                <Label Content="Drone" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="stationList" Click="stationList_Click" FontSize="16" Background="#FF94C9FF" OpacityMask="#FF468BE1" Grid.Row="3" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
+            <StackPanel HorizontalAlignment="Center">
+                <Image Height="70" Width="70" Source="/charging.png" HorizontalAlignment="Center"/>
+                <Label Content="Station" FontWeight="Bold" VerticalContentAlignment="Top" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="customerList" FontSize="16" Background="#FF94C9FF" Click="customerList_Click" Grid.Row="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
+            <StackPanel>
+                <Image Height="70" Width="70" Source="/people (1).png"/>
+                <Label Content="Customer" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button Background="#FF94C9FF" FontSize="16" Click="Button_Click_1" Grid.Row="2" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
+            <StackPanel>
+                <Image Height="70" Width="70" Source="/parcel.png"/>
+                <Label Content="Parcel" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button Content="log out" HorizontalAlignment="Left" Margin="94,31,0,0" VerticalAlignment="Top" Width="120" Height="50" Background="#FF94C9FF" FontSize="16" Click="Button_Click_2" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <Image HorizontalAlignment="Left" Height="90" Margin="100,23,0,0" VerticalAlignment="Top" Width="338" Stretch="UniformToFill" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" Grid.Row="1" Visibility="Visible" Grid.Column="1" Grid.ColumnSpan="3"/>
+        <Button Background="#FF94C9FF" Click="Button_Click_3" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
+            <StackPanel>
+                <Image Height="70" Width="70" Source="/support.png"/>
+                <Label Content="Employee" FontSize="16" FontWeight="Bold"/>
+            </StackPanel>
+        </Button>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="111,0,0,0" VerticalAlignment="Center" Width="162" FlowDirection="LeftToRight" Grid.ColumnSpan="2" Grid.Column="3">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
+
     </Grid>
 </Window>

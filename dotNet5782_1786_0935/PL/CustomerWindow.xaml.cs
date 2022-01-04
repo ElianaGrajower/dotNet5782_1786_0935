@@ -99,7 +99,7 @@ namespace PL
                 string phone = phoneText.Text;
                 bl.UpdateCustomer(customerId, name, phone);
                 MessageBox.Show("customer updated succesfully");
-                DataContext = c;
+                //DataContext = c;
             }
             catch
             {
@@ -206,7 +206,6 @@ namespace PL
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
             termesConditions.Visibility = Visibility.Hidden;
-            checkBoxTerms.IsChecked = false;
             try
             {
                 bl.addCustomer(c);
@@ -228,7 +227,13 @@ namespace PL
 
         private void checkBoxTerms_Checked(object sender, RoutedEventArgs e)
         {
-            continueButton.IsEnabled = true;
+
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new UserWindow().Show();
+            this.Close();
         }
     }
 }

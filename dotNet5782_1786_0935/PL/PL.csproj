@@ -14,16 +14,33 @@
     <None Remove="another-wonderful-sunset-sky.jpg" />
     <None Remove="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <None Remove="Calendar-icon.png" />
+    <None Remove="charging-station.png" />
+    <None Remove="charging.png" />
     <None Remove="clouds-blue-sky-light-31912398.jpg" />
     <None Remove="download.png" />
+    <None Remove="drone %281%29.png" />
+    <None Remove="drone.png" />
     <None Remove="inline_image_preview.jpg" />
+    <None Remove="istockphoto-1208274492-640x640.jpg" />
+    <None Remove="log-out.png" />
+    <None Remove="logout.png" />
+    <None Remove="man.png" />
+    <None Remove="parcel.png" />
+    <None Remove="parcels.png" />
+    <None Remove="people %281%29.png" />
+    <None Remove="people.png" />
     <None Remove="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <None Remove="sky+photo+for+website+home+page.jpeg" />
     <None Remove="sky-houses-lights-night.jpg" />
+    <None Remove="support.png" />
+    <None Remove="user.png" />
     <None Remove="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />
     <None Remove="WhatsApp Image 2022-01-03 at 7.35.46 PM.jpeg" />
     <None Remove="WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" />
     <None Remove="WhatsApp Image 2022-01-03 at 8.42.51 PM.jpeg" />
+    <None Remove="WhatsApp Image 2022-01-04 at 4.52.09 PM.jpeg" />
+    <None Remove="WhatsApp Image 2022-01-04 at 4.55.55 PM.jpeg" />
+    <None Remove="WhatsApp Image 2022-01-04 at 4.58.45 PM.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,16 +55,33 @@
     <Resource Include="another-wonderful-sunset-sky.jpg" />
     <Resource Include="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <Resource Include="Calendar-icon.png" />
+    <Resource Include="charging-station.png" />
+    <Resource Include="charging.png" />
     <Resource Include="clouds-blue-sky-light-31912398.jpg" />
     <Resource Include="download.png" />
+    <Resource Include="drone (1).png" />
+    <Resource Include="drone.png" />
     <Resource Include="inline_image_preview.jpg" />
+    <Resource Include="istockphoto-1208274492-640x640.jpg" />
+    <Resource Include="log-out.png" />
+    <Resource Include="logout.png" />
+    <Resource Include="man.png" />
+    <Resource Include="parcel.png" />
+    <Resource Include="parcels.png" />
+    <Resource Include="people (1).png" />
+    <Resource Include="people.png" />
     <Resource Include="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <Resource Include="sky+photo+for+website+home+page.jpeg" />
     <Resource Include="sky-houses-lights-night.jpg" />
+    <Resource Include="support.png" />
+    <Resource Include="user.png" />
     <Resource Include="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />
     <Resource Include="WhatsApp Image 2022-01-03 at 7.35.46 PM.jpeg" />
     <Resource Include="WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" />
     <Resource Include="WhatsApp Image 2022-01-03 at 8.42.51 PM.jpeg" />
+    <Resource Include="WhatsApp Image 2022-01-04 at 4.52.09 PM.jpeg" />
+    <Resource Include="WhatsApp Image 2022-01-04 at 4.55.55 PM.jpeg" />
+    <Resource Include="WhatsApp Image 2022-01-04 at 4.58.45 PM.jpeg" />
   </ItemGroup>
 
 </Project>
