@@ -13,9 +13,10 @@ namespace Dal
     sealed class DalObject : DalApi.IDal
     {
         public static Random r = new Random();
+        #region singelton
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }
-       
+        #endregion
         private DalObject() { DataSource.Initialize(); } // default constructer calls on initialize func
 
 
@@ -193,15 +194,15 @@ namespace Dal
         {
             try
             {
-                //if (findCustomer(id).active)
-                //{
-                //    var temp = DataSource.CustomerList.Find(d => d.customerId == id);
-                //    var rid = DataSource.CustomerList.Find(d => d.customerId == id);
-                //    temp.active = false;
-                //    DataSource.CustomerList.Remove(rid);
-                //    DataSource.CustomerList.Add(temp);
-                //}
-                DataSource.CustomerList.Remove(findCustomer(id));
+                Customer c = findCustomer(id);
+                if (c.active)
+                {
+                   // var temp = DataSource.CustomerList.Find(d => d.customerId == id);
+                   DataSource.CustomerList.Remove(c); //delete the old element
+                    c.active = false;
+                    DataSource.CustomerList.Add(c);
+                }
+                //DataSource.CustomerList.Remove(findCustomer(id));
 
             }
             catch (DoesntExistException exc)

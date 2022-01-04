@@ -21,7 +21,7 @@
                     <GridViewColumn Header="Drone Id" Width="90" DisplayMemberBinding="{Binding droneId}"/>
                     <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding model}"/>
                     <GridViewColumn Header="Weight" Width="110" DisplayMemberBinding="{Binding weight}"/>
-                    <GridViewColumn Header="Battery" Width="120" DisplayMemberBinding="{Binding battery}"/>
+                    <GridViewColumn Header="Battery" Width="120" DisplayMemberBinding="{Binding battery}" />
                     <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding droneStatus}"/>
                     <GridViewColumn Header="Latitude" Width="120" DisplayMemberBinding="{Binding location.latitude}"/>
                     <GridViewColumn Header="Longitude" Width="120" DisplayMemberBinding="{Binding location.longitude}"/>

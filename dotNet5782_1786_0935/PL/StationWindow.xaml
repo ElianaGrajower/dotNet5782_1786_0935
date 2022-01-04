@@ -29,7 +29,7 @@
         <ListView x:Name="listOfDronesAtStation" Margin="90,217,90,115" DataContext="{Binding}" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="listOfDronesAtStation_MouseDoubleClick" SelectionChanged="listOfDronesAtStation_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Charge Time" Width="140" DisplayMemberBinding="{Binding chargeTime}"/>
+                    <GridViewColumn Header="Charge Time" Width="140" DisplayMemberBinding="{Binding chargeTillNow}"/>
                     <GridViewColumn Header="Drone Id" Width="120" DisplayMemberBinding="{Binding droneId}"/>
                     <GridViewColumn Header="Battery" Width="120" DisplayMemberBinding="{Binding battery}"/>
                 </GridView>

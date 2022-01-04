@@ -66,30 +66,40 @@ namespace PL
             StationToList updateStationList = new StationToList();
             updateStationList = (StationToList)StationsListView.SelectedItem;
             Station updateStation = new Station();
-            updateStation = bl.getStation(updateStationList.stationId);
-            new StationWindow(bl, updateStation).ShowDialog();
-            ShowInfo();
-            if (filterSlots.Text != "")
+            try
             {
-                StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
+                if (updateStationList == null)
+                    throw new Exception("clicked wrong area");
+                updateStation = bl.getStation(updateStationList.stationId);
+                new StationWindow(bl, updateStation).ShowDialog();
+                ShowInfo();
+                if (filterSlots.Text != "")
+                {
+                    StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
 
-                //stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text)));
-                //StationsListView.DataContext = stationObservableCollection;
+                    //stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text)));
+                    //StationsListView.DataContext = stationObservableCollection;
+                }
+                if (availableChargesSelector.SelectedIndex == 0)
+                {
+                    StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
+
+                    //stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots > 0));
+                    //StationsListView.DataContext = stationObservableCollection;
+                }
+                else
+                {
+                    StationsListView.ItemsSource = bl.getStationsList();
+
+                    //stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
+                    //StationsListView.DataContext = stationObservableCollection;
+                }
             }
-            if (availableChargesSelector.SelectedIndex == 0)
+            catch (Exception exc)
             {
-                StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
-
-                //stationObservableCollection = new ObservableCollection<StationToList>(bl.allStations(x => x.numberOfAvailableSlots > 0));
-                //StationsListView.DataContext = stationObservableCollection;
+                MessageBox.Show("System malfunction please wait a moment and try again\n");
             }
-            else
-            {
-                StationsListView.ItemsSource = bl.getStationsList();
-
-                //stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
-                //StationsListView.DataContext = stationObservableCollection;
-            }
+            
         }
 
         private void availableChargesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

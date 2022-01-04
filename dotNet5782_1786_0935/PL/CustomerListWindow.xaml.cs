@@ -60,11 +60,21 @@ namespace PL
             CustomerToList updateCustomer = new CustomerToList();
             updateCustomer = (CustomerToList)CustomersListView.SelectedItem;
             Customer realCustomer = new Customer();
-            realCustomer = bl.getCustomer(updateCustomer.customerId);
-            new CustomerWindow(bl, realCustomer).ShowDialog();
-            //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-            //CustomersListView.DataContext = myObservableCollection;
-            ShowInfo();
+            try
+            {
+                if (updateCustomer == null)
+                    throw new Exception("clicked wrong area");
+                realCustomer = bl.getCustomer(updateCustomer.customerId);
+                new CustomerWindow(bl, realCustomer).ShowDialog();
+                //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
+                //CustomersListView.DataContext = myObservableCollection;
+                ShowInfo();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("System Malfunction please wait a moment and try again\n");
+            }
+            
         }
 
         private void CustomersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

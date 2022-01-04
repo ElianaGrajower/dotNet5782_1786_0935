@@ -102,7 +102,7 @@ namespace BL
             try
             {//makes temp list
                 //calls on getlist of stations function from dal
-                var stationsDal = dal.printStationsList().ToList();
+                var stationsDal = dal.printStationsList().Where(s=>s.active==true).ToList();
                 //in each link calls on get station which convers it to ibl station and adds it to temp list
                 foreach (var s in stationsDal)
                 {
@@ -111,7 +111,6 @@ namespace BL
                         stationId = s.stationId,
                         name = getStation(s.stationId).name,
                         numberOfSlotsInUse = getStation(s.stationId).numberOfSlotsInUse,
-                        //this was just updated
                         numberOfAvailableSlots = getStation(s.stationId).chargeSlots - getUnvailablechargeSlots(s.stationId)
 
 
@@ -228,8 +227,9 @@ namespace BL
             {
                 //updates the list that contain info
                 dal.AddDrone(newDrone);
-                // if(drones.Where(d=>dtl.droneId==d.droneId).Count()==0)
-                if (drones.Count(x => getDrone(x.droneId).active == true) == 0)
+                
+               // if (drones.Count(x => getDrone(x.droneId).active == true) == 0)
+               if (drones.Count(x => x.droneId == droneToAdd.droneId) == 0)//need to somehow use active here
                     drones.Add(dtl);
                 DO.DroneCharge dc = new DO.DroneCharge { droneId = droneToAdd.droneId, stationId = stationId, active = true };
                 var tempstation = getStation(stationId);
@@ -301,6 +301,8 @@ namespace BL
                 station.dronesAtStation = dal.printDroneChargeList().Where(item=>item.stationId== stationId)
                     .Select(drone => new DroneInCharging()
                     {
+                        chargeTime=drone.chargeTime,
+                        chargeTillNow=(DateTime.Now -drone.chargeTime).TotalMinutes,
                         droneId = drone.droneId,
                         battery = getDroneBattery(drone.droneId)
                     }).ToList();
@@ -1182,8 +1184,13 @@ namespace BL
             try
             {
                 //calls get drone to convert to ibl
+                
                 foreach (var d in drones)
-                { drone.Add(returnsDrone(d.droneId)); }
+                {
+                    var temp = dal.getDrone(d.droneId);
+                    if (temp.active)
+                    drone.Add(returnsDrone(d.droneId));
+                }
             }
             catch (ArgumentException) { throw new BO.DoesntExistException(); }
             return drone;
@@ -1196,7 +1203,7 @@ namespace BL
             List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
             try
             {
-                var customerDal = dal.printCustomersList().ToList();
+                var customerDal = dal.printCustomersList().Where(c=>c.active==true).ToList();
                 foreach (var c in customerDal)
                 {
                     var temp = new BO.CustomerToList()
@@ -1229,7 +1236,7 @@ namespace BL
             try
             {
                 //calls getParcel to convert
-                var parcelDal = dal.printParcelsList().ToList();
+                var parcelDal = dal.printParcelsList().Where(p=>p.active==true).ToList();
                 foreach (var p in parcelDal)
                 {
                     var temp = new BO.ParcelToList()

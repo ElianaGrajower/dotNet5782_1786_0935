@@ -127,13 +127,24 @@ namespace PL
         {
             ParcelToList updateParcel = new ParcelToList();
             updateParcel = (ParcelToList)ParcelsListView.SelectedItem;
-            Parcel realParcel = new Parcel();
-            realParcel = Bl.getParcel(updateParcel.parcelId);
-            new ParcelWindow(Bl, realParcel).ShowDialog();
+            try
+            {
+                if (updateParcel == null)
+                    throw new Exception("clicked wrong area");
+                Parcel realParcel = new Parcel();
+                realParcel = Bl.getParcel(updateParcel.parcelId);
+                new ParcelWindow(Bl, realParcel).ShowDialog();
+                ShowInfo();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("System Malfunction please wait a moment and try again\n");
+            }
+            
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
             //DataContext = myObservableCollection;
         //    ParcelsListView.ItemsSource = Bl.getParcelsList();
-            ShowInfo();
+          
 
         }
 

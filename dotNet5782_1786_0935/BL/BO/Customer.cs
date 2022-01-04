@@ -17,7 +17,7 @@ namespace BO
         public string password { set; get; }
         public IEnumerable<ParcelinCustomer> parcelsdelivered { set; get; }
         public IEnumerable<ParcelinCustomer> parcelsOrdered { set; get; }
-        public bool active { set; get; }
+      
 
         public override string ToString()
         {

@@ -28,7 +28,7 @@ namespace PL
         internal readonly IBL bl = BlFactory.GetBl();
         static weightCategories? weightFilter;
         static DroneStatus? statusFilter;
-   //     ObservableCollection<DroneToList> droneObservableCollection;
+        //     ObservableCollection<DroneToList> droneObservableCollection;
 
         public DroneListWindow()
         {
@@ -98,9 +98,19 @@ namespace PL
             DroneToList updateDrone = new DroneToList();
             updateDrone = (DroneToList)DronesListView.SelectedItem;
             Drone realDrone = new Drone();
-            realDrone = bl.getDrone(updateDrone.droneId);
-            new DroneWindow(bl,realDrone).ShowDialog();
-            ShowInfo();
+            try
+            {
+                if (updateDrone == null)
+                    throw new Exception("clicked wrong area");
+                realDrone = bl.getDrone(updateDrone.droneId);
+                new DroneWindow(bl, realDrone).ShowDialog();
+                ShowInfo();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("System Malfunction please wait a moment and try again\n");
+            }
+
             //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
             //DataContext = droneObservableCollection;
         }

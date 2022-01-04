@@ -21,7 +21,7 @@ namespace BO
         public DateTime? pickedUp { set; get; } //The time the drones picks up the parcel from the sender
         public DateTime? delivered { set; get; } //The time the customer receives the parcel
         public bool fragile { set; get; } //if the parcel is fragile    //******should we take it out?
-        public bool active;
+     
         public override string ToString()
         {
             return String.Format($"Parcel Id: {parcelId}\nSender: {sender}\nTarget: {target}\nweight: {weight}\npriority: {priority}\nDrone: {drone}\nrequested: {requested}\nscheduled: {scheduled}\nPicked Up: { pickedUp }\ndelivered: { delivered}\nfragile: {fragile}");

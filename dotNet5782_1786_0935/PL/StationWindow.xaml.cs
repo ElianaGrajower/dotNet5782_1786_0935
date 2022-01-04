@@ -186,16 +186,29 @@ namespace PL
             //throwing a catch
             DroneInCharging updateDrone = new DroneInCharging();
             updateDrone = (DroneInCharging)listOfDronesAtStation.SelectedItem;
-            Drone realDrone = new Drone();
-            realDrone = Bl.getDrone(updateDrone.droneId);
-            new DroneWindow(Bl, realDrone).ShowDialog();
-            //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(s.dronesAtStation);
-            //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
-            
-            DataContext = s;             ///////////doesnt work
-            listOfDronesAtStation.ItemsSource = s.dronesAtStation;
+            try
+            {
+                if (updateDrone == null)
+                    throw new Exception("wrong click");
+                Drone realDrone = new Drone();
+                realDrone = Bl.getDrone(updateDrone.droneId);
+                new DroneWindow(Bl, realDrone).ShowDialog();
+                //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(s.dronesAtStation);
+                //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
 
-            Close();
+                DataContext = s;
+                ///////////doesnt work
+                ///
+
+
+                listOfDronesAtStation.ItemsSource = s.dronesAtStation;
+                Close();
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("System malfunction please wait a moment and try again");
+            }
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
