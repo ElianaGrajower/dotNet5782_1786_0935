@@ -32,6 +32,7 @@
     <None Remove="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <None Remove="sky+photo+for+website+home+page.jpeg" />
     <None Remove="sky-houses-lights-night.jpg" />
+    <None Remove="stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" />
     <None Remove="support.png" />
     <None Remove="user.png" />
     <None Remove="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />
@@ -73,6 +74,7 @@
     <Resource Include="png-clipart-computer-icons-graphics-online-shopping-package-icon-purple-angle.png" />
     <Resource Include="sky+photo+for+website+home+page.jpeg" />
     <Resource Include="sky-houses-lights-night.jpg" />
+    <Resource Include="stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" />
     <Resource Include="support.png" />
     <Resource Include="user.png" />
     <Resource Include="WhatsApp Image 2021-12-27 at 1.05.26 PM.jpeg" />

@@ -18,13 +18,12 @@
         <TextBox x:Name="stationIdText" HorizontalAlignment="Left" Margin="242,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="stationIdText_TextChanged" Text="{Binding stationId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="122,95,0,0" VerticalAlignment="Top" Width="50"/>
         <TextBox x:Name="nameText" HorizontalAlignment="Left" Margin="242,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
-        <Label x:Name="latitudeRead" Content="Latitude:" HorizontalAlignment="Left" Margin="121,171,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="242,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding location.latitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
-        <Label x:Name="inUseRead" Content="Charges In Use:" HorizontalAlignment="Left" Margin="436,95,0,0" VerticalAlignment="Top" Width="99"/>
-        <TextBox x:Name="inUseText" HorizontalAlignment="Left" Margin="557,99,0,0" Text="{Binding numberOfSlotsInUse,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="longitudeRead" Content="Longitude:" HorizontalAlignment="Left" Margin="121,213,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="242,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
-
+        <Label x:Name="latitudeRead" Content="Latitude:" HorizontalAlignment="Left" Margin="438,57,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="548,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding location.latitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
+        <Label x:Name="inUseRead" Content="Charges In Use:" HorizontalAlignment="Left" Margin="436,136,0,0" VerticalAlignment="Top" Width="99"/>
+        <TextBox x:Name="inUseText" HorizontalAlignment="Left" Margin="548,136,0,0" Text="{Binding numberOfSlotsInUse,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="longitudeRead" Content="Longitude:" HorizontalAlignment="Left" Margin="438,99,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="548,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label x:Name="dronesAtStationRead" Content="Drones At Station:" HorizontalAlignment="Left" Margin="122,186,0,0" VerticalAlignment="Top" Visibility="Visible"/>
         <ListView x:Name="listOfDronesAtStation" Margin="90,217,90,115" DataContext="{Binding}" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="listOfDronesAtStation_MouseDoubleClick" SelectionChanged="listOfDronesAtStation_SelectionChanged">
             <ListView.View>
@@ -42,8 +41,6 @@
             <Button x:Name="noButton" Content="no" Canvas.Left="40" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59" Click="Button_Click" />
             <Button x:Name="yesButton" Content="yes" Canvas.Left="130" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59" Click="yesButton_Click" />
         </Canvas>
-        <Label x:Name="locationRead" Content="Location:" HorizontalAlignment="Left" Margin="438,57,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="locationText" HorizontalAlignment="Left" Margin="558,61,0,0" Text="{Binding location,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Canvas x:Name="checkDelete" Margin="298,109,248,194" Background="White" Visibility="Hidden">
             <TextBlock Canvas.Left="41" Canvas.Top="24" TextWrapping="Wrap"><Run Text="Are you sure you want to delete "/><LineBreak/><Run Text="this station?"/></TextBlock>
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>

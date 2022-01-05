@@ -17,6 +17,8 @@ using System.Threading.Tasks;
             public string password { set; get; }
             public bool isCustomer { set; get; }
             public bool active { set; get; }
+            public string email { set; get; }
+
 
 
         public override string ToString()

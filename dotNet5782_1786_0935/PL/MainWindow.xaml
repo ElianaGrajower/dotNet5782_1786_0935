@@ -66,7 +66,6 @@
                 <Label Content="Parcel" FontWeight="Bold" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
-        <Button Content="log out" HorizontalAlignment="Left" Margin="94,31,0,0" VerticalAlignment="Top" Width="120" Height="50" Background="#FF94C9FF" FontSize="16" Click="Button_Click_2" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2"/>
         <Image HorizontalAlignment="Left" Height="90" Margin="100,23,0,0" VerticalAlignment="Top" Width="338" Stretch="UniformToFill" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" Grid.Row="1" Visibility="Visible" Grid.Column="1" Grid.ColumnSpan="3"/>
         <Button Background="#FF94C9FF" Click="Button_Click_3" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
             <StackPanel>

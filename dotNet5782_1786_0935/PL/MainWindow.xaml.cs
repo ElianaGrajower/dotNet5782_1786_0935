@@ -37,33 +37,27 @@ namespace PL
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DroneListWindow(bl).Show();
+            new DroneListWindow(bl, c.name).Show();
         }
 
         private void stationList_Click(object sender, RoutedEventArgs e)
         {
-            new StationListWindow(bl).Show();
+            new StationListWindow(bl, c.name).Show();
         }
 
         private void customerList_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerListWindow(bl, true).Show();
+            new CustomerListWindow(bl, true, c.name).Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            new ParcelListWindow(bl).Show();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            //new UserWindow().Show();
-            //Close();
+            new ParcelListWindow(bl, c.name).Show();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            new CustomerListWindow(bl, false).Show();
+            new CustomerListWindow(bl, false, c.name).Show();
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)

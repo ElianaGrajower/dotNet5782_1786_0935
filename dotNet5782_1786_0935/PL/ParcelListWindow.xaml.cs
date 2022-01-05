@@ -27,10 +27,10 @@ namespace PL
         //  ObservableCollection<ParcelToList> myObservableCollection;
         static ParcelStatus? statusFilter;
         static Priorities? prioritiesFilter;
+        string cName;
 
 
-
-        public ParcelListWindow(IBL parcel) //for an employee
+        public ParcelListWindow(IBL parcel, string customerName) //for an employee
         {
             InitializeComponent();
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
@@ -38,8 +38,10 @@ namespace PL
             ParcelsListView.ItemsSource = Bl.getParcelsList();
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
             prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
         }
-        public ParcelListWindow(IBL parcel, Customer customer) //for a customer
+        public ParcelListWindow(IBL parcel, Customer customer, string customerName) //for a customer
         {
             InitializeComponent();
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
@@ -47,6 +49,8 @@ namespace PL
             ParcelsListView.ItemsSource = Bl.allParcels().Where(x => x.sendername == customer.name || x.recivername == customer.name);  ///have to change the showinfo accordingly
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
             prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
         }
         public void ShowInfo()  /////majorly work on this!!!
         {
@@ -116,7 +120,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelWindow(Bl).ShowDialog();
+            new ParcelWindow(Bl, cName).ShowDialog();
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
             //DataContext = myObservableCollection;
             //  ParcelsListView.ItemsSource = Bl.getParcelsList();
@@ -133,7 +137,7 @@ namespace PL
                     throw new Exception("clicked wrong area");
                 Parcel realParcel = new Parcel();
                 realParcel = Bl.getParcel(updateParcel.parcelId);
-                new ParcelWindow(Bl, realParcel).ShowDialog();
+                new ParcelWindow(Bl, realParcel, cName).ShowDialog();
                 ShowInfo();
             }
             catch (Exception exc)

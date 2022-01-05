@@ -15,17 +15,22 @@ using BO;
 using BlApi;
 using System.Collections.ObjectModel;
 
+using System.Net;
+using System.Net.Mail;
+
 
 namespace PL
 {
     /// <summary>
     /// Interaction logic for CustomerWindow.xaml
     /// </summary>
+
     public partial class CustomerWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
         Customer c;
         Customer cutomerParcel;
+        string cName;
         //ObservableCollection<ParcelinCustomer>deliverObservableCollection;
         //ObservableCollection<ParcelinCustomer>receiveObservableCollection;
 
@@ -41,7 +46,7 @@ namespace PL
         //    receivedRead.Visibility = Visibility.Hidden;
 
         //}
-        public CustomerWindow(IBL customer, bool checkIsCustomer)//add new
+        public CustomerWindow(IBL customer, bool checkIsCustomer, bool isLogout, string custumerName="")//add new
         {
             InitializeComponent();
             this.bl = customer;
@@ -55,11 +60,19 @@ namespace PL
             receivedRead.Visibility = Visibility.Hidden;
             updateButton.Visibility = Visibility.Hidden;
             deleteButton.Visibility = Visibility.Hidden;
-
+            if(isLogout)
+            {
+                expanderHeader.Text = " " + custumerName;
+                cName = custumerName;
+            }
+            else
+            {
+                logout.Visibility = Visibility.Hidden;
+            }
 
 
         }
-        public CustomerWindow(IBL b, BO.Customer customer)//update
+        public CustomerWindow(IBL b, BO.Customer customer, string customerName)//update
         {
             InitializeComponent();
             this.bl = b;
@@ -74,10 +87,12 @@ namespace PL
             idText.IsEnabled = false;
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
+            emailText.IsEnabled = false;
             addButton.Visibility = Visibility.Hidden;
             passwordRead.Visibility = Visibility.Hidden;
             passwordText.Visibility = Visibility.Hidden;
-
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -135,7 +150,7 @@ namespace PL
                 if (updateParcel == null)
                     throw new Exception("wrong button click");
                 realParcel = bl.getParcel(updateParcel.parcelId);
-                new ParcelWindow(bl, realParcel).ShowDialog();
+                new ParcelWindow(bl, realParcel, cName).ShowDialog();
             }
             catch(Exception exc)
             {
@@ -152,7 +167,7 @@ namespace PL
                 if(updateParcel==null)
                     throw new Exception("wrong button click");
                 realParcel = bl.getParcel(updateParcel.parcelId);
-                new ParcelWindow(bl, realParcel).ShowDialog();
+                new ParcelWindow(bl, realParcel, cName).ShowDialog();
             }
             catch (Exception exc)
             {
@@ -191,42 +206,9 @@ namespace PL
 
         }
 
-        ////////private void checkBoxTerms_Checked(object sender, RoutedEventArgs e) //switch to binding!!!!!!!!!!!!!!!
-        ////////{
-        ////////    continueButton.IsEnabled = true;
-        ////////    //  checkBoxTerms.Foreground = "#FF268E75";
-        ////////}
-
-        ////////private void continueButton_Click_1(object sender, RoutedEventArgs e)
-        ////////{
-        ////////    termesConditions.Visibility = Visibility.Collapsed;
-        ////////    checkBoxTerms.IsChecked = false;
-        ////////    try
-        ////////    {
-        ////////        bl.addCustomer(c);
-        ////////        MessageBox.Show("added customer succesfully");
-        ////////        c = new Customer();
-        ////////        c.location = new Location();
-        ////////        DataContext = c;
-        ////////        Close();
-        ////////    }
-        ////////    catch (InvalidInputException exc)
-        ////////    {
-        ////////        MessageBox.Show(exc.Message);
-        ////////    }
-        ////////    catch
-        ////////    {
-        ////////        MessageBox.Show("ERROR can not add customer");
-        ////////    }
-        ////////}
-
-        ////////private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        ////////{
-
-        ////////}
-
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
+           // SendEmail();
             termesConditions.Visibility = Visibility.Hidden;
             try
             {
@@ -257,5 +239,55 @@ namespace PL
             new UserWindow().Show();
             this.Close();
         }
+        private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            termesConditions.Visibility = Visibility.Hidden;
+        }
+
+        private void SendEmail()
+        {
+            // Create a System.Net.Mail.MailMessage object
+            MailMessage message = new MailMessage();
+
+            // Add a recipient
+            message.To.Add(emailText.Text);
+
+            // Add a message subject
+            message.Subject = "Account activation";
+
+            // Add a message body
+            message.Body = "Hi " + c.name + "\n" +
+                "Welcome to DroneDrop.\n" +
+                "Were happy to have you and are sure you will enjoy our services.\n" +
+                "For some reason i cant find anything to write here.\n\n" +
+                "Thanks,\n" +
+                "Team DroneDrop";
+
+            // Create a System.Net.Mail.MailAddress object and 
+            // set the sender email address and display name.
+            message.From = new MailAddress("dronedrop2021@gmail.com", "DroneDrop");
+
+            // Create a System.Net.Mail.SmtpClient object
+            // and set the SMTP host and port number
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+
+            // If your server requires authentication add the below code
+            // =========================================================
+            // Enable Secure Socket Layer (SSL) for connection encryption
+            smtp.EnableSsl = true;
+
+            // Do not send the DefaultCredentials with requests
+            smtp.UseDefaultCredentials = false;
+
+            // Create a System.Net.NetworkCredential object and set
+            // the username and password required by your SMTP account
+            smtp.Credentials = new NetworkCredential("dronedrop2021@gmail.com", "ouiatjczzhkvtxnr");
+            // =========================================================
+
+            // Send the message
+            smtp.Send(message);
+        }
+
+      
     }
 }

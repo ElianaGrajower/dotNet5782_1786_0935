@@ -25,8 +25,9 @@ namespace PL
     {
         internal readonly IBL bl = BlFactory.GetBl();
         Drone d;
+        string cName;
 
-        public DroneWindow(IBL b,Drone drone)//update drone
+        public DroneWindow(IBL b, Drone drone, string customerName)//update drone
         {
             InitializeComponent();
             //ShowInfo();
@@ -71,9 +72,10 @@ namespace PL
                 parcelButton.Visibility = Visibility.Hidden;
             }
             idText.IsEnabled = false;
-
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
         }
-        public DroneWindow(IBL drone)//new drone
+        public DroneWindow(IBL drone, string customerName)//new drone
         {
             InitializeComponent();
             this.bl = drone;
@@ -91,9 +93,11 @@ namespace PL
             matchUpParcel.Visibility = Visibility.Hidden;
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
-            locationText.Visibility = Visibility.Hidden;
+            latitudeRead.Visibility = Visibility.Hidden;
         //    stationIdCombo.Visibility = Visibility.Visible;
-            locationRead.Visibility = Visibility.Hidden;
+            latitudeText.Visibility = Visibility.Hidden;
+            longitudeRead.Visibility = Visibility.Hidden;
+            longitudeText.Visibility = Visibility.Hidden;
          //   stationRead.Visibility = Visibility.Visible;
             weightText.Visibility = Visibility.Hidden;
          //   weight.Visibility = Visibility.Visible;
@@ -104,8 +108,10 @@ namespace PL
             parcelIdRead.Visibility = Visibility.Hidden;
             parcelIdText.Visibility = Visibility.Hidden;
             parcelButton.Visibility = Visibility.Hidden;
-         //   weightText.IsReadOnly = false;
-         //   idText.IsReadOnly = false;
+            //   weightText.IsReadOnly = false;
+            //   idText.IsReadOnly = false;
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
 
         }
 
@@ -322,7 +328,7 @@ namespace PL
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             Close();
-            new DroneWindow(bl).Show();
+            new DroneWindow(bl, cName).Show();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -334,7 +340,7 @@ namespace PL
         {
             Parcel updateParcel = new Parcel();
             updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
-            new ParcelWindow(bl, updateParcel).ShowDialog();
+            new ParcelWindow(bl, updateParcel, cName).ShowDialog();
             //ShowInfo(); have a way to update the info in the window
         }
 

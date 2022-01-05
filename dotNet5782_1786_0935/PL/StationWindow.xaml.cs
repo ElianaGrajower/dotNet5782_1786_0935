@@ -26,8 +26,9 @@ namespace PL
         internal readonly IBL Bl = BlFactory.GetBl();
      //   ObservableCollection<DroneInCharging> droneAtStationObservableCollection;
         Station s;
+        string cName;
 
-        public StationWindow(IBL Station) //new
+        public StationWindow(IBL Station, string customerName) //new
         {
             InitializeComponent();
             this.Bl = Station;
@@ -42,11 +43,11 @@ namespace PL
             inUseText.Visibility = Visibility.Hidden;
             listOfDronesAtStation.Visibility = Visibility.Hidden;
             dronesAtStationRead.Visibility = Visibility.Hidden;
-            locationRead.Visibility = Visibility.Hidden;
-            locationText.Visibility = Visibility.Hidden;
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
         }
              
-        public StationWindow(IBL b, Station station) //update
+        public StationWindow(IBL b, Station station, string customerName) //update
         {
             InitializeComponent();
             this.Bl = b;
@@ -54,16 +55,19 @@ namespace PL
             //s.location = new Location();
             //DataContext = s;
             s = station;
-
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
             add.Visibility = Visibility.Hidden;
             update.Visibility = Visibility.Visible;
             delete.Visibility = Visibility.Visible;
             inUseRead.Visibility = Visibility.Visible;
             inUseText.Visibility = Visibility.Visible;
-            latitudeText.Visibility = Visibility.Hidden;
-            latitudeRead.Visibility = Visibility.Hidden;
-            longitudeText.Visibility = Visibility.Hidden;
-            longitudeRead.Visibility = Visibility.Hidden;
+            //latitudeText.Visibility = Visibility.Hidden;
+            //latitudeRead.Visibility = Visibility.Hidden;
+            //longitudeText.Visibility = Visibility.Hidden;
+            //longitudeRead.Visibility = Visibility.Hidden;
+
+
             ////switch to data binding?????????
             //   stationIdText.Text = station.stationId.ToString();
             //   nameText.Text = station.name.ToString();
@@ -86,7 +90,6 @@ namespace PL
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
             inUseText.IsEnabled = false;
-            locationText.IsEnabled = false;
         }
 
         private void close_Click(object sender, RoutedEventArgs e)
@@ -192,7 +195,7 @@ namespace PL
                     throw new Exception("wrong click");
                 Drone realDrone = new Drone();
                 realDrone = Bl.getDrone(updateDrone.droneId);
-                new DroneWindow(Bl, realDrone).ShowDialog();
+                new DroneWindow(Bl, realDrone, cName).ShowDialog();
                 //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(s.dronesAtStation);
                 //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
 
@@ -219,7 +222,7 @@ namespace PL
         private void yesButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
-            new StationWindow(Bl).ShowDialog();
+            new StationWindow(Bl, cName).ShowDialog();
         }
 
         private void listOfDronesAtStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
