@@ -62,6 +62,19 @@ namespace BL
             }
             if (!flag)
                 return false;
+            flag = false;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (password[i] >= 97 && password[i] <= 122)
+                {
+                    flag = true;
+                    break;
+                }
+
+            }
+            if (!flag)
+                return false;
+            flag = false;
             for (int i = 0; i < password.Length; i++)
             {
                 if (password[i] >= 48 && password[i] <= 57)
