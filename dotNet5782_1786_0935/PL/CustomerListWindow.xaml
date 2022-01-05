@@ -34,9 +34,8 @@
         </ListView>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="80,365,0,0" VerticalAlignment="Top" Width="77" Click="closeButton_Click" Background="#FFDC637A"/>
         <Button x:Name="addCustomerButton" Content="add customer" HorizontalAlignment="Left" Margin="600,365,0,0" VerticalAlignment="Top" Width="120" Click="addNewButton_Click" Background="#FF989B9E"/>
-        <Button x:Name="addEmployeeButton" Content="add employee" HorizontalAlignment="Left" Margin="447,365,0,0" VerticalAlignment="Top" Width="120" Background="#FF989B9E" Click="addEmployeeButton_Click"/>
-        <Button x:Name="groupButton" Content="Group" HorizontalAlignment="Left" Margin="96,21,0,0" VerticalAlignment="Top" Width="98" Click="groupButton_Click"/>
-        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="54" Margin="630,5,0,0" VerticalAlignment="Top" Width="143" FlowDirection="LeftToRight">
+        <Button x:Name="addEmployeeButton" Content="add employee" HorizontalAlignment="Left" Margin="600,365,0,0" VerticalAlignment="Top" Width="120" Background="#FF989B9E" Click="addEmployeeButton_Click"/>
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="15,15,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
             <Expander.Header>
                 <BulletDecorator>
                     <BulletDecorator.Bullet>

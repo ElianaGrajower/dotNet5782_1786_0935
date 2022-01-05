@@ -65,7 +65,7 @@ namespace PL
 
         private void signUpButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, true).Show();
+            new CustomerWindow(bl, true, false).Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

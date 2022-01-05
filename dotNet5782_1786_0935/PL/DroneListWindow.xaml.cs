@@ -28,17 +28,18 @@ namespace PL
         internal readonly IBL bl = BlFactory.GetBl();
         static weightCategories? weightFilter;
         static DroneStatus? statusFilter;
+        string cName;
         //     ObservableCollection<DroneToList> droneObservableCollection;
 
-        public DroneListWindow()
-        {
-            InitializeComponent();
-            //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
-            //DataContext = droneObservableCollection;
-            DronesListView.ItemsSource = bl.getDronesList();
+        //public DroneListWindow()
+        //{
+        //    InitializeComponent();
+        //    //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
+        //    //DataContext = droneObservableCollection;
+        //    DronesListView.ItemsSource = bl.getDronesList();
 
 
-        }
+        //}
         private void ShowInfo()
         {
             IEnumerable<DroneToList> d = new List<DroneToList>();
@@ -54,7 +55,7 @@ namespace PL
             }
             DronesListView.ItemsSource = d;
         }
-        public DroneListWindow(IBL b)
+        public DroneListWindow(IBL b, string customerName)
         {
             InitializeComponent();
             this.bl = b;
@@ -64,6 +65,8 @@ namespace PL
             weightSelector.ItemsSource = Enum.GetValues(typeof(weightCategories));
             //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
             //DataContext = droneObservableCollection;
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
         }
         private void IBL(IBL b)
         {
@@ -80,7 +83,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl).ShowDialog();
+            new DroneWindow(bl, cName).ShowDialog();
             //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
             //DataContext = droneObservableCollection;
             ShowInfo();
@@ -103,7 +106,7 @@ namespace PL
                 if (updateDrone == null)
                     throw new Exception("clicked wrong area");
                 realDrone = bl.getDrone(updateDrone.droneId);
-                new DroneWindow(bl, realDrone).ShowDialog();
+                new DroneWindow(bl, realDrone, cName).ShowDialog();
                 ShowInfo();
             }
             catch (Exception exc)

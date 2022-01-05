@@ -33,12 +33,12 @@ namespace PL
 
         private void viewAccount_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, c).ShowDialog();
+            new CustomerWindow(bl, c, c.name).ShowDialog();
         }
 
         private void parcels_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelListWindow(bl, c).ShowDialog();
+            new ParcelListWindow(bl, c, c.name).ShowDialog();
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

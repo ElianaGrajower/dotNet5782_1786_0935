@@ -82,11 +82,9 @@ namespace BL
                     flag = true;
                     break;
                 }
-
             }
             if (!flag)
                 return false;
-
             return true;
         }
         #endregion

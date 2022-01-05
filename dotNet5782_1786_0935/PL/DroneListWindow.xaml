@@ -45,7 +45,7 @@
             <Image Height="25" Width="25" Source="/download.png"/>
         </Button>
         <Button x:Name="groupButton" Content="Group" HorizontalAlignment="Left" Margin="627,41,0,0" VerticalAlignment="Top" Width="70" Click="groupButton_Click"/>
-        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="28,24,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="20,20,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
             <Expander.Header>
                 <BulletDecorator>
                     <BulletDecorator.Bullet>

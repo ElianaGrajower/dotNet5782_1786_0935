@@ -25,20 +25,31 @@ namespace PL
     {
         internal readonly IBL bl = BlFactory.GetBl();
         bool checkIsCustomer;
+        string cName;
+     //  Customer c=new Customer();
        // ObservableCollection<CustomerToList> myObservableCollection;
 
-        public CustomerListWindow(IBL b, bool isCustomer)
+        public CustomerListWindow(IBL b, bool _isCustomer, string customerName)
         {
             InitializeComponent();
             this.bl = b;
-            this.checkIsCustomer = isCustomer;
+            this.checkIsCustomer = _isCustomer;
+            //       c = customer;
             //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
             //DataContext = myObservableCollection;
-            if (isCustomer)
+            if (checkIsCustomer)
+            {
                 CustomersListView.ItemsSource = b.allCustomers().Where(x => x.isCustomer == true);
+                addEmployeeButton.Visibility = Visibility.Hidden;
+            }
             else
+            {
                 CustomersListView.ItemsSource = b.allCustomers().Where(x => x.isCustomer == false);
-          //  ShowInfo();
+                addCustomerButton.Visibility = Visibility.Hidden;
+            }
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
+            //  ShowInfo();
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -57,7 +68,7 @@ namespace PL
 
         private void addNewButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, true).ShowDialog();
+            new CustomerWindow(bl, true, true, cName).ShowDialog();
             ShowInfo();
             //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
             //DataContext = myObservableCollection;
@@ -73,7 +84,7 @@ namespace PL
                 if (updateCustomer == null)
                     throw new Exception("clicked wrong area");
                 realCustomer = bl.getCustomer(updateCustomer.customerId);
-                new CustomerWindow(bl, realCustomer).ShowDialog();
+                new CustomerWindow(bl, realCustomer, cName).ShowDialog();
                 //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
                 //CustomersListView.DataContext = myObservableCollection;
                 ShowInfo();
@@ -92,16 +103,8 @@ namespace PL
 
         private void addEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow(bl, false).ShowDialog();
+            new CustomerWindow(bl, false, true, cName).ShowDialog();
             ShowInfo();
-        }
-
-        private void groupButton_Click(object sender, RoutedEventArgs e)
-        {
-            CustomersListView.ItemsSource = bl.allCustomers();
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CustomersListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("isCustomer");
-            view.GroupDescriptions.Add(groupDescription);
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

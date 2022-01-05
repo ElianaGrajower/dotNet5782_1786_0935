@@ -23,8 +23,9 @@ namespace PL
     {
         internal readonly IBL Bl = BlFactory.GetBl();
         Parcel p;
+        string cName;
 
-        public ParcelWindow(IBL parcel) //add
+        public ParcelWindow(IBL parcel, string customerName) //add
         {
             InitializeComponent();
             this.Bl = parcel;
@@ -58,7 +59,8 @@ namespace PL
             droneButton.Visibility = Visibility.Hidden;
             senderButton.Visibility = Visibility.Hidden;
             targetButton.Visibility = Visibility.Hidden;
-
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
 
 
 
@@ -66,12 +68,14 @@ namespace PL
 
 
         }
-        public ParcelWindow(IBL b, Parcel parcel) //update
+        public ParcelWindow(IBL b, Parcel parcel, string customerName) //update
         {
             InitializeComponent();
             this.Bl = b;
             this.DataContext = parcel;
             p = parcel;
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
             weightSelect.Visibility = Visibility.Hidden;
             prioritySelect.Visibility = Visibility.Hidden;
             senderSelect.Visibility = Visibility.Hidden;
@@ -105,21 +109,21 @@ namespace PL
         {
             Drone openDrone = new Drone();
             openDrone = Bl.getDrone(Convert.ToInt32(droneIdText.Text));
-            new DroneWindow(Bl, openDrone).ShowDialog();
+            new DroneWindow(Bl, openDrone, cName).ShowDialog();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Customer openCustomer = new Customer();
             openCustomer = Bl.getCustomer(Convert.ToInt32(senderText.Text));
-            new CustomerWindow(Bl, openCustomer).ShowDialog();
+            new CustomerWindow(Bl, openCustomer, cName).ShowDialog();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             Customer openCustomer = new Customer();
             openCustomer = Bl.getCustomer(Convert.ToInt32(targetText.Text));
-            new CustomerWindow(Bl, openCustomer).ShowDialog();
+            new CustomerWindow(Bl, openCustomer, cName).ShowDialog();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)

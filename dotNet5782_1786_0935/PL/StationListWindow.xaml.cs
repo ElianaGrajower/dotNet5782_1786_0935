@@ -24,14 +24,17 @@ namespace PL
     public partial class StationListWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
+        string cName;
         //ObservableCollection<StationToList> stationObservableCollection;
 
-        public StationListWindow(IBL b) 
+        public StationListWindow(IBL b, string customerName) 
         {
             InitializeComponent();
             this.bl = b;
             StationsListView.ItemsSource = b.getStationsList();
             ShowInfo();
+            expanderHeader.Text = " " + customerName;
+            cName = customerName;
             //stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
             //DataContext = stationObservableCollection;
 
@@ -51,7 +54,7 @@ namespace PL
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new StationWindow(bl).ShowDialog();
+            new StationWindow(bl, cName).ShowDialog();
             //stationObservableCollection = new ObservableCollection<StationToList>(bl.getStationsList());
             //DataContext = stationObservableCollection;
             ShowInfo();
@@ -71,7 +74,7 @@ namespace PL
                 if (updateStationList == null)
                     throw new Exception("clicked wrong area");
                 updateStation = bl.getStation(updateStationList.stationId);
-                new StationWindow(bl, updateStation).ShowDialog();
+                new StationWindow(bl, updateStation, cName).ShowDialog();
                 ShowInfo();
                 if (filterSlots.Text != "")
                 {
