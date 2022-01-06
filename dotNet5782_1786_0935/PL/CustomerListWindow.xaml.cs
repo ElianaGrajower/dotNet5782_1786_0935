@@ -39,12 +39,12 @@ namespace PL
             //DataContext = myObservableCollection;
             if (checkIsCustomer)
             {
-                CustomersListView.ItemsSource = b.allCustomers().Where(x => x.isCustomer == true);
+                CustomersListView.ItemsSource = b.allCustomers(x => x.isCustomer == true);
                 addEmployeeButton.Visibility = Visibility.Hidden;
             }
             else
             {
-                CustomersListView.ItemsSource = b.allCustomers().Where(x => x.isCustomer == false);
+                CustomersListView.ItemsSource = b.allCustomers(x => x.isCustomer == false);
                 addCustomerButton.Visibility = Visibility.Hidden;
             }
             expanderHeader.Text = " " + customerName;
