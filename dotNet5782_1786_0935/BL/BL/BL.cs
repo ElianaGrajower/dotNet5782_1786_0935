@@ -697,7 +697,7 @@ namespace BL
                     parcel.drone.battery = getDroneBattery(temp.droneId);
                 else
                     parcel.drone.battery = 0;
-                if (temp.droneId != 0)
+                if (temp.droneId != 0 && temp.delivered == DateTime.MinValue) 
                     parcel.drone.location = new Location(getDrone(temp.droneId).location.latitude, getDrone(temp.droneId).location.longitude);
                 else
                     parcel.drone.location = new Location(30, 35);
