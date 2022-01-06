@@ -22,15 +22,6 @@
                     <GridViewColumn Header="Transit Parcels" Width="110" DisplayMemberBinding="{Binding transitParcel}"/>
                 </GridView>
             </ListView.View>
-            <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </ListView.GroupStyle>
         </ListView>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="80,365,0,0" VerticalAlignment="Top" Width="77" Click="closeButton_Click" Background="#FFDC637A"/>
         <Button x:Name="addCustomerButton" Content="add customer" HorizontalAlignment="Left" Margin="600,365,0,0" VerticalAlignment="Top" Width="120" Click="addNewButton_Click" Background="#FF989B9E"/>

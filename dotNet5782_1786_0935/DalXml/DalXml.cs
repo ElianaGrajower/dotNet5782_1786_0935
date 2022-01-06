@@ -189,7 +189,7 @@ namespace Dal
                 if (customer.active)
                     return customer;
                 else
-                    throw new DoesntExistException("This customer doesnt in the system\n");
+                    throw new DoesntExistException("This customer doesn't exist in the system\n");
             }
             catch (DoesntExistException exc)
             {

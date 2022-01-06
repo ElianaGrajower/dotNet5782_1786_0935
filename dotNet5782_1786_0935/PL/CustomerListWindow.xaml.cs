@@ -39,12 +39,12 @@ namespace PL
             //DataContext = myObservableCollection;
             if (checkIsCustomer)
             {
-                CustomersListView.ItemsSource = b.allCustomers(x => x.isCustomer == true);
+                CustomersListView.ItemsSource = b.getCustomersList();
                 addEmployeeButton.Visibility = Visibility.Hidden;
             }
             else
             {
-                CustomersListView.ItemsSource = b.allCustomers(x => x.isCustomer == false);
+                CustomersListView.ItemsSource = b.getCustomersList();
                 addCustomerButton.Visibility = Visibility.Hidden;
             }
             expanderHeader.Text = " " + customerName;
@@ -61,9 +61,9 @@ namespace PL
         {
             IEnumerable<CustomerToList> d = new List<CustomerToList>();
             if (checkIsCustomer)
-                CustomersListView.ItemsSource = bl.allCustomers().Where(x => x.isCustomer == true);
+                CustomersListView.ItemsSource = bl.getCustomersList();//allCustomers().Where(x => x.isCustomer == true);
             else
-                CustomersListView.ItemsSource = bl.allCustomers().Where(x => x.isCustomer == false);
+                CustomersListView.ItemsSource = bl.getCustomersList();//allCustomers().Where(x => x.isCustomer == false);
         }
 
         private void addNewButton_Click(object sender, RoutedEventArgs e)

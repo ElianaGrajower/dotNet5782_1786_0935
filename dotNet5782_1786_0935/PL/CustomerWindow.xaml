@@ -18,7 +18,7 @@
         <Label Content="Name:" HorizontalAlignment="Left" Margin="141,65,0,0" VerticalAlignment="Top"/>
         <Label Content="Phone:" HorizontalAlignment="Left" Margin="412,34,0,0" VerticalAlignment="Top"/>
         <Label x:Name="sentRead" Content="Sent Parcels:" HorizontalAlignment="Left" Margin="204,112,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="sentParcelsList" Margin="77,138,76,201" DataContext="{Binding}" ItemsSource="{Binding}" SelectionChanged="sentParcelsList_SelectionChanged" MouseDoubleClick="sentParcelsList_MouseDoubleClick" Visibility="Visible">
+        <ListView x:Name="sentParcelsList" Margin="77,138,76,201" SelectionChanged="sentParcelsList_SelectionChanged" MouseDoubleClick="sentParcelsList_MouseDoubleClick" Visibility="Visible">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Parcel Id" Width="100" DisplayMemberBinding="{Binding parcelId}"/>
@@ -31,7 +31,7 @@
             </ListView.View>
         </ListView>
         <Label x:Name="receivedRead" Content="Received Parcels:" HorizontalAlignment="Left" Margin="200,233,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="receivedParcelsList" Margin="76,259,76,80" DataContext="{Binding}" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="receivedParcelsList_MouseDoubleClick">
+        <ListView x:Name="receivedParcelsList" Margin="76,259,76,80" Visibility="Visible" MouseDoubleClick="receivedParcelsList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Parcel Id" Width="100" DisplayMemberBinding="{Binding parcelId}"/>
