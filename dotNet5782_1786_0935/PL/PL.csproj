@@ -42,6 +42,7 @@
     <None Remove="WhatsApp Image 2022-01-04 at 4.52.09 PM.jpeg" />
     <None Remove="WhatsApp Image 2022-01-04 at 4.55.55 PM.jpeg" />
     <None Remove="WhatsApp Image 2022-01-04 at 4.58.45 PM.jpeg" />
+    <None Remove="WhatsApp Image 2022-01-06 at 5.49.14 PM.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +85,7 @@
     <Resource Include="WhatsApp Image 2022-01-04 at 4.52.09 PM.jpeg" />
     <Resource Include="WhatsApp Image 2022-01-04 at 4.55.55 PM.jpeg" />
     <Resource Include="WhatsApp Image 2022-01-04 at 4.58.45 PM.jpeg" />
+    <Resource Include="WhatsApp Image 2022-01-06 at 5.49.14 PM.jpeg" />
   </ItemGroup>
 
 </Project>
