@@ -58,6 +58,7 @@ namespace BL
                     flag = true;
                     break;
                 }
+
             }
             if (!flag)
                 return false;
@@ -69,6 +70,7 @@ namespace BL
                     flag = true;
                     break;
                 }
+
             }
             if (!flag)
                 return false;
