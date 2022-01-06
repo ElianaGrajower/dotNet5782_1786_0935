@@ -27,12 +27,12 @@ namespace Dal
         #endregion
         //private DalXml() { Initialize(); } // default constructer calls on initialize func
         #region Initialize
-        public  void Initialize()
+        public void Initialize()
         {
-           // createStation(); //creats a station with random information
-           // createDrone(); //creats a drone with random information
-           // createCustomer(); //creats a customer with random information
-           // createParcel(); //creats a parcel with random information
+            // createStation(); //creats a station with random information
+            // createDrone(); //creats a drone with random information
+            // createCustomer(); //creats a customer with random information
+            // createParcel(); //creats a parcel with random information
 
         }
         #endregion
@@ -193,7 +193,7 @@ namespace Dal
             }
             catch (DoesntExistException exc)
             {
-                throw new DoesntExistException( exc.Message);//switched for exc
+                throw new DoesntExistException(exc.Message);//switched for exc
             }
         }
         #endregion
@@ -305,8 +305,8 @@ namespace Dal
 
 
                                        }).FirstOrDefault();
-            if(droneCharge.droneId!=null && droneCharge.active)
-            throw new AlreadyExistException("The drone is already being charged at a station");
+            if (droneCharge.droneId != null && droneCharge.active)
+                throw new AlreadyExistException("The drone is already being charged at a station");
             droneChargeToAdd.active = true;
             droneChargeElement.Add(droneChargeToAdd);
             XMLTools.SaveListToXMLElement(droneChargeElement, DroneChargesPath);
@@ -452,7 +452,7 @@ namespace Dal
         {
 
             XElement droneChargeElement = XMLTools.LoadListFromXMLElement(DroneChargesPath);
-           // IEnumerable<XElement> list = droneChargeElement.Elements();
+            // IEnumerable<XElement> list = droneChargeElement.Elements();
             DroneCharge droneCharge = (from item in droneChargeElement.Elements()
                                        where int.Parse(droneChargeElement.Element("Drone Id").Value) == droneId
 
