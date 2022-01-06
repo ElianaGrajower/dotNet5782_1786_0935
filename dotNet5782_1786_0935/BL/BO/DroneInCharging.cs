@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 //updated and needed
 namespace BO
 {
-    public class DroneInCharging
+    public class DroneInCharging       
     {
         public DateTime chargeTime { get; set; }
         public int droneId { get; set; }
