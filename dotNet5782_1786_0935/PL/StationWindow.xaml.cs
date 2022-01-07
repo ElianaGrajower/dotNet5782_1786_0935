@@ -62,6 +62,7 @@ namespace PL
             delete.Visibility = Visibility.Visible;
             inUseRead.Visibility = Visibility.Visible;
             inUseText.Visibility = Visibility.Visible;
+            ourLOGO.Visibility = Visibility.Hidden;
             //latitudeText.Visibility = Visibility.Hidden;
             //latitudeRead.Visibility = Visibility.Hidden;
             //longitudeText.Visibility = Visibility.Hidden;

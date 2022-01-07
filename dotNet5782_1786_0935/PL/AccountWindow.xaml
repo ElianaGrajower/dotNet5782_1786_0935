@@ -10,19 +10,22 @@
         <Grid.Background>
             <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <Button x:Name="viewAccount" Click="viewAccount_Click" Background="#FF94C9FF" FontSize="16" Margin="198,232,452,52" Height="150" Width="150">
+        <Button x:Name="viewAccount" Click="viewAccount_Click" Background="#FF94C9FF" FontSize="16" Margin="185,237,475,57" Height="140" Width="140">
             <StackPanel>
                 <Image Height="70" Width="70" Source="/man.png"/>
                 <Label Content="Account" FontWeight="Bold"></Label>
             </StackPanel>
         </Button>
-        <Button x:Name="parcels" Click="parcels_Click" Background="#FF94C9FF" FontSize="16" Margin="473,232,177,52" Height="150" Width="150">
+        <Button x:Name="parcels" Click="parcels_Click" Background="#FF94C9FF" FontSize="16" Margin="475,237,185,57" Height="140" Width="140">
             <StackPanel>
                 <Image Height="70" Width="70" Source="/parcel.png"/>
                 <Label Content="Parcel" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
             </StackPanel>
         </Button>
-        <Image HorizontalAlignment="Left" Height="96" Margin="247,87,0,0" VerticalAlignment="Top" Width="301" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg"/>
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Center" Margin="0,95,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <Image HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="81" Source="/drone-delivery.png"/>
+            <Image HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="247" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
+        </WrapPanel>
         <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="30,30,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
             <Expander.Header>
                 <BulletDecorator>

@@ -66,7 +66,6 @@
                 <Label Content="Parcel" FontWeight="Bold" HorizontalAlignment="Center"/>
             </StackPanel>
         </Button>
-        <Image HorizontalAlignment="Left" Height="90" Margin="100,23,0,0" VerticalAlignment="Top" Width="338" Stretch="UniformToFill" Source="/WhatsApp Image 2022-01-03 at 7.43.20 PM.jpeg" Grid.Row="1" Visibility="Visible" Grid.Column="1" Grid.ColumnSpan="3"/>
         <Button Background="#FF94C9FF" Click="Button_Click_3" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
             <StackPanel>
                 <Image Height="70" Width="70" Source="/support.png"/>
@@ -87,6 +86,10 @@
                 <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
             </StackPanel>
         </Expander>
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="78,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="1">
+            <Image HorizontalAlignment="Center" Height="88" VerticalAlignment="Top" Width="93" Source="/drone-delivery.png"/>
+            <Image HorizontalAlignment="Center" Height="87" VerticalAlignment="Top" Width="280" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
+        </WrapPanel>
 
     </Grid>
 </Window>

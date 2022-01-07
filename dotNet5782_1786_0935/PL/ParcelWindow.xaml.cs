@@ -81,6 +81,7 @@ namespace PL
             senderSelect.Visibility = Visibility.Hidden;
             targetSelect.Visibility = Visibility.Hidden;
             addButton.Visibility = Visibility.Hidden;
+            ourLOGO.Visibility = Visibility.Hidden;
             try
             {
                 ParcelToList statusParcel = new ParcelToList();

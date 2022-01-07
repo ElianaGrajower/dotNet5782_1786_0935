@@ -1220,7 +1220,7 @@ namespace BL
             List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
             try
             {
-                var customerDal = dal.printCustomersList().Where(c=>c.active==true).ToList();
+                var customerDal = dal.printCustomersList().Where(c => c.active == true).ToList();
                 foreach (var c in customerDal)
                 {
                     var newCustomer = getCustomer(c.customerId);
@@ -1234,16 +1234,70 @@ namespace BL
                         recievedParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
                         transitParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
                         isCustomer= newCustomer.isCustomer,
-                        
-                        
                     };
                     customer.Add(temp);
                 }
             }
             catch (ArgumentException) { throw new BO.DoesntExistException(); }
             return customer;
-
-
+        }
+        #endregion
+        #region getUsersList
+        //returns customer list
+        public List<BO.CustomerToList> getUsersList()
+        {
+            List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
+            try
+            {
+                var customerDal = dal.printCustomersList().Where(c => c.active == true && c.isCustomer == true).ToList();
+                foreach (var c in customerDal)
+                {
+                    var newCustomer = getCustomer(c.customerId);
+                    var temp = new BO.CustomerToList()
+                    {
+                        customerId = c.customerId,
+                        customerName = newCustomer.name,
+                        phone = newCustomer.phone,
+                        parcelsdelivered = newCustomer.parcelsdelivered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        undeliveredParcels = newCustomer.parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        recievedParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        transitParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        isCustomer = newCustomer.isCustomer,
+                    };
+                    customer.Add(temp);
+                }
+            }
+            catch (ArgumentException) { throw new BO.DoesntExistException(); }
+            return customer;
+        }
+        #endregion
+        #region getEmployeesList
+        //returns employee list
+        public List<BO.CustomerToList> getEmployeesList()
+        {
+            List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
+            try
+            {
+                var customerDal = dal.printCustomersList().Where(c => c.active == true && c.isCustomer == false).ToList();
+                foreach (var c in customerDal)
+                {
+                    var newCustomer = getCustomer(c.customerId);
+                    var temp = new BO.CustomerToList()
+                    {
+                        customerId = c.customerId,
+                        customerName = newCustomer.name,
+                        phone = newCustomer.phone,
+                        parcelsdelivered = newCustomer.parcelsdelivered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        undeliveredParcels = newCustomer.parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        recievedParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        transitParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        isCustomer = newCustomer.isCustomer,
+                    };
+                    customer.Add(temp);
+                }
+            }
+            catch (ArgumentException) { throw new BO.DoesntExistException(); }
+            return customer;
         }
         #endregion
         #region getParcelsList

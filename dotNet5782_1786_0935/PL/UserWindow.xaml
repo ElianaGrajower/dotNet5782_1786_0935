@@ -12,7 +12,10 @@
         </Grid.Background>
         <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="154,281,0,0" VerticalAlignment="Top" Height="48" Width="180" Background="#FF94C9FF" FontSize="18" FontWeight="Normal" Click="logInButton_Click"/>
         <Button x:Name="signUpButton" Content="Create Account" HorizontalAlignment="Left" Margin="460,281,0,0" VerticalAlignment="Top" Height="48" Width="180" Background="#FF94C9FF" FontSize="18" FontWeight="Normal" Click="signUpButton_Click"/>
-        <Image HorizontalAlignment="Center" Height="83" Margin="0,105,0,0" VerticalAlignment="Top" Width="425" Source="/רחפן 2.png" Stretch="Uniform"/>
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="240,104,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <Image HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="82" Source="/drone-delivery.png"/>
+            <Image HorizontalAlignment="Left" Height="77" VerticalAlignment="Top" Width="247" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
+        </WrapPanel>
         <Canvas x:Name="userPassword" Margin="265,105,345,56" Background="White" Visibility="Hidden">
             <Label Content="User Name:" Canvas.Left="33" Canvas.Top="37" FontWeight="Bold"/>
             <TextBox x:Name="userNameText" Canvas.Left="33" Canvas.Top="68" Text="" TextWrapping="Wrap" Width="120"/>
@@ -21,6 +24,5 @@
             <Button x:Name="enterButton" Content="Enter" Canvas.Left="61" Canvas.Top="188" Width="68" Click="Button_Click_1"/>
             <Button Content="cancel" Canvas.Left="61" Canvas.Top="222" Width="68" Click="Button_Click"/>
         </Canvas>
-
     </Grid>
 </Window>

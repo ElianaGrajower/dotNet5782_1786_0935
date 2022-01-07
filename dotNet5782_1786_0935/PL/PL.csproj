@@ -14,11 +14,16 @@
     <None Remove="another-wonderful-sunset-sky.jpg" />
     <None Remove="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <None Remove="Calendar-icon.png" />
+    <None Remove="camera-drone.png" />
     <None Remove="charging-station.png" />
     <None Remove="charging.png" />
     <None Remove="clouds-blue-sky-light-31912398.jpg" />
+    <None Remove="delivery.png" />
     <None Remove="download.png" />
     <None Remove="drone %281%29.png" />
+    <None Remove="drone %282%29.png" />
+    <None Remove="drone %283%29.png" />
+    <None Remove="drone-delivery.png" />
     <None Remove="drone.png" />
     <None Remove="inline_image_preview.jpg" />
     <None Remove="istockphoto-1208274492-640x640.jpg" />
@@ -43,6 +48,7 @@
     <None Remove="WhatsApp Image 2022-01-04 at 4.55.55 PM.jpeg" />
     <None Remove="WhatsApp Image 2022-01-04 at 4.58.45 PM.jpeg" />
     <None Remove="WhatsApp Image 2022-01-06 at 5.49.14 PM.jpeg" />
+    <None Remove="רחפן 2 just words.png" />
     <None Remove="רחפן 2.png" />
   </ItemGroup>
 
@@ -58,11 +64,16 @@
     <Resource Include="another-wonderful-sunset-sky.jpg" />
     <Resource Include="blue-sky-cloud-clearing-day-260nw-763628821 new.jpg" />
     <Resource Include="Calendar-icon.png" />
+    <Resource Include="camera-drone.png" />
     <Resource Include="charging-station.png" />
     <Resource Include="charging.png" />
     <Resource Include="clouds-blue-sky-light-31912398.jpg" />
+    <Resource Include="delivery.png" />
     <Resource Include="download.png" />
     <Resource Include="drone (1).png" />
+    <Resource Include="drone (2).png" />
+    <Resource Include="drone (3).png" />
+    <Resource Include="drone-delivery.png" />
     <Resource Include="drone.png" />
     <Resource Include="inline_image_preview.jpg" />
     <Resource Include="istockphoto-1208274492-640x640.jpg" />
@@ -87,6 +98,7 @@
     <Resource Include="WhatsApp Image 2022-01-04 at 4.55.55 PM.jpeg" />
     <Resource Include="WhatsApp Image 2022-01-04 at 4.58.45 PM.jpeg" />
     <Resource Include="WhatsApp Image 2022-01-06 at 5.49.14 PM.jpeg" />
+    <Resource Include="רחפן 2 just words.png" />
     <Resource Include="רחפן 2.png" />
   </ItemGroup>
 

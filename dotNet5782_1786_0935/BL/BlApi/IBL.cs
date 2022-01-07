@@ -36,6 +36,8 @@ namespace BlApi
         public void deliveredParcel(int droneId);
         public List<BO.DroneToList> getDronesList();
         public List<BO.CustomerToList> getCustomersList();
+        public List<BO.CustomerToList> getEmployeesList();
+        public List<BO.CustomerToList> getUsersList();
         public List<BO.ParcelToList> getParcelsList();
         public void SendDroneToCharge(int droneId);
         public BO.Drone getDrone(int id);

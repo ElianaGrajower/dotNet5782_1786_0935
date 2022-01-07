@@ -37,6 +37,7 @@ namespace PL
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
             stationIdCombo.ItemsSource = bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
             add.Visibility = Visibility.Hidden;
+            ourLOGO.Visibility = Visibility.Hidden;
             if (drone.droneStatus == DroneStatus.available)
             {
                 releaseDrone.Visibility = Visibility.Hidden;

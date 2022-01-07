@@ -8,10 +8,10 @@
         Title="CustomerWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/1280px-Sky.jpg" Opacity="1"/>
+            <ImageBrush ImageSource="/clouds-blue-sky-light-31912398.jpg" Opacity="1"/>
         </Grid.Background>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="111,368,0,0" VerticalAlignment="Top" Width="69" Click="closeButton_Click" Background="#FFDC637A"/>
-        <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Background="#FF468BE1" Visibility="Visible" Click="addButton_Click"/>
+        <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Background="#FF989B9E" Visibility="Visible" Click="addButton_Click"/>
         <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Click="updateButton_Click" Background="#FF989B9E" Visibility="Visible"/>
         <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="500,368,0,0" VerticalAlignment="Top" Width="74" Click="deleteButton_Click" Background="#FF989B9E"/>
         <Label Content="Customer Id:" HorizontalAlignment="Left" Margin="141,34,0,0" VerticalAlignment="Top"/>
@@ -99,5 +99,9 @@
                 <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
             </StackPanel>
         </Expander>
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="255,211,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <Image HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="73" Source="/drone-delivery.png"/>
+            <Image HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="224" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
+        </WrapPanel>
     </Grid>
 </Window>

@@ -60,5 +60,9 @@
                 <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
             </StackPanel>
         </Expander>
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="255,217,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <Image HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="73" Source="/drone-delivery.png"/>
+            <Image HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="224" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
+        </WrapPanel>
     </Grid>
 </Window>

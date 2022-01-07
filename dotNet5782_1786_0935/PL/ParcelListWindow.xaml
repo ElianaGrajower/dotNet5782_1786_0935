@@ -8,7 +8,7 @@
         Title="ParcelListWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/1280px-Sky.jpg"/>
+            <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
         <ListView x:Name="ParcelsListView" Margin="0,90,0,94" MouseDoubleClick="ParcelsListView_MouseDoubleClick">
             <ListView.View>
