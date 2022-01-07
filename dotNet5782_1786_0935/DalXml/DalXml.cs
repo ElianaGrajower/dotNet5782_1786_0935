@@ -271,6 +271,7 @@ namespace Dal
         public void AddStation(Station stationToAdd) //adds station to list
         {
 
+
             List<Station> listStations = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
             if (listStations.Count(x => x.stationId == stationToAdd.stationId) != 0 && listStations.Count(x => getStation(x.stationId).active == true) != 0)
                 throw new AlreadyExistException("The station already exist in the system");
