@@ -690,17 +690,19 @@ namespace BL
                     //builds a drone in parcel
                     drone = new DroneInParcel()
                 };
-
+                var drone = getDrone(temp.droneId);
                 //fills the drone in parcel
                 parcel.drone.droneId = temp.droneId;
                 if (temp.droneId != 0)
                     parcel.drone.battery = getDroneBattery(temp.droneId);
                 else
                     parcel.drone.battery = 0;
-                if (temp.droneId != 0 && temp.delivered == DateTime.MinValue) 
-                    parcel.drone.location = new Location(getDrone(temp.droneId).location.latitude, getDrone(temp.droneId).location.longitude);
+                if (temp.droneId != 0 && temp.delivered == DateTime.MinValue)
+                    parcel.drone.location = new Location(drone.location.latitude, drone.location.longitude);
                 else
-                    parcel.drone.location = new Location(30, 35);
+                {
+                    parcel.drone.location = new Location(30, 35); 
+                }
               
                 return parcel;
 
@@ -750,18 +752,20 @@ namespace BL
                             BO.Location senderLocation = new Location(sender.latitude, sender.longitude );
                             BO.Location targetLocation = new Location ( target.latitude, target.longitude );
                             drt.droneStatus = DroneStatus.delivery;
+                        var newSenderLocation = closestStation(senderLocation, false, baseStationLocations);
+                        var newTargetLocation = closestStation(targetLocation, false, baseStationLocations);
                             if (pr.pickedUp == DateTime.MinValue && pr.scheduled != DateTime.MinValue)
                             {
-                                drt.location = new Location( closestStation(senderLocation, false, baseStationLocations).latitude,closestStation(senderLocation, false, baseStationLocations).longitude);
+                                drt.location = new Location(newSenderLocation.latitude, newSenderLocation.longitude);
                                 minBatery = distance(drt.location, senderLocation) * chargeCapacity.chargeCapacityArr[0];
                                 minBatery += distance(senderLocation, targetLocation) * chargeCapacity.chargeCapacityArr[(int)pr.weight];
-                                minBatery += distance(targetLocation, new Location(closestStation(targetLocation, false, baseStationLocations).latitude,   closestStation(targetLocation, false, baseStationLocations).longitude )) * chargeCapacity.chargeCapacityArr[0];
+                                minBatery += distance(targetLocation, new Location(newTargetLocation.latitude, newTargetLocation.longitude )) * chargeCapacity.chargeCapacityArr[0];
                             }
                             if (pr.pickedUp != DateTime.MinValue && pr.delivered == DateTime.MinValue)
                             {
                                 
                                 drt.location = senderLocation;
-                                minBatery = distance(targetLocation, new Location ( closestStation(targetLocation, false, baseStationLocations).latitude,  closestStation(targetLocation, false, baseStationLocations).longitude )) * chargeCapacity.chargeCapacityArr[0];
+                                minBatery = distance(targetLocation, new Location (newTargetLocation.latitude, newTargetLocation.longitude )) * chargeCapacity.chargeCapacityArr[0];
                                 minBatery += distance(drt.location, targetLocation) * chargeCapacity.chargeCapacityArr[(int)pr.weight];
                             }
                             if (minBatery > 100) { minBatery = 100; }
@@ -1145,15 +1149,16 @@ namespace BL
                 int index = drones.FindIndex(d => d.droneId == droneId);
                 drones.RemoveAt(index);
                 BatteryUsage usage = new BatteryUsage();
+                var customer = getCustomer(tempDrone.parcel.target.customerId);
                 int amount = (int)tempParcel.weight;
                 if (amount == 1)
-                    tempDrone.battery -= distance(tempDrone.location, getCustomer(tempDrone.parcel.target.customerId).location) * usage.light;
+                    tempDrone.battery -= distance(tempDrone.location, customer.location) * usage.light;
                 if (amount == 2)
-                    tempDrone.battery -= distance(tempDrone.location, getCustomer(tempDrone.parcel.target.customerId).location) * usage.medium;
+                    tempDrone.battery -= distance(tempDrone.location, customer.location) * usage.medium;
                 if (amount == 3)
-                    tempDrone.battery -= distance(tempDrone.location, getCustomer(tempDrone.parcel.target.customerId).location) * usage.heavy;
-                tempDrone.location.latitude = getCustomer(tempDrone.parcel.target.customerId).location.latitude;
-                tempDrone.location.longitude = getCustomer(tempDrone.parcel.target.customerId).location.longitude;
+                    tempDrone.battery -= distance(tempDrone.location, customer.location) * usage.heavy;
+                tempDrone.location.latitude = customer.location.latitude;
+                tempDrone.location.longitude = customer.location.longitude;
                 tempDrone.droneStatus = DroneStatus.available;
                 tempDrone.parcel.parcelStatus = ParcelStatus.delivered;
                 var tempD = new DroneToList()
@@ -1182,6 +1187,7 @@ namespace BL
                     delivered = DateTime.Now
             };
                 dal.UpdateParcel(parcel);
+                
             }
             else
             throw (new UnableToCompleteRequest());
@@ -1217,16 +1223,17 @@ namespace BL
                 var customerDal = dal.printCustomersList().Where(c=>c.active==true).ToList();
                 foreach (var c in customerDal)
                 {
+                    var newCustomer = getCustomer(c.customerId);
                     var temp = new BO.CustomerToList()
                     {
                         customerId= c.customerId,
-                        customerName= getCustomer(c.customerId).name,
-                        phone = getCustomer(c.customerId).phone,
-                        parcelsdelivered = getCustomer(c.customerId).parcelsdelivered.Where(s=>s.parcelStatus==ParcelStatus.delivered).Count(),
-                        undeliveredParcels = getCustomer(c.customerId).parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
-                        recievedParcel = getCustomer(c.customerId).parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
-                        transitParcel = getCustomer(c.customerId).parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
-                        isCustomer= getCustomer(c.customerId).isCustomer,
+                        customerName= newCustomer.name,
+                        phone = newCustomer.phone,
+                        parcelsdelivered = newCustomer.parcelsdelivered.Where(s=>s.parcelStatus==ParcelStatus.delivered).Count(),
+                        undeliveredParcels = newCustomer.parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        recievedParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        transitParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        isCustomer= newCustomer.isCustomer,
                         
                         
                     };
@@ -1250,23 +1257,24 @@ namespace BL
                 var parcelDal = dal.printParcelsList().Where(p=>p.active==true).ToList();
                 foreach (var p in parcelDal)
                 {
+                    var newParcel = getParcel(p.parcelId);
                     var temp = new BO.ParcelToList()
                     {
                         parcelId=p.parcelId,
-                        sendername= getParcel(p.parcelId).sender.customerName,
-                        recivername = getParcel(p.parcelId).target.customerName,
-                        weight= getParcel(p.parcelId).weight,
-                        priority= getParcel(p.parcelId).priority
+                        sendername= newParcel.sender.customerName,
+                        recivername = newParcel.target.customerName,
+                        weight= newParcel.weight,
+                        priority= newParcel.priority
                      
                     };
-                    if (getParcel(p.parcelId).delivered != DateTime.MinValue)
+                    if (newParcel.delivered != DateTime.MinValue)
                         temp.parcelStatus = ParcelStatus.delivered;
                     else
                     {
-                        if (getParcel(p.parcelId).pickedUp != DateTime.MinValue)
+                        if (newParcel.pickedUp != DateTime.MinValue)
                             temp.parcelStatus = ParcelStatus.pickedUp;
                         else
-                        { if (getParcel(p.parcelId).scheduled != DateTime.MinValue)
+                        { if (newParcel.scheduled != DateTime.MinValue)
                                 temp.parcelStatus = ParcelStatus.matched;
                             else
                                 temp.parcelStatus = ParcelStatus.created;
@@ -1390,14 +1398,16 @@ namespace BL
                     pt.parcelStatus = ParcelStatus.pickedUp;
                 else
                     pt.parcelStatus = ParcelStatus.delivered;
+                var newSender = getCustomer(p.senderId);
+                var newTarget = getCustomer(p.targetId);
                 pt.priority = (BO.Priorities)p.priority;
                 pt.weight = (BO.weightCategories)p.weight;
                 pt.sender = new BO.CustomerInParcel();
-                pt.sender.customerId = getCustomer(p.senderId).customerId;
-                pt.sender.customerName = getCustomer(p.senderId).name;
+                pt.sender.customerId = newSender.customerId;
+                pt.sender.customerName = newSender.name;
                 pt.target = new BO.CustomerInParcel();
-                pt.target.customerId = getCustomer(p.targetId).customerId;
-                pt.target.customerName = getCustomer(p.targetId).name;
+                pt.target.customerId = newTarget.customerId;
+                pt.target.customerName = newTarget.name;
                 DO.Customer sender = dal.getCustomer(p.senderId);
                 DO.Customer target = dal.getCustomer(p.targetId);
                 pt.pickupLocation = new BO.Location(sender.latitude, sender.longitude);
