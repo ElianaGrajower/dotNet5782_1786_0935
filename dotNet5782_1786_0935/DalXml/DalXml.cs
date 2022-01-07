@@ -17,7 +17,10 @@ namespace Dal
     sealed class DalXml : IDal
     {
 
-
+        internal  string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "1111aaa" };
+        internal  string[] stationName = { "Raanana", "Tel Aviv" };
+        internal  string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
+        internal  string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
 
         public static Random r = new Random();
         #region singelton
@@ -26,18 +29,18 @@ namespace Dal
         public static IDal Instance { get => instance; }
         #endregion
         //private DalXml() { Initialize(); } // default constructer calls on initialize func
-        #region Initialize
-        public void Initialize()
-        {
-            // createStation(); //creats a station with random information
-            // createDrone(); //creats a drone with random information
-            // createCustomer(); //creats a customer with random information
-            // createParcel(); //creats a parcel with random information
+        //                                   // #region Initialize
+        //public void Initialize()
+        //{
+        //    createStation(); //creats a station with random information
+        //    createDrone(); //creats a drone with random information
+        //    createCustomer(); //creats a customer with random information
+        //    createParcel(); //creats a parcel with random information
 
-        }
-        #endregion
+        //}
+
         //#region createStation
-        //public  void createStation() //creats a station with random information
+        //public void createStation() //creats a station with random information
         //{
         //    List<Station> listStations = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
         //    for (int i = 0; i < 2; i++) //creates 2 stations with information
@@ -55,7 +58,7 @@ namespace Dal
         //}
         //#endregion
         //#region createDrone
-        //public  void createDrone() //creats a drone with random information
+        //public void createDrone() //creats a drone with random information
         //{
         //    List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
         //    for (int i = 0; i < 10; i++) //creates 5 drones with information
@@ -70,7 +73,7 @@ namespace Dal
         //}
         //#endregion
         //#region createCustomer
-        //public  void createCustomer() //creats a customer with random information
+        //public void createCustomer() //creats a customer with random information
         //{
         //    List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
         //    string p = letters[10];
@@ -102,20 +105,20 @@ namespace Dal
         //}
         //#endregion
         //#region createParcel
-        //public  void createParcel() //creats a parcel with random information
+        //public void createParcel() //creats a parcel with random information
         //{
         //    List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
         //    List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
         //    List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
         //    List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
-        //    list.Add(1001);
-        //    list.Add(0); list.Add(0); list.Add(0.001); list.Add(0.002); list.Add(0.003); list.Add(10);
+
+        //    list.Add(0); list.Add(0); list.Add(0.001); list.Add(0.002); list.Add(0.003); list.Add(10); list.Add(1001);
 
 
         //    for (int i = 0; i < 10; i++) //creates 10 parcels with information
         //        listParcels.Add(new Parcel()
         //        {
-        //            parcelId = (int)list[0] + i,
+        //            parcelId = (int)list[6] + i,
         //            weight = (DO.weightCategories)r.Next(1, 3), //chooses a weight from light, average, heavy
         //            priority = (DO.Priorities)r.Next(1, 3),
         //            requested = DateTime.Now.AddDays(-4 * i),
@@ -129,7 +132,7 @@ namespace Dal
 
 
         //        });
-        //    list[0] = list[0] + 10;
+        //    list[6] = list[6] + 10;
         //    XMLTools.SaveListToXMLSerializer<double>(list, configPath);
         //    XMLTools.SaveListToXMLSerializer(listParcels, ParcelsPath);
         //}
@@ -152,10 +155,10 @@ namespace Dal
             try
             {
                 var station = findStation(stationId);
-                if (station.active)
+                //if (station.active)
                     return station;
-                else
-                    throw new DoesntExistException("This station doesnt exist in the system\n");
+               // else
+                  //  throw new DoesntExistException("This station doesnt exist in the system\n");
             }
             catch (DoesntExistException exc)
             {
@@ -169,10 +172,10 @@ namespace Dal
             try
             {
                 var drone = findDrone(droneId);
-                if (drone.active)
+               // if (drone.active)
                     return drone;
-                else
-                    throw new DoesntExistException("This drone doesnt exist\n");
+              //  else
+                  //  throw new DoesntExistException("This drone doesnt exist\n");
             }
             catch (DoesntExistException exc)
             {
@@ -186,10 +189,10 @@ namespace Dal
             try
             {
                 var customer = findCustomer(customerId);
-                if (customer.active)
+               // if (customer.active)
                     return customer;
-                else
-                    throw new DoesntExistException("This customer doesn't exist in the system\n");
+               // else
+                  //  throw new DoesntExistException("This customer doesn't exist in the system\n");
             }
             catch (DoesntExistException exc)
             {
@@ -203,10 +206,10 @@ namespace Dal
             try
             {
                 var parcel = findParcel(parcelId);
-                if (parcel.active)
+              //  if (parcel.active)
                     return parcel;
-                else
-                    throw new DoesntExistException("This parcel doesnt exist int he system\n");
+              //  else
+                 //   throw new DoesntExistException("This parcel doesnt exist int he system\n");
             }
             catch (DoesntExistException exc)
             {
@@ -677,9 +680,9 @@ namespace Dal
         public int getParcelId() //returns parcel id
         {
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
-            list[0]++;
+            list[6]++;
             XMLTools.SaveListToXMLSerializer<double>(list, configPath);
-            return (int)list[0]--;
+            return (int)list[6]--;
         }
         #endregion
         #region ChargeCapacity //did xmlserializer
@@ -687,7 +690,7 @@ namespace Dal
         {
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
 
-            double[] arr = new double[100];
+            double[] arr = new double[7];
             for (int i = 0; i < list.Count(); i++)
             { arr[i] = list[i]; }
 

@@ -2,61 +2,61 @@
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>792329665</droneId>
+    <droneId>666643136</droneId>
     <model>Reaper</model>
     <active>true</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>907170039</droneId>
+    <droneId>530566763</droneId>
     <model>Shadow</model>
     <active>true</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>873954476</droneId>
+    <droneId>875920051</droneId>
     <model>Grey Eagle</model>
     <active>true</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>371656046</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>185471103</droneId>
     <model>Global Hawk</model>
     <active>true</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>391258500</droneId>
+    <droneId>963259877</droneId>
     <model>Pioneer</model>
     <active>true</active>
   </Drone>
   <Drone>
-    <maxWeight>light</maxWeight>
-    <droneId>780534750</droneId>
+    <maxWeight>average</maxWeight>
+    <droneId>950516858</droneId>
     <model>Fire Scout</model>
     <active>true</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>174593374</droneId>
+    <droneId>113520995</droneId>
     <model>Snowgoose</model>
     <active>true</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>709471381</droneId>
+    <droneId>276004746</droneId>
     <model>Hunter</model>
     <active>true</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>729227254</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>640180008</droneId>
     <model>Stalker</model>
     <active>true</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>425565991</droneId>
+    <droneId>133538420</droneId>
     <model>GNAT</model>
     <active>true</active>
   </Drone>

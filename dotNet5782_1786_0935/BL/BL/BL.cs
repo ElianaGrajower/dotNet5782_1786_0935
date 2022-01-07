@@ -1166,13 +1166,14 @@ namespace BL
                     droneId = tempDrone.droneId,
                     model = tempDrone.model,
                     battery = tempDrone.battery,
-                    weight=tempDrone.maxWeight,
+                    weight = tempDrone.maxWeight,
                     droneStatus = DroneStatus.available,
                     location = new Location(tempDrone.location.latitude, tempDrone.location.longitude),
                     parcelId = 0,
                     numOfParcelsdelivered = dal.printParcelsList().Where(p => p.parcelId == tempDrone.parcel.parcelId).Count()
                 };
                 drones.Add(tempD);
+
                 DO.Parcel parcel = new DO.Parcel()
                 {
                     parcelId = tempParcel.parcelId,
@@ -1320,8 +1321,8 @@ namespace BL
             {
                 //ensures drone exists
                 drone = getDrone(droneId);
-              //  if(!drone.active)
-                 //   throw new BO.DoesntExistException("this drone doesnt exist in the system\n");
+                //if(!drone.active)
+                //   throw new BO.DoesntExistException("this drone doesnt exist in the system\n");
 
             }
             catch (DO.DoesntExistException exp)
@@ -1336,7 +1337,7 @@ namespace BL
             
             station = getStations().Find(x => x.location.longitude == stationLocation.longitude && x.location.latitude == stationLocation.latitude);
             int droneIndex = drones.ToList().FindIndex(x => x.droneId == droneId);
-            if ((drone.battery - minBatteryRequired(drones[droneIndex].droneId) <= 0))
+            if ((drone.battery - minBatteryRequired(drones[droneIndex].droneId) < 0))
                 throw new UnableToCompleteRequest("the drone doesn't have enough charge");
             //updates info
             if (station.chargeSlots > 0)
