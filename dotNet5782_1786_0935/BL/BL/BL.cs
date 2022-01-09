@@ -113,7 +113,7 @@ namespace BL
             try
             {//makes temp list
                 //calls on getlist of stations function from dal
-                var stationsDal = dal.printStationsList().Where(s=>s.active==true).ToList();
+                var stationsDal = dal.printStationsList().ToList();
                 //in each link calls on get station which convers it to ibl station and adds it to temp list
                 foreach (var s in stationsDal)
                 {
@@ -242,7 +242,7 @@ namespace BL
                // if (drones.Count(x => getDrone(x.droneId).active == true) == 0)
                if (drones.Count(x => x.droneId == droneToAdd.droneId) == 0)//need to somehow use active here
                     drones.Add(dtl);
-                DO.DroneCharge dc = new DO.DroneCharge { droneId = droneToAdd.droneId, stationId = stationId, active = true };
+                DO.DroneCharge dc = new DO.DroneCharge { droneId = droneToAdd.droneId, stationId = stationId, };
                 var tempstation = getStation(stationId);
                 if (drones.Where(d => dtl.droneId == d.droneId).Count() == 0)
                     tempstation.decreaseChargeSlots();
@@ -474,8 +474,8 @@ namespace BL
                 name = StationtoAdd.name,
                 latitude = StationtoAdd.location.latitude,
                 longitude = StationtoAdd.location.longitude,
-                chargeSlots = StationtoAdd.chargeSlots
-             //   active=true
+                chargeSlots = StationtoAdd.chargeSlots,
+               // active=true
             };
             try
             {
@@ -690,7 +690,7 @@ namespace BL
                     //builds a drone in parcel
                     drone = new DroneInParcel()
                 };
-                var drone = getDrone(temp.droneId);
+                
                 //fills the drone in parcel
                 parcel.drone.droneId = temp.droneId;
                 if (temp.droneId != 0)
@@ -698,10 +698,13 @@ namespace BL
                 else
                     parcel.drone.battery = 0;
                 if (temp.droneId != 0 && temp.delivered == DateTime.MinValue)
-                    parcel.drone.location = new Location(drone.location.latitude, drone.location.longitude);
+                {
+                    var drone = getDrone(temp.droneId);
+                    parcel.drone.location = new Location(drone.location.latitude, drone.location.longitude); 
+                }
                 else
                 {
-                    parcel.drone.location = new Location(30, 35); 
+                    parcel.drone.location = new Location(30, 35);
                 }
               
                 return parcel;
@@ -796,7 +799,7 @@ namespace BL
                                     break;
                                 i++;
                             }
-                            DO.DroneCharge DC = new DO.DroneCharge { droneId=drt.droneId, stationId=s.stationId,chargeTime=DateTime.Now,active=true };
+                            DO.DroneCharge DC = new DO.DroneCharge { droneId=drt.droneId, stationId=s.stationId,chargeTime=DateTime.Now };
                             dal.AddDroneCharge(DC);
                             drt.location = new Location( s.latitude,  s.longitude );
                             drt.battery = rnd.Next(1, 21); // 100/;
@@ -884,8 +887,9 @@ namespace BL
                 tempCustomer.name = name;
             if (number != "")    
                 tempCustomer.Phone = number;
-            dal.deleteCustomer(customerId);
-            dal.AddCustomer(tempCustomer);
+            dal.UpdateCustomer(tempCustomer);
+            //dal.deleteCustomer(customerId);
+            //dal.AddCustomer(tempCustomer);
         }
         #endregion
         #region releaseDroneFromCharge
@@ -929,8 +933,8 @@ namespace BL
                 DO.Station stationDl = new DO.Station();
                 //updates info
                 stationDl = dal.getStation(stationId);
-                if(!stationDl.active)
-                    throw new BO.DoesntExistException("The station doesnt exist in the system\n");
+                //if(!stationDl.active)
+                  //  throw new BO.DoesntExistException("The station doesnt exist in the system\n");
                 if (name !=  "")
                     stationDl.name = name;
                 if (AvlblDCharges != 0)
@@ -1206,7 +1210,7 @@ namespace BL
                 foreach (var d in drones)
                 {
                     var temp = dal.getDrone(d.droneId);
-                    if (temp.active)
+                   // if (temp.active)
                     drone.Add(returnsDrone(d.droneId));
                 }
             }
@@ -1221,7 +1225,7 @@ namespace BL
             List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
             try
             {
-                var customerDal = dal.printCustomersList().Where(c=>c.active==true).ToList();
+                var customerDal = dal.printCustomersList()./*Where(c=>c.active==true)*/ToList();
                 foreach (var c in customerDal)
                 {
                     var newCustomer = getCustomer(c.customerId);
@@ -1247,6 +1251,64 @@ namespace BL
 
         }
         #endregion
+        #region getUsersList
+        //returns customer list
+        public List<BO.CustomerToList> getUsersList()
+        {
+            List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
+            try
+            {
+                var customerDal = dal.printCustomersList().Where(c => c.active == true && c.isCustomer == true).ToList();
+                foreach (var c in customerDal)
+                {
+                    var newCustomer = getCustomer(c.customerId);
+                    var temp = new BO.CustomerToList()
+                    {
+                        customerId = c.customerId,
+                        customerName = newCustomer.name,
+                        phone = newCustomer.phone,
+                        parcelsdelivered = newCustomer.parcelsdelivered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        undeliveredParcels = newCustomer.parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        recievedParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        transitParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        isCustomer = newCustomer.isCustomer,
+                    };
+                    customer.Add(temp);
+                }
+            }
+            catch (ArgumentException) { throw new BO.DoesntExistException(); }
+            return customer;
+        }
+        #endregion
+        #region getEmployeesList
+        //returns employee list
+        public List<BO.CustomerToList> getEmployeesList()
+        {
+            List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
+            try
+            {
+                var customerDal = dal.printCustomersList().Where(c => c.active == true && c.isCustomer == false).ToList();
+                foreach (var c in customerDal)
+                {
+                    var newCustomer = getCustomer(c.customerId);
+                    var temp = new BO.CustomerToList()
+                    {
+                        customerId = c.customerId,
+                        customerName = newCustomer.name,
+                        phone = newCustomer.phone,
+                        parcelsdelivered = newCustomer.parcelsdelivered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        undeliveredParcels = newCustomer.parcelsdelivered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        recievedParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus == ParcelStatus.delivered).Count(),
+                        transitParcel = newCustomer.parcelsOrdered.Where(s => s.parcelStatus != ParcelStatus.delivered).Count(),
+                        isCustomer = newCustomer.isCustomer,
+                    };
+                    customer.Add(temp);
+                }
+            }
+            catch (ArgumentException) { throw new BO.DoesntExistException(); }
+            return customer;
+        }
+        #endregion
         #region getParcelsList
         //returns parcel list
         public List<BO.ParcelToList> getParcelsList()
@@ -1255,7 +1317,7 @@ namespace BL
             try
             {
                 //calls getParcel to convert
-                var parcelDal = dal.printParcelsList().Where(p=>p.active==true).ToList();
+                var parcelDal = dal.printParcelsList()/*.Where(p=>p.active==true)*/.ToList();
                 foreach (var p in parcelDal)
                 {
                     var newParcel = getParcel(p.parcelId);
@@ -1567,6 +1629,15 @@ namespace BL
 
         }
         #endregion
+        public void releaseAllFromCharge()
+        {
+            var listDrone = allDrones();
+            foreach(var drone in listDrone)
+            {
+                if (drone.droneStatus == DroneStatus.maintenance)
+                    releaseDroneFromCharge(drone.droneId);
+            }
+        }
 
      }
 

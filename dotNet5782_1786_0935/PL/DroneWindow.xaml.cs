@@ -316,7 +316,7 @@ namespace PL
             { MessageBox.Show(exc.Message); }
             catch
             {
-                MessageBox.Show("ERROR");
+                //MessageBox.Show("ERROR");
             }
         }
 
