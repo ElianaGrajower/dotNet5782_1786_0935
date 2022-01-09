@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Station>
-    <stationId>866286672</stationId>
-    <name>Raanana</name>
-    <latitude>31.746922097949277</latitude>
-    <longitude>34.69431731313668</longitude>
-    <chargeSlots>22</chargeSlots>
+    <stationId>212645552</stationId>
+    <name>Tel Aviv</name>
+    <latitude>32.236947843882234</latitude>
+    <longitude>35.20678293844535</longitude>
+    <chargeSlots>93</chargeSlots>
     <active>false</active>
   </Station>
   <Station>
-    <stationId>821888820</stationId>
-    <name>Tel Aviv</name>
-    <latitude>32.050529129327984</latitude>
-    <longitude>34.75648399933543</longitude>
-    <chargeSlots>3</chargeSlots>
+    <stationId>183194250</stationId>
+    <name>Raanana</name>
+    <latitude>29.34735782829875</latitude>
+    <longitude>35.03328835536879</longitude>
+    <chargeSlots>41</chargeSlots>
     <active>false</active>
   </Station>
 </ArrayOfStation>
