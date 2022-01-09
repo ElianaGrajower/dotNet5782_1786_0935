@@ -896,15 +896,20 @@ namespace BL
         //this function releases drone from charge
         public void releaseDroneFromCharge(int droneId)
         {
-
-
             var tempDrone = getDrone(droneId);
             var temp = returnsDrone(droneId);
-            double chargeTime = DateTime.Now.Subtract(dal.getDroneCharge(droneId).chargeTime).TotalMinutes;
-
+            try
+            {
+                double chargeTime = DateTime.Now.Subtract(dal.getDroneCharge(droneId).chargeTime).TotalMinutes;
+            }
+            catch (DO.DoesntExistException exc)
+            {
+                throw new BO.DoesntExistException(exc.Message);
+            }
             //checks if drone is charging
             if (tempDrone.droneStatus == DroneStatus.maintenance)
             {
+                double chargeTime = DateTime.Now.Subtract(dal.getDroneCharge(droneId).chargeTime).TotalMinutes;
                 //updates info
                 var possibleStation = getStation(dal.printStationsList().ToList()
                                         .Find(station => station.latitude == tempDrone.location.latitude && station.longitude == tempDrone.location.longitude).stationId);
@@ -1258,7 +1263,7 @@ namespace BL
             List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
             try
             {
-                var customerDal = dal.printCustomersList().Where(c => c.active == true && c.isCustomer == true).ToList();
+                var customerDal = dal.printCustomersList().Where(c => /*c.active == true &&*/ c.isCustomer == true).ToList();
                 foreach (var c in customerDal)
                 {
                     var newCustomer = getCustomer(c.customerId);
@@ -1287,7 +1292,7 @@ namespace BL
             List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
             try
             {
-                var customerDal = dal.printCustomersList().Where(c => c.active == true && c.isCustomer == false).ToList();
+                var customerDal = dal.printCustomersList().Where(c => /*c.active == true &&*/ c.isCustomer == false).ToList();
                 foreach (var c in customerDal)
                 {
                     var newCustomer = getCustomer(c.customerId);

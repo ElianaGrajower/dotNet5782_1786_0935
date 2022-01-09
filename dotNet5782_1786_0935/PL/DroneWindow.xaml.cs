@@ -26,6 +26,7 @@ namespace PL
         internal readonly IBL bl = BlFactory.GetBl();
         Drone d;
         string cName;
+        bool isAllReleased = true;
 
         public DroneWindow(IBL b, Drone drone, string customerName)//update drone
         {
