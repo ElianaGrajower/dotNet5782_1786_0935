@@ -36,8 +36,8 @@ namespace BlApi
         public void deliveredParcel(int droneId);
         public List<BO.DroneToList> getDronesList();
         public List<BO.CustomerToList> getCustomersList();
-        public List<BO.CustomerToList> getEmployeesList();
         public List<BO.CustomerToList> getUsersList();
+        public List<BO.CustomerToList> getEmployeesList();
         public List<BO.ParcelToList> getParcelsList();
         public void SendDroneToCharge(int droneId);
         public BO.Drone getDrone(int id);
@@ -47,5 +47,6 @@ namespace BlApi
         public IEnumerable<BO.ParcelToList> allParcels(Func<BO.ParcelToList, bool> predicate = null);
         public IEnumerable<BO.CustomerToList> allCustomers(Func<BO.CustomerToList, bool> predicate = null);
         public void releaseAllFromCharge();
-    }
+
+    }     
 }

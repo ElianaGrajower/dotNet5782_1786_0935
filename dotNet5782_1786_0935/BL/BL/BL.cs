@@ -690,7 +690,7 @@ namespace BL
                     //builds a drone in parcel
                     drone = new DroneInParcel()
                 };
-
+                
                 //fills the drone in parcel
                 parcel.drone.droneId = temp.droneId;
                 if (temp.droneId != 0)
@@ -700,7 +700,7 @@ namespace BL
                 if (temp.droneId != 0 && temp.delivered == DateTime.MinValue)
                 {
                     var drone = getDrone(temp.droneId);
-                    parcel.drone.location = new Location(drone.location.latitude, drone.location.longitude);
+                    parcel.drone.location = new Location(drone.location.latitude, drone.location.longitude); 
                 }
                 else
                 {
@@ -781,28 +781,28 @@ namespace BL
                     }
                 }
 
-                if (!flag)
-                {
-                    int temp = rnd.Next(1, 3);
-                    if (temp == 1)
-                        drt.droneStatus = BO.DroneStatus.available;
-                    else
-                        drt.droneStatus = BO.DroneStatus.maintenance;
-                    if (drt.droneStatus == BO.DroneStatus.maintenance)
+                    if (!flag)
                     {
-                        int r = rnd.Next(0, dal.printStationsList().Count()), i = 0;
-                        DO.Station s = new DO.Station();
-                        foreach (var ite in dal.printStationsList())
+                        int temp = rnd.Next(1, 3);
+                        if (temp == 1)
+                            drt.droneStatus = BO.DroneStatus.available;
+                        else
+                            drt.droneStatus = BO.DroneStatus.maintenance;
+                        if (drt.droneStatus == BO.DroneStatus.maintenance)
                         {
-                            s = ite;
-                            if (i == r)
-                                break;
-                            i++;
-                        }
-                        DO.DroneCharge DC = new DO.DroneCharge { droneId = drt.droneId, stationId = s.stationId, chargeTime = DateTime.Now };
-                        dal.AddDroneCharge(DC);
-                        drt.location = new Location(s.latitude, s.longitude);
-                        drt.battery = rnd.Next(1, 21); // 100/;
+                            int r = rnd.Next(0, dal.printStationsList().Count()), i = 0;
+                            DO.Station s = new DO.Station();
+                            foreach (var ite in dal.printStationsList())
+                            {
+                                s = ite;
+                                if (i == r)
+                                    break;
+                                i++;
+                            }
+                            DO.DroneCharge DC = new DO.DroneCharge { droneId=drt.droneId, stationId=s.stationId,chargeTime=DateTime.Now };
+                            dal.AddDroneCharge(DC);
+                            drt.location = new Location( s.latitude,  s.longitude );
+                            drt.battery = rnd.Next(1, 21); // 100/;
                         if (drt.location == null)
                             drt.location = new Location(29.208, 34.57);
                     }
@@ -934,8 +934,8 @@ namespace BL
                 //updates info
                 stationDl = dal.getStation(stationId);
                 //if(!stationDl.active)
-                //  throw new BO.DoesntExistException("The station doesnt exist in the system\n");
-                if (name != "")
+                  //  throw new BO.DoesntExistException("The station doesnt exist in the system\n");
+                if (name !=  "")
                     stationDl.name = name;
                 if (AvlblDCharges != 0)
                 {
@@ -1210,7 +1210,7 @@ namespace BL
                 foreach (var d in drones)
                 {
                     var temp = dal.getDrone(d.droneId);
-                    // if (temp.active)
+                   // if (temp.active)
                     drone.Add(returnsDrone(d.droneId));
                 }
             }
@@ -1633,13 +1633,20 @@ namespace BL
         public void releaseAllFromCharge()
         {
             var listDrone = allDrones();
-            foreach (var drone in listDrone)
+            foreach(var drone in listDrone)
             {
                 if (drone.droneStatus == DroneStatus.maintenance)
                     releaseDroneFromCharge(drone.droneId);
             }
         }
-    }
+
+     }
+
+
+
+
+
+
 }
 
 

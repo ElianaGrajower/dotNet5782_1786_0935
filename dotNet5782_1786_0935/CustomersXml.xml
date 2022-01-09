@@ -1,103 +1,103 @@
 <?xml version="1.0"?>
 <ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
-    <customerId>396937679</customerId>
+    <customerId>909437613</customerId>
     <name>Michael</name>
-    <Phone>0550264604</Phone>
-    <latitude>32.10102565122304</latitude>
-    <longitude>35.126827876976144</longitude>
+    <Phone>0592762389</Phone>
+    <latitude>30.801484210756833</latitude>
+    <longitude>35.36162519275752</longitude>
     <password>A1111aaa</password>
     <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>529921430</customerId>
+    <customerId>323252067</customerId>
     <name>Hannah</name>
-    <Phone>0537347480</Phone>
-    <latitude>32.485272156267555</latitude>
-    <longitude>35.4621614861545</longitude>
+    <Phone>055820972</Phone>
+    <latitude>31.638247812430958</latitude>
+    <longitude>34.59137975721684</longitude>
     <password>B1111aaa</password>
     <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>267649437</customerId>
+    <customerId>419202750</customerId>
     <name>Fred</name>
-    <Phone>0527774952</Phone>
-    <latitude>32.83663264511416</latitude>
-    <longitude>34.90971720204676</longitude>
+    <Phone>0584082063</Phone>
+    <latitude>30.729471525949645</latitude>
+    <longitude>35.064786789871185</longitude>
     <password>C1111aaa</password>
     <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>293301767</customerId>
+    <customerId>315281046</customerId>
     <name>Sam</name>
-    <Phone>0560927280</Phone>
-    <latitude>30.062378862868705</latitude>
-    <longitude>35.09356740949842</longitude>
+    <Phone>0548768548</Phone>
+    <latitude>32.78540612511076</latitude>
+    <longitude>34.72254737443875</longitude>
     <password>D1111aaa</password>
     <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>326947325</customerId>
-    <name>Tom</name>
-    <Phone>0541633286</Phone>
-    <latitude>32.01017204483001</latitude>
-    <longitude>35.528504932913236</longitude>
-    <password>E1111aaa</password>
-    <isCustomer>true</isCustomer>
-    <active>false</active>
-  </Customer>
-  <Customer>
-    <customerId>543301217</customerId>
+    <customerId>239263933</customerId>
     <name>Jessie</name>
-    <Phone>0542214988</Phone>
-    <latitude>30.87786101121775</latitude>
-    <longitude>34.88901473147749</longitude>
+    <Phone>0565873406</Phone>
+    <latitude>31.32928074908363</latitude>
+    <longitude>34.79896739432075</longitude>
     <password>F1111aaa</password>
     <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>977888338</customerId>
+    <customerId>297989327</customerId>
     <name>George</name>
-    <Phone>0566553536</Phone>
-    <latitude>30.473493934796423</latitude>
-    <longitude>35.552747365712534</longitude>
+    <Phone>0582904908</Phone>
+    <latitude>33.00002728445876</latitude>
+    <longitude>34.90452129798686</longitude>
     <password>G1111aaa</password>
     <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>439700056</customerId>
+    <customerId>575515125</customerId>
     <name>Tiffany</name>
-    <Phone>0516361190</Phone>
-    <latitude>29.600078670554367</latitude>
-    <longitude>35.49414055155783</longitude>
+    <Phone>0525460879</Phone>
+    <latitude>29.373470245535707</latitude>
+    <longitude>35.06620807892466</longitude>
     <password>H1111aaa</password>
     <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>886691012</customerId>
+    <customerId>684447120</customerId>
     <name>Elizabeth</name>
-    <Phone>0582291981</Phone>
-    <latitude>31.337104663376746</latitude>
-    <longitude>35.215387302919005</longitude>
+    <Phone>058564322</Phone>
+    <latitude>29.598132150027496</latitude>
+    <longitude>35.268575019696065</longitude>
     <password>I1111aaa</password>
     <isCustomer>false</isCustomer>
     <active>false</active>
   </Customer>
   <Customer>
-    <customerId>298040865</customerId>
+    <customerId>319975576</customerId>
     <name>Rachel</name>
-    <Phone>0597621811</Phone>
-    <latitude>30.729068094705262</latitude>
-    <longitude>35.21726718498732</longitude>
+    <Phone>0594779398</Phone>
+    <latitude>31.791748973410925</latitude>
+    <longitude>34.91921777544041</longitude>
     <password>J1111aaa</password>
     <isCustomer>false</isCustomer>
+    <active>false</active>
+  </Customer>
+  <Customer>
+    <customerId>985431503</customerId>
+    <name>Tomasttt</name>
+    <Phone>0589500195</Phone>
+    <latitude>31.397945245414483</latitude>
+    <longitude>35.11992750731759</longitude>
+    <password>E1111aaa</password>
+    <isCustomer>true</isCustomer>
     <active>false</active>
   </Customer>
 </ArrayOfCustomer>
