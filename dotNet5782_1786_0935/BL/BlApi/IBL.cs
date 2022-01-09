@@ -46,5 +46,6 @@ namespace BlApi
         public IEnumerable<DroneToList> allDrones(Func<DroneToList, bool> predicate = null);
         public IEnumerable<BO.ParcelToList> allParcels(Func<BO.ParcelToList, bool> predicate = null);
         public IEnumerable<BO.CustomerToList> allCustomers(Func<BO.CustomerToList, bool> predicate = null);
-    }     
+        public void releaseAllFromCharge();
+    }
 }

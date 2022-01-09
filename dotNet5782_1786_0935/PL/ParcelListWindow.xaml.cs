@@ -28,6 +28,8 @@ namespace PL
         static ParcelStatus? statusFilter;
         static Priorities? prioritiesFilter;
         string cName;
+        bool isUser = false;
+        Customer c = new Customer();
 
 
         public ParcelListWindow(IBL parcel, string customerName) //for an employee
@@ -49,6 +51,8 @@ namespace PL
             ParcelsListView.ItemsSource = Bl.allParcels().Where(x => x.sendername == customer.name || x.recivername == customer.name);  ///have to change the showinfo accordingly
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
             prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
+            isUser = true;
+            c = customer;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
@@ -57,39 +61,46 @@ namespace PL
             IEnumerable<ParcelToList> p = new List<ParcelToList>();
             p = Bl.getParcelsList();
             //   statusFilter = (ParcelStatus)statusSelector.SelectedItem;
-            if (statusSelector.SelectedIndex != 4)
+            if (isUser)
             {
-                if (statusSelector.Text != "")
-                    p = Bl.allParcels(x => x.parcelStatus == statusFilter);
-                else
-                    p = Bl.allParcels();
+                ParcelsListView.ItemsSource = Bl.allParcels().Where(x => x.sendername == c.name || x.recivername == c.name);  ///have to change the showinfo accordingly
             }
-            if(dateRange.SelectedIndex!=-1)
+            else
             {
-               // IEnumerable<ParcelToList> p = new List<ParcelToList>();
-                p = Bl.getParcelsList();
-                if (dateRange.SelectedIndex == 0)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
-                if (dateRange.SelectedIndex == 1)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
-                if (dateRange.SelectedIndex == 2)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
-                if (dateRange.SelectedIndex == 3)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
-              //  ParcelsListView.ItemsSource = p;
+                if (statusSelector.SelectedIndex != 4)
+                {
+                    if (statusSelector.Text != "")
+                        p = Bl.allParcels(x => x.parcelStatus == statusFilter);
+                    else
+                        p = Bl.allParcels();
+                }
+                if (dateRange.SelectedIndex != -1)
+                {
+                    // IEnumerable<ParcelToList> p = new List<ParcelToList>();
+                    p = Bl.getParcelsList();
+                    if (dateRange.SelectedIndex == 0)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
+                    if (dateRange.SelectedIndex == 1)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
+                    if (dateRange.SelectedIndex == 2)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
+                    if (dateRange.SelectedIndex == 3)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
+                    //  ParcelsListView.ItemsSource = p;
+                }
+                if (pickDate.ToString() != "Select a date")
+                {
+                    if (dateRange.SelectedIndex == 0)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
+                    if (dateRange.SelectedIndex == 1)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
+                    if (dateRange.SelectedIndex == 2)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
+                    if (dateRange.SelectedIndex == 3)
+                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
+                }
+                ParcelsListView.ItemsSource = p;
             }
-            if (pickDate.ToString() != "Select a date")
-            {
-                if (dateRange.SelectedIndex == 0)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
-                if (dateRange.SelectedIndex == 1)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
-                if (dateRange.SelectedIndex == 2)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
-                if (dateRange.SelectedIndex == 3)
-                    p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
-            }
-            ParcelsListView.ItemsSource = p;
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)  //date range
@@ -281,6 +292,7 @@ namespace PL
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
+            Bl.releaseAllFromCharge();
             Close();
         }
     }

@@ -8,7 +8,7 @@
         Title="CustomerWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/clouds-blue-sky-light-31912398.jpg" Opacity="1"/>
+            <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="111,368,0,0" VerticalAlignment="Top" Width="69" Click="closeButton_Click" Background="#FFDC637A"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Background="#FF989B9E" Visibility="Visible" Click="addButton_Click"/>
@@ -59,6 +59,10 @@
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
             <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
         </Canvas>
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="255,211,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <Image HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="73" Source="/drone-delivery.png"/>
+            <Image HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="224" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
+        </WrapPanel>
         <ScrollViewer x:Name="termesConditions" Margin="59,0,59,-12" Visibility="Hidden">
             <StackPanel Height="1650" Width="666" Background="White">
                 <TextBlock Text="   DroneDrop" TextWrapping="Wrap" Width="666" Height="47" Background="#FF333333" Foreground="White" FontWeight="Bold" FontSize="24"/>
@@ -99,9 +103,5 @@
                 <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
             </StackPanel>
         </Expander>
-        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="255,211,0,0" Orientation="Horizontal" VerticalAlignment="Top">
-            <Image HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="73" Source="/drone-delivery.png"/>
-            <Image HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="224" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
-        </WrapPanel>
     </Grid>
 </Window>

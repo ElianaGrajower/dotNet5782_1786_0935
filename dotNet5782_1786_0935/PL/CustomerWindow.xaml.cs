@@ -209,7 +209,7 @@ namespace PL
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-           // SendEmail();
+         //   SendEmail();
             termesConditions.Visibility = Visibility.Hidden;
             try
             {
@@ -238,6 +238,7 @@ namespace PL
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
+            bl.releaseAllFromCharge();
             this.Close();
         }
         private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
@@ -245,50 +246,50 @@ namespace PL
             termesConditions.Visibility = Visibility.Hidden;
         }
 
-        //private void SendEmail()
-        //{
-        //    // Create a System.Net.Mail.MailMessage object
-        //    MailMessage message = new MailMessage();
+        private void SendEmail()
+        {
+            // Create a System.Net.Mail.MailMessage object
+            MailMessage message = new MailMessage();
 
-        //    // Add a recipient
-        //    message.To.Add(emailText.Text);
+            // Add a recipient
+            message.To.Add(emailText.Text);
 
-        //    // Add a message subject
-        //    message.Subject = "Account activation";
+            // Add a message subject
+            message.Subject = "Account activation";
 
-        //    // Add a message body
-        //    message.Body = "Hi " + c.name + "\n" +
-        //        "Welcome to DroneDrop.\n" +
-        //        "Were happy to have you and are sure you will enjoy our services.\n" +
-        //        "For some reason i cant find anything to write here.\n\n" +
-        //        "Thanks,\n" +
-        //        "Team DroneDrop";
+            // Add a message body
+            message.Body = "Hi " + c.name + "\n" +
+                "Welcome to DroneDrop.\n" +
+                "Were happy to have you and are sure you will enjoy our services.\n" +
+                "For some reason i cant find anything to write here.\n\n" +
+                "Thanks,\n" +
+                "Team DroneDrop";
 
-        //    // Create a System.Net.Mail.MailAddress object and 
-        //    // set the sender email address and display name.
-        //    message.From = new MailAddress("dronedrop2021@gmail.com", "DroneDrop");
+            // Create a System.Net.Mail.MailAddress object and 
+            // set the sender email address and display name.
+            message.From = new MailAddress("dronedrop2021@gmail.com", "DroneDrop");
 
-        //    // Create a System.Net.Mail.SmtpClient object
-        //    // and set the SMTP host and port number
-        //    SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            // Create a System.Net.Mail.SmtpClient object
+            // and set the SMTP host and port number
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
 
-        //    // If your server requires authentication add the below code
-        //    // =========================================================
-        //    // Enable Secure Socket Layer (SSL) for connection encryption
-        //    smtp.EnableSsl = true;
+            // If your server requires authentication add the below code
+            // =========================================================
+            // Enable Secure Socket Layer (SSL) for connection encryption
+            smtp.EnableSsl = true;
 
-        //    // Do not send the DefaultCredentials with requests
-        //    smtp.UseDefaultCredentials = false;
+            // Do not send the DefaultCredentials with requests
+            smtp.UseDefaultCredentials = false;
 
-        //    // Create a System.Net.NetworkCredential object and set
-        //    // the username and password required by your SMTP account
-        //    smtp.Credentials = new NetworkCredential("dronedrop2021@gmail.com", "ouiatjczzhkvtxnr");
-        //    // =========================================================
+            // Create a System.Net.NetworkCredential object and set
+            // the username and password required by your SMTP account
+            smtp.Credentials = new NetworkCredential("dronedrop2021@gmail.com", "ouiatjczzhkvtxnr");
+            // =========================================================
 
-        //    // Send the message
-        //    smtp.Send(message);
-        //}
+            // Send the message
+            smtp.Send(message);
+        }
 
-      
+
     }
 }

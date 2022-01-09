@@ -60,15 +60,16 @@ namespace PL
             new CustomerListWindow(bl, false, c.name).Show();
         }
 
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //new UserWindow().Show();
-            //Close();
-        }
+        //private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    //new UserWindow().Show();
+        //    //Close();
+        //}
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
+            bl.releaseAllFromCharge();
             Close();
         }
     }
