@@ -23,10 +23,12 @@ namespace PL
     public partial class UserWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
+        
 
         public UserWindow()
         {
             InitializeComponent();
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

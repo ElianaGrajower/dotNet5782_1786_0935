@@ -30,6 +30,19 @@ namespace PL
         string cName;
         bool isUser = false;
         Customer c = new Customer();
+        //to remove close box from window
+        private const int GWL_STYLE = -16;
+        private const int WS_SYSMENU = 0x80000;
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        void ToolWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Code to remove close box from window
+            var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
+        }
 
 
         public ParcelListWindow(IBL parcel, string customerName) //for an employee
@@ -42,6 +55,8 @@ namespace PL
             prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             expanderHeader.Text = " " + customerName;
             cName = customerName;
+            //to remove close box from window
+            Loaded += ToolWindow_Loaded;
         }
         public ParcelListWindow(IBL parcel, Customer customer, string customerName) //for a customer
         {
@@ -55,6 +70,8 @@ namespace PL
             c = customer;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
+            //to remove close box from window
+            Loaded += ToolWindow_Loaded;
         }
         public void ShowInfo()  /////majorly work on this!!!
         {
@@ -153,7 +170,7 @@ namespace PL
             }
             catch (Exception exc)
             {
-                MessageBox.Show("System Malfunction please wait a moment and try again\n");
+              //  MessageBox.Show("System Malfunction please wait a moment and try again\n");
             }
             
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());
