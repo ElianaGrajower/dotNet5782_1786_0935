@@ -154,4 +154,18 @@
     <fragile>false</fragile>
     <active>false</active>
   </Parcel>
+  <Parcel>
+    <parcelId>1013</parcelId>
+    <senderId>143292260</senderId>
+    <targetId>558250769</targetId>
+    <weight>average</weight>
+    <priority>fast</priority>
+    <droneId>534655959</droneId>
+    <requested>2022-01-10T17:50:24.22366+02:00</requested>
+    <scheduled>2022-01-10T17:50:32.2047971+02:00</scheduled>
+    <pickedUp>2022-01-10T17:50:37.0699265+02:00</pickedUp>
+    <delivered>2022-01-10T17:50:39.8259243+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
 </ArrayOfParcel>
