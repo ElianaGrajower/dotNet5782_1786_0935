@@ -323,7 +323,7 @@ namespace BL
                     }).ToList();
                     return station;
                 }
-                catch (BO.DoesntExistException exc)
+                catch (DO.DoesntExistException exc)
                 { throw new BO.DoesntExistException(exc.Message); }
             }
             catch (BO.DoesntExistException exc)
@@ -808,7 +808,7 @@ namespace BL
                             minBatery += distance(drt.location, targetLocation) * chargeCapacity.chargeCapacityArr[(int)pr.weight];
                         }
                         if (minBatery > 100) { minBatery = 100; }
-                        if (minBatery == 0) { minBatery = 17; }
+                        if (minBatery < 17) { minBatery = 17; }
                         drt.battery = rnd.Next((int)minBatery, 101); // 100/;
                                                                      //  if (drt.location == null)
                                                                      //   drt.location = new Location(29.208, 34.57);
