@@ -350,6 +350,7 @@ namespace PL
         {
             new UserWindow().Show();
             bl.releaseAllFromCharge();
+  
             Close();
         }
     }
