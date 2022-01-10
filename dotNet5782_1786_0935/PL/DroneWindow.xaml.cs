@@ -99,11 +99,13 @@ namespace PL
 
         private void Simulation_ProgressChanged(object sender, ProgressChangedEventArgs e) //changes what we see
         {
-            if (d.droneStatus == DroneStatus.available) 
-            {
-                bl.matchDroneWithPacrel(d.droneId);
-            }
-            DataContext = bl.getDrone(d.droneId);
+            
+                if (d.droneStatus == DroneStatus.available)
+                {
+                    bl.matchDroneWithPacrel(d.droneId);
+                }
+                DataContext = bl.getDrone(d.droneId);
+           
         }
 
         private void Simulation_DoWork(object sender, DoWorkEventArgs e) //when it runs, 
