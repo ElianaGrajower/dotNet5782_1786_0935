@@ -309,7 +309,9 @@ namespace BL
                 station.chargeSlots = tempStation.chargeSlots;
                 station.numberOfSlotsInUse = getUnvailablechargeSlots(tempStation.stationId);
                 //finds the rest of the info from dronecharging ist
-                station.dronesAtStation = dal.printDroneChargeList().Where(item => item.stationId == stationId)
+                try
+                {
+                    station.dronesAtStation = dal.printDroneChargeList().Where(item => item.stationId == stationId)
                     .Select(drone => new DroneInCharging()
                     {
                         chargeTime = drone.chargeTime,
@@ -317,7 +319,10 @@ namespace BL
                         droneId = drone.droneId,
                         battery = getDroneBattery(drone.droneId)
                     }).ToList();
-                return station;
+                    return station;
+                }
+                catch (BO.DoesntExistException exc)
+                { throw new BO.DoesntExistException(exc.Message); }
             }
             catch (BO.DoesntExistException exc)
             {
@@ -404,12 +409,13 @@ namespace BL
         private double getDroneBattery(int droneId)
         {
 
-            double battery = drones.ToList().Find(drone => drone.droneId == droneId).battery;
-            if (battery == null)
-                throw new BO.DoesntExistException("Doesnt exist");
-            return battery;
-
-
+            var drone = drones.ToList().Where(drone => drone.droneId == droneId).FirstOrDefault();
+                if (drone == null)
+                    throw new BO.DoesntExistException("Doesnt exist");
+            
+            return drone.battery;
+            
+           
         }
         #endregion
         #region addCustomer
@@ -710,7 +716,10 @@ namespace BL
                 {
                     throw new BO.DoesntExistException(exc.Message);
                 }
-
+                catch (BO.DoesntExistException exc)
+                {
+                    throw new BO.DoesntExistException(exc.Message);
+                }
                 if (temp.droneId != 0 && temp.delivered == DateTime.MinValue)
                 {
                     var drone = getDrone(temp.droneId);
