@@ -162,6 +162,7 @@ namespace BL
                     Location baseStationlocation = closestStation(target.location, false, stationLocationslist());
                     double targetToCharge = distance(target.location, baseStationlocation);
                     minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * targetToCharge);
+                    if(minValue >= 0)
                     return minValue;
                 }
                 //if wasnt delievred updates all the info
@@ -176,10 +177,11 @@ namespace BL
                     Location baseStationlocation = closestStation(target.location, false, stationLocationslist());
                     double targetToCharge = distance(target.location, baseStationlocation);
                     minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * targetToCharge);
-                    return minValue;
+                    if (minValue >= 0)
+                        return minValue;
                 }
             }
-            return 90;
+            return 0;
         }
         #endregion
         #region findStation
@@ -1129,6 +1131,7 @@ namespace BL
         {
             var tempDrone = getDrone(droneId);
             var tempParcel = getParcel(tempDrone.parcel.parcelId);
+            var customer = getCustomer(tempParcel.sender.customerId);
             //ensures was not yet picked up
             if (tempParcel.pickedUp == DateTime.MinValue)
             {
@@ -1137,22 +1140,23 @@ namespace BL
                 int index = drones.FindIndex(d => d.droneId == droneId);
                 drones.RemoveAt(index);
                 BatteryUsage usage = new BatteryUsage();
-                tempDrone.location.latitude = tempDrone.parcel.pickupLocation.latitude;
-                tempDrone.location.longitude = tempDrone.parcel.pickupLocation.longitude;
+              
                 tempDrone.parcel.parcelStatus = ParcelStatus.pickedUp;
-
+               
                 //AddDrone(tempDrone,FindStation(tempDrone.location));
                 var tempD = new DroneToList()
                 {
                     droneId = tempDrone.droneId,
                     model = tempDrone.model,
-                    battery = tempDrone.battery,
+                    battery = tempDrone.battery- (distance(tempDrone.location, customer.location) * usage.available),
                     weight = tempDrone.maxWeight,
                     droneStatus = DroneStatus.delivery,
                     location = new Location(tempDrone.location.latitude, tempDrone.location.longitude),
                     parcelId = tempDrone.parcel.parcelId,
                     numOfParcelsdelivered = dal.printParcelsList().Where(p => p.parcelId == tempDrone.parcel.parcelId).Count()
                 };
+                tempDrone.location.latitude = tempDrone.parcel.pickupLocation.latitude;
+                tempDrone.location.longitude = tempDrone.parcel.pickupLocation.longitude;
                 drones.Add(tempD);
                 // dal.DeleteParcel(tempParcel.parcelId);
                 tempParcel.pickedUp = DateTime.Now;

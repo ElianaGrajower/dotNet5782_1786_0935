@@ -29,20 +29,6 @@
     <active>false</active>
   </Parcel>
   <Parcel>
-    <parcelId>1003</parcelId>
-    <senderId>169082827</senderId>
-    <targetId>558250769</targetId>
-    <weight>light</weight>
-    <priority>fast</priority>
-    <droneId>424756140</droneId>
-    <requested>2022-01-02T15:45:57.2267323+02:00</requested>
-    <scheduled>2022-01-10T15:45:57.2267328+02:00</scheduled>
-    <pickedUp>0001-01-01T00:00:00</pickedUp>
-    <delivered>0001-01-01T00:00:00</delivered>
-    <fragile>false</fragile>
-    <active>false</active>
-  </Parcel>
-  <Parcel>
     <parcelId>1004</parcelId>
     <senderId>558250769</senderId>
     <targetId>558250769</targetId>
@@ -65,48 +51,6 @@
     <droneId>498652219</droneId>
     <requested>2021-12-25T15:45:57.2267344+02:00</requested>
     <scheduled>2022-01-10T15:45:57.2267348+02:00</scheduled>
-    <pickedUp>0001-01-01T00:00:00</pickedUp>
-    <delivered>0001-01-01T00:00:00</delivered>
-    <fragile>false</fragile>
-    <active>false</active>
-  </Parcel>
-  <Parcel>
-    <parcelId>1006</parcelId>
-    <senderId>573103658</senderId>
-    <targetId>558250769</targetId>
-    <weight>average</weight>
-    <priority>regular</priority>
-    <droneId>607041557</droneId>
-    <requested>2021-12-21T15:45:57.2267361+02:00</requested>
-    <scheduled>2022-01-10T15:45:57.2267365+02:00</scheduled>
-    <pickedUp>0001-01-01T00:00:00</pickedUp>
-    <delivered>0001-01-01T00:00:00</delivered>
-    <fragile>false</fragile>
-    <active>false</active>
-  </Parcel>
-  <Parcel>
-    <parcelId>1008</parcelId>
-    <senderId>192114535</senderId>
-    <targetId>558250769</targetId>
-    <weight>light</weight>
-    <priority>fast</priority>
-    <droneId>534655959</droneId>
-    <requested>2021-12-13T15:45:57.2267381+02:00</requested>
-    <scheduled>2022-01-10T15:45:57.2267385+02:00</scheduled>
-    <pickedUp>0001-01-01T00:00:00</pickedUp>
-    <delivered>0001-01-01T00:00:00</delivered>
-    <fragile>false</fragile>
-    <active>false</active>
-  </Parcel>
-  <Parcel>
-    <parcelId>1009</parcelId>
-    <senderId>559184788</senderId>
-    <targetId>558250769</targetId>
-    <weight>light</weight>
-    <priority>regular</priority>
-    <droneId>263852647</droneId>
-    <requested>2021-12-09T15:45:57.226739+02:00</requested>
-    <scheduled>2022-01-10T15:45:57.2267395+02:00</scheduled>
     <pickedUp>0001-01-01T00:00:00</pickedUp>
     <delivered>0001-01-01T00:00:00</delivered>
     <fragile>false</fragile>
@@ -137,6 +81,76 @@
     <scheduled>2022-01-10T15:45:57.2267375+02:00</scheduled>
     <pickedUp>2022-01-10T15:46:15.1227411+02:00</pickedUp>
     <delivered>2022-01-10T15:46:17.9690908+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1009</parcelId>
+    <senderId>559184788</senderId>
+    <targetId>558250769</targetId>
+    <weight>light</weight>
+    <priority>regular</priority>
+    <droneId>263852647</droneId>
+    <requested>2021-12-09T15:45:57.226739+02:00</requested>
+    <scheduled>2022-01-10T15:45:57.2267395+02:00</scheduled>
+    <pickedUp>2022-01-10T17:21:19.1961395+02:00</pickedUp>
+    <delivered>2022-01-10T17:21:22.2763697+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1012</parcelId>
+    <senderId>143292260</senderId>
+    <targetId>216413463</targetId>
+    <weight>average</weight>
+    <priority>emergency</priority>
+    <droneId>713828477</droneId>
+    <requested>2022-01-10T17:23:18.6537736+02:00</requested>
+    <scheduled>2022-01-10T17:23:29.4396224+02:00</scheduled>
+    <pickedUp>2022-01-10T17:23:34.7070804+02:00</pickedUp>
+    <delivered>2022-01-10T17:23:39.0935946+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1006</parcelId>
+    <senderId>573103658</senderId>
+    <targetId>558250769</targetId>
+    <weight>average</weight>
+    <priority>regular</priority>
+    <droneId>607041557</droneId>
+    <requested>2021-12-21T15:45:57.2267361+02:00</requested>
+    <scheduled>2022-01-10T15:45:57.2267365+02:00</scheduled>
+    <pickedUp>2022-01-10T17:29:47.4635242+02:00</pickedUp>
+    <delivered>2022-01-10T17:29:51.9670347+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1008</parcelId>
+    <senderId>192114535</senderId>
+    <targetId>558250769</targetId>
+    <weight>light</weight>
+    <priority>fast</priority>
+    <droneId>534655959</droneId>
+    <requested>2021-12-13T15:45:57.2267381+02:00</requested>
+    <scheduled>2022-01-10T15:45:57.2267385+02:00</scheduled>
+    <pickedUp>2022-01-10T17:31:16.6912372+02:00</pickedUp>
+    <delivered>2022-01-10T17:31:23.6894195+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1003</parcelId>
+    <senderId>169082827</senderId>
+    <targetId>558250769</targetId>
+    <weight>light</weight>
+    <priority>fast</priority>
+    <droneId>424756140</droneId>
+    <requested>2022-01-02T15:45:57.2267323+02:00</requested>
+    <scheduled>2022-01-10T15:45:57.2267328+02:00</scheduled>
+    <pickedUp>2022-01-10T17:34:43.5018757+02:00</pickedUp>
+    <delivered>2022-01-10T17:34:47.080166+02:00</delivered>
     <fragile>false</fragile>
     <active>false</active>
   </Parcel>
