@@ -27,19 +27,7 @@ namespace PL
      //   ObservableCollection<DroneInCharging> droneAtStationObservableCollection;
         Station s;
         string cName;
-        //to remove close box from window
-        private const int GWL_STYLE = -16;
-        private const int WS_SYSMENU = 0x80000;
-        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        void ToolWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            // Code to remove close box from window
-            var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
-            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
-        }
+        
 
         public StationWindow(IBL Station, string customerName) //new
         {
@@ -58,8 +46,7 @@ namespace PL
             dronesAtStationRead.Visibility = Visibility.Hidden;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-            //to remove close box from window
-            Loaded += ToolWindow_Loaded;
+          
         }
              
         public StationWindow(IBL b, Station station, string customerName) //update
@@ -78,8 +65,7 @@ namespace PL
             inUseRead.Visibility = Visibility.Visible;
             inUseText.Visibility = Visibility.Visible;
             ourLOGO.Visibility = Visibility.Hidden;
-            //to remove close box from window
-            Loaded += ToolWindow_Loaded;
+            
             //latitudeText.Visibility = Visibility.Hidden;
             //latitudeRead.Visibility = Visibility.Hidden;
             //longitudeText.Visibility = Visibility.Hidden;
