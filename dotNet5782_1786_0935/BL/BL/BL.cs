@@ -94,7 +94,7 @@ namespace BL
         {
 
             double[] arr = dal.ChargeCapacity();
-            var chargeCapacity = new chargeCapacity { pwrLight = arr[0], pwrAverge = arr[1], pwrAvailable = arr[2], pwrHeavy = arr[3], pwrRateLoadingDrone = arr[4], chargeCapacityArr = arr };
+            var chargeCapacity = new chargeCapacity { pwrAvailable = arr[0], pwrLight = arr[1], pwrAverge = arr[2],  pwrHeavy = arr[3], pwrRateLoadingDrone = arr[4], chargeCapacityArr = arr };
             return chargeCapacity;
         }
         #endregion
@@ -181,7 +181,7 @@ namespace BL
                         return minValue;
                 }
             }
-            return 0;
+            return 90;
         }
         #endregion
         #region findStation
@@ -866,6 +866,8 @@ namespace BL
                         minBatery += distance(drt.location, new Location(closestStation(Location1, false, baseStationLocations).longitude, closestStation(Location1, false, baseStationLocations).latitude)) * chargeCapacity.chargeCapacityArr[0];
 
                         if (minBatery > 100) { minBatery = 100; }
+                        if(minBatery<17)
+                        { minBatery = 17; }
                         drt.battery = rnd.Next((int)minBatery, 101);
                         drt.parcelId = 0;
                     }
@@ -1026,8 +1028,8 @@ namespace BL
                 x = distance(loc, new BO.Location(dal.getCustomer(item.targetId).latitude, dal.getCustomer(item.targetId).longitude));
                 double fromCusToSta = distance(new BO.Location(dal.getCustomer(item.targetId).latitude, dal.getCustomer(item.targetId).longitude), closestStation(new BO.Location(dal.getCustomer(item.targetId).latitude, dal.getCustomer(item.targetId).longitude), false, stationLocationslist()));
 
-                double butteryUse = x * chargeCapacity.chargeCapacityArr[(int)item.weight] + fromCusToSta * chargeCapacity.chargeCapacityArr[0] + d * chargeCapacity.chargeCapacityArr[0];
-                if (d < far && (battery - butteryUse) > 0 && item.scheduled == DateTime.MinValue && weight(we, (BO.weightCategories)item.weight) == true)
+                double batteryUse = x * chargeCapacity.chargeCapacityArr[(int)item.weight] + fromCusToSta * chargeCapacity.chargeCapacityArr[0] + d * chargeCapacity.chargeCapacityArr[0];
+                if (d < far && (battery - batteryUse) > 0 && item.scheduled == DateTime.MinValue && weight(we, (BO.weightCategories)item.weight) == true)
                 {
                     far = d;
                     theParcel = item;

@@ -2,61 +2,61 @@
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>127389040</droneId>
+    <droneId>954999596</droneId>
     <model>Reaper</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>102474458</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>929875020</droneId>
     <model>Shadow</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>993155468</droneId>
+    <droneId>813097727</droneId>
     <model>Grey Eagle</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>337474796</droneId>
+    <droneId>289734779</droneId>
     <model>Global Hawk</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>267497220</droneId>
+    <droneId>198473925</droneId>
     <model>Pioneer</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>683722831</droneId>
+    <droneId>333227754</droneId>
     <model>Fire Scout</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>762879353</droneId>
+    <droneId>584147196</droneId>
     <model>Snowgoose</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>865006918</droneId>
+    <droneId>660529877</droneId>
     <model>Hunter</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>851121787</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>844900951</droneId>
     <model>Stalker</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>581926356</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>234351951</droneId>
     <model>GNAT</model>
     <active>false</active>
   </Drone>
