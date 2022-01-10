@@ -46,6 +46,7 @@ namespace PL
         }
         BackgroundWorker simulation;
         bool isRun;
+        bool isClose = false;
 
         public DroneWindow(IBL b, Drone drone, string customerName)//update drone
         {
@@ -114,20 +115,57 @@ namespace PL
         {
             if (d.droneStatus == DroneStatus.available) 
             {
-                bl.matchDroneWithPacrel(d.droneId);
+                try
+                {
+                    bl.matchDroneWithPacrel(d.droneId);
+                    this.DataContext = bl.getDrone(d.droneId);
+                    Thread.Sleep(2000); 
+                    bl.pickUpParcel(d.droneId);
+                    this.DataContext = bl.getDrone(d.droneId);
+                    Thread.Sleep(2000);
+                    bl.deliveredParcel(d.droneId);
+                    this.DataContext = bl.getDrone(d.droneId);
+                    Thread.Sleep(2000);
+                }
+                catch
+                {
+                    bl.SendDroneToCharge(d.droneId);
+                    this.DataContext = bl.getDrone(d.droneId);
+                    Thread.Sleep(2000);
+                    while (d.battery != 100.0)
+                    {
+                        DataContext = bl.getDrone(d.droneId);
+                    }
+                    Thread.Sleep(2000);
+                    bl.releaseDroneFromCharge(d.droneId);
+                    this.DataContext = bl.getDrone(d.droneId);
+                    Thread.Sleep(2000);
+                    bl.pickUpParcel(d.droneId);
+                    this.DataContext = bl.getDrone(d.droneId);
+                    Thread.Sleep(2000);
+                    bl.deliveredParcel(d.droneId);
+                    this.DataContext = bl.getDrone(d.droneId);
+                    Thread.Sleep(2000);
+                }
             }
-            DataContext = bl.getDrone(d.droneId);
         }
 
         private void Simulation_DoWork(object sender, DoWorkEventArgs e) //when it runs, 
         {
-            while(this.isRun)
+            if (bl.getParcelsList().Count(x => x.parcelStatus == ParcelStatus.created) == 0)
+                this.isRun = false;
+            while (this.isRun)
             {
                 this.simulation.ReportProgress(1);
                 Thread.Sleep(1000); //one secound
-                //if(bl.getParcelsList())
+                if (bl.getParcelsList().Count(x => x.parcelStatus == ParcelStatus.created) == 0)  
+                    this.isRun = false;
+                if (isClose)
+                    this.isRun = false;
+                //add a stop button
 
             }
+            MessageBox.Show("finished");
         }
 
         public DroneWindow(IBL drone, string customerName)//new drone
@@ -175,6 +213,7 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+            isClose = true;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

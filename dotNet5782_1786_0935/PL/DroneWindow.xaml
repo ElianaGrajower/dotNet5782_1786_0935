@@ -21,7 +21,7 @@
         <Label HorizontalAlignment="Left" Margin="234,130,0,0" Content="Max weight:" VerticalAlignment="Top" Height="35" Grid.ColumnSpan="2"/>
         <Label HorizontalAlignment="Left" Margin="234,95,0,0" Content="Model:" VerticalAlignment="Top" Height="28" Grid.ColumnSpan="2"/>
         <Label x:Name="stationRead" HorizontalAlignment="Left" Margin="234,165,0,0" Content="station ID:" VerticalAlignment="Top" Height="30" Grid.ColumnSpan="2"/>
-        <Button Content="close" HorizontalAlignment="Left" Margin="77,360,0,0" VerticalAlignment="Top" Width="68" Click="Button_Click" Background="#FFDC637A" FontStyle="Normal" AutomationProperties.IsOffscreenBehavior="Default"/>
+        <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="77,360,0,0" VerticalAlignment="Top" Width="68" Click="Button_Click" Background="#FFDC637A" FontStyle="Normal" AutomationProperties.IsOffscreenBehavior="Default"/>
         <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="278,360,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Click="add_Click" Visibility="Visible" Grid.Column="2"/>
         <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="278,360,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Click="Button_Click_1" Visibility="Visible" Grid.Column="2"/>
         <Button x:Name="chargeDrone" Content="charge drone" HorizontalAlignment="Left" Margin="162,240,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Visibility="Visible" Click="chargeDrone_Click" Grid.Column="2"/>
