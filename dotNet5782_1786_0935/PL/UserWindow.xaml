@@ -16,13 +16,22 @@
             <Image HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="82" Source="/drone-delivery.png"/>
             <Image HorizontalAlignment="Left" Height="77" VerticalAlignment="Top" Width="247" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
         </WrapPanel>
-        <Canvas x:Name="userPassword" Margin="265,105,345,56" Background="White" Visibility="Hidden">
+        <Canvas x:Name="blackBackground" Visibility="Collapsed">
+            <Canvas.Background>
+                <SolidColorBrush Color="#FF020202" Opacity="0.695"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas x:Name="white" Margin="305,78,305,73" Background="White" Visibility="Collapsed" ></Canvas>
+        <Canvas x:Name="userPassword" Margin="305,78,305,73" Visibility="Collapsed">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/little sky.jpg" Opacity="0.6"/>
+            </Canvas.Background>
             <Label Content="User Name:" Canvas.Left="33" Canvas.Top="37" FontWeight="Bold"/>
             <TextBox x:Name="userNameText" Canvas.Left="33" Canvas.Top="68" Text="" TextWrapping="Wrap" Width="120"/>
             <Label Content="Password:" Canvas.Left="37" Canvas.Top="108" FontWeight="Bold"/>
             <PasswordBox x:Name="passwordText" Canvas.Left="33" Canvas.Top="139" Width="120"/>
-            <Button x:Name="enterButton" Content="Enter" Canvas.Left="61" Canvas.Top="188" Width="68" Click="Button_Click_1"/>
-            <Button Content="cancel" Canvas.Left="61" Canvas.Top="222" Width="68" Click="Button_Click"/>
+            <Button x:Name="enterButton" Content="Enter" Canvas.Left="59" Canvas.Top="188" Width="68" Click="Button_Click_1" Background="#FF94C9FF"/>
+            <Button Content="cancel" Canvas.Left="59" Canvas.Top="222" Width="68" Click="Button_Click" Background="#FF94C9FF"/>
         </Canvas>
     </Grid>
 </Window>

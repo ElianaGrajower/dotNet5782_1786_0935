@@ -29,17 +29,17 @@ namespace BlApi
         public BO.Parcel getParcel(int parcelId);
         public void UpdateDronename(int droneId, string dmodel);
         public void UpdateCustomer(int customerId, string name, string number);
-        public void releaseDroneFromCharge(int droneId); //releases the drone from its charge
+        public void releaseDroneFromCharge(int droneId); //releases the drone from its charge  ///THIS
         public void updateStation(int stationId, int AvlblDCharges, string name = " ");
-        public void matchDroneWithPacrel(int droneId);
-        public void pickUpParcel(int droneId);
-        public void deliveredParcel(int droneId);
+        public void matchDroneWithPacrel(int droneId); //THIS
+        public void pickUpParcel(int droneId);  //THIS
+        public void deliveredParcel(int droneId);  //THIS
         public List<BO.DroneToList> getDronesList();
         public List<BO.CustomerToList> getCustomersList();
         public List<BO.CustomerToList> getUsersList();
         public List<BO.CustomerToList> getEmployeesList();
         public List<BO.ParcelToList> getParcelsList();
-        public void SendDroneToCharge(int droneId);
+        public void SendDroneToCharge(int droneId);  //THIS
         public BO.Drone getDrone(int id);
         public BO.DroneToList returnsDrone(int id);
         public IEnumerable<BO.StationToList> allStations(Func<BO.StationToList, bool> predicate = null);
@@ -47,6 +47,7 @@ namespace BlApi
         public IEnumerable<BO.ParcelToList> allParcels(Func<BO.ParcelToList, bool> predicate = null);
         public IEnumerable<BO.CustomerToList> allCustomers(Func<BO.CustomerToList, bool> predicate = null);
         public void releaseAllFromCharge();
+        //public void simulator(int droneId, Action<in T>update, Func<bool>isDone);
 
     }     
 }

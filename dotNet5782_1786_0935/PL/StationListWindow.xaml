@@ -8,7 +8,7 @@
         Title="StationListWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/1280px-Sky.jpg"/>
+            <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
         <ListView x:Name="StationsListView" Margin="0,90,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="StationsListView_MouseDoubleClick" SelectionChanged="StationsListView_SelectionChanged">
             <ListView.View>
@@ -47,5 +47,9 @@
                 <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
             </StackPanel>
         </Expander>
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="335,350,0,0" Orientation="Horizontal" VerticalAlignment="Top" Width="130">
+            <Image HorizontalAlignment="Left" Height="29" VerticalAlignment="Center" Width="32" Source="/drone-delivery.png"/>
+            <Image HorizontalAlignment="Left" Height="29" VerticalAlignment="Center" Width="95" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
+        </WrapPanel>
     </Grid>
 </Window>

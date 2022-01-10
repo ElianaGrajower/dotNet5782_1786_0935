@@ -8,7 +8,7 @@
         Title="ParcelWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.85"/>
+            <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
         <Label Content="Sender Id:" HorizontalAlignment="Left" Margin="256,115,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="senderText" HorizontalAlignment="Left" Margin="347,119,0,0" Text="{Binding sender.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>

@@ -61,6 +61,8 @@ namespace PL
         private void logInButton_Click(object sender, RoutedEventArgs e)
         {
             userPassword.Visibility = Visibility.Visible;
+            white.Visibility = Visibility.Visible;
+            blackBackground.Visibility = Visibility.Visible;
         }
 
         private void signUpButton_Click(object sender, RoutedEventArgs e)
@@ -71,6 +73,8 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             userPassword.Visibility = Visibility.Collapsed;
+            white.Visibility = Visibility.Collapsed;
+            blackBackground.Visibility = Visibility.Collapsed;
             userNameText.Text = "";
             passwordText.Clear();
         }

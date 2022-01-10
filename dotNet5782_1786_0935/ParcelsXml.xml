@@ -1,20 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Parcel>
-    <parcelId>1001</parcelId>
-    <senderId>218625480</senderId>
-    <targetId>661332262</targetId>
-    <weight>average</weight>
-    <priority>fast</priority>
-    <droneId>956384936</droneId>
-    <requested>2022-01-09T17:43:53.0185768+02:00</requested>
-    <scheduled>2022-01-09T17:43:53.0277159+02:00</scheduled>
-    <pickedUp>0001-01-01T00:00:00</pickedUp>
-    <delivered>0001-01-01T00:00:00</delivered>
-    <fragile>false</fragile>
-    <active>false</active>
-  </Parcel>
-  <Parcel>
     <parcelId>1002</parcelId>
     <senderId>698323342</senderId>
     <targetId>661332262</targetId>
@@ -137,6 +123,48 @@
     <scheduled>2022-01-09T17:43:53.028804+02:00</scheduled>
     <pickedUp>2022-01-09T17:58:33.5885976+02:00</pickedUp>
     <delivered>2022-01-09T17:58:35.1100982+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1001</parcelId>
+    <senderId>218625480</senderId>
+    <targetId>661332262</targetId>
+    <weight>average</weight>
+    <priority>fast</priority>
+    <droneId>956384936</droneId>
+    <requested>2022-01-09T17:43:53.0185768+02:00</requested>
+    <scheduled>2022-01-09T17:43:53.0277159+02:00</scheduled>
+    <pickedUp>2022-01-10T14:01:36.7064021+02:00</pickedUp>
+    <delivered>2022-01-10T14:01:39.4717796+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1012</parcelId>
+    <senderId>698323342</senderId>
+    <targetId>417403346</targetId>
+    <weight>light</weight>
+    <priority>emergency</priority>
+    <droneId>956384936</droneId>
+    <requested>2022-01-10T13:51:19.8750065+02:00</requested>
+    <scheduled>2022-01-10T14:01:52.0004248+02:00</scheduled>
+    <pickedUp>2022-01-10T14:01:57.2084508+02:00</pickedUp>
+    <delivered>2022-01-10T14:02:06.5685937+02:00</delivered>
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1013</parcelId>
+    <senderId>218625480</senderId>
+    <targetId>417403346</targetId>
+    <weight>light</weight>
+    <priority>fast</priority>
+    <droneId>956384936</droneId>
+    <requested>2022-01-10T14:02:44.2818781+02:00</requested>
+    <scheduled>2022-01-10T14:03:46.9557223+02:00</scheduled>
+    <pickedUp>0001-01-01T00:00:00</pickedUp>
+    <delivered>0001-01-01T00:00:00</delivered>
     <fragile>false</fragile>
     <active>false</active>
   </Parcel>

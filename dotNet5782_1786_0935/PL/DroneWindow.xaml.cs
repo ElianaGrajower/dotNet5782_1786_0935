@@ -14,6 +14,11 @@ using System.Windows.Shapes;
 using BL;
 using BO;
 using BlApi;
+using System.Threading;
+//using System.Linq;
+using System.ComponentModel;
+
+
 
 
 namespace PL
@@ -26,7 +31,8 @@ namespace PL
         internal readonly IBL bl = BlFactory.GetBl();
         Drone d;
         string cName;
-        bool isAllReleased = true;
+        BackgroundWorker simulation;
+        bool isRun;
 
         public DroneWindow(IBL b, Drone drone, string customerName)//update drone
         {
@@ -35,6 +41,12 @@ namespace PL
             this.bl = b;
             this.DataContext = drone;
             d = drone;
+            simulation = new BackgroundWorker();
+            isRun = true;
+            simulation.DoWork += Simulation_DoWork;
+            simulation.ProgressChanged += Simulation_ProgressChanged;
+            simulation.WorkerReportsProgress = true;
+            simulation.RunWorkerCompleted += Simulation_RunWorkerCompleted;
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
             stationIdCombo.ItemsSource = bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
             add.Visibility = Visibility.Hidden;
@@ -77,6 +89,32 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
+
+        private void Simulation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void Simulation_ProgressChanged(object sender, ProgressChangedEventArgs e) //changes what we see
+        {
+            if (d.droneStatus == DroneStatus.available) 
+            {
+                bl.matchDroneWithPacrel(d.droneId);
+            }
+            DataContext = bl.getDrone(d.droneId);
+        }
+
+        private void Simulation_DoWork(object sender, DoWorkEventArgs e) //when it runs, 
+        {
+            while(this.isRun)
+            {
+                this.simulation.ReportProgress(1);
+                Thread.Sleep(1000); //one secound
+                //if(bl.getParcelsList())
+
+            }
+        }
+
         public DroneWindow(IBL drone, string customerName)//new drone
         {
             InitializeComponent();
@@ -350,8 +388,12 @@ namespace PL
         {
             new UserWindow().Show();
             bl.releaseAllFromCharge();
-  
             Close();
+        }
+
+        private void simulationButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.simulation.RunWorkerAsync();
         }
     }
 }

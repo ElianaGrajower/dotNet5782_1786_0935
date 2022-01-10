@@ -48,7 +48,7 @@
         <TextBox x:Name="phoneText" HorizontalAlignment="Left" Margin="526,38,0,0" Text="{Binding phone,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Latitude:" HorizontalAlignment="Left" Margin="412,65,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="526,69,0,0" Text="{Binding location.latitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Content="Logitude:" HorizontalAlignment="Left" Margin="412,96,0,0" VerticalAlignment="Top"/>
+        <Label Content="Logitude:" HorizontalAlignment="Left" Margin="412,97,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="526,100,0,0" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="passwordRead" Content="Password:" HorizontalAlignment="Left" Margin="141,127,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="255,133,0,0" Text="{Binding password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120" TextChanged="passwordText_TextChanged"/>

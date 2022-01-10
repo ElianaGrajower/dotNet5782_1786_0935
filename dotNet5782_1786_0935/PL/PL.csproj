@@ -27,6 +27,7 @@
     <None Remove="drone.png" />
     <None Remove="inline_image_preview.jpg" />
     <None Remove="istockphoto-1208274492-640x640.jpg" />
+    <None Remove="little sky.jpg" />
     <None Remove="log-out.png" />
     <None Remove="logout.png" />
     <None Remove="man.png" />
@@ -77,6 +78,7 @@
     <Resource Include="drone.png" />
     <Resource Include="inline_image_preview.jpg" />
     <Resource Include="istockphoto-1208274492-640x640.jpg" />
+    <Resource Include="little sky.jpg" />
     <Resource Include="log-out.png" />
     <Resource Include="logout.png" />
     <Resource Include="man.png" />

@@ -8,7 +8,7 @@
         Title="StationWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/clouds-blue-sky-light-31912398.jpg"/>
+            <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
         <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="84" Click="update_Click" Background="#FF989B9E"/>
         <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="85" Click="add_Click" Background="#FF989B9E"/>
