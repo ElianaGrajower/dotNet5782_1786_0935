@@ -105,34 +105,58 @@ namespace PL
                 try
                 {
                     bl.matchDroneWithPacrel(d.droneId);
-                    this.DataContext = bl.getDrone(d.droneId);
-                    Thread.Sleep(2000); 
+                    parcelButton.Visibility = Visibility.Visible;
+                    parcelIdRead.Visibility = Visibility.Visible;
+                    parcelIdText.Visibility = Visibility.Visible;
+                    d.droneStatus = DroneStatus.delivery;
+                    d = bl.getDrone(d.droneId);
+                    Parcel realParcel = new Parcel();
+                    realParcel = bl.getParcel(d.parcel.parcelId);
+                    ParcelWindow parcelW = new ParcelWindow(bl, realParcel, cName);
+                    parcelW.Show();
+                    this.DataContext = d;
+                    Thread.Sleep(500); 
                     bl.pickUpParcel(d.droneId);
                     this.DataContext = bl.getDrone(d.droneId);
-                    Thread.Sleep(2000);
+                    Thread.Sleep(500);
                     bl.deliveredParcel(d.droneId);
                     this.DataContext = bl.getDrone(d.droneId);
-                    Thread.Sleep(2000);
+                    parcelW.Close();
+                    parcelButton.Visibility = Visibility.Hidden;
+                    parcelIdRead.Visibility = Visibility.Hidden;
+                    parcelIdText.Visibility = Visibility.Hidden;
+                    Thread.Sleep(500);
+                    //close parcel
                 }
                 catch
                 {
                     bl.SendDroneToCharge(d.droneId);
                     this.DataContext = bl.getDrone(d.droneId);
-                    Thread.Sleep(2000);
                     while (d.battery != 100.0)
                     {
                         DataContext = bl.getDrone(d.droneId);
                     }
-                    Thread.Sleep(2000);
-                    bl.releaseDroneFromCharge(d.droneId);
-                    this.DataContext = bl.getDrone(d.droneId);
-                    Thread.Sleep(2000);
+                    bl.matchDroneWithPacrel(d.droneId);
+                    parcelButton.Visibility = Visibility.Visible;
+                    parcelIdRead.Visibility = Visibility.Visible;
+                    parcelIdText.Visibility = Visibility.Visible;
+                    d.droneStatus = DroneStatus.delivery;
+                    d = bl.getDrone(d.droneId);
+                    Parcel realParcel = new Parcel();
+                    realParcel = bl.getParcel(d.parcel.parcelId);
+                    new ParcelWindow(bl, realParcel, cName).ShowDialog();
+                    this.DataContext = d;
+                    Thread.Sleep(500);
                     bl.pickUpParcel(d.droneId);
                     this.DataContext = bl.getDrone(d.droneId);
-                    Thread.Sleep(2000);
+                    Thread.Sleep(500);
                     bl.deliveredParcel(d.droneId);
                     this.DataContext = bl.getDrone(d.droneId);
-                    Thread.Sleep(2000);
+                    parcelButton.Visibility = Visibility.Hidden;
+                    parcelIdRead.Visibility = Visibility.Hidden;
+                    parcelIdText.Visibility = Visibility.Hidden;
+                    Thread.Sleep(500);
+                    //close parcel
                 }
             }
         }
@@ -321,6 +345,9 @@ namespace PL
                 matchUpParcel.Visibility = Visibility.Visible;
                 pickupParcel.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Visible;
+                parcelButton.Visibility = Visibility.Hidden;
+                parcelIdRead.Visibility = Visibility.Hidden;
+                parcelIdText.Visibility = Visibility.Hidden;
                 statusText.Text = "available";
             }
             catch (BO.AlreadyExistsException exc)
@@ -346,6 +373,9 @@ namespace PL
                 pickupParcel.Visibility = Visibility.Visible;
                 deliverParcel.Visibility = Visibility.Hidden;
                 chargeDrone.Visibility = Visibility.Hidden;
+                parcelButton.Visibility = Visibility.Visible;
+                parcelIdRead.Visibility = Visibility.Visible;
+                parcelIdText.Visibility = Visibility.Visible;
                 statusText.Text = "delivery";
             }
             catch (BO.DoesntExistException exc)
@@ -436,7 +466,7 @@ namespace PL
                 MessageBox.Show("The drone is not connecetd to a parcel\n");
             }
 
-            new ParcelWindow(bl, updateParcel, cName).ShowDialog();
+          //  new ParcelWindow(bl, updateParcel, cName).ShowDialog();
             //ShowInfo(); have a way to update the info in the window
         }
 
