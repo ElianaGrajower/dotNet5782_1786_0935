@@ -115,7 +115,7 @@ namespace PL
                     ParcelWindow parcelW = new ParcelWindow(bl, realParcel, cName);
                     parcelW.Show();
                     this.DataContext = d;
-                    Thread.Sleep(500); 
+                    Thread.Sleep(8000); 
                     bl.pickUpParcel(d.droneId);
                     this.DataContext = bl.getDrone(d.droneId);
                     Thread.Sleep(500);

@@ -1,62 +1,62 @@
 <?xml version="1.0"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
-    <maxWeight>light</maxWeight>
-    <droneId>127389040</droneId>
+    <maxWeight>average</maxWeight>
+    <droneId>361591185</droneId>
     <model>Reaper</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>102474458</droneId>
+    <droneId>411124292</droneId>
     <model>Shadow</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>light</maxWeight>
-    <droneId>993155468</droneId>
+    <maxWeight>average</maxWeight>
+    <droneId>263746123</droneId>
     <model>Grey Eagle</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>337474796</droneId>
+    <droneId>558762043</droneId>
     <model>Global Hawk</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>267497220</droneId>
+    <droneId>390633801</droneId>
     <model>Pioneer</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>683722831</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>721492675</droneId>
     <model>Fire Scout</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>light</maxWeight>
-    <droneId>762879353</droneId>
+    <maxWeight>average</maxWeight>
+    <droneId>675701941</droneId>
     <model>Snowgoose</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>865006918</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>622283857</droneId>
     <model>Hunter</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>851121787</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>255073673</droneId>
     <model>Stalker</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>581926356</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>142645051</droneId>
     <model>GNAT</model>
     <active>false</active>
   </Drone>
