@@ -9,10 +9,10 @@ namespace BO
 {
     public class BatteryUsage
     {
-        public double light=0.01;    
-        public double medium=0.02;
-        public double heavy=0.03;
-        public double available;
-        public double chargeSpeed=0.5;
+        public double light=0.1;    
+        public double medium=0.2;
+        public double heavy=0.3;
+        public double available=0.09;
+        public double chargeSpeed=10;
     }
 }

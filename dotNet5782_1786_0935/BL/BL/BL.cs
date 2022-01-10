@@ -162,6 +162,7 @@ namespace BL
                     Location baseStationlocation = closestStation(target.location, false, stationLocationslist());
                     double targetToCharge = distance(target.location, baseStationlocation);
                     minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * targetToCharge);
+                    if(minValue >= 0)
                     return minValue;
                 }
                 //if wasnt delievred updates all the info
@@ -176,10 +177,11 @@ namespace BL
                     Location baseStationlocation = closestStation(target.location, false, stationLocationslist());
                     double targetToCharge = distance(target.location, baseStationlocation);
                     minValue += (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] * targetToCharge);
-                    return minValue;
+                    if (minValue >= 0)
+                        return minValue;
                 }
             }
-            return 90;
+            return 0;
         }
         #endregion
         #region findStation
@@ -747,7 +749,7 @@ namespace BL
             drones = new List<BO.DroneToList>();
             bool flag = false;
             Random rnd = new Random();
-            double minBatery = 0;
+            double minBatery = 17;
             //gets lists of drones
             IEnumerable<DO.Drone> d = dal.printDronesList();
             //gets list of parcel
@@ -762,8 +764,9 @@ namespace BL
                 drt.model = item.model;
                 drt.weight = (BO.weightCategories)(int)item.maxWeight;
                 drt.numOfParcelsdelivered = dal.printParcelsList().Count(x => x.droneId == drt.droneId);
-                int parcelId = dal.printParcelsList().ToList().Find(x => x.droneId == drt.droneId).parcelId;
-                drt.parcelId = parcelId;
+                int parcelId = dal.printParcelsList().ToList().FirstOrDefault(x => x.droneId == drt.droneId && x.delivered==DateTime.MinValue).parcelId;
+                 drt.parcelId = parcelId;
+               
                 // drt.droneStatus = DroneStatus.available;
                 // drt.location = new Location(30, 35);
 
@@ -805,7 +808,7 @@ namespace BL
                             minBatery += distance(drt.location, targetLocation) * chargeCapacity.chargeCapacityArr[(int)pr.weight];
                         }
                         if (minBatery > 100) { minBatery = 100; }
-                        if (minBatery == 0) { minBatery = 1; }
+                        if (minBatery == 0) { minBatery = 17; }
                         drt.battery = rnd.Next((int)minBatery, 101); // 100/;
                                                                      //  if (drt.location == null)
                                                                      //   drt.location = new Location(29.208, 34.57);
@@ -818,7 +821,7 @@ namespace BL
                 {
                     int temp = rnd.Next(1, 3);
                     if (temp == 1)
-                        drt.droneStatus = BO.DroneStatus.available;
+                       drt.droneStatus = BO.DroneStatus.available; 
                     else
                         drt.droneStatus = BO.DroneStatus.maintenance;
                     if (drt.droneStatus == BO.DroneStatus.maintenance)
@@ -863,17 +866,14 @@ namespace BL
                         minBatery += distance(drt.location, new Location(closestStation(Location1, false, baseStationLocations).longitude, closestStation(Location1, false, baseStationLocations).latitude)) * chargeCapacity.chargeCapacityArr[0];
 
                         if (minBatery > 100) { minBatery = 100; }
-                        // if (minBatery == 0) { minBatery = 1; }
-                        // if (drt.location == null)
-                        //   drt.location = new Location(29.207, 34.5);
                         drt.battery = rnd.Next((int)minBatery, 101);
+                        drt.parcelId = 0;
                     }
 
                 }
                 drones.Add(drt);
 
-                //Console.WriteLine(drt.ToString());
-
+          
 
 
 
@@ -1129,6 +1129,7 @@ namespace BL
         {
             var tempDrone = getDrone(droneId);
             var tempParcel = getParcel(tempDrone.parcel.parcelId);
+            var customer = getCustomer(tempParcel.sender.customerId);
             //ensures was not yet picked up
             if (tempParcel.pickedUp == DateTime.MinValue)
             {
@@ -1137,22 +1138,23 @@ namespace BL
                 int index = drones.FindIndex(d => d.droneId == droneId);
                 drones.RemoveAt(index);
                 BatteryUsage usage = new BatteryUsage();
-                tempDrone.location.latitude = tempDrone.parcel.pickupLocation.latitude;
-                tempDrone.location.longitude = tempDrone.parcel.pickupLocation.longitude;
+              
                 tempDrone.parcel.parcelStatus = ParcelStatus.pickedUp;
-
+               
                 //AddDrone(tempDrone,FindStation(tempDrone.location));
                 var tempD = new DroneToList()
                 {
                     droneId = tempDrone.droneId,
                     model = tempDrone.model,
-                    battery = tempDrone.battery,
+                    battery = tempDrone.battery- (distance(tempDrone.location, customer.location) * usage.available),
                     weight = tempDrone.maxWeight,
                     droneStatus = DroneStatus.delivery,
                     location = new Location(tempDrone.location.latitude, tempDrone.location.longitude),
                     parcelId = tempDrone.parcel.parcelId,
                     numOfParcelsdelivered = dal.printParcelsList().Where(p => p.parcelId == tempDrone.parcel.parcelId).Count()
                 };
+                tempDrone.location.latitude = tempDrone.parcel.pickupLocation.latitude;
+                tempDrone.location.longitude = tempDrone.parcel.pickupLocation.longitude;
                 drones.Add(tempD);
                 // dal.DeleteParcel(tempParcel.parcelId);
                 tempParcel.pickedUp = DateTime.Now;
@@ -1540,7 +1542,7 @@ namespace BL
                 droneBo.droneStatus = drone.droneStatus;
                 droneBo.numOfParcelsdelivered = drone.numOfParcelsdelivered;
                 droneBo.numOfParcelsdelivered = dal.printParcelsList().Count(x => x.droneId == droneBo.droneId);
-                int parcelId = dal.printParcelsList().ToList().Find(x => x.droneId == droneBo.droneId).parcelId;
+                int parcelId = dal.printParcelsList().ToList().Find(x => x.droneId == droneBo.droneId && x.delivered==DateTime.MinValue).parcelId;
                 droneBo.parcelId = parcelId;
 
             }
@@ -1601,73 +1603,7 @@ namespace BL
             return customer.Where(predicate).ToList();
         }
         #endregion
-        #region returnCustomer
-        //returns customer
-        public BO.Customer returnCustomer(string name, string password)
-        {
-            try
-            {
-                //gets customer from dal list
-                DO.Customer temp = dal.returnCustomer(name, password);
-                //starts building bo customer
-                BO.Customer customer = new BO.Customer()
-                {
-                    customerId = temp.customerId,
-                    name = temp.name,
-                    phone = temp.Phone,
-                    password = temp.password,
-                    isCustomer = temp.isCustomer,
-                    location = new Location(temp.latitude, temp.longitude)
-                    {
-                        latitude = temp.latitude,
-                        longitude = temp.longitude,
-
-                    },
-                    parcelsOrdered = dal.printParcelsList().Where(parcel => parcel.targetId == temp.customerId).Select(Parcel => new ParcelinCustomer()
-
-                    {
-                        parcelId = Parcel.parcelId,
-                        weight = (BO.weightCategories)((int)Parcel.weight),
-                        priority = (BO.Priorities)((int)Parcel.priority),
-                        parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
-                        customerInParcel = new CustomerInParcel()
-                        {
-                            customerId = Parcel.senderId,
-                            customerName = dal.getCustomer(Parcel.senderId).name
-                        }
-                    }),
-
-                    parcelsdelivered = dal.printParcelsList().Where(parcel => parcel.senderId == temp.customerId).Select(Parcel => new ParcelinCustomer()
-
-                    {
-                        parcelId = Parcel.parcelId,
-                        weight = (BO.weightCategories)((int)Parcel.weight),
-                        priority = (BO.Priorities)((int)Parcel.priority),
-                        parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
-                        customerInParcel = new CustomerInParcel()
-                        {
-                            customerId = Parcel.targetId,
-                            customerName = dal.getCustomer(Parcel.targetId).name
-                        }
-
-                    })
-
-                };
-
-                return customer;
-
-            }
-            catch (BO.DoesntExistException exc)
-            {
-                throw exc;
-            }
-            catch (DO.DoesntExistException exc)
-            {
-                throw new BO.DoesntExistException(exc.Message);
-            }
-
-        }
-        #endregion
+        #region releaseAllFromCharge
         public void releaseAllFromCharge()
         {
             var listDrone = allDrones();
@@ -1677,10 +1613,7 @@ namespace BL
                     releaseDroneFromCharge(drone.droneId);
             }
         }
-        //public void simulator(int droneId, Action<string> update, Func<bool> isDone)
-        //{
-
-        //}
+        #endregion
 
     }
 
