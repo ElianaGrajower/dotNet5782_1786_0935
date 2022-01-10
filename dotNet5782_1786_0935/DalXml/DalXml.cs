@@ -18,7 +18,7 @@ namespace Dal
     {
 
         internal  string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "1111aaa" };
-        internal  string[] stationName = { "Raanana", "Tel Aviv" };
+        internal  string[] stationName = { "Raanana Central Station", "Tel Aviv Central Station" };
         internal  string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
         internal  string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
 
@@ -112,13 +112,13 @@ namespace Dal
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
 
-            list.Add(0); list.Add(0); list.Add(0.001); list.Add(0.002); list.Add(0.003); list.Add(10); list.Add(1001);
+           list.Add(0.0009); list.Add(0.001); list.Add(0.002); list.Add(0.003); list.Add(10); list.Add(1001);
 
 
             for (int i = 0; i < 10; i++) //creates 10 parcels with information
                 listParcels.Add(new Parcel()
                 {
-                    parcelId = (int)list[6] + i,
+                    parcelId = (int)list[5] + i,
                     weight = (DO.weightCategories)r.Next(1, 3), //chooses a weight from light, average, heavy
                     priority = (DO.Priorities)r.Next(1, 3),
                     requested = DateTime.Now.AddDays(-4 * i),
@@ -132,7 +132,7 @@ namespace Dal
 
 
                 });
-            list[6] = list[6] + 10;
+            list[5] = list[5] + 10;
             XMLTools.SaveListToXMLSerializer<double>(list, configPath);
             XMLTools.SaveListToXMLSerializer(listParcels, ParcelsPath);
         }
@@ -725,9 +725,9 @@ namespace Dal
         public int getParcelId() //returns parcel id
         {
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
-            list[6]++;
+            list[5]++;
             XMLTools.SaveListToXMLSerializer<double>(list, configPath);
-            return (int)list[6]--;
+            return (int)list[5]--;
         }
         #endregion
         #region ChargeCapacity //did xmlserializer

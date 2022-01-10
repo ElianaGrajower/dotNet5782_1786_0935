@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="450" Width="800">
+        Title="CustomerWindow" Height="450" Width="800"  WindowStyle="None">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AccountWindow" Height="450" Width="800">
+        Title="AccountWindow" Height="450" Width="800"  WindowStyle="None">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>

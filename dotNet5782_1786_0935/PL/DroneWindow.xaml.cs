@@ -31,19 +31,7 @@ namespace PL
         internal readonly IBL bl = BlFactory.GetBl();
         Drone d;
         string cName;
-        //to remove close box from window
-        private const int GWL_STYLE = -16;
-        private const int WS_SYSMENU = 0x80000;
-        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        void ToolWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            // Code to remove close box from window
-            var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
-            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
-        }
+       
         BackgroundWorker simulation;
         bool isRun;
         bool isClose = false;
@@ -102,8 +90,7 @@ namespace PL
             idText.IsEnabled = false;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-            //to remove close box from window
-            Loaded += ToolWindow_Loaded;
+         
         }
 
         private void Simulation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -205,8 +192,7 @@ namespace PL
             //   idText.IsReadOnly = false;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-            //to remove close box from window
-            Loaded += ToolWindow_Loaded;
+            
 
         }
 
@@ -303,6 +289,7 @@ namespace PL
             {
                 int droneId = Convert.ToInt32(idText.Text);
                 bl.releaseDroneFromCharge(droneId);
+                DataContext = bl.getDrone(d.droneId);
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;    
                 chargeDrone.Visibility = Visibility.Visible;
@@ -329,6 +316,7 @@ namespace PL
             {
                 bl.deliveredParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone delivered succesfully");
+                DataContext = bl.getDrone(d.droneId);
                 deliverParcel.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Visible;
                 pickupParcel.Visibility = Visibility.Hidden;
@@ -353,6 +341,7 @@ namespace PL
             {
                 bl.matchDroneWithPacrel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone matched up succesfully");
+                DataContext = bl.getDrone(d.droneId);
                 matchUpParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Visible;
                 deliverParcel.Visibility = Visibility.Hidden;
@@ -377,6 +366,7 @@ namespace PL
             {
                 bl.pickUpParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone pickedUp succesfully");
+                DataContext = bl.getDrone(d.droneId);
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -399,6 +389,7 @@ namespace PL
             {
                 bl.SendDroneToCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone charging succesfully");
+                DataContext = bl.getDrone(d.droneId);
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -435,7 +426,16 @@ namespace PL
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Parcel updateParcel = new Parcel();
-            updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
+            try
+            {
+                updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
+                new ParcelWindow(bl, updateParcel, cName).ShowDialog();
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("The drone is not connecetd to a parcel\n");
+            }
+
             new ParcelWindow(bl, updateParcel, cName).ShowDialog();
             //ShowInfo(); have a way to update the info in the window
         }
@@ -449,7 +449,12 @@ namespace PL
 
         private void simulationButton_Click(object sender, RoutedEventArgs e)
         {
-            this.simulation.RunWorkerAsync();
+            try
+            { this.simulation.RunWorkerAsync(); }
+            catch(Exception exc)
+            {
+                MessageBox.Show("ERROR\n");
+            }
         }
     }
 }

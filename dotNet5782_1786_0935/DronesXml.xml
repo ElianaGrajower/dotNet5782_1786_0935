@@ -60,4 +60,10 @@
     <model>GNAT</model>
     <active>false</active>
   </Drone>
+  <Drone>
+    <maxWeight>average</maxWeight>
+    <droneId>713828477</droneId>
+    <model>Snowgoose</model>
+    <active>false</active>
+  </Drone>
 </ArrayOfDrone>
