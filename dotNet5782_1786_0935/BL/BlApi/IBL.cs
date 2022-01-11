@@ -48,6 +48,7 @@ namespace BlApi
         public IEnumerable<BO.CustomerToList> allCustomers(Func<BO.CustomerToList, bool> predicate = null);
         public void releaseAllFromCharge();
         //public void simulator(int droneId, Action<in T>update, Func<bool>isDone);
+        public double distance(BO.Location l1, BO.Location l2);
 
     }     
 }

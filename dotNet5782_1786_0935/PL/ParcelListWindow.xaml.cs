@@ -156,7 +156,7 @@ namespace PL
             }
             catch (Exception exc)
             {
-              //  MessageBox.Show("System Malfunction please wait a moment and try again\n");
+              
             }
             
             //myObservableCollection = new ObservableCollection<ParcelToList>(Bl.getParcelsList());

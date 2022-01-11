@@ -213,7 +213,7 @@ namespace PL
             }
             catch(Exception exc)
             {
-                MessageBox.Show("System malfunction please wait a moment and try again");
+                
             }
             
         }

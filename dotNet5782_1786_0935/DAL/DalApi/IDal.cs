@@ -34,10 +34,7 @@ namespace DalApi
                                                     //  public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel); //matches up parcel with buyer
                                                     //  public string chargeDrone(Drone drone, int stationNum); //charges drone
                                                     //  public string releaseDrone(DroneCharge charge); //releases drone from charge
-        public string PrintStation(int stationId); //prints a station
-        public string PrintDrone(int droneId); //prints a drone
-        public string PrintCustomer(int customerId); //prints a customer
-        public string PrintParcel(int parcelId); //prints a parcel
+      
         public Parcel findParcel(int parcelId); //finds a parcel using its id
         public Customer findCustomer(int customerId); //finds a customer using its id
         public DroneCharge findDroneCharge(int droneId, int stationId);

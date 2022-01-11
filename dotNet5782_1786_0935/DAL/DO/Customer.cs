@@ -16,7 +16,8 @@ using System.Threading.Tasks;
             public double longitude { set; get; }
             public string password { set; get; }
             public bool isCustomer { set; get; }
-          
+            public string email { set; get; }
+
 
 
 

@@ -158,7 +158,7 @@ namespace PL
             }
             catch(Exception exc)
             {
-                MessageBox.Show("System malfunction please wait a moment then try again\n");
+                
             }
         }
         private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
@@ -175,7 +175,7 @@ namespace PL
             }
             catch (Exception exc)
             {
-                MessageBox.Show("System malfunction please wait a moment then try again\n");
+               
             }
         }
 
@@ -212,7 +212,7 @@ namespace PL
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-         //   SendEmail();
+            SendEmail();
             termesConditions.Visibility = Visibility.Hidden;
             try
             {
@@ -263,9 +263,10 @@ namespace PL
             // Add a message body
             message.Body = "Hi " + c.name + "\n" +
                 "Welcome to DroneDrop.\n" +
-                "Were happy to have you and are sure you will enjoy our services.\n" +
-                "For some reason i cant find anything to write here.\n\n" +
-                "Thanks,\n" +
+                "We are so happy you have chosen to join us  and  are sure you will enjoy our services.\n" +
+                "For any question, problems or requests you can contact our customer service team " +
+                "at customerService@DroneDrop.com and they will gladly assist you.\n\n" +
+                "Thank you and have a great day,\n" +
                 "Team DroneDrop";
 
             // Create a System.Net.Mail.MailAddress object and 
