@@ -31,22 +31,6 @@ namespace PL
         Customer c;
         Customer cutomerParcel;
         string cName;
-        
-        //ObservableCollection<ParcelinCustomer>deliverObservableCollection;
-        //ObservableCollection<ParcelinCustomer>receiveObservableCollection;
-
-        //public CustomerWindow()
-        //{
-        //    InitializeComponent();
-        //    c = new Customer();
-        //    c.location = new Location();
-        //    DataContext = c;
-        //    sentParcelsList.Visibility = Visibility.Hidden;
-        //    receivedParcelsList.Visibility = Visibility.Hidden;
-        //    sentRead.Visibility = Visibility.Hidden;
-        //    receivedRead.Visibility = Visibility.Hidden;
-
-        //}
         public CustomerWindow(IBL customer, bool checkIsCustomer, bool isLogout, string custumerName="")//add new
         {
             InitializeComponent();
@@ -81,10 +65,6 @@ namespace PL
             cutomerParcel = customer;
             sentParcelsList.ItemsSource = customer.parcelsdelivered;
             receivedParcelsList.ItemsSource = customer.parcelsOrdered;
-            //deliverObservableCollection = new ObservableCollection<ParcelinCustomer>(customer.parcelsdelivered);
-            //sentParcelsList.DataContext = deliverObservableCollection;
-            //receiveObservableCollection = new ObservableCollection<ParcelinCustomer>(customer.parcelsOrdered);
-            //receivedParcelsList.DataContext = receiveObservableCollection;
             idText.IsEnabled = false;
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
