@@ -13,7 +13,6 @@ namespace BL
         private const int DELAY = 1000;
         private const double TIME_STEP = DELAY / 1000;
         private const double STEP = VELOCITY / TIME_STEP;
-    //    bool checkRun = true;
         public Simulator(int droneId, Action updateDrone, Func<bool> isRun, BL bl)
         {
             BO.Drone drone = new BO.Drone();

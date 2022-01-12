@@ -58,6 +58,8 @@ namespace PL
                 releaseDrone.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Hidden;
+                parcelIdRead.Visibility = Visibility.Hidden;
+                parcelIdText.Visibility = Visibility.Hidden;
             }
             if (drone.droneStatus == BO.DroneStatus.maintenance)
             {
@@ -65,6 +67,8 @@ namespace PL
                 matchUpParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Hidden;
+                parcelIdRead.Visibility = Visibility.Hidden;
+                parcelIdText.Visibility = Visibility.Hidden;
             }
             if (drone.droneStatus == BO.DroneStatus.delivery)
             {
@@ -118,11 +122,6 @@ namespace PL
             latitudeText.Visibility = Visibility.Hidden;
             longitudeRead.Visibility = Visibility.Hidden;
             longitudeText.Visibility = Visibility.Hidden;
-         //   stationRead.Visibility = Visibility.Visible;
-
-            //weightText.Visibility = Visibility.Hidden;
-
-         //   weight.Visibility = Visibility.Visible;
             batteryRead.Visibility = Visibility.Hidden;
             batteryGrid.Visibility = Visibility.Hidden;
             statusRead.Visibility = Visibility.Hidden;
@@ -134,8 +133,8 @@ namespace PL
             //   idText.IsReadOnly = false;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-            
-
+            automticButton.Visibility = Visibility.Hidden;
+            manualButton.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -357,26 +356,26 @@ namespace PL
             Close();
         }
 
-        public void updateDroneView()
-        {
-            d = bl.getDrone(d.droneId);
-            if (d.droneStatus == DroneStatus.delivery)
-            {
-                parcel.Visibility = Visibility.Visible;
-                weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
-                prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
-                p = d.parcel;
-                if (p.parcelStatus == false)
-                    p.distance = bl.distance(d.location, p.pickupLocation);
-                if (p.parcelStatus == true)
-                    p.distance = bl.distance(p.pickupLocation, p.targetLocation);
-                parcel.DataContext = p;
-            }
-            else
-                parcel.Visibility = Visibility.Hidden;
-            textBlocks.DataContext = d;
-            droneList.updateListView();
-        }
+        //public void updateDroneView()
+        //{
+        //    d = bl.getDrone(d.droneId);
+        //    if (d.droneStatus == DroneStatus.delivery)
+        //    {
+        //        parcel.Visibility = Visibility.Visible;
+        //        weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
+        //        prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
+        //        p = d.parcel;
+        //        if (p.parcelStatus == false)
+        //            p.distance = bl.distance(d.location, p.pickupLocation);
+        //        if (p.parcelStatus == true)
+        //            p.distance = bl.distance(p.pickupLocation, p.targetLocation);
+        //        parcel.DataContext = p;
+        //    }
+        //    else
+        //        parcel.Visibility = Visibility.Hidden;
+        //    textBlocks.DataContext = d;
+        //    droneList.updateListView();
+        //}
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -411,8 +410,6 @@ namespace PL
                 // e.Result throw System.Reflection.TargetInvocationException
                 MessageBox.Show("Error"); //Exception Message
             }
-
-
             //Auto = false;
             if (d.droneStatus == DroneStatus.delivery)
             {
@@ -424,6 +421,19 @@ namespace PL
                 textBlocks.DataContext = d;
             }
             MessageBox.Show("The simulator is ended");
+            buttons.Visibility = Visibility.Visible;
+            automticButton.Visibility = Visibility.Visible;
+            manualButton.Visibility = Visibility.Hidden;
+            parcelButton.Visibility = Visibility.Hidden;
+            parcelIdRead.Visibility = Visibility.Hidden;
+            parcelIdText.Visibility = Visibility.Hidden;
+            logOut.Visibility = Visibility.Visible;
+            closeButton.Visibility = Visibility.Visible;
+            releaseDrone.Visibility = Visibility.Hidden;
+            pickupParcel.Visibility = Visibility.Hidden;
+            deliverParcel.Visibility = Visibility.Hidden;
+            parcelIdRead.Visibility = Visibility.Hidden;
+            parcelIdText.Visibility = Visibility.Hidden;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -460,17 +470,6 @@ namespace PL
         {
             if (worker.WorkerSupportsCancellation == true)
                 worker.CancelAsync();
-
-
-            buttons.Visibility = Visibility.Visible;
-            automticButton.Visibility = Visibility.Visible;
-            manualButton.Visibility = Visibility.Hidden;  // i think...
-            parcelButton.Visibility = Visibility.Hidden;
-            parcelIdRead.Visibility = Visibility.Hidden;
-            parcelIdText.Visibility = Visibility.Hidden;
-            logOut.Visibility = Visibility.Visible;
-            closeButton.Visibility = Visibility.Visible;
-          
         }
 
     }
