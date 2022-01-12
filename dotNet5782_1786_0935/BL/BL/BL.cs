@@ -65,16 +65,16 @@ namespace BL
                 chargeCapacity chargeCapacity = getChargeCapacity();
                 var target = dal.getCustomer(item.targetId);
                 d = distance(a, loc);
-                x = distance(loc, new BO.Location(dal.getCustomer(item.targetId).latitude, 
+                x = distance(loc, new BO.Location(dal.getCustomer(item.targetId).latitude,
                                                    dal.getCustomer(item.targetId).longitude));
                 double fromCusToSta = distance(new BO.Location(target.latitude,
-                                                               target.longitude), 
+                                                               target.longitude),
                                                                 closestStation(new BO.Location(target.latitude,
                                                                 target.longitude), false, stationLocationslist()));
 
                 double batteryUse = x * chargeCapacity.chargeCapacityArr[(int)item.weight] +
                                    fromCusToSta * chargeCapacity.chargeCapacityArr[0] + d * chargeCapacity.chargeCapacityArr[0];
-                if (d < far && (battery - batteryUse) > 0 && item.scheduled == null 
+                if (d < far && (battery - batteryUse) > 0 && item.scheduled == null
                                                             && weight(we, (BO.weightCategories)item.weight) == true)
                 {
                     far = d;
@@ -166,8 +166,15 @@ namespace BL
         {
 
             double[] arr = dal.ChargeCapacity();
-            var chargeCapacity = new chargeCapacity { pwrAvailable = arr[0], pwrLight = arr[1], pwrAverge = arr[2], 
-                                                      pwrHeavy = arr[3], pwrRateLoadingDrone = arr[4], chargeCapacityArr = arr };
+            var chargeCapacity = new chargeCapacity
+            {
+                pwrAvailable = arr[0],
+                pwrLight = arr[1],
+                pwrAverge = arr[2],
+                pwrHeavy = arr[3],
+                pwrRateLoadingDrone = arr[4],
+                chargeCapacityArr = arr
+            };
             return chargeCapacity;
         }
         #endregion
@@ -187,7 +194,7 @@ namespace BL
             if (drone.droneStatus == DroneStatus.available)
             {
                 Location location = closestStation(drone.location, false, stationLocationslist());
-                return (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable] 
+                return (int)(getChargeCapacity().chargeCapacityArr[(int)getChargeCapacity().pwrAvailable]
                                                 * distance(drone.location, location));
             }
             //if drone out for delivery
@@ -291,7 +298,7 @@ namespace BL
                 //if has chatgeslots
                 if (withChargeSlots)
                 {
-                    var station = getStations().ToList().Find(x => x.location.longitude == locations[i].longitude 
+                    var station = getStations().ToList().Find(x => x.location.longitude == locations[i].longitude
                                                                && x.location.latitude == locations[i].latitude);
 
                     //checks distance
@@ -614,7 +621,7 @@ namespace BL
             //checks validity of input
             if (droneToAdd.droneId <= 0)
                 throw new BO.InvalidInputException("drone id not valid- must be a posittive\n");
-            if (droneToAdd.maxWeight != BO.weightCategories.light && droneToAdd.maxWeight != BO.weightCategories.average 
+            if (droneToAdd.maxWeight != BO.weightCategories.light && droneToAdd.maxWeight != BO.weightCategories.average
                                                                     && droneToAdd.maxWeight != BO.weightCategories.heavy)
                 throw new BO.InvalidInputException("invalid weight- must light(0),average(1) or heavy(2)");
             if (droneToAdd.battery == 0)
@@ -701,7 +708,7 @@ namespace BL
                 customerId = customertoAdd.customerId,
                 name = customertoAdd.name,
                 Phone = customertoAdd.phone,
-                email=customertoAdd.email,
+                email = customertoAdd.email,
                 latitude = customertoAdd.location.latitude,
                 longitude = customertoAdd.location.longitude,
                 password = customertoAdd.password,
@@ -875,7 +882,7 @@ namespace BL
                 //gets customer from dal list
                 DO.Customer temp = dal.getCustomer(customerId);
                 var parcelList = dal.printParcelsList();
-              //  var boParcelList = getParcelsList();
+                //  var boParcelList = getParcelsList();
                 //starts building bo customer
                 BO.Customer customer = new BO.Customer()
                 {
@@ -893,34 +900,34 @@ namespace BL
                     parcelsOrdered = parcelList.Where(parcel => parcel.targetId == customerId)
                                                            .Select(Parcel => new ParcelinCustomer()
 
-                    {
-                        parcelId = Parcel.parcelId,
-                        weight = (BO.weightCategories)((int)Parcel.weight),
-                        priority = (BO.Priorities)((int)Parcel.priority),
-                        parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
-                        customerInParcel = new CustomerInParcel()
-                        {
-                            customerId = Parcel.senderId,
-                            customerName = dal.getCustomer(Parcel.senderId).name
-                        }
-                    }),
+                                                           {
+                                                               parcelId = Parcel.parcelId,
+                                                               weight = (BO.weightCategories)((int)Parcel.weight),
+                                                               priority = (BO.Priorities)((int)Parcel.priority),
+                                                               parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
+                                                               customerInParcel = new CustomerInParcel()
+                                                               {
+                                                                   customerId = Parcel.senderId,
+                                                                   customerName = dal.getCustomer(Parcel.senderId).name
+                                                               }
+                                                           }),
 
                     parcelsdelivered = parcelList.Where(parcel => parcel.senderId == customerId)
                                                              .Select(Parcel => new ParcelinCustomer()
 
-                    {
-                        parcelId = Parcel.parcelId,
-                        weight = (BO.weightCategories)((int)Parcel.weight),
-                        priority = (BO.Priorities)((int)Parcel.priority),
-                        parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
-                        customerInParcel = new CustomerInParcel()
-                        {
-                            customerId = Parcel.targetId,
-                            customerName = dal.getCustomer(Parcel.targetId).name
-                        }
+                                                             {
+                                                                 parcelId = Parcel.parcelId,
+                                                                 weight = (BO.weightCategories)((int)Parcel.weight),
+                                                                 priority = (BO.Priorities)((int)Parcel.priority),
+                                                                 parcelStatus = getParcelsList().Where(p => p.parcelId == Parcel.parcelId).First().parcelStatus,
+                                                                 customerInParcel = new CustomerInParcel()
+                                                                 {
+                                                                     customerId = Parcel.targetId,
+                                                                     customerName = dal.getCustomer(Parcel.targetId).name
+                                                                 }
 
-                    }),
-                    email=temp.email
+                                                             }),
+                    email = temp.email
 
                 };
 
@@ -1148,7 +1155,7 @@ namespace BL
         BL()
         {
 
-            
+
             drones = new List<BO.DroneToList>();
             bool flag = false;
             Random rnd = new Random();
@@ -1168,13 +1175,13 @@ namespace BL
                 drt.weight = (BO.weightCategories)(int)item.maxWeight;
                 drt.numOfParcelsdelivered = dal.printParcelsList().Count(x => x.droneId == drt.droneId);
                 int parcelId = dal.printParcelsList().ToList().FirstOrDefault(x => x.droneId == drt.droneId
-                                                                              && x.delivered==null).parcelId;
+                                                                              && x.delivered == null).parcelId;
                 drt.parcelId = parcelId;
                 var baseStationLocations = stationLocationslist();
                 //goes over every parcel in list
                 foreach (var pr in parcels)
                 {
-                    
+
                     //if not yet delivered updates info
                     if (pr.droneId == item.droneId)
                     {
@@ -1189,10 +1196,10 @@ namespace BL
                         {
                             drt.location = new Location(newSenderLocation.latitude, newSenderLocation.longitude);
                             minBatery = distance(drt.location, senderLocation) * chargeCapacity.chargeCapacityArr[0];
-                            minBatery += distance(senderLocation, targetLocation) * 
+                            minBatery += distance(senderLocation, targetLocation) *
                                            chargeCapacity.chargeCapacityArr[(int)pr.weight];
                             minBatery += distance(targetLocation,
-                                                 new Location(newTargetLocation.latitude, newTargetLocation.longitude)) 
+                                                 new Location(newTargetLocation.latitude, newTargetLocation.longitude))
                                                  * chargeCapacity.chargeCapacityArr[0];
                         }
                         if (pr.pickedUp != null && pr.delivered == null)
@@ -1213,7 +1220,7 @@ namespace BL
                         }
                         if (minBatery > 100) { minBatery = 100; }
                         if (minBatery < 17) { minBatery = 17; }
-                        drt.battery = rnd.Next((int)minBatery, 101); 
+                        drt.battery = rnd.Next((int)minBatery, 101);
                         flag = true;
                         break;
                     }
@@ -1237,8 +1244,8 @@ namespace BL
                                 break;
                             i++;
                         }
-                        DO.DroneCharge DC = new DO.DroneCharge 
-                                            { droneId = drt.droneId, stationId = s.stationId, chargeTime = DateTime.Now };
+                        DO.DroneCharge DC = new DO.DroneCharge
+                        { droneId = drt.droneId, stationId = s.stationId, chargeTime = DateTime.Now };
                         dal.AddDroneCharge(DC);
                         drt.location = new Location(s.latitude, s.longitude);
                         drt.battery = rnd.Next(1, 21); // 100/;
@@ -1265,14 +1272,14 @@ namespace BL
 
                         drt.location = new Location(lst[l].latitude, lst[l].longitude);
                         Location Location1 = new Location(lst[l].latitude, lst[l].longitude);
-                        var tempLoc= closestStation(Location1, false, baseStationLocations);
+                        var tempLoc = closestStation(Location1, false, baseStationLocations);
                         minBatery += distance(drt.location, new Location
                                                   (tempLoc.longitude, tempLoc.latitude)) * chargeCapacity.chargeCapacityArr[0];
                         if (minBatery > 100) { minBatery = 100; }
                         if (minBatery < 17)
                         { minBatery = 17; }
                         drt.battery = rnd.Next((int)minBatery, 101);
-                        
+
                     }
 
                 }
@@ -1331,7 +1338,7 @@ namespace BL
             if (number != "")
                 tempCustomer.Phone = number;
             dal.UpdateCustomer(tempCustomer);
-          
+
         }
         #endregion
         #region releaseDroneFromCharge
@@ -1354,15 +1361,17 @@ namespace BL
                 double chargeTime = DateTime.Now.Subtract(dal.getDroneCharge(droneId).chargeTime).TotalMinutes;
                 //updates info
                 var possibleStation = getStation(dal.printStationsList().ToList()
-                                        .Find(station => station.latitude == tempDrone.location.latitude 
+                                        .Find(station => station.latitude == tempDrone.location.latitude
                                         && station.longitude == tempDrone.location.longitude).stationId);
                 BatteryUsage usage = new BatteryUsage();
                 tempDrone.battery += (chargeTime * usage.chargeSpeed);
                 if (tempDrone.battery > 100)
                     tempDrone.battery = 100;
                 dal.deleteDroneCharge(tempDrone.droneId, possibleStation.stationId);
-                drones.ForEach(d => { if (d.droneId == droneId)
-                    { d.droneStatus = DroneStatus.available; d.battery = tempDrone.battery; } });
+                drones.ForEach(d => {
+                    if (d.droneId == droneId)
+                    { d.droneStatus = DroneStatus.available; d.battery = tempDrone.battery; }
+                });
                 dal.deleteStation(possibleStation.stationId);
                 possibleStation.numberOfSlotsInUse--;
                 addStation(possibleStation);
@@ -1466,9 +1475,9 @@ namespace BL
                 int index = drones.FindIndex(d => d.droneId == droneId);
                 drones.RemoveAt(index);
                 BatteryUsage usage = new BatteryUsage();
-              
+
                 tempDrone.parcel.parcelStatus = true;
-               
+
                 //AddDrone(tempDrone,FindStation(tempDrone.location));
                 var tempD = new DroneToList()
                 {
@@ -1576,7 +1585,7 @@ namespace BL
             {
                 //ensures drone exists
                 drone = getDrone(droneId);
-            
+
 
             }
             catch (DO.DoesntExistException exp)
@@ -1589,7 +1598,7 @@ namespace BL
             //find closest sation to charge at
             Location stationLocation = closestStation(drone.location, false, stationLocationslist());
 
-            station = getStations().Find(x => x.location.longitude == stationLocation.longitude 
+            station = getStations().Find(x => x.location.longitude == stationLocation.longitude
                                           && x.location.latitude == stationLocation.latitude);
             int droneIndex = drones.ToList().FindIndex(x => x.droneId == droneId);
             if ((drone.battery - minBatteryRequired(drones[droneIndex].droneId) < 0))
