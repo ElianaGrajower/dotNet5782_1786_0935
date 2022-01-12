@@ -45,7 +45,6 @@
             <ComboBoxItem Content="clear"></ComboBoxItem>
         </ComboBox>
         <Label x:Name="dateSelector" Content="Date Range:" HorizontalAlignment="Left" Margin="343,17,0,0" VerticalAlignment="Top"/>
-        <Calendar x:Name="calender" HorizontalAlignment="Left" Margin="609,63,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <DatePicker x:Name="pickDate" HorizontalAlignment="Left" Margin="585,37,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePicker_SelectedDateChanged" DataContextChanged="DatePicker_DataContextChanged"/>
         <Button HorizontalAlignment="Left" Margin="723,32,0,0" VerticalAlignment="Top" Height="30" Width="30" Click="Button_Click_1" Background="White">
             <Image Height="25" Width="25" Source="/download.png"/>

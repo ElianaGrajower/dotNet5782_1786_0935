@@ -24,24 +24,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/1.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="111*"/>
-        </Grid.RowDefinitions>-->
-        <!--<Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
-        </Grid>-->
-        <!--<Image HorizontalAlignment="Center" Height="598" Margin="0,10,0,0" VerticalAlignment="Top" Width="800" Source="/a-drone-carrying-a-box.jpg" Opacity="0.6" Grid.RowSpan="3">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/a-drone-carrying-a-box.jpg"/>
-            </Image.OpacityMask>
-        </Image>-->
         <Button Click="Button_Click" Background="#FF94C9FF" FontSize="16" Grid.Row="4" RenderTransformOrigin="0.485,0.123" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
             <StackPanel>
                 <Image Height="70" Width="70" Source="/drone (1).png"/>

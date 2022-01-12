@@ -122,10 +122,10 @@ namespace PL
             //pickDate.DataContext.Equals("select");
         }
 
-        private void dateButton_Click(object sender, RoutedEventArgs e)
-        {
-            calender.Visibility = Visibility.Visible;
-        }
+        //private void dateButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    calender.Visibility = Visibility.Visible;
+        //}
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {

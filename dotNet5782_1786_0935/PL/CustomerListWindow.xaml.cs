@@ -87,8 +87,6 @@ namespace PL
                     throw new Exception("clicked wrong area");
                 realCustomer = bl.getCustomer(updateCustomer.customerId);
                 new CustomerWindow(bl, realCustomer, cName).ShowDialog();
-                //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-                //CustomersListView.DataContext = myObservableCollection;
                 ShowInfo();
             }
             catch (Exception exc)
