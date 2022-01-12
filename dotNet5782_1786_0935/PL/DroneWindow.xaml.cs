@@ -387,7 +387,7 @@ namespace PL
             {
                 bl.openSimulator(d.droneId, updateDrone, checkStop);
             }
-            catch (Exception ex)
+            catch (Exception ex)  
             {
                 MessageBox.Show(ex.Message);
             }
