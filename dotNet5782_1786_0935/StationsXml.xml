@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Station>
+    <stationId>107949456</stationId>
+    <name>Raanana Central Station</name>
+    <latitude>29.731349448515267</latitude>
+    <longitude>35.3659567605499</longitude>
+    <chargeSlots>34</chargeSlots>
+    <active>false</active>
+  </Station>
+  <Station>
+    <stationId>456767935</stationId>
+    <name>Tel Aviv Central Station</name>
+    <latitude>31.488661274508416</latitude>
+    <longitude>35.39646213743205</longitude>
+    <chargeSlots>74</chargeSlots>
+    <active>false</active>
+  </Station>
+</ArrayOfStation>

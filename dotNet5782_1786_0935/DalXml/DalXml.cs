@@ -28,7 +28,7 @@ namespace Dal
         static readonly IDal instance = new DalXml();
         public static IDal Instance { get => instance; }
         #endregion
-        private DalXml() { Initialize(); } // default constructer calls on initialize func
+        //private DalXml() { Initialize(); } // default constructer calls on initialize func
                                            // #region Initialize
         public void Initialize()
         {
