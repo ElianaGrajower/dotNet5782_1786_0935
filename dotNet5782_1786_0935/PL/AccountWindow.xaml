@@ -40,5 +40,11 @@
                 <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
             </StackPanel>
         </Expander>
+        <Button x:Name="confirmationButton" Content="Confirmation" HorizontalAlignment="Left" Margin="622,63,0,0" VerticalAlignment="Top" Height="46" Width="101" Background="#FF94C9FF" Click="Button_Click"/>
+        <Canvas x:Name="confirmationCanvas" Margin="281,63,281,135" Background="#FF94C9FF" Visibility="Collapsed">
+            <Button x:Name="pickUpButton" Content="PickedUp" Canvas.Left="64" Canvas.Top="63" Width="114" Height="38" Background="#FFBADEFB" Click="pickUpButton_Click" FontSize="14"/>
+            <Button x:Name="recivedButton" Content="Recieved" Canvas.Left="62" Canvas.Top="144" Width="114" Height="38" Background="#FFBADEFB" Click="recivedButton_Click" FontSize="14"/>
+            <TextBlock Canvas.Left="108" Canvas.Top="203" Text="exit" TextWrapping="Wrap" TextDecorations="Underline" FontSize="16" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"/>
+        </Canvas>
     </Grid>
 </Window>

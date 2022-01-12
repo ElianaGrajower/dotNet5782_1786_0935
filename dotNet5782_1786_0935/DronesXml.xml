@@ -2,61 +2,61 @@
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>193705566</droneId>
+    <droneId>642751470</droneId>
     <model>Reaper</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>194847128</droneId>
+    <droneId>449404546</droneId>
     <model>Shadow</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>light</maxWeight>
-    <droneId>139526454</droneId>
+    <maxWeight>average</maxWeight>
+    <droneId>437524622</droneId>
     <model>Grey Eagle</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>213532592</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>196028755</droneId>
     <model>Global Hawk</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>689288439</droneId>
+    <droneId>694120306</droneId>
     <model>Pioneer</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>light</maxWeight>
-    <droneId>191220018</droneId>
+    <maxWeight>average</maxWeight>
+    <droneId>253072406</droneId>
     <model>Fire Scout</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>862507606</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>983081866</droneId>
     <model>Snowgoose</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>849834768</droneId>
+    <droneId>149396595</droneId>
     <model>Hunter</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>172550032</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>646754073</droneId>
     <model>Stalker</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>926132922</droneId>
+    <droneId>670865414</droneId>
     <model>GNAT</model>
     <active>false</active>
   </Drone>

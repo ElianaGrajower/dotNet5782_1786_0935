@@ -49,5 +49,47 @@ namespace PL
             bl.releaseAllFromCharge();
             Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            confirmationCanvas.Visibility = Visibility.Visible;
+        }
+
+        private void pickUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parcels = bl.confirmPickUp(c.customerId);
+                string s = string.Join(Environment.NewLine, parcels);
+                if (s == null)
+                    throw new DoesntExistException();
+                MessageBox.Show(s + "\nPress OK to approve the parcels above");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("No parcels awaiting confirmations");
+            }
+        }
+
+        private void recivedButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parcels = bl.confirmDelivery(c.customerId);
+                string s = string.Join(Environment.NewLine, parcels);
+                if (s == null)
+                    throw new DoesntExistException();
+                MessageBox.Show(s + "\nPress OK to approve the parcels above");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No parcels awaiting confirmations");
+            }
+        }
+
+        private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            confirmationCanvas.Visibility = Visibility.Hidden;
+        }
     }
 }
