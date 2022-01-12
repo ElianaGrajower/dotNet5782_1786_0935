@@ -412,8 +412,18 @@ namespace PL
 
         private void manualButton_Click(object sender, RoutedEventArgs e)
         {
-            if (worker.WorkerSupportsCancellation == true)
-                worker.CancelAsync();
+            try
+            {
+                if (worker.WorkerSupportsCancellation == true)
+                    worker.CancelAsync();
+            }
+            catch(Exception exc)
+            {
+
+            }
+
+           
+
         }
 
     }
