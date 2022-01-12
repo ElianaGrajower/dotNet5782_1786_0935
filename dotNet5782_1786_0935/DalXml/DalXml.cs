@@ -28,7 +28,7 @@ namespace Dal
         static readonly IDal instance = new DalXml();
         public static IDal Instance { get => instance; }
         #endregion
-     //   private DalXml() { Initialize(); } // default constructer calls on initialize func
+        private DalXml() { Initialize(); } // default constructer calls on initialize func
                                            // #region Initialize
         public void Initialize()
         {
@@ -75,7 +75,8 @@ namespace Dal
         #region createCustomer
         public void createCustomer() //creats a customer with random information
         {
-            XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
+            XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath); 
+            
             string p = letters[10];
             for (int i = 0; i < 8; i++) //creates 8 customers with information
                 listCustomers.Add(new XElement("Customer",
@@ -83,8 +84,8 @@ namespace Dal
                    new XElement("customerId", r.Next(100000000, 999999999)),
                     new XElement("name", customerName[i]),
                     new XElement("Phone", "05" + r.Next(00000000, 99999999)),
-                    new XElement("longitude", (r.NextDouble() + r.Next(34, 35)) + 0.57), //gets coordinates for (-90 - 90) 
-                    new XElement("latitude", (r.NextDouble() + r.Next(29, 33)) + 0.207), //gets coordinates for (-180 - 180)
+                    new XElement("longitude", (r.NextDouble() + r.Next(34, 35)) + 0.57), 
+                    new XElement("latitude", (r.NextDouble() + r.Next(29, 33)) + 0.207), 
                      new XElement("password", letters[i] + p),
                      new XElement("isCustomer", true),
                      new XElement("email", customerName[i]+ letters[11])))

@@ -363,26 +363,26 @@ namespace PL
             Close();
         }
 
-        public void updateDroneView()
-        {
-            d = bl.getDrone(d.droneId);
-            if (d.droneStatus == DroneStatus.delivery)
-            {
-                parcel.Visibility = Visibility.Visible;
-                weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
-                prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
-                p = d.parcel;
-                if (p.parcelStatus == false)
-                    p.distance = bl.distance(d.location, p.pickupLocation);
-                if (p.parcelStatus == true)
-                    p.distance = bl.distance(p.pickupLocation, p.targetLocation);
-                parcel.DataContext = p;
-            }
-            else
-                parcel.Visibility = Visibility.Hidden;
-            textBlocks.DataContext = d;
-            droneList.updateListView();
-        }
+        //public void updateDroneView()
+        //{
+        //    d = bl.getDrone(d.droneId);
+        //    if (d.droneStatus == DroneStatus.delivery)
+        //    {
+        //        parcel.Visibility = Visibility.Visible;
+        //        weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
+        //        prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
+        //        p = d.parcel;
+        //        if (p.parcelStatus == false)
+        //            p.distance = bl.distance(d.location, p.pickupLocation);
+        //        if (p.parcelStatus == true)
+        //            p.distance = bl.distance(p.pickupLocation, p.targetLocation);
+        //        parcel.DataContext = p;
+        //    }
+        //    else
+        //        parcel.Visibility = Visibility.Hidden;
+        //    textBlocks.DataContext = d;
+        //    droneList.updateListView();
+        //}
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -477,9 +477,15 @@ namespace PL
 
         private void manualButton_Click(object sender, RoutedEventArgs e)
         {
-            if (worker.WorkerSupportsCancellation == true)
-                worker.CancelAsync();
+            try
+            {
+                if (worker.WorkerSupportsCancellation == true)
+                    worker.CancelAsync();
+            }
+            catch(Exception exc)
+            {
 
+            }
 
            
 
