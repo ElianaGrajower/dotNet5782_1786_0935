@@ -1485,7 +1485,8 @@ namespace BL
         {
             var tempDrone = getDrone(droneId);
             var tempParcel = getParcel(tempDrone.parcel.parcelId);
-            var customer = getCustomer(tempParcel.sender.customerId);
+             var customer = getCustomer(tempParcel.sender.customerId);
+           
             //ensures was not yet picked up
             if (tempParcel.pickedUp == null)
             {

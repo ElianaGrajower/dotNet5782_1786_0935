@@ -135,6 +135,8 @@ namespace PL
             cName = customerName;
             automticButton.Visibility = Visibility.Hidden;
             manualButton.Visibility = Visibility.Hidden;
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -470,6 +472,10 @@ namespace PL
         {
             if (worker.WorkerSupportsCancellation == true)
                 worker.CancelAsync();
+
+
+           
+
         }
 
     }
