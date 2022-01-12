@@ -40,7 +40,7 @@ namespace BL
                         while (drone.battery < 100)
                         {
                             Thread.Sleep(DELAY);
-                            bl.releaseDroneFromCharge(droneId);        //fix this!!!!!
+                            bl.releaseDroneFromCharge(droneId);        
                             drone = bl.getDrone(droneId);
                             bl.SendDroneToCharge(droneId);
                             updateDrone();
@@ -59,7 +59,7 @@ namespace BL
                     while (drone.battery < 100)
                     {
                         Thread.Sleep(DELAY);
-                        bl.releaseDroneFromCharge(droneId);        //fix this!!!!!
+                        bl.releaseDroneFromCharge(droneId);        
                         drone = bl.getDrone(droneId);
                         bl.SendDroneToCharge(droneId);
                         updateDrone();
