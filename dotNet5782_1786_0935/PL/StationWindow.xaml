@@ -14,7 +14,7 @@
         <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="85" Click="add_Click" Background="#FF989B9E"/>
         <Button x:Name="close" Content="close" HorizontalAlignment="Left" Margin="132,343,0,0" VerticalAlignment="Top" Width="85" Click="close_Click" Background="#FFDC637A"/>
         <Label Content="Station Id:" HorizontalAlignment="Left" Margin="122,57,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="stationIdText" HorizontalAlignment="Left" Margin="242,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="stationIdText_TextChanged" Text="{Binding stationId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
+        <TextBox x:Name="stationIdText" HorizontalAlignment="Left" Margin="242,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding stationId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="122,95,0,0" VerticalAlignment="Top" Width="50"/>
         <TextBox x:Name="nameText" HorizontalAlignment="Left" Margin="242,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label x:Name="latitudeRead" Content="Latitude:" HorizontalAlignment="Left" Margin="438,57,0,0" VerticalAlignment="Top"/>
@@ -24,7 +24,7 @@
         <Label x:Name="longitudeRead" Content="Longitude:" HorizontalAlignment="Left" Margin="438,99,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="548,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>
         <Label x:Name="dronesAtStationRead" Content="Drones At Station:" HorizontalAlignment="Left" Margin="122,186,0,0" VerticalAlignment="Top" Visibility="Visible"/>
-        <ListView x:Name="listOfDronesAtStation" Margin="90,217,90,115" DataContext="{Binding}" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="listOfDronesAtStation_MouseDoubleClick" SelectionChanged="listOfDronesAtStation_SelectionChanged">
+        <ListView x:Name="listOfDronesAtStation" Margin="90,217,90,115" DataContext="{Binding}" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="listOfDronesAtStation_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Charge Time" Width="140" DisplayMemberBinding="{Binding chargeTillNow}"/>

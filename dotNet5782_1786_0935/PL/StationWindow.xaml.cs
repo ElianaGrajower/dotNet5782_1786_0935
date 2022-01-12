@@ -24,7 +24,6 @@ namespace PL
     public partial class StationWindow : Window
     {
         internal readonly IBL Bl = BlFactory.GetBl();
-     //   ObservableCollection<DroneInCharging> droneAtStationObservableCollection;
         Station s;
         string cName;
         
@@ -36,7 +35,6 @@ namespace PL
             s = new Station();
             s.location = new Location();
             DataContext = s;
-
             add.Visibility = Visibility.Visible;
             update.Visibility = Visibility.Hidden;
             inUseRead.Visibility = Visibility.Hidden;
@@ -45,16 +43,12 @@ namespace PL
             dronesAtStationRead.Visibility = Visibility.Hidden;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-          
         }
              
         public StationWindow(IBL b, Station station, string customerName) //update
         {
             InitializeComponent();
             this.Bl = b;
-            //s = new Station();
-            //s.location = new Location();
-            //DataContext = s;
             s = station;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
@@ -63,31 +57,8 @@ namespace PL
             inUseRead.Visibility = Visibility.Visible;
             inUseText.Visibility = Visibility.Visible;
             ourLOGO.Visibility = Visibility.Hidden;
-            
-            //latitudeText.Visibility = Visibility.Hidden;
-            //latitudeRead.Visibility = Visibility.Hidden;
-            //longitudeText.Visibility = Visibility.Hidden;
-            //longitudeRead.Visibility = Visibility.Hidden;
-
-
-            ////switch to data binding?????????
-            //   stationIdText.Text = station.stationId.ToString();
-            //   nameText.Text = station.name.ToString();
-            //   slotsText.Text = station.chargeSlots.ToString();
-            //   inUseText.Text = station.numberOfSlotsInUse.ToString();
-            //   allChargeText.Text = (station.chargeSlots + station.numberOfSlotsInUse).ToString();
-            //   locationText.Text = station.location.ToString();  // it will work when we make it a station
-            ////   Station realStation = new Station();
-            ////   realStation = Bl.getStation(station.stationId);
-            //   listOfDronesAtStation.ItemsSource = station.dronesAtStation;
-            ////////
-            ///
             this.DataContext = station;
             listOfDronesAtStation.ItemsSource = station.dronesAtStation;
-
-            //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(station.dronesAtStation);
-            //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
-
             stationIdText.IsEnabled = false;
             latitudeText.IsEnabled = false;
             longitudeText.IsEnabled = false;
@@ -139,10 +110,8 @@ namespace PL
 
 
 
-        private void listOfDronesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e) //write this!!
+        private void listOfDronesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e) 
         {
-            //something here is veryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy wrong
-            //throwing a catch
             DroneInCharging updateDrone = new DroneInCharging();
             updateDrone = (DroneInCharging)listOfDronesAtStation.SelectedItem;
             try
@@ -152,14 +121,7 @@ namespace PL
                 Drone realDrone = new Drone();
                 realDrone = Bl.getDrone(updateDrone.droneId);
                 new DroneWindow(Bl, realDrone, cName).ShowDialog();
-                //droneAtStationObservableCollection = new ObservableCollection<DroneInCharging>(s.dronesAtStation);
-                //listOfDronesAtStation.DataContext = droneAtStationObservableCollection;
-
                 DataContext = s;
-                ///////////doesnt work
-                ///
-
-
                 listOfDronesAtStation.ItemsSource = s.dronesAtStation;
                 Close();
             }
@@ -179,16 +141,6 @@ namespace PL
         {
             Close();
             new StationWindow(Bl, cName).ShowDialog();
-        }
-
-        private void listOfDronesAtStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void stationIdText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

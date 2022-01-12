@@ -38,12 +38,7 @@ namespace PL
             prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
             senderSelect.ItemsSource = Bl.allCustomers().Select(c => c.customerId);
             targetSelect.ItemsSource = Bl.allCustomers().Select(c => c.customerId);
-            //weightText.Visibility = Visibility.Hidden;
-            //priorityText.Visibility = Visibility.Hidden;
-            //senderText.Visibility = Visibility.Hidden;
-            //targetText.Visibility = Visibility.Hidden;
             deleteButton.Visibility = Visibility.Hidden;
-     //       updateButton.Visibility = Visibility.Hidden;
             parcelIdText.Visibility = Visibility.Hidden;
             parcelIdRead.Visibility = Visibility.Hidden;
             droneIdText.Visibility = Visibility.Hidden;
@@ -61,13 +56,6 @@ namespace PL
             targetButton.Visibility = Visibility.Hidden;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-          
-
-
-
-
-
-
         }
         public ParcelWindow(IBL b, Parcel parcel, string customerName) //update
         {
@@ -87,7 +75,6 @@ namespace PL
             targetSelect.IsEnabled = false;
             addButton.Visibility = Visibility.Hidden;
             ourLOGO.Visibility = Visibility.Hidden;
-           
             try
             {
                 ParcelToList statusParcel = new ParcelToList();
@@ -103,9 +90,6 @@ namespace PL
             {
                 droneButton.Visibility = Visibility.Hidden;
             }
-
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -156,15 +140,12 @@ namespace PL
             }
         }
 
-        private void prioritySelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
             checkDelete.Visibility = Visibility.Visible;
         }
+
 
         private void yes_Click(object sender, RoutedEventArgs e)
         {

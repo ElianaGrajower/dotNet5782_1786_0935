@@ -44,7 +44,6 @@ namespace PL
             sentRead.Visibility = Visibility.Hidden;
             receivedRead.Visibility = Visibility.Hidden;
             updateButton.Visibility = Visibility.Hidden;
-         
             if (isLogout)
             {
                 expanderHeader.Text = " " + custumerName;
@@ -54,8 +53,6 @@ namespace PL
             {
                 logout.Visibility = Visibility.Hidden;
             }
-
-
         }
         public CustomerWindow(IBL b, BO.Customer customer, string customerName)//update
         {
@@ -75,7 +72,6 @@ namespace PL
             passwordText.Visibility = Visibility.Hidden;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-         
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -83,10 +79,6 @@ namespace PL
             Close();
         }
 
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            //checkDelete.Visibility = Visibility.Visible;
-        }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -97,7 +89,6 @@ namespace PL
                 string phone = phoneText.Text;
                 bl.UpdateCustomer(customerId, name, phone);
                 MessageBox.Show("customer updated succesfully");
-                //DataContext = c;
             }
             catch(InvalidInputException exc)
             {
@@ -109,14 +100,6 @@ namespace PL
             }
         }
 
-        private void sentParcelsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
-        private void idText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
@@ -140,7 +123,7 @@ namespace PL
                 
             }
         }
-        private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
+        private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) 
         {
             ParcelinCustomer updateParcel = new ParcelinCustomer();
             updateParcel = (ParcelinCustomer)receivedParcelsList.SelectedItem;
@@ -156,15 +139,6 @@ namespace PL
             {
                
             }
-        }
-        private void passwordText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
@@ -188,11 +162,6 @@ namespace PL
             {
                 MessageBox.Show("ERROR can not add customer");
             }
-        }
-
-        private void checkBoxTerms_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -250,7 +219,5 @@ namespace PL
             // Send the message
             smtp.Send(message);
         }
-
-
     }
 }

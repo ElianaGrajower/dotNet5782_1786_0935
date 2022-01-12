@@ -17,7 +17,7 @@
         <Label Content="Name:" HorizontalAlignment="Left" Margin="141,65,0,0" VerticalAlignment="Top"/>
         <Label Content="Phone:" HorizontalAlignment="Left" Margin="412,34,0,0" VerticalAlignment="Top"/>
         <Label x:Name="sentRead" Content="Sent Parcels:" HorizontalAlignment="Left" Margin="204,112,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="sentParcelsList" Margin="77,138,76,201" SelectionChanged="sentParcelsList_SelectionChanged" MouseDoubleClick="sentParcelsList_MouseDoubleClick" Visibility="Visible">
+        <ListView x:Name="sentParcelsList" Margin="77,138,76,201" MouseDoubleClick="sentParcelsList_MouseDoubleClick" Visibility="Visible">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Parcel Id" Width="100" DisplayMemberBinding="{Binding parcelId}"/>
@@ -50,13 +50,27 @@
         <Label Content="Logitude:" HorizontalAlignment="Left" Margin="412,97,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="526,100,0,0" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="passwordRead" Content="Password:" HorizontalAlignment="Left" Margin="141,127,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="255,133,0,0" Text="{Binding password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120" TextChanged="passwordText_TextChanged"/>
+        <TextBox x:Name="passwordText" HorizontalAlignment="Left" Margin="255,133,0,0" Text="{Binding password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="141,97,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="emailText" HorizontalAlignment="Left" Margin="255,100,0,0" Text="{Binding email,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.CanContentScroll="True" Height="18"/>
         <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="255,211,0,0" Orientation="Horizontal" VerticalAlignment="Top">
             <Image HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="73" Source="/drone-delivery.png"/>
             <Image HorizontalAlignment="Left" Height="69" VerticalAlignment="Top" Width="224" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
         </WrapPanel>
+        <Expander x:Name="logout" FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="18,19,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+            <Expander.Header>
+                <BulletDecorator>
+                    <BulletDecorator.Bullet>
+                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
+                </BulletDecorator>
+            </Expander.Header>
+            <StackPanel Orientation="Horizontal" Width="152">
+                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
+            </StackPanel>
+        </Expander>
         <ScrollViewer x:Name="termesConditions" Margin="59,0,59,-12" Visibility="Hidden">
             <StackPanel Height="1650" Width="666" Background="White">
                 <TextBlock Text="   DroneDrop" TextWrapping="Wrap" Width="666" Height="47" Background="#FF333333" Foreground="White" FontWeight="Bold" FontSize="24"/>
@@ -77,25 +91,11 @@
                 <TextBlock TextWrapping="Wrap" Width="630" ><Run/><LineBreak/><Run Text="Contacting us" FontWeight="Bold" FontSize="16"/></TextBlock>
                 <TextBlock Text="If you have any questions, concerns, or complaints regarding this Agreement, we encourage you to contact us using the details below:" TextWrapping="Wrap" Width="630" Height="38"/>
                 <TextBlock Text="customerService@DroneDrop.com " TextWrapping="Wrap" Width="630" Height="23"/>
-                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above" Width="630" Checked="checkBoxTerms_Checked" Foreground="{Binding ElementName=checkBoxTerms, Path=IsChecked, Mode=TwoWay}"/>
+                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above" Width="630" Foreground="{Binding ElementName=checkBoxTerms, Path=IsChecked, Mode=TwoWay}"/>
                 <Button x:Name="continueButton" Content="continue" Width="111" HorizontalAlignment="Right" Margin="0,0,100,0" Click="continueButton_Click" IsEnabled="{Binding ElementName=checkBoxTerms, Path=IsChecked, Mode=TwoWay}"/>
                 <TextBlock Text="cancel" TextWrapping="Wrap" Foreground="#FF007DCE" TextDecorations="Underline" Margin="25,0,500,0" Height="39" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"/>
                 <TextBlock TextWrapping="Wrap" Width="666" Height="64" Background="#FFF0F0F0"><Run/><LineBreak/><Run Text="     DroneDrop"/></TextBlock>
             </StackPanel>
         </ScrollViewer>
-        <Expander x:Name="logout" FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="18,19,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
-            <Expander.Header>
-                <BulletDecorator>
-                    <BulletDecorator.Bullet>
-                        <Image Width="20" Source="/user.png" FlowDirection="RightToLeft" RenderTransformOrigin="0.393,0.527"/>
-                    </BulletDecorator.Bullet>
-                    <TextBlock x:Name="expanderHeader" Width="128" Text="" FontWeight="Normal" FontSize="16"></TextBlock>
-                </BulletDecorator>
-            </Expander.Header>
-            <StackPanel Orientation="Horizontal" Width="152">
-                <TextBlock TextWrapping="Wrap" Text="log out" FontWeight="Normal" FontSize="14" TextDecorations="Underline" Foreground="#FF007DCE" FlowDirection="LeftToRight" Width="82" Padding="23,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
-                <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
-            </StackPanel>
-        </Expander>
     </Grid>
 </Window>

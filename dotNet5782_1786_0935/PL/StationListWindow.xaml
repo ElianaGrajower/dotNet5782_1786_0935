@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <ListView x:Name="StationsListView" Margin="0,90,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="StationsListView_MouseDoubleClick" SelectionChanged="StationsListView_SelectionChanged">
+        <ListView x:Name="StationsListView" Margin="0,90,0,94" DataContext="{Binding}" ItemsSource="{Binding}" MouseDoubleClick="StationsListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Station Id" Width="90" DisplayMemberBinding="{Binding stationId}"/>

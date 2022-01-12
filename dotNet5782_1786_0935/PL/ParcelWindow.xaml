@@ -19,7 +19,7 @@
         <Label Content="Priority:" HorizontalAlignment="Left" Margin="256,224,0,0" VerticalAlignment="Top"/>
         <Label x:Name="parcelIdRead" Content="Parcel Id:" HorizontalAlignment="Left" Margin="256,47,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="weightSelect" HorizontalAlignment="Left" Margin="347,190,0,0" VerticalAlignment="Top" Width="150" Text="{Binding weight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True"/>
-        <ComboBox x:Name="prioritySelect" HorizontalAlignment="Left" Margin="347,228,0,0" VerticalAlignment="Top" Width="150" Text="{Binding priority,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True" SelectionChanged="prioritySelect_SelectionChanged"/>
+        <ComboBox x:Name="prioritySelect" HorizontalAlignment="Left" Margin="347,228,0,0" VerticalAlignment="Top" Width="150" Text="{Binding priority,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True"/>
         <Label x:Name="droneIdRead" Content="Drone Id:" HorizontalAlignment="Left" Margin="256,82,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="droneIdText" HorizontalAlignment="Left" Margin="347,86,0,0" Text="{Binding drone.droneId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <Button x:Name="senderButton" Content="sender" HorizontalAlignment="Left" Margin="519,120,0,0" VerticalAlignment="Top" Width="60" Background="#FF989B9E" Click="Button_Click_2"/>

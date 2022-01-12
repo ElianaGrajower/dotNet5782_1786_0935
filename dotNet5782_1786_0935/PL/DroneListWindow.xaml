@@ -10,11 +10,11 @@
         <Grid.Background>
             <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <ComboBox Name="weightSelector" Margin="215,35,429,350" SelectionChanged="weightSelector_SelectionChanged"/>
-        <ComboBox x:Name="StatusSelector" Margin="454,35,190,350" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
+        <ComboBox Name="weightSelector" Margin="215,35,429,369" SelectionChanged="weightSelector_SelectionChanged"/>
+        <ComboBox x:Name="StatusSelector" Margin="454,35,190,369" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="391,31,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label Content="Weight:" Margin="150,32,527,353" FontSize="16"></Label>
-        <ListView x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged" Margin="0,90,0,94" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
+        <ListView x:Name="DronesListView" Margin="0,90,0,94" MouseDoubleClick="DronesListView_MouseDoubleClick" Background="White">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Drone Id" Width="90" DisplayMemberBinding="{Binding droneId}"/>
@@ -38,7 +38,7 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Content="add drone" Margin="600,358,96,32" Click="Button_Click" Background="#FF989B9E"/>
+        <Button Content="add drone" Margin="600,358,96,53" Click="Button_Click" Background="#FF989B9E"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="84,358,0,32" VerticalAlignment="Top" Width="91" Height="22" Click="Button_Click_1" Background="#FFDC637A"/>
         <Button HorizontalAlignment="Left" Margin="726,36,0,0" VerticalAlignment="Top" Height="30" Width="30" Background="White" Click="Button_Click_2">
             <Image Height="25" Width="25" Source="/download.png"/>

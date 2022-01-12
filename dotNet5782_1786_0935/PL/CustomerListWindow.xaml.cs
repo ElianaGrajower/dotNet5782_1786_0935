@@ -26,8 +26,6 @@ namespace PL
         internal readonly IBL bl = BlFactory.GetBl();
         bool checkIsCustomer;
         string cName;
-        //  Customer c=new Customer();
-        // ObservableCollection<CustomerToList> myObservableCollection;
       
 
         public CustomerListWindow(IBL b, bool _isCustomer, string customerName)
@@ -35,9 +33,6 @@ namespace PL
             InitializeComponent();
             this.bl = b;
             this.checkIsCustomer = _isCustomer;
-            //       c = customer;
-            //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-            //DataContext = myObservableCollection;
             if (checkIsCustomer)
             {
                 CustomersListView.ItemsSource = b.getUsersList();
@@ -50,8 +45,6 @@ namespace PL
             }
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-            //  ShowInfo();
-           
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -59,11 +52,11 @@ namespace PL
             Close();
         }
 
-        private void ShowInfo()  /////add filter
+        private void ShowInfo()  
         {
             IEnumerable<CustomerToList> d = new List<CustomerToList>();
             if (checkIsCustomer)
-                CustomersListView.ItemsSource = bl.getCustomersList();
+                CustomersListView.ItemsSource = bl.getUsersList();
             else
                 CustomersListView.ItemsSource = bl.getEmployeesList();
         }
@@ -72,8 +65,6 @@ namespace PL
         {
             new CustomerWindow(bl, true, true, cName).ShowDialog();
             ShowInfo();
-            //myObservableCollection = new ObservableCollection<CustomerToList>(bl.getCustomersList());
-            //DataContext = myObservableCollection;
         }
 
         private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)  ////why does it earase???
@@ -94,11 +85,6 @@ namespace PL
                 
             }
             
-        }
-
-        private void CustomersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void addEmployeeButton_Click(object sender, RoutedEventArgs e)

@@ -35,14 +35,12 @@ namespace PL
        
         BackgroundWorker worker;
         bool checkRun;
-        //bool isClose = false;
         private void updateDrone() => worker.ReportProgress(1);
         private bool checkStop() => worker.CancellationPending;
 
         public DroneWindow(IBL b, Drone drone, string customerName, DroneListWindow dlw = null)//update drone
         {
             InitializeComponent();
-            //ShowInfo();
             this.bl = b;
             textBlocks.DataContext = drone;
             d = drone;
@@ -95,7 +93,6 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
             droneList = dlw;
-         
         }
 
 
@@ -109,16 +106,13 @@ namespace PL
             textBlocks.DataContext = d;
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
             stationIdCombo.ItemsSource = bl.allStations(s => s.numberOfAvailableSlots > 0).Select(s=>s.stationId);
-            //  stationIdCombo.Items.Add(Bl.getStationsList());
             updateButton.Visibility = Visibility.Hidden;
-         //   add.Visibility = Visibility.Visible;
             chargeDrone.Visibility = Visibility.Hidden;
             releaseDrone.Visibility = Visibility.Hidden;
             matchUpParcel.Visibility = Visibility.Hidden;
             pickupParcel.Visibility = Visibility.Hidden;
             deliverParcel.Visibility = Visibility.Hidden;
             latitudeRead.Visibility = Visibility.Hidden;
-        //    stationIdCombo.Visibility = Visibility.Visible;
             latitudeText.Visibility = Visibility.Hidden;
             longitudeRead.Visibility = Visibility.Hidden;
             longitudeText.Visibility = Visibility.Hidden;
@@ -129,21 +123,15 @@ namespace PL
             parcelIdRead.Visibility = Visibility.Hidden;
             parcelIdText.Visibility = Visibility.Hidden;
             parcelButton.Visibility = Visibility.Hidden;
-            //   weightText.IsReadOnly = false;
-            //   idText.IsReadOnly = false;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
             automticButton.Visibility = Visibility.Hidden;
             manualButton.Visibility = Visibility.Hidden;
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
-          //  droneList.updateListView();
-           // isClose = true;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -186,19 +174,6 @@ namespace PL
         }
         private void releaseDrone_Click(object sender, RoutedEventArgs e)
         {
-            //int time;
-            //try
-            //{
-            //    if (Convert.ToInt32(releaseTime.Text) == null)
-            //        throw new BO.InvalidInputException("Invalid input!\n");
-            //}
-
-            //catch (InvalidInputException exc)
-            //{
-            //    MessageBox.Show(exc.Message);
-            //}
-
-            //time = Convert.ToInt32(releaseTime.Text);
             try
             {
                 int droneId = Convert.ToInt32(idText.Text);
@@ -208,8 +183,6 @@ namespace PL
                 releaseDrone.Visibility = Visibility.Hidden;    
                 chargeDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Visible;
-                ///////////////////////up to here
-                //////////binde for battery,status......
             }
             catch (BO.DoesntExistException exc)
             { MessageBox.Show(exc.Message); }
@@ -319,7 +292,6 @@ namespace PL
             { MessageBox.Show(exc.Message); }
             catch
             {
-                //MessageBox.Show("ERROR");
             }
         }
 
@@ -329,10 +301,6 @@ namespace PL
             new DroneWindow(bl, cName).Show();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
@@ -346,9 +314,6 @@ namespace PL
             {
                 MessageBox.Show("The drone is not connecetd to a parcel\n");
             }
-
-          //  new ParcelWindow(bl, updateParcel, cName).ShowDialog();
-            //ShowInfo(); have a way to update the info in the window
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -357,27 +322,6 @@ namespace PL
             bl.releaseAllFromCharge();
             Close();
         }
-
-        //public void updateDroneView()
-        //{
-        //    d = bl.getDrone(d.droneId);
-        //    if (d.droneStatus == DroneStatus.delivery)
-        //    {
-        //        parcel.Visibility = Visibility.Visible;
-        //        weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
-        //        prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
-        //        p = d.parcel;
-        //        if (p.parcelStatus == false)
-        //            p.distance = bl.distance(d.location, p.pickupLocation);
-        //        if (p.parcelStatus == true)
-        //            p.distance = bl.distance(p.pickupLocation, p.targetLocation);
-        //        parcel.DataContext = p;
-        //    }
-        //    else
-        //        parcel.Visibility = Visibility.Hidden;
-        //    textBlocks.DataContext = d;
-        //    droneList.updateListView();
-        //}
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -412,7 +356,6 @@ namespace PL
                 // e.Result throw System.Reflection.TargetInvocationException
                 MessageBox.Show("Error"); //Exception Message
             }
-            //Auto = false;
             if (d.droneStatus == DroneStatus.delivery)
             {
                 if (d.parcel.parcelStatus == true)
@@ -451,7 +394,6 @@ namespace PL
         }
 
 
-
         private void simulationButton_Click(object sender, RoutedEventArgs e)
         {
             worker = new BackgroundWorker();
@@ -472,10 +414,6 @@ namespace PL
         {
             if (worker.WorkerSupportsCancellation == true)
                 worker.CancelAsync();
-
-
-           
-
         }
 
     }

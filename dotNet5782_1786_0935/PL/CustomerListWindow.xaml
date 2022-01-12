@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <ListView x:Name="CustomersListView" Margin="0,64,0,94" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionChanged="CustomersListView_SelectionChanged" Background="White">
+        <ListView x:Name="CustomersListView" Margin="0,64,0,94" MouseDoubleClick="CustomersListView_MouseDoubleClick" Background="White">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Customer Id" Width="100" DisplayMemberBinding="{Binding customerId}"/>

@@ -30,17 +30,7 @@ namespace PL
         static DroneStatus? statusFilter;
         string cName;
 
-        //     ObservableCollection<DroneToList> droneObservableCollection;
 
-        //public DroneListWindow()
-        //{
-        //    InitializeComponent();
-        //    //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
-        //    //DataContext = droneObservableCollection;
-        //    DronesListView.ItemsSource = bl.getDronesList();
-
-
-        //}
         private void ShowInfo()
         {
             IEnumerable<DroneToList> d = new List<DroneToList>();
@@ -64,38 +54,23 @@ namespace PL
             ShowInfo();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             weightSelector.ItemsSource = Enum.GetValues(typeof(weightCategories));
-            //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
-            //DataContext = droneObservableCollection;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-     
         }
         private void IBL(IBL b)
         {
 
         }
 
-        private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(weightCategories));     ////////****i think theyre supposed to be here
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl, cName).ShowDialog();
-            //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
-            //DataContext = droneObservableCollection;
             ShowInfo();
-
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
-
         }
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -115,9 +90,6 @@ namespace PL
             {
                 
             }
-
-            //droneObservableCollection = new ObservableCollection<DroneToList>(bl.getDronesList());
-            //DataContext = droneObservableCollection;
         }
 
         private void weightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -175,10 +147,7 @@ namespace PL
                     else
                         DronesListView.ItemsSource = bl.allDrones();
                 }
-
             }
-
-
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
