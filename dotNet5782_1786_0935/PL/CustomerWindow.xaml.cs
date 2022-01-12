@@ -147,7 +147,7 @@ namespace PL
         {
             ParcelinCustomer updateParcel = new ParcelinCustomer();
             updateParcel = (ParcelinCustomer)sentParcelsList.SelectedItem;
-            Parcel realParcel = new Parcel();
+            Parcel realParcel = new Parcel();  
             try
             {
                 if (updateParcel == null)
