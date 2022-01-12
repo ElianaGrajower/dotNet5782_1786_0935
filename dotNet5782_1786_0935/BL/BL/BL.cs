@@ -93,7 +93,7 @@ namespace BL
             if (pri == DO.Priorities.fast)
                 theParcel = findTheParcel(we, a, battery, DO.Priorities.regular);
             if (theParcel.parcelId == 0)
-                throw new BO.DoesntExistException("ERROR! there is not a parcel that match to the drone ");
+                throw new BO.DoesntExistException("ERROR! there is no parcel that matches  the drone ");
             return theParcel;
         }
         #endregion
@@ -612,7 +612,7 @@ namespace BL
         }
         #endregion
         #endregion
-
+        #region confirmDelivery
         public IEnumerable<int> confirmDelivery(int customerId)
         {
             var customer = getCustomer(customerId);
@@ -622,6 +622,8 @@ namespace BL
             return parcelsList;
             
         }
+        #endregion
+        #region confirmPickUp
         public IEnumerable<int> confirmPickUp(int customerId)
         {
             var customer = getCustomer(customerId);
@@ -631,6 +633,7 @@ namespace BL
             return parcelsList;
 
         }
+        #endregion
 
         #region add
         #region addDrone
@@ -1655,10 +1658,13 @@ namespace BL
         }
         #endregion
         #endregion
+
+        #region openSimulator
         public void openSimulator(int droneId, Action updateView, Func<bool> isRun)
         {
             new Simulator(droneId, updateView, isRun, this);
         }
+        #endregion
 
     }
 
