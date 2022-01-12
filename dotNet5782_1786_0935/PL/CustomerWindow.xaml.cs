@@ -54,13 +54,12 @@ namespace PL
             c = new Customer();
             c.location = new Location();
             c.isCustomer = checkIsCustomer;
-            DataContext = c;
+            DataContext = c;   
             sentParcelsList.Visibility = Visibility.Hidden;
             receivedParcelsList.Visibility = Visibility.Hidden;
             sentRead.Visibility = Visibility.Hidden;
             receivedRead.Visibility = Visibility.Hidden;
             updateButton.Visibility = Visibility.Hidden;
-            deleteButton.Visibility = Visibility.Hidden;
          
             if (isLogout)
             {
@@ -216,7 +215,7 @@ namespace PL
             termesConditions.Visibility = Visibility.Hidden;
             try
             {
-                bl.addCustomer(c);
+                bl.addCustomer(c);       
                 MessageBox.Show("added customer succesfully");
                 c = new Customer();
                 c.location = new Location();

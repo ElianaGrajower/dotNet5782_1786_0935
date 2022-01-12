@@ -13,7 +13,6 @@
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="111,368,0,0" VerticalAlignment="Top" Width="69" Click="closeButton_Click" Background="#FFDC637A"/>
         <Button x:Name="addButton" Content="add" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Background="#FF989B9E" Visibility="Visible" Click="addButton_Click"/>
         <Button x:Name="updateButton" Content="update" HorizontalAlignment="Left" Margin="624,368,0,0" VerticalAlignment="Top" Width="74" Click="updateButton_Click" Background="#FF989B9E" Visibility="Visible"/>
-        <Button x:Name="deleteButton" Content="delete" HorizontalAlignment="Left" Margin="500,368,0,0" VerticalAlignment="Top" Width="74" Click="deleteButton_Click" Background="#FF989B9E"/>
         <Label Content="Customer Id:" HorizontalAlignment="Left" Margin="141,34,0,0" VerticalAlignment="Top"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="141,65,0,0" VerticalAlignment="Top"/>
         <Label Content="Phone:" HorizontalAlignment="Left" Margin="412,34,0,0" VerticalAlignment="Top"/>
