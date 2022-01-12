@@ -54,7 +54,7 @@ namespace PL
             c = new Customer();
             c.location = new Location();
             c.isCustomer = checkIsCustomer;
-            DataContext = c;
+            DataContext = c;   
             sentParcelsList.Visibility = Visibility.Hidden;
             receivedParcelsList.Visibility = Visibility.Hidden;
             sentRead.Visibility = Visibility.Hidden;
