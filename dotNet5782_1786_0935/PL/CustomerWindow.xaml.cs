@@ -60,7 +60,6 @@ namespace PL
             sentRead.Visibility = Visibility.Hidden;
             receivedRead.Visibility = Visibility.Hidden;
             updateButton.Visibility = Visibility.Hidden;
-            deleteButton.Visibility = Visibility.Hidden;
          
             if (isLogout)
             {
@@ -216,7 +215,7 @@ namespace PL
             termesConditions.Visibility = Visibility.Hidden;
             try
             {
-                bl.addCustomer(c);
+                bl.addCustomer(c);       
                 MessageBox.Show("added customer succesfully");
                 c = new Customer();
                 c.location = new Location();

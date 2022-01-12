@@ -12,7 +12,6 @@
         </Grid.Background>
         <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="84" Click="update_Click" Background="#FF989B9E"/>
         <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="594,343,0,0" VerticalAlignment="Top" Width="85" Click="add_Click" Background="#FF989B9E"/>
-        <Button x:Name="delete" Content="delete" HorizontalAlignment="Left" Margin="477,343,0,0" VerticalAlignment="Top" Width="85" Click="delete_Click" Background="#FF989B9E"/>
         <Button x:Name="close" Content="close" HorizontalAlignment="Left" Margin="132,343,0,0" VerticalAlignment="Top" Width="85" Click="close_Click" Background="#FFDC637A"/>
         <Label Content="Station Id:" HorizontalAlignment="Left" Margin="122,57,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="stationIdText" HorizontalAlignment="Left" Margin="242,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="stationIdText_TextChanged" Text="{Binding stationId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}"/>

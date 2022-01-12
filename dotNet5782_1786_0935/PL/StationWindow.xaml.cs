@@ -39,7 +39,6 @@ namespace PL
 
             add.Visibility = Visibility.Visible;
             update.Visibility = Visibility.Hidden;
-            delete.Visibility = Visibility.Hidden;
             inUseRead.Visibility = Visibility.Hidden;
             inUseText.Visibility = Visibility.Hidden;
             listOfDronesAtStation.Visibility = Visibility.Hidden;
@@ -61,7 +60,6 @@ namespace PL
             cName = customerName;
             add.Visibility = Visibility.Hidden;
             update.Visibility = Visibility.Visible;
-            delete.Visibility = Visibility.Visible;
             inUseRead.Visibility = Visibility.Visible;
             inUseText.Visibility = Visibility.Visible;
             ourLOGO.Visibility = Visibility.Hidden;
