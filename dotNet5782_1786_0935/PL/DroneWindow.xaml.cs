@@ -472,6 +472,7 @@ namespace PL
             closeButton.Visibility = Visibility.Visible;
           
         }
+
     }
 }
 

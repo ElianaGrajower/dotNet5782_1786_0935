@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800"  WindowStartupLocation="CenterScreen"  WindowStyle="ToolWindow">
+        Title="DroneWindow" Height="450" Width="800"  WindowStartupLocation="Manual"  WindowStyle="None">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="234*"/>
@@ -37,8 +37,8 @@
             <Label x:Name="batteryRead" Content="Battery:" Canvas.Top="175"/>
             <Label x:Name="statusRead" Content="Drone Status:" Canvas.Top="210"/>
             <Grid x:Name="batteryGrid" Canvas.Left="102" Canvas.Top="175">
-                <ProgressBar Minimum="0" Maximum="100" Value="{Binding battery}" Name="batteryProgress"></ProgressBar>
-                <TextBox Text="{Binding ElementName=batteryProgress, Path=Value, StringFormat=\{0:#0.0\}%, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" IsEnabled="False" Canvas.Left="102" Canvas.Top="180"/>
+                <ProgressBar Minimum="0" Maximum="100" Value="{Binding battery}" Name="batteryProgress"/>
+                <TextBox Text="{Binding ElementName=batteryProgress, Path=Value, StringFormat=\{0:#0.0\}%, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" IsEnabled="False" Canvas.Left="102" Canvas.Top="180" TextAlignment="Center"/>
             </Grid>
             <TextBox x:Name="statusText" Text="{Binding droneStatus, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" IsEnabled="False" Canvas.Left="102" Canvas.Top="215"/>
         </Canvas>
