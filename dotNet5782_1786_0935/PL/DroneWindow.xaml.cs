@@ -70,9 +70,9 @@ namespace PL
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Hidden;
-                if(drone.parcel.parcelStatus==ParcelStatus.matched)
+                if(drone.parcel.parcelStatus==false)
                     deliverParcel.Visibility = Visibility.Hidden;
-                if (drone.parcel.parcelStatus == ParcelStatus.pickedUp)
+                if (drone.parcel.parcelStatus == true)
                     pickupParcel.Visibility = Visibility.Hidden;
             }
             stationIdCombo.Visibility = Visibility.Hidden;
@@ -393,13 +393,14 @@ namespace PL
             {
                 updateParcel = bl.getParcel(Convert.ToInt32(parcelIdText.Text));
                 new ParcelWindow(bl, updateParcel, cName).ShowDialog();
+                new ParcelWindow(bl, updateParcel, cName).ShowDialog();
             }
             catch(Exception exc)
             {
                 MessageBox.Show("The drone is not connecetd to a parcel\n");
             }
 
-            new ParcelWindow(bl, updateParcel, cName).ShowDialog();
+           
             //ShowInfo(); have a way to update the info in the window
         }
 

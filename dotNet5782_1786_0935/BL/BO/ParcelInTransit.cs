@@ -18,7 +18,7 @@ namespace BO
         public Location pickupLocation { set; get; }
         public Location targetLocation { set; get; }
         public double distance { set; get; }
-        public ParcelStatus parcelStatus { set; get; }
+        public bool parcelStatus { set; get; }
 
 
         public override string ToString()

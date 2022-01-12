@@ -106,7 +106,7 @@ namespace PL
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            checkDelete.Visibility = Visibility.Visible;
+            //checkDelete.Visibility = Visibility.Visible;
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)

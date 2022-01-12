@@ -1039,15 +1039,15 @@ namespace BL
                     throw new BO.DoesntExistException("The parcel doesn't exist in system");
                 }
                 if (p.requested == null)
-                    pt.parcelStatus = ParcelStatus.created;
+                    pt.parcelStatus = false;
                 else
                 if (p.pickedUp == null)
-                    pt.parcelStatus = ParcelStatus.matched;
+                    pt.parcelStatus = false;
                 else
                     if (p.delivered == null)
-                    pt.parcelStatus = ParcelStatus.pickedUp;
+                    pt.parcelStatus = true;
                 else
-                    pt.parcelStatus = ParcelStatus.delivered;
+                    pt.parcelStatus = true;
                 var newSender = getCustomer(p.senderId);
                 var newTarget = getCustomer(p.targetId);
                 //pt.parcelId = p.parcelId;
@@ -1427,7 +1427,7 @@ namespace BL
                 myDrone.droneStatus = DroneStatus.delivery;
                 myDrone.parcel = new ParcelInTransit();
                 myDrone.parcel.parcelId = myParcel.parcelId;
-                myDrone.parcel.parcelStatus = ParcelStatus.matched;
+                myDrone.parcel.parcelStatus = false;
                 var tempParcel = myParcel;
                 tempParcel.droneId = droneId;
                 tempParcel.scheduled = DateTime.Now;
@@ -1467,7 +1467,7 @@ namespace BL
                 drones.RemoveAt(index);
                 BatteryUsage usage = new BatteryUsage();
               
-                tempDrone.parcel.parcelStatus = ParcelStatus.pickedUp;
+                tempDrone.parcel.parcelStatus = true;
                
                 //AddDrone(tempDrone,FindStation(tempDrone.location));
                 var tempD = new DroneToList()
@@ -1532,7 +1532,7 @@ namespace BL
                 tempDrone.location.latitude = customer.location.latitude;
                 tempDrone.location.longitude = customer.location.longitude;
                 tempDrone.droneStatus = DroneStatus.available;
-                tempDrone.parcel.parcelStatus = ParcelStatus.delivered;
+                tempDrone.parcel.parcelStatus = true;
                 var tempD = new DroneToList()
                 {
                     droneId = tempDrone.droneId,

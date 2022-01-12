@@ -158,7 +158,7 @@ namespace PL
 
         private void delete_Click(object sender, RoutedEventArgs e)
         {
-            checkDelete.Visibility = Visibility.Visible;
+            //checkDelete.Visibility = Visibility.Visible;
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
