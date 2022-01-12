@@ -49,6 +49,8 @@ namespace BlApi
         public void releaseAllFromCharge();
         public double distance(BO.Location l1, BO.Location l2);
         public void openSimulator(int droneId, Action updateView, Func<bool> isRun);
+        public IEnumerable<int> confirmDelivery(int customerId);
+        public IEnumerable<int> confirmPickUp(int customerId);
 
     }
 }

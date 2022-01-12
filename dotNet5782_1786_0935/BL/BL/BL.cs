@@ -613,6 +613,25 @@ namespace BL
         #endregion
         #endregion
 
+        public IEnumerable<int> confirmDelivery(int customerId)
+        {
+            var customer = getCustomer(customerId);
+            var parcelsList = getParcelsList().Where(p=>p.recivername==customer.name)
+                                     .Where(p=>p.parcelStatus==ParcelStatus.delivered)
+                                                                .Select(p=>p.parcelId);
+            return parcelsList;
+            
+        }
+        public IEnumerable<int> confirmPickUp(int customerId)
+        {
+            var customer = getCustomer(customerId);
+            var parcelsList = getParcelsList().Where(p => p.sendername == customer.name)
+                                   .Where(p => p.parcelStatus == ParcelStatus.delivered)
+                                                                .Select(p => p.parcelId);
+            return parcelsList;
+
+        }
+
         #region add
         #region addDrone
         //this function adds a drone
