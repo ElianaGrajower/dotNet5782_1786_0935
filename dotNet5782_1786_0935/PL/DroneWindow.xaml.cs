@@ -42,7 +42,8 @@ namespace PL
         {
             InitializeComponent();
             this.bl = b;
-            textBlocks.DataContext = drone;
+            /*textBlocks.*/DataContext = drone;
+            //parcelIdText.DataContext = drone;
             d = drone;
             
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
@@ -178,7 +179,7 @@ namespace PL
             {
                 int droneId = Convert.ToInt32(idText.Text);
                 bl.releaseDroneFromCharge(droneId);
-                textBlocks.DataContext = bl.getDrone(d.droneId);
+                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;    
                 chargeDrone.Visibility = Visibility.Visible;
@@ -199,7 +200,8 @@ namespace PL
             {
                 bl.deliveredParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone delivered succesfully");
-                textBlocks.DataContext = bl.getDrone(d.droneId);
+                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
+              //  parcelIdText.DataContext = bl.getDrone(d.droneId);
                 deliverParcel.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Visible;
                 pickupParcel.Visibility = Visibility.Hidden;
@@ -227,7 +229,8 @@ namespace PL
             {
                 bl.matchDroneWithPacrel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone matched up succesfully");
-                textBlocks.DataContext = bl.getDrone(d.droneId);
+                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
+               // parcelIdText.DataContext = bl.getDrone(d.droneId);
                 matchUpParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Visible;
                 deliverParcel.Visibility = Visibility.Hidden;
@@ -255,7 +258,8 @@ namespace PL
             {
                 bl.pickUpParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone pickedUp succesfully");
-                textBlocks.DataContext = bl.getDrone(d.droneId);
+                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
+                // parcelIdText.DataContext = bl.getDrone(d.droneId);
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -278,7 +282,7 @@ namespace PL
             {
                 bl.SendDroneToCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone charging succesfully");
-                textBlocks.DataContext = bl.getDrone(d.droneId);
+                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
