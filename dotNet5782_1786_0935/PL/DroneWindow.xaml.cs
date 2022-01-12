@@ -15,13 +15,7 @@ using BL;
 using BO;
 using BlApi;
 using System.Threading;
-//using System.Linq;
 using System.ComponentModel;
-//using System;
-//using BO;
-//using System.Threading;
-//using static BL.BL;
-//using System.Linq;
 
 
 
@@ -108,7 +102,7 @@ namespace PL
             d = new Drone();
             d.location = new Location();
             d.parcel = new ParcelInTransit();
-            DataContext = d;
+            textBlocks.DataContext = d;
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
             stationIdCombo.ItemsSource = bl.allStations(s => s.numberOfAvailableSlots > 0).Select(s=>s.stationId);
             //  stationIdCombo.Items.Add(Bl.getStationsList());
@@ -177,7 +171,7 @@ namespace PL
                 d = new Drone();
                 d.location = new Location();
                 d.parcel = new ParcelInTransit();
-                DataContext = d;
+                textBlocks.DataContext = d;
                 Close();
             }
             catch(InvalidInputException exc)
@@ -208,7 +202,7 @@ namespace PL
             {
                 int droneId = Convert.ToInt32(idText.Text);
                 bl.releaseDroneFromCharge(droneId);
-                DataContext = bl.getDrone(d.droneId);
+                textBlocks.DataContext = bl.getDrone(d.droneId);
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;    
                 chargeDrone.Visibility = Visibility.Visible;
@@ -231,7 +225,7 @@ namespace PL
             {
                 bl.deliveredParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone delivered succesfully");
-                DataContext = bl.getDrone(d.droneId);
+                textBlocks.DataContext = bl.getDrone(d.droneId);
                 deliverParcel.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Visible;
                 pickupParcel.Visibility = Visibility.Hidden;
@@ -259,7 +253,7 @@ namespace PL
             {
                 bl.matchDroneWithPacrel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone matched up succesfully");
-                DataContext = bl.getDrone(d.droneId);
+                textBlocks.DataContext = bl.getDrone(d.droneId);
                 matchUpParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Visible;
                 deliverParcel.Visibility = Visibility.Hidden;
@@ -287,7 +281,7 @@ namespace PL
             {
                 bl.pickUpParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone pickedUp succesfully");
-                DataContext = bl.getDrone(d.droneId);
+                textBlocks.DataContext = bl.getDrone(d.droneId);
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -310,7 +304,7 @@ namespace PL
             {
                 bl.SendDroneToCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone charging succesfully");
-                DataContext = bl.getDrone(d.droneId);
+                textBlocks.DataContext = bl.getDrone(d.droneId);
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -427,7 +421,7 @@ namespace PL
                 else
                     bl.pickUpParcel(d.droneId);
                 d = bl.getDrone(d.droneId);
-                DataContext = d;
+                textBlocks.DataContext = d;
             }
             MessageBox.Show("The simulator is ended");
         }

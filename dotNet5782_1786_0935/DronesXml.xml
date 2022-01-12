@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Drone>
+    <maxWeight>light</maxWeight>
+    <droneId>193705566</droneId>
+    <model>Reaper</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>light</maxWeight>
+    <droneId>194847128</droneId>
+    <model>Shadow</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>light</maxWeight>
+    <droneId>139526454</droneId>
+    <model>Grey Eagle</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>average</maxWeight>
+    <droneId>213532592</droneId>
+    <model>Global Hawk</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>light</maxWeight>
+    <droneId>689288439</droneId>
+    <model>Pioneer</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>light</maxWeight>
+    <droneId>191220018</droneId>
+    <model>Fire Scout</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>average</maxWeight>
+    <droneId>862507606</droneId>
+    <model>Snowgoose</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>light</maxWeight>
+    <droneId>849834768</droneId>
+    <model>Hunter</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>average</maxWeight>
+    <droneId>172550032</droneId>
+    <model>Stalker</model>
+    <active>false</active>
+  </Drone>
+  <Drone>
+    <maxWeight>light</maxWeight>
+    <droneId>926132922</droneId>
+    <model>GNAT</model>
+    <active>false</active>
+  </Drone>
+</ArrayOfDrone>
