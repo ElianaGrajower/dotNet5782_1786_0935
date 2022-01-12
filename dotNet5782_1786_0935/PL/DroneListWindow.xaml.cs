@@ -108,7 +108,7 @@ namespace PL
                 if (updateDrone == null)
                     throw new Exception("clicked wrong area");
                 realDrone = bl.getDrone(updateDrone.droneId);
-                new DroneWindow(bl, realDrone, cName).ShowDialog();
+                new DroneWindow(bl, realDrone, cName, this).ShowDialog();
                 ShowInfo();
             }
             catch (Exception exc)
@@ -202,5 +202,10 @@ namespace PL
             bl.releaseAllFromCharge();
             Close();
         }
+        public void updateListView()
+        {
+            ShowInfo();
+        }
+
     }
 }

@@ -13,6 +13,6 @@ namespace BO
         public double medium=0.002;
         public double heavy=0.003;
         public double available=0.0009;
-        public double chargeSpeed=10;
+        public double chargeSpeed=80;
     }
 }

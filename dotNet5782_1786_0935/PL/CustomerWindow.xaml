@@ -83,7 +83,7 @@
                 <TextBlock TextWrapping="Wrap" Width="630" ><Run/><LineBreak/><Run Text="Contacting us" FontWeight="Bold" FontSize="16"/></TextBlock>
                 <TextBlock Text="If you have any questions, concerns, or complaints regarding this Agreement, we encourage you to contact us using the details below:" TextWrapping="Wrap" Width="630" Height="38"/>
                 <TextBlock Text="customerService@DroneDrop.com " TextWrapping="Wrap" Width="630" Height="23"/>
-                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above" Width="630" Checked="checkBoxTerms_Checked" Foreground="{Binding ElementName=checkBoxTerms, Path=IsChecked}"/>
+                <CheckBox x:Name="checkBoxTerms" Content="I have read and agree to the terms and services that are writen above" Width="630" Checked="checkBoxTerms_Checked" Foreground="{Binding ElementName=checkBoxTerms, Path=IsChecked, Mode=TwoWay}"/>
                 <Button x:Name="continueButton" Content="continue" Width="111" HorizontalAlignment="Right" Margin="0,0,100,0" Click="continueButton_Click" IsEnabled="{Binding ElementName=checkBoxTerms, Path=IsChecked, Mode=TwoWay}"/>
                 <TextBlock Text="cancel" TextWrapping="Wrap" Foreground="#FF007DCE" TextDecorations="Underline" Margin="25,0,500,0" Height="39" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"/>
                 <TextBlock TextWrapping="Wrap" Width="666" Height="64" Background="#FFF0F0F0"><Run/><LineBreak/><Run Text="     DroneDrop"/></TextBlock>

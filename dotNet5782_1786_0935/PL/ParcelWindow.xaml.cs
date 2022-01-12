@@ -38,10 +38,10 @@ namespace PL
             prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
             senderSelect.ItemsSource = Bl.allCustomers().Select(c => c.customerId);
             targetSelect.ItemsSource = Bl.allCustomers().Select(c => c.customerId);
-            weightText.Visibility = Visibility.Hidden;
-            priorityText.Visibility = Visibility.Hidden;
-            senderText.Visibility = Visibility.Hidden;
-            targetText.Visibility = Visibility.Hidden;
+            //weightText.Visibility = Visibility.Hidden;
+            //priorityText.Visibility = Visibility.Hidden;
+            //senderText.Visibility = Visibility.Hidden;
+            //targetText.Visibility = Visibility.Hidden;
             deleteButton.Visibility = Visibility.Hidden;
      //       updateButton.Visibility = Visibility.Hidden;
             parcelIdText.Visibility = Visibility.Hidden;
@@ -72,15 +72,19 @@ namespace PL
         public ParcelWindow(IBL b, Parcel parcel, string customerName) //update
         {
             InitializeComponent();
+            weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
+            prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
+            senderSelect.ItemsSource = Bl.allCustomers().Select(c => c.customerId);
+            targetSelect.ItemsSource = Bl.allCustomers().Select(c => c.customerId);
             this.Bl = b;
             this.DataContext = parcel;
             p = parcel;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-            weightSelect.Visibility = Visibility.Hidden;
-            prioritySelect.Visibility = Visibility.Hidden;
-            senderSelect.Visibility = Visibility.Hidden;
-            targetSelect.Visibility = Visibility.Hidden;
+            weightSelect.IsEnabled = false;
+            prioritySelect.IsEnabled = false;
+            senderSelect.IsEnabled = false;
+            targetSelect.IsEnabled = false;
             addButton.Visibility = Visibility.Hidden;
             ourLOGO.Visibility = Visibility.Hidden;
            
@@ -119,14 +123,14 @@ namespace PL
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Customer openCustomer = new Customer();
-            openCustomer = Bl.getCustomer(Convert.ToInt32(senderText.Text));
+            openCustomer = Bl.getCustomer(Convert.ToInt32(senderSelect.SelectedItem));
             new CustomerWindow(Bl, openCustomer, cName).ShowDialog();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             Customer openCustomer = new Customer();
-            openCustomer = Bl.getCustomer(Convert.ToInt32(targetText.Text));
+            openCustomer = Bl.getCustomer(Convert.ToInt32(targetSelect.SelectedItem));
             new CustomerWindow(Bl, openCustomer, cName).ShowDialog();
         }
 

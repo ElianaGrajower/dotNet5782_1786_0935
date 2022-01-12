@@ -15,40 +15,47 @@
         <Grid.Background>
             <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
-        <TextBox x:Name="idText" HorizontalAlignment="Left" Margin="97,65,0,0" Text="{Binding droneId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Background="White" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="modelText" HorizontalAlignment="Left" Margin="97,100,0,0" Text="{Binding model,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label HorizontalAlignment="Left" Margin="234,60,0,0" Content="Drone Id:" VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2"/>
-        <Label HorizontalAlignment="Left" Margin="234,130,0,0" Content="Max weight:" VerticalAlignment="Top" Height="35" Grid.ColumnSpan="2"/>
-        <Label HorizontalAlignment="Left" Margin="234,95,0,0" Content="Model:" VerticalAlignment="Top" Height="28" Grid.ColumnSpan="2"/>
-        <Label x:Name="stationRead" HorizontalAlignment="Left" Margin="234,165,0,0" Content="station ID:" VerticalAlignment="Top" Height="30" Grid.ColumnSpan="2"/>
         <Button x:Name="closeButton" Content="close" HorizontalAlignment="Left" Margin="77,360,0,0" VerticalAlignment="Top" Width="68" Click="Button_Click" Background="#FFDC637A" FontStyle="Normal" AutomationProperties.IsOffscreenBehavior="Default"/>
-        <Button x:Name="add" Content="add" HorizontalAlignment="Left" Margin="278,360,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Click="add_Click" Visibility="Visible" Grid.Column="2"/>
-        <Button x:Name="update" Content="update" HorizontalAlignment="Left" Margin="278,360,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Click="Button_Click_1" Visibility="Visible" Grid.Column="2"/>
-        <Button x:Name="chargeDrone" Content="charge drone" HorizontalAlignment="Left" Margin="162,240,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Visibility="Visible" Click="chargeDrone_Click" Grid.Column="2"/>
-        <Button x:Name="releaseDrone" Content="release drone" HorizontalAlignment="Left" Margin="162,240,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Click="releaseDrone_Click" Visibility="Visible" Grid.Column="2"/>
-        <Button x:Name="matchUpParcel" Content="match up parcel" HorizontalAlignment="Left" Margin="162,273,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Visibility="Visible" Click="matchUpParcel_Click" Grid.Column="2"/>
-        <Button x:Name="pickupParcel" Content="pickup parcel" HorizontalAlignment="Left" Margin="162,273,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Visibility="Visible" Click="pickupParcel_Click" Grid.Column="2"/>
-        <Button x:Name="deliverParcel" Content="deliver parcel" HorizontalAlignment="Left" Margin="162,273,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Visibility="Visible" Click="deliverParcel_Click" Grid.Column="2"/>
-        <ComboBox x:Name="weight" HorizontalAlignment="Left" Margin="97,135,0,0" VerticalAlignment="Top" Width="140" Text="{Binding maxWeight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="latitudeRead" HorizontalAlignment="Left" Margin="234,165,0,0" Content="Latitude:" VerticalAlignment="Top" Width="66" Visibility="Visible" Height="28" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="latitudeText" HorizontalAlignment="Left" Margin="97,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Text="{Binding location.latitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="longitudeRead" Content="Longitude:" HorizontalAlignment="Left" Margin="234,200,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="longitudeText" HorizontalAlignment="Left" Margin="97,205,0,0" Text="{Binding location.longitude,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="weightText" HorizontalAlignment="Left" Margin="97,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Text="{Binding maxWeight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <ComboBox x:Name="stationIdCombo" HorizontalAlignment="Left" Margin="97,170,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <!--<TextBox x:Name="weightText" HorizontalAlignment="Left" Margin="97,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Text="{Binding maxWeight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>-->
         <Canvas x:Name="addAnotherDrone" Background="White" Margin="68,114,287,183" Visibility="Collapsed" Grid.Column="1" Grid.ColumnSpan="2">
             <TextBlock Canvas.Left="51" Canvas.Top="37" TextWrapping="Wrap"><Run Text="would you like to add "/><LineBreak/><Run Text="another drone?"/></TextBlock>
-            <Button Content="no" Canvas.Left="40" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59" Click="Button_Click_2"/>
+            <Button Content="no" Canvas.Left="40" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59"/>
             <Button Content="yes" Canvas.Left="130" Canvas.Top="85" RenderTransformOrigin="0.938,-0.284" Width="59" Click="Button_Click_3"/>
         </Canvas>
-        <Label x:Name="batteryRead" Content="Battery:" HorizontalAlignment="Left" Margin="234,235,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Label x:Name="statusRead" Content="Drone Status:" HorizontalAlignment="Left" Margin="234,270,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="batteryText" HorizontalAlignment="Left" Margin="97,240,0,0" Text="{Binding battery,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="statusText" HorizontalAlignment="Left" Margin="97,275,0,0" Text="{Binding droneStatus,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="parcelIdRead" Content="Parcel Id:" HorizontalAlignment="Left" Margin="234,305,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="parcelIdText" HorizontalAlignment="Left" Margin="97,310,0,0" Text="{Binding parcel.parcelId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button x:Name="parcelButton" Content="open parcel" HorizontalAlignment="Left" Margin="162,308,0,0" VerticalAlignment="Top" Width="96" Background="#FF989B9E" Click="Button_Click_4" Grid.Column="2"/>
-        <Expander FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="28,29,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
+        <Canvas x:Name="textBlocks" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="236" Margin="234,60,0,0" VerticalAlignment="Top" Width="242">
+            <TextBox x:Name="idText" Text="{Binding droneId, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" Background="White" Canvas.Left="102" Canvas.Top="5"/>
+            <TextBox x:Name="modelText" Text="{Binding model, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" Canvas.Left="102" Canvas.Top="40"/>
+            <Label Content="Drone Id:" Height="25"/>
+            <Label Content="Max weight:" Height="35" Canvas.Top="70"/>
+            <Label Content="Model:" Height="28" Canvas.Top="35"/>
+            <Label x:Name="stationRead" Content="station ID:" Height="30" Canvas.Top="105"/>
+            <ComboBox x:Name="weight" Width="140" Text="{Binding maxWeight, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Canvas.Left="102" Canvas.Top="75"/>
+            <Label x:Name="latitudeRead" Content="Latitude:" Width="66" Visibility="Visible" Height="28" Canvas.Top="105"/>
+            <TextBox x:Name="latitudeText" TextWrapping="Wrap" Width="140" Text="{Binding location.latitude, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" IsEnabled="False" Canvas.Left="102" Canvas.Top="110"/>
+            <Label x:Name="longitudeRead" Content="Longitude:" Canvas.Top="140"/>
+            <TextBox x:Name="longitudeText" Text="{Binding location.longitude, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" IsEnabled="False" Canvas.Left="102" Canvas.Top="145"/>
+            <ComboBox x:Name="stationIdCombo" Width="140" Canvas.Left="102" Canvas.Top="110"/>
+            <Label x:Name="batteryRead" Content="Battery:" Canvas.Top="175"/>
+            <Label x:Name="statusRead" Content="Drone Status:" Canvas.Top="210"/>
+            <Grid x:Name="batteryGrid" Canvas.Left="102" Canvas.Top="175">
+                <ProgressBar Minimum="0" Maximum="100" Value="{Binding battery}" Name="batteryProgress"></ProgressBar>
+                <TextBox Text="{Binding ElementName=batteryProgress, Path=Value, StringFormat=\{0:#0.0\}%, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" IsEnabled="False" Canvas.Left="102" Canvas.Top="180"/>
+            </Grid>
+            <TextBox x:Name="statusText" Text="{Binding droneStatus, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" IsEnabled="False" Canvas.Left="102" Canvas.Top="215"/>
+        </Canvas>
+        <Canvas x:Name="buttons" Grid.ColumnSpan="3" Margin="234,240,88,54">
+            <Button x:Name="add" Content="add" Width="96" Background="#FF989B9E" Click="add_Click" Visibility="Visible" Canvas.Left="382" Canvas.Top="120"/>
+            <Button x:Name="updateButton" Content="update" Width="96" Background="#FF989B9E" Click="Button_Click_1" Visibility="Visible" Canvas.Left="382" Canvas.Top="120"/>
+            <Label x:Name="parcelIdRead" Content="Parcel Id:" Canvas.Top="65"/>
+            <TextBox x:Name="parcelIdText" Text="{Binding parcel.parcelId, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" Width="140" IsEnabled="False" Canvas.Left="102" Canvas.Top="70"/>
+            <Button x:Name="chargeDrone" Content="charge drone" Background="#FF989B9E" Visibility="Visible" Click="chargeDrone_Click" Height="20" Canvas.Left="266" Width="96"/>
+            <Button x:Name="releaseDrone" Content="release drone" Background="#FF989B9E" Click="releaseDrone_Click" Visibility="Visible" Height="20" Canvas.Left="266" Width="96"/>
+            <Button x:Name="matchUpParcel" Content="match up parcel" Background="#FF989B9E" Visibility="Visible" Click="matchUpParcel_Click" Height="20" Canvas.Left="266" Canvas.Top="33" Width="96"/>
+            <Button x:Name="pickupParcel" Content="pickup parcel" Background="#FF989B9E" Visibility="Visible" Click="pickupParcel_Click" Height="20" Canvas.Left="266" Canvas.Top="33" Width="96"/>
+            <Button x:Name="deliverParcel" Content="deliver parcel" Background="#FF989B9E" Visibility="Visible" Click="deliverParcel_Click" Height="20" Canvas.Left="266" Canvas.Top="33" Width="96"/>
+            <Button x:Name="parcelButton" Content="open parcel" Background="#FF989B9E" Click="Button_Click_4" Height="20" Canvas.Left="266" Canvas.Top="68" Width="96"/>
+        </Canvas>
+        <Expander x:Name="logOut" FontSize="14" HeaderStringFormat="Left" HorizontalAlignment="Left" Height="61" Margin="28,29,0,0" VerticalAlignment="Top" Width="162" FlowDirection="LeftToRight">
             <Expander.Header>
                 <BulletDecorator>
                     <BulletDecorator.Bullet>
@@ -62,10 +69,27 @@
                 <Image Height="15" Width="15" Source="/log-out.png" Margin="-7,0,0,15"/>
             </StackPanel>
         </Expander>
-        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="239,226,0,0" Orientation="Horizontal" VerticalAlignment="Top" Grid.ColumnSpan="3">
+        <WrapPanel x:Name="ourLOGO" HorizontalAlignment="Left" Margin="239,226,0,0" Orientation="Horizontal" VerticalAlignment="Top" Grid.ColumnSpan="3" Visibility="Visible">
             <Image HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="77" Source="/drone-delivery.png"/>
             <Image HorizontalAlignment="Left" Height="73" VerticalAlignment="Top" Width="238" Source="/רחפן 2 just words.png" Stretch="Uniform"/>
         </WrapPanel>
-        <Button x:Name="simulationButton" Content="simulation" Grid.Column="1" HorizontalAlignment="Left" Margin="54,360,0,0" VerticalAlignment="Top" Click="simulationButton_Click"/>
+        <Button x:Name="automticButton" Content="Automatic" HorizontalAlignment="Left" Margin="213,360,0,0" VerticalAlignment="Top" Click="simulationButton_Click" Width="85" Grid.ColumnSpan="2" Background="#FF989B9E"/>
+        <Button x:Name="manualButton" Content="Manual" HorizontalAlignment="Left" Margin="213,360,0,0" VerticalAlignment="Top" Width="85" Background="#FF989B9E" Visibility="Hidden" Click="manualButton_Click" Grid.ColumnSpan="2"/>
+        <Canvas x:Name="parcel" Grid.Column="2" Margin="169,59,51,75" Visibility="Hidden" IsEnabled="False">
+            <Label Content="Sender Id:" Height="26" Canvas.Top="34" Width="62"/>
+            <ComboBox x:Name="senderSelect" Text="{Binding sender.customerId, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" IsEnabled="True" Height="22" Canvas.Left="91" Canvas.Top="38" Width="149"/>
+            <Label Content="Target Id:" Height="26" Canvas.Top="71" Width="58"/>
+            <ComboBox x:Name="targetSelect" Text="{Binding target.customerId, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" IsEnabled="True" Height="22" Canvas.Left="91" Canvas.Top="75" Width="149"/>
+            <Label Content="Weight:" Height="26" Canvas.Top="109" Width="50"/>
+            <TextBox x:Name="parcelIdText_Copy" Text="{Binding parcelId, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" IsEnabled="False" Height="18" Canvas.Left="91" Canvas.Top="4" Width="151"/>
+            <Label Content="Priority:" Height="26" Canvas.Top="143" Width="50"/>
+            <Label x:Name="parcelIdRead_Copy" Content="Parcel Id:" Height="26" Width="59"/>
+            <ComboBox x:Name="weightSelect" Text="{Binding weight, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" IsEnabled="True" Height="22" Canvas.Left="91" Canvas.Top="109" Width="149"/>
+            <ComboBox x:Name="prioritySelect" Text="{Binding priority, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" IsEnabled="True" Height="22" Canvas.Left="91" Canvas.Top="147" Width="149"/>
+            <Label x:Name="distanceRead" Content="Distance:" Height="26" Canvas.Top="178" Width="68"/>
+            <TextBox x:Name="distanceText" Text="{Binding distance, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" IsEnabled="False" Height="18" Canvas.Left="91" Canvas.Top="182" Width="149"/>
+            <Label x:Name="StatusRead" Content="Parcel Status:" Height="26" Canvas.Top="211" Width="68"/>
+            <TextBox x:Name="pStatusText" Text="{Binding parcelStatus, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" IsEnabled="False" Height="18" Canvas.Left="91" Canvas.Top="215" Width="149"/>
+        </Canvas>
     </Grid>
 </Window>

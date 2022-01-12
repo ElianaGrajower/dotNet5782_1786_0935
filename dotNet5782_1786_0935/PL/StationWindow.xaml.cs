@@ -103,23 +103,6 @@ namespace PL
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            //Station newStation = new Station();
-            //try
-            //{
-            //    ///not allowed???????????FIX????????????
-            //    newStation.stationId = Convert.ToInt32(stationIdText.Text);
-            //    newStation.name = nameText.Text;
-            //    Location newLocation = new Location(Convert.ToDouble(latitudeText.Text), Convert.ToDouble(longitudeText.Text));
-            //    newStation.location = newLocation;
-            //    newStation.chargeSlots = Convert.ToInt32(allChargeText.Text);
-            //    Bl.addStation(newStation);
-            //    MessageBox.Show("station added succesfully");
-            //    addAnotherStation.Visibility = Visibility.Visible;
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("ERROR invalid input");
-            //}
             try
             {
                 Bl.addStation(s);

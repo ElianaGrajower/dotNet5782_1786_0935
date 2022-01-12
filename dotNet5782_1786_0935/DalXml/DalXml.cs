@@ -17,10 +17,10 @@ namespace Dal
     sealed class DalXml : IDal
     {
 
-        internal  string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "1111aaa" };
-        internal  string[] stationName = { "Raanana Central Station", "Tel Aviv Central Station" };
-        internal  string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
-        internal  string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
+        internal string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "1111aaa", "@gmail.com" };
+        internal string[] stationName = { "Raanana Central Station", "Tel Aviv Central Station" };
+        internal string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
+        internal string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
 
         public static Random r = new Random();
         #region singelton
@@ -28,8 +28,8 @@ namespace Dal
         static readonly IDal instance = new DalXml();
         public static IDal Instance { get => instance; }
         #endregion
-       // private DalXml() { Initialize(); } // default constructer calls on initialize func
-                                           // #region Initialize
+        //   private DalXml() { Initialize(); } // default constructer calls on initialize func
+        // #region Initialize
         public void Initialize()
         {
             createStation(); //creats a station with random information
@@ -75,63 +75,72 @@ namespace Dal
         #region createCustomer
         public void createCustomer() //creats a customer with random information
         {
-            List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
             string p = letters[10];
             for (int i = 0; i < 8; i++) //creates 8 customers with information
-                listCustomers.Add(new Customer()
-                {
-                    customerId = r.Next(100000000, 999999999),
-                    name = customerName[i],
-                    Phone = "05" + r.Next(00000000, 99999999),
-                    longitude = (r.NextDouble() + r.Next(34, 35)) + 0.57, //gets coordinates for (-90 - 90) 
-                    latitude = (r.NextDouble() + r.Next(29, 33)) + 0.207, //gets coordinates for (-180 - 180)
-                    password = letters[i] + p,
-                    isCustomer = true
-                    // active = true
-                });
+                listCustomers.Add(new XElement("Customer",
+
+                   new XElement("customerId", r.Next(100000000, 999999999)),
+                    new XElement("name", customerName[i]),
+                    new XElement("Phone", "05" + r.Next(00000000, 99999999)),
+                    new XElement("longitude", (r.NextDouble() + r.Next(34, 35)) + 0.57), //gets coordinates for (-90 - 90) 
+                    new XElement("latitude", (r.NextDouble() + r.Next(29, 33)) + 0.207), //gets coordinates for (-180 - 180)
+                     new XElement("password", letters[i] + p),
+                     new XElement("isCustomer", true),
+                     new XElement("email", customerName[i] + letters[11])))
+                    ;
+
+
             for (int i = 8; i < 10; i++) //creates 2 workers
-                listCustomers.Add(new Customer()
-                {
-                    customerId = r.Next(100000000, 999999999),
-                    name = customerName[i],
-                    Phone = "05" + r.Next(00000000, 99999999),
-                    longitude = (r.NextDouble() + r.Next(34, 35)) + 0.57, //gets coordinates for (-90 - 90) 
-                    latitude = (r.NextDouble() + r.Next(29, 33)) + 0.207, //gets coordinates for (-180 - 180)
-                    password = letters[i] + p,
-                    isCustomer = false
-                    // active = true
-                });
-            XMLTools.SaveListToXMLSerializer(listCustomers, CustomersPath);
+                listCustomers.Add(new XElement("Customer",
+
+                     new XElement("customerId", r.Next(100000000, 999999999)),
+                      new XElement("name", customerName[i]),
+                      new XElement("Phone", "05" + r.Next(00000000, 99999999)),
+                      new XElement("longitude", (r.NextDouble() + r.Next(34, 35)) + 0.57), //gets coordinates for (-90 - 90) 
+                      new XElement("latitude", (r.NextDouble() + r.Next(29, 33)) + 0.207), //gets coordinates for (-180 - 180)
+                       new XElement("password", letters[i] + p),
+                       new XElement("isCustomer", false),
+                        new XElement("email", customerName[i] + letters[11])))
+                      ;
+            XMLTools.SaveListToXMLElement(listCustomers, CustomersPath);
         }
         #endregion
         #region createParcel
         public void createParcel() //creats a parcel with random information
         {
             List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
-            List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
-
-           list.Add(0.0009); list.Add(0.001); list.Add(0.002); list.Add(0.003); list.Add(10); list.Add(1001);
-
+            list.Add(0.0009); list.Add(0.001); list.Add(0.002); list.Add(0.003); list.Add(10); list.Add(1001);
+            var target = (from x in listCustomers.Elements()
+                          where Convert.ToInt32(x.Element("customerId").Value) != 0
+                          select x).FirstOrDefault();
 
             for (int i = 0; i < 10; i++) //creates 10 parcels with information
+            {
+                var sender = (from x in listCustomers.Elements().Skip(i)
+                              where Convert.ToInt32(x.Element("customerId").Value) != 0
+                              select x).FirstOrDefault();
                 listParcels.Add(new Parcel()
                 {
+
                     parcelId = (int)list[5] + i,
                     weight = (DO.weightCategories)r.Next(1, 3), //chooses a weight from light, average, heavy
                     priority = (DO.Priorities)r.Next(1, 3),
                     requested = DateTime.Now.AddDays(-4 * i),
-                    scheduled = DateTime.Now,//this was just added its untested
-                    pickedUp = DateTime.MinValue,
-                    delivered = DateTime.MinValue,
-                    senderId = listCustomers[i].customerId,
-                    targetId = listCustomers[3].customerId,
+                    scheduled = DateTime.Now,
+                    pickedUp = null,
+                    delivered = null,
+                    senderId = Convert.ToInt32(sender.Element("customerId").Value),
+                    targetId = Convert.ToInt32(target.Element("customerId").Value),
                     droneId = listDrones[i].droneId
-                    //  active = true,
+
 
 
                 });
+            }
             list[5] = list[5] + 10;
             XMLTools.SaveListToXMLSerializer<double>(list, configPath);
             XMLTools.SaveListToXMLSerializer(listParcels, ParcelsPath);
@@ -147,7 +156,7 @@ namespace Dal
         string CustomersPath = @"CustomersXml.xml"; //XMLSerializer
         string ParcelsPath = @"ParcelsXml.xml"; //xmlserializer
 
-
+        #region get
         #region  getStation /doesnt need did active
         public Station getStation(int stationId)
         {
@@ -155,10 +164,9 @@ namespace Dal
             try
             {
                 var station = findStation(stationId);
-                //if (station.active)
-                    return station;
-               // else
-                  //  throw new DoesntExistException("This station doesnt exist in the system\n");
+
+                return station;
+
             }
             catch (DoesntExistException exc)
             {
@@ -172,10 +180,10 @@ namespace Dal
             try
             {
                 var drone = findDrone(droneId);
-               // if (drone.active)
-                    return drone;
-              //  else
-                  //  throw new DoesntExistException("This drone doesnt exist\n");
+                // if (drone.active)
+                return drone;
+                //  else
+                //  throw new DoesntExistException("This drone doesnt exist\n");
             }
             catch (DoesntExistException exc)
             {
@@ -189,10 +197,10 @@ namespace Dal
             try
             {
                 var customer = findCustomer(customerId);
-               // if (customer.active)
-                    return customer;
-               // else
-                  //  throw new DoesntExistException("This customer doesn't exist in the system\n");
+                // if (customer.active)
+                return customer;
+                // else
+                //  throw new DoesntExistException("This customer doesn't exist in the system\n");
             }
             catch (DoesntExistException exc)
             {
@@ -206,10 +214,10 @@ namespace Dal
             try
             {
                 var parcel = findParcel(parcelId);
-              //  if (parcel.active)
-                    return parcel;
-              //  else
-                 //   throw new DoesntExistException("This parcel doesnt exist int he system\n");
+                //  if (parcel.active)
+                return parcel;
+                //  else
+                //   throw new DoesntExistException("This parcel doesnt exist int he system\n");
             }
             catch (DoesntExistException exc)
             {
@@ -217,12 +225,53 @@ namespace Dal
             }
         }
         #endregion
+        #region getParcelId//did xmlserializer
+        public int getParcelId() //returns parcel id
+        {
+            List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
+            list[5]++;
+            XMLTools.SaveListToXMLSerializer<double>(list, configPath);
+            return (int)list[5]--;
+        }
+        #endregion
+        #region getDroneCharge 
+        public DroneCharge getDroneCharge(int droneId)
+        {
+            try
+            {
+                return findDroneCharge(droneId);
+            }
+            catch (DoesntExistException exc)
+            {
+                throw new DoesntExistException(exc.Message);
+            }
+        }
+        #endregion
+        #region returnCustomer /* doesnt need/
+        public Customer returnCustomer(string name, string password)
+        {
+            try
+            {
+                var customer = checkCustomer(name, password);
+                return customer;
+
+
+            }
+            catch (DoesntExistException exc)
+            {
+                throw exc;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region update
         #region UpdateDrone /did xmlserializer and active
         public void UpdateDrone(Drone droneToUpdate)
         {
             List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
             listDrones.RemoveAll(x => x.droneId == droneToUpdate.droneId);
-          //  droneToUpdate.active = true;
+            //  droneToUpdate.active = true;
             listDrones.Add(droneToUpdate);
             XMLTools.SaveListToXMLSerializer(listDrones, DronesPath);
 
@@ -245,11 +294,9 @@ namespace Dal
         public void UpdateCustomer(Customer customerToUpdate)
         {
 
-            List<Customer> listcustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            listcustomers.RemoveAll(x => x.customerId == customerToUpdate.customerId);
-          //  customerToUpdate.active = true;
-            listcustomers.Add(customerToUpdate);
-            XMLTools.SaveListToXMLSerializer(listcustomers, CustomersPath);
+
+            deleteCustomer(customerToUpdate.customerId);
+            AddCustomer(customerToUpdate);
 
 
         }
@@ -260,22 +307,25 @@ namespace Dal
 
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             listParcels.RemoveAll(x => x.parcelId == parcelToUpdate.parcelId);
-           // parcelToUpdate.active = true;
+            // parcelToUpdate.active = true;
             listParcels.Add(parcelToUpdate);
             XMLTools.SaveListToXMLSerializer(listParcels, ParcelsPath);
 
 
         }
         #endregion
+        #endregion
+
+        #region add
         #region AddStation /did the xmlserializer/ and active
         public void AddStation(Station stationToAdd) //adds station to list
         {
 
 
             List<Station> listStations = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
-            if (listStations.Count(x => x.stationId == stationToAdd.stationId) != 0 )
+            if (listStations.Count(x => x.stationId == stationToAdd.stationId) != 0)
                 throw new AlreadyExistException("The station already exist in the system");
-          //  stationToAdd.active = true;
+            //  stationToAdd.active = true;
             listStations.Add(stationToAdd);
             XMLTools.SaveListToXMLSerializer(listStations, StationsPath);
         }
@@ -284,9 +334,9 @@ namespace Dal
         public void AddDrone(Drone droneToAdd) //adds drone to list
         {
             List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
-            if (listDrones.Count(x => x.droneId == droneToAdd.droneId) != 0 )
+            if (listDrones.Count(x => x.droneId == droneToAdd.droneId) != 0)
                 throw new AlreadyExistException("The drone already exist in the system");
-          //  droneToAdd.active = true;
+            //  droneToAdd.active = true;
             listDrones.Add(droneToAdd);
             XMLTools.SaveListToXMLSerializer(listDrones, DronesPath);
 
@@ -331,15 +381,37 @@ namespace Dal
         #region AddCustomer /*did the xmlseriler and active
         public void AddCustomer(Customer customerToAdd) //adds customer to list
         {
-            //var customer = getCustomer(customerToAdd.customerId);
-            List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            if (listCustomers.Count(x => x.customerId == customerToAdd.customerId) != 0)
+            XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
+            var ifExists = (from c in listCustomers.Elements()
+                            where Convert.ToInt32(c.Element("customerId").Value) == customerToAdd.customerId
+                            select c).FirstOrDefault();
+            var checkName = (from c in listCustomers.Elements()
+                             where (c.Element("name").Value) == customerToAdd.name
+                             select c).FirstOrDefault();
+
+
+            if (ifExists != null)
                 throw new AlreadyExistException("A customer with this id already exist in the system");
-            if (listCustomers.Count(x => x.name == customerToAdd.name) != 0 )
+            if (checkName != null)
                 throw new AlreadyExistException("A customer with this user name already exist in the system");
-           // customerToAdd.active = true;
-            listCustomers.Add(customerToAdd);
-            XMLTools.SaveListToXMLSerializer(listCustomers, CustomersPath);
+
+            XElement newAdd = new XElement("Customer",
+
+                   new XElement("customerId", customerToAdd.customerId),
+                    new XElement("name", customerToAdd.name),
+                    new XElement("Phone", customerToAdd.Phone),
+                    new XElement("longitude", customerToAdd.longitude), //gets coordinates for (-90 - 90) 
+                    new XElement("latitude", customerToAdd.latitude), //gets coordinates for (-180 - 180)
+                     new XElement("password", customerToAdd.password),
+                     new XElement("isCustomer", customerToAdd.isCustomer),
+                     new XElement("email", customerToAdd.email))
+                    ;
+
+            listCustomers.Add(newAdd);
+
+
+
+            XMLTools.SaveListToXMLElement(listCustomers, CustomersPath);
         }
         #endregion
         #region AddParcel /did the xmlSerializer*/ and active
@@ -348,11 +420,14 @@ namespace Dal
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             if (listParcels.Count(x => x.parcelId == parcelToAdd.parcelId) != 0)
                 throw new AlreadyExistException("The parcel already exist in the system");
-           // parcelToAdd.active = true;
+            // parcelToAdd.active = true;
             listParcels.Add(parcelToAdd);
             XMLTools.SaveListToXMLSerializer(listParcels, ParcelsPath);
         }
         #endregion
+        #endregion
+
+        #region delete
         #region deleteDrone /*did the xmlserializer and active
         public void deleteDrone(int id)
         {
@@ -360,15 +435,15 @@ namespace Dal
             {
                 List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
                 var drone = findDrone(id);
-             //   if (drone.active == true)
-               // {
-                  //  var temp = listDrones.Find(d => d.droneId == id);
-                 //   temp.active = false;
-                    listDrones.Remove(drone);
-                 //   listDrones.Add(temp);
-               // }
-               // else
-                   // throw new DoesntExistException("This drone doesnt exist in the system\n");
+                //   if (drone.active == true)
+                // {
+                //  var temp = listDrones.Find(d => d.droneId == id);
+                //   temp.active = false;
+                listDrones.Remove(drone);
+                //   listDrones.Add(temp);
+                // }
+                // else
+                // throw new DoesntExistException("This drone doesnt exist in the system\n");
 
                 XMLTools.SaveListToXMLSerializer(listDrones, DronesPath);
 
@@ -385,18 +460,16 @@ namespace Dal
         {
             try
             {
-                List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+                XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
                 var customer = findCustomer(id);
-             //   if (customer.active == true)
-             //   {
-                 //   var temp = listCustomers.Find(d => d.customerId == id);
-                 //   temp.active = false;
-                    listCustomers.Remove(customer);
-                   // listCustomers.Add(temp);
-               // }
-               // else
-                //    throw new DoesntExistException("This customer doesnt exist in the system");
-                XMLTools.SaveListToXMLSerializer(listCustomers, CustomersPath);
+                (from c in listCustomers.Elements()
+                 where Convert.ToInt32(c.Element("customerId").Value) == id
+                 select c).Remove();
+
+
+
+
+                XMLTools.SaveListToXMLElement(listCustomers, CustomersPath);
 
             }
             catch (DoesntExistException exc)
@@ -414,15 +487,15 @@ namespace Dal
             {
                 List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
                 var parcel = findParcel(id);
-                //if (parcel.active == true && parcel.scheduled == DateTime.MinValue)
+                //if (parcel.active == true && parcel.scheduled == null)
                 //{
                 //    var temp = listParcels.Find(d => d.parcelId == id);
                 //    temp.active = false;
-                    listParcels.Remove(parcel);
-                   // listParcels.Add(temp);
-             //   }
-              //  else
-                  //  throw new DoesntExistException("This parcel doesnt exist in the system\n");
+                listParcels.Remove(parcel);
+                // listParcels.Add(temp);
+                //   }
+                //  else
+                //  throw new DoesntExistException("This parcel doesnt exist in the system\n");
 
 
                 XMLTools.SaveListToXMLSerializer(listParcels, ParcelsPath);
@@ -445,7 +518,7 @@ namespace Dal
                 //{
                 //    var temp = listStations.Find(d => d.stationId == id);
                 //    temp.active = false;
-                    listStations.Remove(station);
+                listStations.Remove(station);
                 //    listStations.Add(temp);
                 //}
                 //else
@@ -471,75 +544,14 @@ namespace Dal
                 listDroneCharges.RemoveAll(x => x.droneId == droneId);
 
 
-            listDroneCharges.RemoveAll(dc=>dc.droneId==droneId);
+            listDroneCharges.RemoveAll(dc => dc.droneId == droneId);
             XMLTools.SaveListToXMLSerializer(listDroneCharges, DroneChargesPath);
-            //XElement droneChargeElement = XMLTools.LoadListFromXMLElement(DroneChargesPath);
-            //// IEnumerable<XElement> list = droneChargeElement.Elements();
-            //DroneCharge droneCharge = (from item in droneChargeElement.Elements()
-            //                           where int.Parse(droneChargeElement.Element("Drone Id").Value) == droneId
-
-            //                           select new DroneCharge()
-            //                           {
-            //                               droneId = int.Parse(droneChargeElement.Element("Drone id").Value),
-            //                               stationId = int.Parse(droneChargeElement.Element("Station id").Value),
-            //                               chargeTime = DateTime.Parse(droneChargeElement.Element("Charge Time").Value),
-            //                               active = false
-
-
-            //                           }).FirstOrDefault();
-
-
-
-            //try
-            //{
-            //    if (droneCharge.droneId != null)
-            //    {
-            //        droneChargeElement.Add(droneCharge);
-            //        XMLTools.SaveListToXMLElement(droneChargeElement, DroneChargesPath);
-
-            //    }
-            //    else
-            //        throw new DoesntExistException("THis drone is not currently being charged\n");
-            //}
-            //catch (DoesntExistException exc)
-            //{
-            //    throw exc;
-            //}
 
         }
         #endregion
-        #region PrintStation /doesnt need
-        public string PrintStation(int stationId) //prints a station
-        {
-            if (findStation(stationId).stationId != 0)
-                return findStation(stationId).ToString();
-            throw new DoesntExistException("The station doesn't exist in system");
-        }
         #endregion
-        #region PrintDrone /doesnt need
-        public string PrintDrone(int droneId) //prints a drone
-        {
-            if (findDrone(droneId).droneId != 0)
-                return findDrone(droneId).ToString();
-            throw new DoesntExistException("The drone doesn't exist in system");
-        }
-        #endregion
-        #region PrintCustomer /doesnt need
-        public string PrintCustomer(int customerId) //prints a customer
-        {
-            if (findCustomer(customerId).customerId != 0)
-                return findCustomer(customerId).ToString();
-            throw new DoesntExistException("The customer doesn't exist in system");
-        }
-        #endregion
-        #region PrintParcel /doesnt need
-        public string PrintParcel(int parcelId) //prints a parcel
-        {
-            if (findParcel(parcelId).parcelId != 0)
-                return findParcel(parcelId).ToString();
-            throw new DoesntExistException("The parcel doesn't exist in system");
-        }
-        #endregion
+
+        #region find
         #region findParcel /*did xmlserializer
         public Parcel findParcel(int parcelId) //finds a parcel using its id
         {
@@ -559,17 +571,26 @@ namespace Dal
 
         }
         #endregion
-        #region findCustomer/did xmlserialier
+        #region findCustomer/did xelement
         public Customer findCustomer(int customerId) //finds a customer using its id
         {
 
-            List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-
-            for (int i = 0; i < listCustomers.Count(); i++) //goes over customer list
+            XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
+            Customer c = new Customer();
+            foreach (var customer in listCustomers.Elements())//goes over customer list
             {
-                if (listCustomers[i].customerId == customerId) //if id matches
+                if (Convert.ToInt32(customer.Element("customerId").Value) == customerId) //if id matches
                 {
-                    return (listCustomers[i]);
+                    c.customerId = Convert.ToInt32(customer.Element("customerId").Value);
+                    c.name = (customer.Element("name").Value);
+                    c.Phone = (customer.Element("Phone").Value);
+                    c.latitude = Convert.ToDouble(customer.Element("latitude").Value);
+                    c.longitude = Convert.ToDouble(customer.Element("longitude").Value);
+                    c.password = (customer.Element("password").Value);
+                    c.isCustomer = Convert.ToBoolean(customer.Element("isCustomer").Value);
+                    c.email = (customer.Element("email").Value);
+                    return c;
+
 
                 }
             }
@@ -577,31 +598,6 @@ namespace Dal
             throw new DoesntExistException("The customer doesn't exist in system");
 
 
-        }
-        #endregion
-        #region checkCustomer /did xml serialier
-        public Customer checkCustomer(string name, string password) //finds a customer using its id
-        {
-            bool flagExist = false, coorectPassword = false;
-            int j = 0;
-            List<Customer> listCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            for (int i = 0; i < listCustomers.Count(); i++) //goes over customer list
-            {
-                if (listCustomers[i].name == name) //if id matches
-                {
-                    j = i;
-                    flagExist = true;
-                    if (listCustomers[i].password == password)
-                        coorectPassword = true;
-
-
-                }
-            }
-            if (!flagExist)
-                throw new DoesntExistException("The customer doesn't exist in system");
-            if (!coorectPassword)
-                throw new DoesntExistException("Incorrect Paswword\n");
-            return (listCustomers[j]);
         }
         #endregion
         #region findDroneCharge /i think i did xelelemt
@@ -619,32 +615,32 @@ namespace Dal
                 }
 
             }
-            throw new DoesntExistException("The drone isnt't charging"); 
+            throw new DoesntExistException("The drone isnt't charging");
             //XElement droneChargeElement = XMLTools.LoadListFromXMLElement(DroneChargesPath);
             //IEnumerable<XElement> list = droneChargeElement.Elements();
             //DroneCharge droneCharge = (from item in droneChargeElement.Elements()
             //                           where int.Parse(droneChargeElement.Element("Drone Id").Value) == droneId && int.Parse(droneChargeElement.Element("Station Id").Value) == stationId
 
-                //                           select new DroneCharge()
-                //                           {
-                //                               droneId = int.Parse(droneChargeElement.Element("Drone id").Value),
-                //                               stationId = int.Parse(droneChargeElement.Element("Station id").Value),
-                //                               chargeTime = DateTime.Parse(droneChargeElement.Element("Charge Time").Value)
-                //                              // active = bool.Parse(droneChargeElement.Element("Active").Value)
+            //                           select new DroneCharge()
+            //                           {
+            //                               droneId = int.Parse(droneChargeElement.Element("Drone id").Value),
+            //                               stationId = int.Parse(droneChargeElement.Element("Station id").Value),
+            //                               chargeTime = DateTime.Parse(droneChargeElement.Element("Charge Time").Value)
+            //                              // active = bool.Parse(droneChargeElement.Element("Active").Value)
 
 
-                //                           }).FirstOrDefault();
-                //if (droneCharge.droneId != null)
-                //    return droneCharge;
-                //for (int i = 0; i < DataSource.DroneChargeList.Count(); i++)
-                //{
-                //    if (DataSource.DroneChargeList[i].droneId == droneId && DataSource.DroneChargeList[i].stationId == stationId) //if id matches
-                //    {
-                //        return (DataSource.DroneChargeList[i]);
-                //    }
-                //}
-         
-              //  throw new DoesntExistException("The drone or station doesn't exist in system");
+            //                           }).FirstOrDefault();
+            //if (droneCharge.droneId != null)
+            //    return droneCharge;
+            //for (int i = 0; i < DataSource.DroneChargeList.Count(); i++)
+            //{
+            //    if (DataSource.DroneChargeList[i].droneId == droneId && DataSource.DroneChargeList[i].stationId == stationId) //if id matches
+            //    {
+            //        return (DataSource.DroneChargeList[i]);
+            //    }
+            //}
+
+            //  throw new DoesntExistException("The drone or station doesn't exist in system");
         }
         #endregion
         #region findDrone /didxmlserializer
@@ -693,58 +689,13 @@ namespace Dal
 
             }
             throw new DoesntExistException("The drone isnt't charging");
-            //XElement droneChargeElement = XMLTools.LoadListFromXMLElement(DroneChargesPath);
-            //IEnumerable<XElement> list = droneChargeElement.Elements();
-            //DroneCharge droneCharge = (from item in droneChargeElement.Elements()
-            //                           where int.Parse(droneChargeElement.Element("Drone Id").Value) == droneChargeId
-
-                //                           select new DroneCharge()
-                //                           {
-                //                               droneId = int.Parse(droneChargeElement.Element("Drone id").Value),
-                //                               stationId = int.Parse(droneChargeElement.Element("Station id").Value),
-                //                               chargeTime = DateTime.Parse(droneChargeElement.Element("Charge Time").Value),
-                //                               active = bool.Parse(droneChargeElement.Element("Active").Value)
-
-
-                //                           }).FirstOrDefault();
-                //if (droneCharge.droneId != null)
-                //    return droneCharge;
-
-                //for (int i = 0; i < DataSource.DroneChargeList.Count(); i++) //goes over dronecharge list
-                //{
-                //    if (DataSource.DroneChargeList[i].droneId == droneChargeId) //if ifd match
-                //    {
-                //        return (DataSource.DroneChargeList[i]);
-                //    }
-                //}
-           // else
-               // throw new DoesntExistException("The dronecharge doesn't exist in system");
-        }
-        #endregion
-        #region getParcelId//did xmlserializer
-        public int getParcelId() //returns parcel id
-        {
-            List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
-            list[5]++;
-            XMLTools.SaveListToXMLSerializer<double>(list, configPath);
-            return (int)list[5]--;
-        }
-        #endregion
-        #region ChargeCapacity //did xmlserializer
-        public double[] ChargeCapacity()
-        {
-            List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
-
-            double[] arr = new double[7];
-            for (int i = 0; i < list.Count(); i++)
-            { arr[i] = list[i]; }
-
-
-            return arr;
 
 
         }
         #endregion
+        #endregion
+
+        #region getLists
         #region printStationsList /*did xml serializer
         public IEnumerable<Station> printStationsList() //prints list of stations 
         {
@@ -771,11 +722,20 @@ namespace Dal
         #region printCustomersList /*did xmlserializer
         public IEnumerable<Customer> printCustomersList() //prints customer list
         {
-            List<Customer> listCcustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            foreach (Customer item in listCcustomers)
-            {
-                yield return item;
-            }
+            XElement listCcustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
+            Customer c = new Customer();
+            return from customer in listCcustomers.Elements()
+                   select new Customer()
+                   {
+                       customerId = Convert.ToInt32(customer.Element("customerId").Value),
+                       name = (customer.Element("name").Value),
+                       Phone = (customer.Element("Phone").Value),
+                       latitude = Convert.ToDouble(customer.Element("latitude").Value),
+                       longitude = Convert.ToDouble(customer.Element("longitude").Value),
+                       password = (customer.Element("password").Value),
+                       isCustomer = Convert.ToBoolean(customer.Element("isCustomer").Value)
+
+                   };
 
         }
         #endregion
@@ -793,24 +753,31 @@ namespace Dal
         #region printDroneChargeList /i think i did xelement
         public IEnumerable<DroneCharge> printDroneChargeList() //prints DroneCharge list
         {
-            //XElement droneChargeElement = XMLTools.LoadListFromXMLElement(DroneChargesPath);
-            //IEnumerable<XElement> list = droneChargeElement.Elements();
-            //List<DroneCharge> droneChargeList = (from item in droneChargeElement.Elements()
-            //                                     select new DroneCharge()
-            //                                     {
-            //                                         droneId = int.Parse(droneChargeElement.Element("Drone id").Value),
-            //                                         stationId = int.Parse(droneChargeElement.Element("Station id").Value),
-            //                                         chargeTime = DateTime.Parse(droneChargeElement.Element("Charge Time").Value),
-            //                                         //active = bool.Parse(droneChargeElement.Element("Active").Value)
 
-
-            //                                     }).ToList();
             List<DroneCharge> droneChargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargesPath);
 
             foreach (DroneCharge item in droneChargeList/*.Where(s => s.active == true)*/)
             {
                 yield return item;
             }
+
+        }
+        #endregion
+        #endregion
+
+        #region random help
+        #region ChargeCapacity //did xmlserializer
+        public double[] ChargeCapacity()
+        {
+            List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
+
+            double[] arr = new double[7];
+            for (int i = 0; i < list.Count(); i++)
+            { arr[i] = list[i]; }
+
+
+            return arr;
+
 
         }
         #endregion
@@ -834,36 +801,45 @@ namespace Dal
             }
         }
         #endregion
-        #region returnCustomer /* doesnt need/
-        public Customer returnCustomer(string name, string password)
+        #region checkCustomer /did xelement
+        public Customer checkCustomer(string name, string password) //finds a customer using its id
         {
-            try
+            bool flagExist = false, coorectPassword = false;
+            int i = 0, j = 0;
+            Customer c = new Customer();
+            XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
+            foreach (var customer in listCustomers.Elements()) //goes over customer list
             {
-                var customer = checkCustomer(name, password);
-                //if (customer.active)
-                    return customer;
-              //  else
-                  //  throw new DoesntExistException("This customer doesnt exist in the system\n");
+                i++;
+                if ((customer.Element("name").Value) == name)//if id matches
+                {
+                    j = i;
+                    flagExist = true;
+                    if ((customer.Element("password").Value) == password)
+                    {
+                        coorectPassword = true;
+                        c.customerId = Convert.ToInt32(customer.Element("customerId").Value);
+                        c.name = (customer.Element("name").Value);
+                        c.Phone = (customer.Element("Phone").Value);
+                        c.latitude = Convert.ToDouble(customer.Element("latitude").Value);
+                        c.longitude = Convert.ToDouble(customer.Element("longitude").Value);
+                        c.password = (customer.Element("password").Value);
+                        c.isCustomer = Convert.ToBoolean(customer.Element("isCustomer").Value);
+                        return c;
 
+                    }
+
+
+                }
             }
-            catch (DoesntExistException exc)
-            {
-                throw exc;
-            }
+            if (!flagExist)
+                throw new DoesntExistException("The customer doesn't exist in system");
+            if (!coorectPassword)
+                throw new DoesntExistException("Incorrect Paswword\n");
+            return c;
+
         }
         #endregion
-        #region getDroneCharge dont need
-        public DroneCharge getDroneCharge(int droneId)
-        {
-            try
-            {
-                return findDroneCharge(droneId);
-            }
-            catch (DoesntExistException exc)
-            {
-                throw new DoesntExistException(exc.Message);
-            }
-        }
         #endregion
 
     }

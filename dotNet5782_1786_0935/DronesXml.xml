@@ -1,62 +1,62 @@
 <?xml version="1.0"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>361591185</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>958839580</droneId>
     <model>Reaper</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>411124292</droneId>
+    <droneId>933232729</droneId>
     <model>Shadow</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>average</maxWeight>
-    <droneId>263746123</droneId>
+    <droneId>527318872</droneId>
     <model>Grey Eagle</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>558762043</droneId>
+    <droneId>244365520</droneId>
     <model>Global Hawk</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>390633801</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>247147781</droneId>
     <model>Pioneer</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>721492675</droneId>
+    <droneId>156965580</droneId>
     <model>Fire Scout</model>
     <active>false</active>
   </Drone>
   <Drone>
-    <maxWeight>average</maxWeight>
-    <droneId>675701941</droneId>
+    <maxWeight>light</maxWeight>
+    <droneId>101738723</droneId>
     <model>Snowgoose</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>622283857</droneId>
+    <droneId>258910723</droneId>
     <model>Hunter</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>255073673</droneId>
+    <droneId>584451403</droneId>
     <model>Stalker</model>
     <active>false</active>
   </Drone>
   <Drone>
     <maxWeight>light</maxWeight>
-    <droneId>142645051</droneId>
+    <droneId>104217654</droneId>
     <model>GNAT</model>
     <active>false</active>
   </Drone>

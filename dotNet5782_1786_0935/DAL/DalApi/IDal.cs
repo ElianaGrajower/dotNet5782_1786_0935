@@ -30,22 +30,19 @@ namespace DalApi
         public void deleteStation(int id);
         public void deleteDroneCharge(int droneId, int stationId);
         //public string matchUpParcel(Parcel parcel); //matches up package with drone
-                                                    //  public string pickUpParcel(Customer customer, Parcel parcel); //matches up packg with sender of pckg
-                                                    //  public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel); //matches up parcel with buyer
-                                                    //  public string chargeDrone(Drone drone, int stationNum); //charges drone
-                                                    //  public string releaseDrone(DroneCharge charge); //releases drone from charge
-        public string PrintStation(int stationId); //prints a station
-        public string PrintDrone(int droneId); //prints a drone
-        public string PrintCustomer(int customerId); //prints a customer
-        public string PrintParcel(int parcelId); //prints a parcel
+        //  public string pickUpParcel(Customer customer, Parcel parcel); //matches up packg with sender of pckg
+        //  public string deliverParcel(Customer customer, Parcel parcel, int priorityLevel); //matches up parcel with buyer
+        //  public string chargeDrone(Drone drone, int stationNum); //charges drone
+        //  public string releaseDrone(DroneCharge charge); //releases drone from charge
+
         public Parcel findParcel(int parcelId); //finds a parcel using its id
         public Customer findCustomer(int customerId); //finds a customer using its id
         public DroneCharge findDroneCharge(int droneId, int stationId);
-       public Drone findDrone(int droneId); //finds a drone using its id
+        public Drone findDrone(int droneId); //finds a drone using its id
         public Station findStation(int stationId); //finds a station using its id
         public DroneCharge findDroneCharge(int droneChargeId); //finds a drone charge using its id
-       public int getParcelId(); //returns parcel id
-      //  public double distance(double latitude1, double longitute1, double latitude2, double longitute2); //calculates distance between coordinates for bonus
+        public int getParcelId(); //returns parcel id
+                                  //  public double distance(double latitude1, double longitute1, double latitude2, double longitute2); //calculates distance between coordinates for bonus
         public double[] ChargeCapacity();
         public IEnumerable<Station> printStationsList(); //prints list of stations 
         public IEnumerable<Drone> printDronesList(); //prints list of drone
@@ -57,6 +54,6 @@ namespace DalApi
         public Customer checkCustomer(string name, string password);
         public DroneCharge getDroneCharge(int droneId);
 
-    } 
-   }
+    }
+}
 

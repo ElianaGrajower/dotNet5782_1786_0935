@@ -16,6 +16,7 @@ namespace BlApi
         public chargeCapacity getChargeCapacity();
         public List<BO.StationToList> getStationsList();
         public void addDrone(BO.Drone DronetoAdd, int stationId);
+        public double distance(BO.Location l1, BO.Location l2);
         public BO.Station getStation(int stationId);
         public List<BO.Station> getStations();
         public void addCustomer(BO.Customer CustomertoAdd);
@@ -47,7 +48,7 @@ namespace BlApi
         public IEnumerable<BO.ParcelToList> allParcels(Func<BO.ParcelToList, bool> predicate = null);
         public IEnumerable<BO.CustomerToList> allCustomers(Func<BO.CustomerToList, bool> predicate = null);
         public void releaseAllFromCharge();
-        //public void simulator(int droneId, Action<in T>update, Func<bool>isDone);
+        public void openSimulator(int droneId, Action updateView, Func<bool> isRun);
 
-    }     
+    }
 }
