@@ -58,6 +58,8 @@ namespace PL
                 releaseDrone.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Hidden;
+                parcelIdRead.Visibility = Visibility.Hidden;
+                parcelIdText.Visibility = Visibility.Hidden;
             }
             if (drone.droneStatus == BO.DroneStatus.maintenance)
             {
@@ -65,6 +67,8 @@ namespace PL
                 matchUpParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Hidden;
+                parcelIdRead.Visibility = Visibility.Hidden;
+                parcelIdText.Visibility = Visibility.Hidden;
             }
             if (drone.droneStatus == BO.DroneStatus.delivery)
             {
@@ -134,7 +138,9 @@ namespace PL
             //   idText.IsReadOnly = false;
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-            
+            automticButton.Visibility = Visibility.Hidden;
+            manualButton.Visibility = Visibility.Hidden;
+
 
         }
 
@@ -424,6 +430,19 @@ namespace PL
                 textBlocks.DataContext = d;
             }
             MessageBox.Show("The simulator is ended");
+            buttons.Visibility = Visibility.Visible;
+            automticButton.Visibility = Visibility.Visible;
+            manualButton.Visibility = Visibility.Hidden;
+            parcelButton.Visibility = Visibility.Hidden;
+            parcelIdRead.Visibility = Visibility.Hidden;
+            parcelIdText.Visibility = Visibility.Hidden;
+            logOut.Visibility = Visibility.Visible;
+            closeButton.Visibility = Visibility.Visible;
+            releaseDrone.Visibility = Visibility.Hidden;
+            pickupParcel.Visibility = Visibility.Hidden;
+            deliverParcel.Visibility = Visibility.Hidden;
+            parcelIdRead.Visibility = Visibility.Hidden;
+            parcelIdText.Visibility = Visibility.Hidden;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -462,15 +481,8 @@ namespace PL
                 worker.CancelAsync();
 
 
-            buttons.Visibility = Visibility.Visible;
-            automticButton.Visibility = Visibility.Visible;
-            manualButton.Visibility = Visibility.Hidden;  // i think...
-            parcelButton.Visibility = Visibility.Hidden;
-            parcelIdRead.Visibility = Visibility.Hidden;
-            parcelIdText.Visibility = Visibility.Hidden;
-            logOut.Visibility = Visibility.Visible;
-            closeButton.Visibility = Visibility.Visible;
-          
+           
+
         }
 
     }
