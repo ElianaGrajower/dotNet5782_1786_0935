@@ -1626,6 +1626,10 @@ namespace BL
         }
         #endregion
         #endregion
+        public void openSimulator(int droneId, Action updateView, Func<bool> isRun)
+        {
+            new Simulator(droneId, updateView, isRun, this);
+        }
 
     }
 
