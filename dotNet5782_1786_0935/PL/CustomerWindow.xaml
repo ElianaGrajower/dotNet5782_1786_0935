@@ -55,7 +55,7 @@
         <Label Content="Email:" HorizontalAlignment="Left" Margin="141,97,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="emailText" HorizontalAlignment="Left" Margin="255,100,0,0" Text="{Binding email,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.CanContentScroll="True" Height="18"/>
         <Canvas x:Name="checkDelete" Margin="298,109,248,194" Background="White" Visibility="Hidden">
-            <TextBlock Canvas.Left="41" Canvas.Top="24" TextWrapping="Wrap"><Run Text="Are you sure you want to delete "/><LineBreak/><Run Text="this station?"/></TextBlock>
+            <TextBlock Canvas.Left="41" Canvas.Top="24" TextWrapping="Wrap"><Run Text="Are you sure you want to delete "/><LineBreak/><Run Text="this parcel?"/></TextBlock>
             <Button x:Name="cancel" Content="cancel" Canvas.Left="58" Canvas.Top="80" Width="54" Click="cancel_Click"/>
             <Button x:Name="yes" Content="yes" Canvas.Left="145" Canvas.Top="80" Width="54" Click="yes_Click"/>
         </Canvas>

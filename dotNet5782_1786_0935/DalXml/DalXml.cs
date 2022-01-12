@@ -17,10 +17,10 @@ namespace Dal
     sealed class DalXml : IDal
     {
 
-        internal string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "1111aaa", "@gmail.com" };
-        internal string[] stationName = { "Raanana Central Station", "Tel Aviv Central Station" };
-        internal string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
-        internal string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
+        internal  string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "1111aaa" ,"@gmail.com"};
+        internal  string[] stationName = { "Raanana Central Station", "Tel Aviv Central Station" };
+        internal  string[] droneName = { "Reaper", "Shadow", "Grey Eagle", "Global Hawk", "Pioneer", "Fire Scout", "Snowgoose", "Hunter", "Stalker", "GNAT", "Wing Loong II", "AVENGER", "Apollo Earthly", "AirHaven", "indRazer", "Godspeed", "Phantom", "Novotek", "Tri-Propeller", "WikiDrone" };
+        internal  string[] customerName = { "Michael", "Hannah", "Fred", "Sam", "Tom", "Jessie", "George", "Tiffany", "Elizabeth", "Rachel" };
 
         public static Random r = new Random();
         #region singelton
@@ -28,8 +28,8 @@ namespace Dal
         static readonly IDal instance = new DalXml();
         public static IDal Instance { get => instance; }
         #endregion
-        //   private DalXml() { Initialize(); } // default constructer calls on initialize func
-        // #region Initialize
+    //   private DalXml() { Initialize(); } // default constructer calls on initialize func
+                                           // #region Initialize
         public void Initialize()
         {
             createStation(); //creats a station with random information
@@ -87,10 +87,10 @@ namespace Dal
                     new XElement("latitude", (r.NextDouble() + r.Next(29, 33)) + 0.207), //gets coordinates for (-180 - 180)
                      new XElement("password", letters[i] + p),
                      new XElement("isCustomer", true),
-                     new XElement("email", customerName[i] + letters[11])))
+                     new XElement("email", customerName[i]+ letters[11])))
                     ;
-
-
+                
+                
             for (int i = 8; i < 10; i++) //creates 2 workers
                 listCustomers.Add(new XElement("Customer",
 
@@ -115,14 +115,14 @@ namespace Dal
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
             list.Add(0.0009); list.Add(0.001); list.Add(0.002); list.Add(0.003); list.Add(10); list.Add(1001);
             var target = (from x in listCustomers.Elements()
-                          where Convert.ToInt32(x.Element("customerId").Value) != 0
-                          select x).FirstOrDefault();
+                        where Convert.ToInt32(x.Element("customerId").Value) != 0
+                        select x).FirstOrDefault();
 
             for (int i = 0; i < 10; i++) //creates 10 parcels with information
             {
                 var sender = (from x in listCustomers.Elements().Skip(i)
-                              where Convert.ToInt32(x.Element("customerId").Value) != 0
-                              select x).FirstOrDefault();
+                            where Convert.ToInt32(x.Element("customerId").Value) != 0
+                            select x).FirstOrDefault();
                 listParcels.Add(new Parcel()
                 {
 
@@ -136,7 +136,7 @@ namespace Dal
                     senderId = Convert.ToInt32(sender.Element("customerId").Value),
                     targetId = Convert.ToInt32(target.Element("customerId").Value),
                     droneId = listDrones[i].droneId
-
+                    
 
 
                 });
@@ -164,9 +164,9 @@ namespace Dal
             try
             {
                 var station = findStation(stationId);
-
-                return station;
-
+                
+                    return station;
+            
             }
             catch (DoesntExistException exc)
             {
@@ -294,7 +294,7 @@ namespace Dal
         public void UpdateCustomer(Customer customerToUpdate)
         {
 
-
+            
             deleteCustomer(customerToUpdate.customerId);
             AddCustomer(customerToUpdate);
 
@@ -386,13 +386,13 @@ namespace Dal
                             where Convert.ToInt32(c.Element("customerId").Value) == customerToAdd.customerId
                             select c).FirstOrDefault();
             var checkName = (from c in listCustomers.Elements()
-                             where (c.Element("name").Value) == customerToAdd.name
-                             select c).FirstOrDefault();
+                            where (c.Element("name").Value) == customerToAdd.name
+                            select c).FirstOrDefault();
 
 
-            if (ifExists != null)
+            if ( ifExists!=null)
                 throw new AlreadyExistException("A customer with this id already exist in the system");
-            if (checkName != null)
+            if (checkName!=null)
                 throw new AlreadyExistException("A customer with this user name already exist in the system");
 
             XElement newAdd = new XElement("Customer",
@@ -577,18 +577,18 @@ namespace Dal
 
             XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
             Customer c = new Customer();
-            foreach (var customer in listCustomers.Elements())//goes over customer list
+            foreach(var customer in listCustomers.Elements())//goes over customer list
             {
-                if (Convert.ToInt32(customer.Element("customerId").Value) == customerId) //if id matches
+                if (Convert.ToInt32(customer.Element("customerId").Value )== customerId) //if id matches
                 {
                     c.customerId = Convert.ToInt32(customer.Element("customerId").Value);
                     c.name = (customer.Element("name").Value);
-                    c.Phone = (customer.Element("Phone").Value);
+                    c.Phone= (customer.Element("Phone").Value);
                     c.latitude = Convert.ToDouble(customer.Element("latitude").Value);
                     c.longitude = Convert.ToDouble(customer.Element("longitude").Value);
                     c.password = (customer.Element("password").Value);
                     c.isCustomer = Convert.ToBoolean(customer.Element("isCustomer").Value);
-                    c.email = (customer.Element("email").Value);
+                    c.email= (customer.Element("email").Value);
                     return c;
 
 
@@ -689,8 +689,8 @@ namespace Dal
 
             }
             throw new DoesntExistException("The drone isnt't charging");
-
-
+          
+               
         }
         #endregion
         #endregion
@@ -722,7 +722,7 @@ namespace Dal
         #region printCustomersList /*did xmlserializer
         public IEnumerable<Customer> printCustomersList() //prints customer list
         {
-            XElement listCcustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
+           XElement listCcustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
             Customer c = new Customer();
             return from customer in listCcustomers.Elements()
                    select new Customer()
@@ -753,7 +753,7 @@ namespace Dal
         #region printDroneChargeList /i think i did xelement
         public IEnumerable<DroneCharge> printDroneChargeList() //prints DroneCharge list
         {
-
+           
             List<DroneCharge> droneChargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargesPath);
 
             foreach (DroneCharge item in droneChargeList/*.Where(s => s.active == true)*/)

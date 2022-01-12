@@ -149,11 +149,11 @@ namespace Dal
         public void AddCustomer(Customer customerToAdd) //adds customer to list
         {
 
-            if (DataSource.CustomerList.Count(x => x.customerId == customerToAdd.customerId) != 0 && DataSource.CustomerList.Count(x => getCustomer(x.customerId).active == true) != 0)
+            if (DataSource.CustomerList.Count(x => x.customerId == customerToAdd.customerId) != 0 )
                 throw new AlreadyExistException("A customer with this id already exist in the system");
-            if(DataSource.CustomerList.Count(x => x.name == customerToAdd.name) != 0 && DataSource.CustomerList.Count(x => getCustomer(x.customerId).active == true) != 0)
+            if(DataSource.CustomerList.Count(x => x.name == customerToAdd.name)  != 0)
                 throw new AlreadyExistException("A customer with this user name already exist in the system");
-            customerToAdd.active = true;
+           // customerToAdd.active = true;
             DataSource.CustomerList.Add(customerToAdd);
         }
         #endregion
@@ -195,13 +195,12 @@ namespace Dal
             try
             {
                 Customer c = findCustomer(id);
-                if (c.active)
-                {
+               
                    // var temp = DataSource.CustomerList.Find(d => d.customerId == id);
                    DataSource.CustomerList.Remove(c); //delete the old element
-                    c.active = false;
+                  //  c.active = false;
                     DataSource.CustomerList.Add(c);
-                }
+                
                 //DataSource.CustomerList.Remove(findCustomer(id));
 
             }
@@ -470,7 +469,7 @@ namespace Dal
         #region printCustomersList
         public IEnumerable<Customer> printCustomersList() //prints customer list
         {
-            foreach (Customer item in DataSource.CustomerList.Where(s => s.active == true))
+            foreach (Customer item in DataSource.CustomerList)
             {
                 yield return item;
             }

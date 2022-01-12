@@ -18,7 +18,8 @@ namespace BO
         public IEnumerable<ParcelinCustomer> parcelsdelivered { set; get; }
         public IEnumerable<ParcelinCustomer> parcelsOrdered { set; get; }
         public string email { set; get; }
-      
+       
+
 
         public override string ToString()
         {

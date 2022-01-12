@@ -83,7 +83,7 @@ namespace DAL
                     latitude = (DalObject.r.NextDouble() + DalObject.r.Next(29, 33)) + 0.207, //gets coordinates for (-180 - 180)
                     password = letters[i] + p,
                     isCustomer = true,
-                    active=true
+                    
                 }) ;
             for (int i = 8; i < 10; i++) //creates 2 workers
                 CustomerList.Add(new Customer()
@@ -95,7 +95,7 @@ namespace DAL
                     latitude = (DalObject.r.NextDouble() + DalObject.r.Next(29, 33)) + 0.207, //gets coordinates for (-180 - 180)
                     password = letters[i] + p,
                     isCustomer = false,
-                    active = true
+                    
                 });
         }
         #endregion

@@ -141,7 +141,7 @@ namespace PL
 
         private void delete_Click(object sender, RoutedEventArgs e)
         {
-            checkDelete.Visibility = Visibility.Visible;
+            //checkDelete.Visibility = Visibility.Visible;
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -196,7 +196,7 @@ namespace PL
             }
             catch(Exception exc)
             {
-                MessageBox.Show("System malfunction please wait a moment and try again");
+                
             }
             
         }
