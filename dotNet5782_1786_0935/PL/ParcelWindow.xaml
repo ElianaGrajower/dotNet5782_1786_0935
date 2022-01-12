@@ -11,18 +11,14 @@
             <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
         <Label Content="Sender Id:" HorizontalAlignment="Left" Margin="256,115,0,0" VerticalAlignment="Top"/>
-        <!--<TextBox x:Name="senderText" HorizontalAlignment="Left" Margin="347,119,0,0" Text="{Binding sender.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>-->
         <ComboBox x:Name="senderSelect" HorizontalAlignment="Left" Margin="347,119,0,0" Text="{Binding sender.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="150" IsEnabled="True"/>
         <Label Content="Target Id:" HorizontalAlignment="Left" Margin="256,152,0,0" VerticalAlignment="Top"/>
-        <!--<TextBox x:Name="targetText" HorizontalAlignment="Left" Margin="347,156,0,0" Text="{Binding target.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>-->
         <ComboBox x:Name="targetSelect" HorizontalAlignment="Left" Margin="347,156,0,0" Text="{Binding target.customerId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="150" IsEnabled="True"/>
         <Label Content="Weight:" HorizontalAlignment="Left" Margin="256,190,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="parcelIdText" HorizontalAlignment="Left" Margin="347,51,0,0" Text="{Binding parcelId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
         <Label Content="Priority:" HorizontalAlignment="Left" Margin="256,224,0,0" VerticalAlignment="Top"/>
         <Label x:Name="parcelIdRead" Content="Parcel Id:" HorizontalAlignment="Left" Margin="256,47,0,0" VerticalAlignment="Top"/>
-        <!--<TextBox x:Name="weightText" HorizontalAlignment="Left" Margin="347,190,0,0" VerticalAlignment="Top" Width="150" Text="{Binding weight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False"/>-->
         <ComboBox x:Name="weightSelect" HorizontalAlignment="Left" Margin="347,190,0,0" VerticalAlignment="Top" Width="150" Text="{Binding weight,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True"/>
-        <!--<TextBox x:Name="priorityText" HorizontalAlignment="Left" Margin="347,228,0,0" VerticalAlignment="Top" Width="150" Text="{Binding priority,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="False"/>-->
         <ComboBox x:Name="prioritySelect" HorizontalAlignment="Left" Margin="347,228,0,0" VerticalAlignment="Top" Width="150" Text="{Binding priority,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" IsEnabled="True" SelectionChanged="prioritySelect_SelectionChanged"/>
         <Label x:Name="droneIdRead" Content="Drone Id:" HorizontalAlignment="Left" Margin="256,82,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="droneIdText" HorizontalAlignment="Left" Margin="347,86,0,0" Text="{Binding drone.droneId,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>

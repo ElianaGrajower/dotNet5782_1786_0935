@@ -137,36 +137,7 @@ namespace PL
             }
         }
 
-        private void delete_Click(object sender, RoutedEventArgs e)
-        {
-            //checkDelete.Visibility = Visibility.Visible;
-        }
 
-        private void cancel_Click(object sender, RoutedEventArgs e)
-        {
-            checkDelete.Visibility = Visibility.Collapsed;
-        }
-
-        private void yes_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                int stationId = Convert.ToInt32(stationIdText.Text);
-                Bl.deleteStation(stationId);
-                MessageBox.Show("station deleted succesfully");
-                checkDelete.Visibility = Visibility.Collapsed;
-                Close();
-            }
-            catch
-            {
-                MessageBox.Show("ERROR");
-            }
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void listOfDronesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e) //write this!!
         {

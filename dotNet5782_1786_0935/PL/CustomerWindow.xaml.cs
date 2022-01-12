@@ -177,28 +177,6 @@ namespace PL
                
             }
         }
-
-        private void yes_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                int customerId = Convert.ToInt32(idText.Text);
-                bl.deleteCustomer(customerId);
-                MessageBox.Show("customer deleted succesfully");
-                checkDelete.Visibility = Visibility.Collapsed;
-                Close();
-            }
-            catch
-            {
-                MessageBox.Show("ERROR");
-            }
-        }
-
-        private void cancel_Click(object sender, RoutedEventArgs e)
-        {
-            checkDelete.Visibility = Visibility.Collapsed;
-        }
-
         private void passwordText_TextChanged(object sender, TextChangedEventArgs e)
         {
 

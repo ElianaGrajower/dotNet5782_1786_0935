@@ -10,7 +10,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/stock-photo-the-vast-blue-sky-and-clouds-sky-250nw-408791038.jpg" Opacity="0.9"/>
         </Grid.Background>
-
         <ComboBox Name="weightSelector" Margin="215,35,429,350" SelectionChanged="weightSelector_SelectionChanged"/>
         <ComboBox x:Name="StatusSelector" Margin="454,35,190,350" SelectionChanged="StatusSelector_SelectionChanged"></ComboBox>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="391,31,0,0" VerticalAlignment="Top" FontSize="16"/>
