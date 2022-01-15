@@ -32,7 +32,15 @@ namespace BL
 
         #region helpFunctions
         #region emailValidity
-        //ensures the email is valid and contains @
+
+
+        /// <summary>
+        ///ensures the email is valid and contains @
+        /// </summary>
+        /// <param name="email">/param>
+        /// <returns>true if valid otherwise false</returns>
+        /// 
+
         private bool emailValidity(string email)
         {
             for (int i = 0; i < email.Length; i++)
@@ -44,7 +52,15 @@ namespace BL
         }
         #endregion
         #region findTheParcel
-        //this function finds a parcel based on many different orders of priorities
+
+        /// <summary>
+        ///this function finds a parcel based on many different orders of priorities
+        /// </summary>
+        /// <param name="we"> the weight drone can hold</param>
+        /// <param name="a"> the loctaion</param>
+        /// <param name="battery">the amount of battery it has</param>
+        /// <param name="pri"> the priority if the parcel</param>
+        /// <returns>the parcel to match with the drone</returns>
         private DO.Parcel findTheParcel(BO.weightCategories we, BO.Location a, double battery, DO.Priorities pri)
         {
             double d, x;
@@ -103,16 +119,28 @@ namespace BL
         }
         #endregion
         #region searchCostumer
-        public int searchCustomer(string userName) //recieves the name of a customer and returns its id
+        /// <summary>
+        ///recieves the name of a customer and returns its id 
+        /// </summary>
+        /// <param name="userName"> of customer</param>
+        /// <returns>id of customer</returns>
+        public int searchCustomer(string userName) 
         {
             int id = getCustomersList().Where(c => c.customerName == userName).Select(s => s.customerId).FirstOrDefault();
             return id;
         }
         #endregion
         #region isEmployee
+
+        /// <summary>
+        /// checks if this user is an employee
+        /// </summary>
+        /// <param name="userName">naem of user</param>
+        /// <param name="password">password of user</param>
+        /// <returns>true if employye otherwise false</returns>
         public bool isEmployee(string userName, string password)
         {
-            //gets the customer id that matches the name
+           
             int id = getCustomersList().Where(c => c.customerName == userName).Select(s => s.customerId).FirstOrDefault();
             if (id == null)
                 throw new BO.DoesntExistException("this userName doest exist\n");
@@ -124,6 +152,12 @@ namespace BL
         }
         #endregion
         #region passwordProtection
+
+        /// <summary>
+        /// checks to ensure the passowrd is strong and proteceted
+        /// </summary>
+        /// <param name="password">the password user chose</param>
+        /// <returns>true if password strong otherwise false</returns>
         private bool passwordProtection(string password)
         {
             bool flag = false;
@@ -171,7 +205,11 @@ namespace BL
         }
         #endregion
         #region getChargeCapacity
-        //this function returns an arr of chargecapacity
+       
+        /// <summary>
+        //  gets the charge cappacity
+        /// </summary>
+        /// <returns>an array if the chargecapacity</returns>
         public chargeCapacity getChargeCapacity()
         {
 
@@ -189,6 +227,12 @@ namespace BL
         }
         #endregion
         #region getUnvailablechargeSlots
+
+        /// <summary>
+        /// counts the aount of availabe charge slots
+        /// </summary>
+        /// <param name="stationId"> the id of the sttation</param>
+        /// <returns>amount of available slots</returns>
         private int getUnvailablechargeSlots(int stationId)
         {
             //makes all availble all available slots
@@ -197,7 +241,12 @@ namespace BL
         }
         #endregion
         #region minBatteryRequired
-        //this function checks how much battery is needed for the drone to get from point a to point b
+        
+        /// <summary>
+        ///this function checks how much battery is needed for the drone to get from point a to point b
+        /// </summary>
+        /// <param name="droneId"> the id of drone</param>
+        /// <returns> the min battery required</returns>
         private int minBatteryRequired(int droneId)
         { //gets drone 
             var drone = getDrone(droneId);
@@ -248,7 +297,11 @@ namespace BL
         }
         #endregion
         #region stationLocationslist
-        //returns a list of all the the station locations
+
+        /// <summary>
+        ///returns a list of all the the station locations
+        /// </summary>
+        /// <returns>list of location</returns>
         private List<Location> stationLocationslist()
         {
             List<Location> locations = new List<Location>();
@@ -263,7 +316,12 @@ namespace BL
         }
         #endregion
         #region onlyDigits
-        //this function ensures that  enteres is only numbers
+
+        /// <summary>
+        ///this function ensures that  enteres is only numbers
+        /// </summary>
+        /// <param name="x">the character</param>
+        /// <returns>true if digit itherwise false</returns>
         private bool onlyDigits(char x)
         {
             //ensures that in range of ascii value of numbers
@@ -274,14 +332,25 @@ namespace BL
         }
         #endregion
         #region deg2rad
-        //this function converts degree to radiant
+
+        /// <summary>
+        ///this function converts degree to radiant
+        /// </summary>
+        /// <param name="val"> degree</param>
+        /// <returns>the val radiant vallue</returns>
         private static double deg2rad(double val)
         {
             return (Math.PI / 180) * val;
         }
         #endregion
         #region distance
-        //calculates distance between two location based on a mathematical calculation for coordinates
+        
+        /// <summary>
+        ///calculates distance between two location based on a mathematical calculation for coordinates
+        /// </summary>
+        /// <param name="l1">first location</param>
+        /// <param name="l2">second location</param>
+        /// <returns>distance between two location</returns>
         public double distance(BO.Location l1, BO.Location l2)
         {
             var R = 6371; // Radius of the earth in km
@@ -297,7 +366,14 @@ namespace BL
         }
         #endregion
         #region closestStation
-        //finds closestStation with chargeSlots
+     
+        /// <summary>
+        ///finds closestStation with chargeSlots
+        /// </summary>
+        /// <param name="currentLocation">the lcotion </param>
+        /// <param name="withChargeSlots">if has stations </param>
+        /// <param name="l"></param>
+        /// <returns>location of station</returns>
         private Location closestStation(Location currentLocation, bool withChargeSlots, List<Location> l)
         {
 
@@ -343,6 +419,12 @@ namespace BL
         }
         #endregion
         #region getDroneBattery
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="droneId">the id if drone</param>
+        /// <returns>the amount of battery the drone has</returns>
         private double getDroneBattery(int droneId)
         {
             //finds correct drone
@@ -356,7 +438,12 @@ namespace BL
         }
         #endregion
         #region findStation
-        //this function finds a station based on coordinates that it recives
+
+        /// <summary>
+        ///this function finds a station based on coordinates that it recives
+        /// </summary>
+        /// <param name="location">the loc of staton</param>
+        /// <returns>the id of station</returns>
         private int findStation(Location location)
         {
             //finds station with correct locaton
@@ -368,7 +455,13 @@ namespace BL
         }
         #endregion
         #region weight
-        //ensures the weight category
+
+        /// <summary>
+        ///ensures the weight category
+        /// </summary>
+        /// <param name="dr">the drone weight</param>
+        /// <param name="pa">the parcel weight</param>
+        /// <returns>true if can hold otherwise false</returns>
         private bool weight(BO.weightCategories dr, BO.weightCategories pa)
         {
             if (dr == BO.weightCategories.heavy)
@@ -380,28 +473,18 @@ namespace BL
             return false;
         }
         #endregion
-        //#region indexOfChargeCapacity
-        ////returns what kinds of parcel it can hold
-        //private int indexOfChargeCapacity(DO.weightCategories w)
-        //{
-        //    if (w == DO.weightCategories.light)
-        //        return 1;
-        //    if (w == DO.weightCategories.average)
-        //        return 2;
-        //    if (w == DO.weightCategories.heavy)
-        //        return 3;
-         
 
-        //    return 0;
 
-        //}
-        //#endregion
 
         #endregion
 
         #region lists
         #region getDronesList
-        //returns dronelist
+
+        /// <summary>
+        /// //returns dronelist
+        /// </summary>
+        /// <returns>list of DroneToList</returns>
         public List<BO.DroneToList> getDronesList()
         {
             List<BO.DroneToList> drone = new List<BO.DroneToList>();
@@ -419,9 +502,13 @@ namespace BL
             catch (ArgumentException) { throw new BO.DoesntExistException(); }
             return drone;
         }
-        #endregion  
+        #endregion
         #region getCustomersList
-        //returns customer list
+
+        /// <summary>
+        ///   //returns customer list
+        /// </summary>
+        /// <returns>list of CustomerToList</returns>
         public List<BO.CustomerToList> getCustomersList()
         {
             List<BO.CustomerToList> customer = new List<BO.CustomerToList>();
@@ -460,7 +547,11 @@ namespace BL
         }
         #endregion
         #region getUsersList
-        //returns customer list
+
+        /// <summary>
+        ///     //returns customer list
+        /// </summary>
+        /// <returns>list ofo CustomerToList </returns>
         public List<BO.CustomerToList> getUsersList()
         {
 
@@ -477,7 +568,11 @@ namespace BL
         }
         #endregion
         #region getEmployeesList
-        //returns employee list
+
+        /// <summary>
+        /// //returns employee list
+        /// </summary>
+        /// <returns>list if CustomerToList</returns>
         public List<BO.CustomerToList> getEmployeesList()
         {
             try
@@ -494,7 +589,12 @@ namespace BL
         }
         #endregion
         #region getParcelsList
-        //returns parcel list
+
+        /// <summary>
+        ///returns parcel list
+
+        /// </summary>
+        /// <returns>list of ParcelToList</returns>
         public List<BO.ParcelToList> getParcelsList()
         {
             List<BO.ParcelToList> parcel = new List<BO.ParcelToList>();
@@ -539,7 +639,11 @@ namespace BL
         }
         #endregion
         #region getStationsList
-        //this function returns a list of all the stations
+
+        /// <summary>
+        /////this function returns a list of all the stations
+        /// </summary>
+        /// <returns>list of sttaions</returns>
         public List<BO.StationToList> getStationsList()
         {
             List<BO.StationToList> stations = new List<BO.StationToList>();
@@ -568,6 +672,12 @@ namespace BL
         }
         #endregion getStationsList
         #region allDrones
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns>ienumerable of dronetolist</returns>
         public IEnumerable<DroneToList> allDrones(Func<DroneToList, bool> predicate = null)
         {
             if (predicate == null)
@@ -579,6 +689,11 @@ namespace BL
         #endregion
         #region allStations
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns>ienumerable of sronetolist</returns>
         public IEnumerable<BO.StationToList> allStations(Func<BO.StationToList, bool> predicate = null)
         {
             var station = getStationsList();
@@ -592,6 +707,12 @@ namespace BL
         }
         #endregion
         #region allParcels
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns>ienumerable of parceltolist</returns>
         public IEnumerable<BO.ParcelToList> allParcels(Func<BO.ParcelToList, bool> predicate = null)
         {
             var parcel = getParcelsList();
@@ -603,6 +724,12 @@ namespace BL
         }
         #endregion
         #region allCustomers
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns>ienumerable of CustomerToList </returns>
         public IEnumerable<BO.CustomerToList> allCustomers(Func<BO.CustomerToList, bool> predicate = null)
         {
             var customer = getCustomersList();
@@ -614,7 +741,11 @@ namespace BL
         }
         #endregion
         #region getStations
-        //this function returns a list of stations
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>list of sttaions</returns>
         public List<BO.Station> getStations()
         {
             List<BO.Station> stations = new List<BO.Station>();
@@ -630,6 +761,12 @@ namespace BL
         }
         #endregion
         #region confirmDelivery
+
+        /// <summary>
+        /// this function makes alist of all the parcel id of parcels that the customer send
+        /// </summary>
+        /// <param name="customerId">the id of customer</param>
+        /// <returns>list of parcel id</returns>
         public IEnumerable<int> confirmDelivery(int customerId)
         {
 
@@ -643,6 +780,11 @@ namespace BL
         }
         #endregion
         #region confirmPickUp
+        /// <summary>
+        /// this function makes alist of all the parcel id of parcels that the customer ordered
+        /// </summary>
+        /// <param name="customerId">the id of customer</param>
+        /// <returns>list of parcel id</returns>
         public IEnumerable<int> confirmPickUp(int customerId)
         {
             var customer = getCustomer(customerId);
@@ -659,7 +801,12 @@ namespace BL
 
         #region add
         #region addDrone
-        //this function adds a drone
+       
+        /// <summary>
+        ///this function adds a drone
+        /// </summary>
+        /// <param name="droneToAdd">new drone</param>
+        /// <param name="stationId">station id</param>
         public void addDrone(BO.Drone droneToAdd, int stationId)
         {
             //checks validity of input
@@ -725,7 +872,11 @@ namespace BL
         }
         #endregion
         #region addCustomer
-        //adds customer
+       
+        /// <summary>
+        ///this function adds a customer
+        /// </summary>
+        /// <param name="customertoAdd">new customer</param>
         public void addCustomer(BO.Customer customertoAdd)
         {
 
@@ -771,7 +922,11 @@ namespace BL
         }
         #endregion
         #region addStation
-        //adds station
+       
+        /// <summary>
+        /// adds a station
+        /// </summary>
+        /// <param name="StationtoAdd">new station</param>
         public void addStation(BO.Station StationtoAdd)
         {
 
@@ -809,7 +964,12 @@ namespace BL
         }
         #endregion
         #region addParcel
-        //adds parcel
+        
+        /// <summary>
+        /// adds a parcel
+        /// </summary>
+        /// <param name="parcelToAdd">new parcel</param>
+        /// <returns></returns>
         public int addParcel(BO.Parcel parcelToAdd)
         {
 
@@ -851,7 +1011,11 @@ namespace BL
 
         #region delete
         #region deleteStation
-        //delets station
+        
+        /// <summary>
+        /// deletes station
+        /// </summary>
+        /// <param name="stationId"></param>
         public void deleteStation(int stationId)
         {
             try
@@ -867,7 +1031,10 @@ namespace BL
         }
         #endregion
         #region deleteParcel
-        //deletes parcel
+        /// <summary>
+        /// deletes parcel
+        /// </summary>
+        /// <param name="parcelId"></param>
         public void deleteParcel(int parcelId)
         {
             try
@@ -883,7 +1050,10 @@ namespace BL
         }
         #endregion
         #region deleteCustomer
-        //delets customer
+        /// <summary>
+        /// deletes customer
+        /// </summary>
+        /// <param name="customerId"></param>
         public void deleteCustomer(int customerId)
         {
             try
@@ -899,7 +1069,10 @@ namespace BL
         }
         #endregion
         #region deleteDrone
-        //delets drone 
+        /// <summary>
+        /// deletes custodronemer
+        /// </summary>
+        /// <param name="droneId"></param> 
         public void deleteDrone(int droneId)
         {
             try
@@ -918,7 +1091,12 @@ namespace BL
 
         #region get
         #region getCustomer
-        //returns customer
+       
+        /// <summary>
+        /// gets cusotmer
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>customer</returns>
         public BO.Customer getCustomer(int customerId)
         {
             try
@@ -993,7 +1171,11 @@ namespace BL
         }
         #endregion
         #region getParcel
-        //returns parcle
+        /// <summary>
+        /// gets parcel
+        /// </summary>
+        /// <param name="parcelsId"></param>
+        /// <returns>Parcel</returns>
         public BO.Parcel getParcel(int parcelsId)
         {
 
@@ -1064,7 +1246,11 @@ namespace BL
         }
         #endregion
         #region getDrone
-        //returns drone
+        /// <summary>
+        /// gets drone
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns>drone</returns>
         public BO.Drone getDrone(int id)
         {
             //ensures drone exists
@@ -1126,7 +1312,11 @@ namespace BL
         }
         #endregion
         #region returnsDrone
-        //returns dronetolist
+        /// <summary>
+        /// gets dronetolist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>dronetolist</returns>
         public BO.DroneToList returnsDrone(int id)
         {
             DroneToList droneBo = new DroneToList();
@@ -1161,7 +1351,11 @@ namespace BL
         }
         #endregion
         #region getStation
-        //this function returns a station
+        /// <summary>
+        /// gets station
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns>station</returns>
         public BO.Station getStation(int stationId)
         {
             try
@@ -1200,6 +1394,10 @@ namespace BL
         #endregion
 
         #region BL
+
+        /// <summary>
+        /// this fun is the constructer and creates a list of drones 
+        /// </summary>
         BL()
         {
 
@@ -1350,7 +1548,12 @@ namespace BL
 
         #region update
         #region UpdateDronename
-        //updates drone name
+        
+        /// <summary>
+        /// this fun updates the name of drone
+        /// </summary>
+        /// <param name="droneId">drone id to update</param>
+        /// <param name="dmodel">new drone name</param>
         public void UpdateDronename(int droneId, string dmodel)
         {
             //checks id drone exits
@@ -1378,7 +1581,13 @@ namespace BL
         }
         #endregion
         #region UpdateCustomer
-        //updates customer
+        
+        /// <summary>
+        /// updates custoemr info
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="name">new name</param>
+        /// <param name="number">new number</param>
         public void UpdateCustomer(int customerId, string name, string number)
         {
             //updates info
@@ -1392,7 +1601,11 @@ namespace BL
         }
         #endregion
         #region releaseDroneFromCharge
-        //this function releases drone from charge
+        
+        /// <summary>
+        /// this fun releas a drone from charge
+        /// </summary>
+        /// <param name="droneId">id of drone to hcrage</param>
         public void releaseDroneFromCharge(int droneId)
         {
             //gets drone
@@ -1437,7 +1650,13 @@ namespace BL
         }
         #endregion
         #region updateStation
-        //this function updates station
+        
+        /// <summary>
+        /// updades station info
+        /// </summary>
+        /// <param name="stationId">id of sttaion to update</param>
+        /// <param name="AvlblDCharges">new amount of slots</param>
+        /// <param name="name">new name</param>
         public void updateStation(int stationId, int AvlblDCharges, string name = "")
         {
             try
@@ -1472,7 +1691,11 @@ namespace BL
         }
         #endregion
         #region MatchDroneWithPacrel
-        //matches drone with parcel
+        
+        /// <summary>
+        /// matches a drone with a parcel
+        /// </summary>
+        /// <param name="droneId"></param>
         public void matchDroneWithPacrel(int droneId)
         {
 
@@ -1519,7 +1742,11 @@ namespace BL
         }
         #endregion
         #region PickUpParcel
-        //pick up parcel to deliver(doesnt actually deliver yet!!
+
+        /// <summary>
+        /// pick up parcel to deliver(doesnt actually deliver yet!!
+        /// </summary>
+        /// <param name="droneId"></param>
         public void pickUpParcel(int droneId)
         {
             var tempDrone = getDrone(droneId);
@@ -1575,7 +1802,11 @@ namespace BL
         }
         #endregion
         #region deliveredParcel
-        //delievrs parcel
+
+        /// <summary>
+        /// delievrs parcel
+        /// </summary>
+        /// <param name="droneId"></param>
         public void deliveredParcel(int droneId)
         {
             var tempDrone = getDrone(droneId);
@@ -1638,7 +1869,11 @@ namespace BL
         }
         #endregion
         #region SendDroneToCharge
-        //sends drone to charge at station
+
+        /// <summary>
+        /// sends drone to charge at station
+        /// </summary>
+        /// <param name="droneId"></param>
         public void SendDroneToCharge(int droneId)
         {
             BO.Drone drone = new();
@@ -1680,6 +1915,10 @@ namespace BL
         }
         #endregion
         #region releaseAllFromCharge
+
+        /// <summary>
+        /// releases all the drone charging from charge
+        /// </summary>
         public void releaseAllFromCharge()
         {
             var listDrone = allDrones();

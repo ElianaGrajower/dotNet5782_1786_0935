@@ -164,6 +164,12 @@ namespace Dal
 
         #region get
         #region  getStation 
+
+        /// <summary>
+        /// gets station
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns>station</returns>
         public Station getStation(int stationId)
         {
 
@@ -181,6 +187,11 @@ namespace Dal
         }
         #endregion
         #region getDrone 
+        /// <summary>
+        /// gets drone
+        /// </summary>
+        /// <param name="roneId"></param>
+        /// <returns>drone</returns>
         public Drone getDrone(int droneId)
         {
             try
@@ -196,6 +207,11 @@ namespace Dal
         }
         #endregion
         #region getCustomer 
+        /// <summary>
+        /// gets customer
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>customer</returns>
         public Customer getCustomer(int customerId)
         {
             try
@@ -210,6 +226,11 @@ namespace Dal
         }
         #endregion
         #region getParcel 
+        /// <summary>
+        /// gets parcel
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns>parcel</returns>
         public Parcel getParcel(int parcelId)
         {
             try
@@ -224,6 +245,10 @@ namespace Dal
         }
         #endregion
         #region getParcelId
+        /// <summary>
+        /// gets parcel id
+        /// </summary>
+        /// <returns>parcelid</returns>
         public int getParcelId() //returns parcel id
         {
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
@@ -233,6 +258,12 @@ namespace Dal
         }
         #endregion
         #region getDroneCharge 
+
+        /// <summary>
+        /// gets dronecharge
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns>dronecharge</returns>
         public DroneCharge getDroneCharge(int droneId)
         {
             try
@@ -246,6 +277,13 @@ namespace Dal
         }
         #endregion
         #region returnCustomer 
+
+        /// <summary>
+        /// gets thec ustomer based on name and passwors
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <returns>customer</returns>
         public Customer returnCustomer(string name, string password)
         {
             try
@@ -265,6 +303,11 @@ namespace Dal
 
         #region update
         #region UpdateDrone 
+
+        /// <summary>
+        /// updates droen info
+        /// </summary>
+        /// <param name="droneToUpdate">updated drone</param>
         public void UpdateDrone(Drone droneToUpdate)
         {
             List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -276,6 +319,11 @@ namespace Dal
         }
         #endregion
         #region UpdateStation
+
+        /// <summary>
+        /// upodates stau=io info
+        /// </summary>
+        /// <param name="stationToUpdate">updated station</param>
         public void UpdateStation(Station stationToUpdate)
         {
             List<Station> listStations = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -287,6 +335,11 @@ namespace Dal
         }
         #endregion
         #region UpdateCustomer
+
+        /// <summary>
+        /// updated cusotemr info
+        /// </summary>
+        /// <param name="customerToUpdate"updated customer></param>
         public void UpdateCustomer(Customer customerToUpdate)
         {
 
@@ -298,6 +351,11 @@ namespace Dal
         }
         #endregion
         #region UpdateParcel 
+
+        /// <summary>
+        /// updateds parcel info
+        /// </summary>
+        /// <param name="parcelToUpdate">updates parcel info</param>
         public void UpdateParcel(Parcel parcelToUpdate)
         {
 
@@ -314,6 +372,11 @@ namespace Dal
 
         #region add
         #region AddStation 
+
+        /// <summary>
+        /// adds station
+        /// </summary>
+        /// <param name="stationToAdd"></param>
         public void AddStation(Station stationToAdd) //adds station to list
         {
 
@@ -326,6 +389,11 @@ namespace Dal
         }
         #endregion
         #region  AddDrone 
+
+        /// <summary>
+        /// adds drone
+        /// </summary>
+        /// <param name="droneToAdd"></param>
         public void AddDrone(Drone droneToAdd) //adds drone to list
         {
             List<Drone> listDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -337,6 +405,11 @@ namespace Dal
         }
         #endregion
         #region AddDroneCharge
+
+        /// <summary>
+        /// adds drine charge
+        /// </summary>
+        /// <param name="droneChargeToAdd"></param>
         public void AddDroneCharge(DroneCharge droneChargeToAdd) //adds drone to list
         {
 
@@ -373,6 +446,11 @@ namespace Dal
 
         #endregion
         #region AddCustomer 
+
+        /// <summary>
+        /// adds customer
+        /// </summary>
+        /// <param name="customerToAdd"></param>
         public void AddCustomer(Customer customerToAdd) //adds customer to list
         {
             XElement listCustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
@@ -409,6 +487,11 @@ namespace Dal
         }
         #endregion
         #region AddParcel 
+
+        /// <summary>
+        /// adds parcel
+        /// </summary>
+        /// <param name="parcelToAdd"></param>
         public void AddParcel(Parcel parcelToAdd) //adds parcel to list
         {
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
@@ -422,6 +505,11 @@ namespace Dal
 
         #region delete
         #region deleteDrone 
+
+        /// <summary>
+        /// deletes drone
+        /// </summary>
+        /// <param name="id"></param>
         public void deleteDrone(int id)
         {
             try
@@ -440,6 +528,11 @@ namespace Dal
         }
         #endregion
         #region deleteCustomer
+
+        /// <summary>
+        /// delets customer
+        /// </summary>
+        /// <param name="id"></param>
         public void deleteCustomer(int id)
         {
             try
@@ -464,6 +557,11 @@ namespace Dal
         }
         #endregion
         #region deleteParcel
+
+        /// <summary>
+        /// deltes parcel
+        /// </summary>
+        /// <param name="id"></param>
         public void deleteParcel(int id)
         {
 
@@ -482,6 +580,11 @@ namespace Dal
         }
         #endregion
         #region deleteStation 
+
+        /// <summary>
+        /// delets station
+        /// </summary>
+        /// <param name="id"></param>
         public void deleteStation(int id)
         {
             try
@@ -500,6 +603,12 @@ namespace Dal
         }
         #endregion
         #region deleteDroneCharge 
+
+        /// <summary>
+        /// delets drone charge
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
         public void deleteDroneCharge(int droneId, int stationId)
         {
             List<DroneCharge> listDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargesPath);
@@ -518,6 +627,12 @@ namespace Dal
 
         #region find
         #region findParcel  
+
+        /// <summary>
+        /// finds the parcel
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns>the parcel</returns>
         public Parcel findParcel(int parcelId) //finds a parcel using its id
         {
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
@@ -537,6 +652,12 @@ namespace Dal
         }
         #endregion
         #region findCustomer
+
+        /// <summary>
+        /// finds customer
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>custoemr</returns>
         public Customer findCustomer(int customerId) //finds a customer using its id
         {
 
@@ -566,6 +687,13 @@ namespace Dal
         }
         #endregion
         #region findDroneCharge
+
+        /// <summary>
+        /// finds drone charge
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
+        /// <returns>drone charge</returns>
         public DroneCharge findDroneCharge(int droneId, int stationId)
         {
             List<DroneCharge> listDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargesPath);
@@ -585,6 +713,12 @@ namespace Dal
         }
         #endregion
         #region findDrone 
+
+        /// <summary>
+        /// finds drone
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns>drone</returns>
         public Drone findDrone(int droneId) //finds a drone using its id
         {
 
@@ -600,6 +734,12 @@ namespace Dal
         }
         #endregion
         #region findStation 
+
+        /// <summary>
+        /// finds station
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns>station</returns>
         public Station findStation(int stationId) //finds a station using its id
         {
             List<Station> listStations = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -615,6 +755,12 @@ namespace Dal
         }
         #endregion
         #region findDroneCharge 
+
+        /// <summary>
+        /// finds drone charge
+        /// </summary>
+        /// <param name="droneChargeId"></param>
+        /// <returns>drone charge</returns>
         public DroneCharge findDroneCharge(int droneChargeId) //finds a drone charge using its id
         {
             List<DroneCharge> listDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargesPath);
@@ -638,6 +784,11 @@ namespace Dal
 
         #region getLists
         #region printStationsList 
+
+        /// <summary>
+        /// creates ienumerable of all stations
+        /// </summary>
+        /// <returns>ienumerable of sttaions</returns>
         public IEnumerable<Station> printStationsList() //prints list of stations 
         {
             List<Station> listStations = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -650,6 +801,10 @@ namespace Dal
         }
         #endregion
         #region printDronesList 
+        /// <summary>
+        /// creates ienumerable of all drones
+        /// </summary>
+        /// <returns>ienumerable of drones</returns>
         public IEnumerable<Drone> printDronesList() //prints list of drone
         {
 
@@ -661,6 +816,10 @@ namespace Dal
         }
         #endregion
         #region printCustomersList 
+        /// <summary>
+        /// creates ienumerable of all customers
+        /// </summary>
+        /// <returns>ienumerable of custoemrs</returns>
         public IEnumerable<Customer> printCustomersList() //prints customer list
         {
            XElement listCcustomers = XMLTools.LoadListFromXMLElement(CustomersPath);
@@ -681,6 +840,10 @@ namespace Dal
         }
         #endregion
         #region printParcelsList
+        /// <summary>
+        /// creates ienumerable of all parcel
+        /// </summary>
+        /// <returns>ienumerable of parcel</returns>
         public IEnumerable<Parcel> printParcelsList() //prints parcel list
         {
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
@@ -692,6 +855,10 @@ namespace Dal
         }
         #endregion
         #region printDroneChargeList 
+        /// <summary>
+        /// creates ienumerable of all drone charges
+        /// </summary>
+        /// <returns>ienumerabel of f=drone chargw=es</returns>
         public IEnumerable<DroneCharge> printDroneChargeList() //prints DroneCharge list
         {
            
@@ -708,6 +875,11 @@ namespace Dal
 
         #region random help
         #region ChargeCapacity 
+
+        /// <summary>
+        /// creates an array of all the charge capacity
+        /// </summary>
+        /// <returns>arr if charge capaacity</returns>
         public double[] ChargeCapacity()
         {
             List<double> list = XMLTools.LoadListFromXMLSerializer<double>(configPath);
@@ -723,7 +895,13 @@ namespace Dal
         }
         #endregion
         #region attribute
-        public void attribute(int dID, int pID)//the function attribute parcel to drone
+
+        /// <summary>
+        /// the function attribute parcel to drone
+        /// </summary>
+        /// <param name="dID"></param>
+        /// <param name="pID"></param>
+        public void attribute(int dID, int pID)
         {
             List<Parcel> listParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             try
@@ -743,7 +921,14 @@ namespace Dal
         }
         #endregion
         #region checkCustomer 
-        public Customer checkCustomer(string name, string password) //finds a customer id using its name and password
+
+        /// <summary>
+        /// finds a customer id using its name and password
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <returns>customer</returns>
+        public Customer checkCustomer(string name, string password) 
         {
             bool flagExist = false, coorectPassword = false;
             int i = 0, j = 0;
