@@ -330,7 +330,7 @@ namespace PL
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             d = bl.getDrone(d.droneId);
-            d = bl.getDrone(d.droneId);
+           // d = bl.getDrone(d.droneId);
             if (d.droneStatus == DroneStatus.delivery)
             {
                 parcel.Visibility = Visibility.Visible;

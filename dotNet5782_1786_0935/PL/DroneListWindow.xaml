@@ -22,8 +22,8 @@
                     <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight}"/>
                     <GridViewColumn Header="Battery" Width="70" DisplayMemberBinding="{Binding battery, StringFormat=\{0:#0.0\}%}"/>
                     <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding droneStatus}"/>
-                    <GridViewColumn Header="Latitude" Width="130" DisplayMemberBinding="{Binding location.latitude}"/>
-                    <GridViewColumn Header="Longitude" Width="130" DisplayMemberBinding="{Binding location.longitude}"/>
+                    <GridViewColumn Header="Latitude" Width="130" DisplayMemberBinding="{Binding location.latitude ,StringFormat=\{0:#0.00000\}°N}"/>
+                    <GridViewColumn Header="Longitude" Width="130" DisplayMemberBinding="{Binding location.longitude,StringFormat=\{0:#0.00000\}°E}"/>
                     <GridViewColumn Header="Parcel Id" Width="70" DisplayMemberBinding="{Binding parcelId}"/>
                     <GridViewColumn Header="Parcels Delivered" Width="100" DisplayMemberBinding="{Binding numOfParcelsdelivered }"/>
                 </GridView>
