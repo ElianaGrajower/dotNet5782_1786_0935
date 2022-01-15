@@ -29,7 +29,7 @@ namespace Dal
 
         //this is all in order to initalize the files the first time-otherwise it shouldnt be called on and that y it is in green
         #region Initialize
-        //   private DalXml() { Initialize(); } // default constructer calls on initialize func
+         //private DalXml() { Initialize(); } // default constructer calls on initialize func
 
         internal string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "1111aaa", "@gmail.com" };
         internal string[] stationName = { "Raanana Central Station", "Tel Aviv Central Station" };

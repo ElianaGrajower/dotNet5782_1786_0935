@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Parcel>
+    <parcelId>1001</parcelId>
+    <senderId>136566342</senderId>
+    <targetId>136566342</targetId>
+    <weight>average</weight>
+    <priority>regular</priority>
+    <droneId>568546121</droneId>
+    <requested>2022-01-15T23:00:35.6060192+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6114984+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1002</parcelId>
+    <senderId>618018820</senderId>
+    <targetId>136566342</targetId>
+    <weight>light</weight>
+    <priority>fast</priority>
+    <droneId>126902755</droneId>
+    <requested>2022-01-11T23:00:35.6129394+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129465+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1003</parcelId>
+    <senderId>741283305</senderId>
+    <targetId>136566342</targetId>
+    <weight>light</weight>
+    <priority>fast</priority>
+    <droneId>326128805</droneId>
+    <requested>2022-01-07T23:00:35.6129534+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129542+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1004</parcelId>
+    <senderId>570484831</senderId>
+    <targetId>136566342</targetId>
+    <weight>light</weight>
+    <priority>regular</priority>
+    <droneId>894729796</droneId>
+    <requested>2022-01-03T23:00:35.6129588+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129595+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1005</parcelId>
+    <senderId>254151720</senderId>
+    <targetId>136566342</targetId>
+    <weight>average</weight>
+    <priority>fast</priority>
+    <droneId>197089423</droneId>
+    <requested>2021-12-30T23:00:35.6129623+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129629+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1006</parcelId>
+    <senderId>236806040</senderId>
+    <targetId>136566342</targetId>
+    <weight>light</weight>
+    <priority>regular</priority>
+    <droneId>671652721</droneId>
+    <requested>2021-12-26T23:00:35.612967+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129676+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1007</parcelId>
+    <senderId>369236369</senderId>
+    <targetId>136566342</targetId>
+    <weight>light</weight>
+    <priority>fast</priority>
+    <droneId>598410537</droneId>
+    <requested>2021-12-22T23:00:35.6129709+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129716+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1008</parcelId>
+    <senderId>783591295</senderId>
+    <targetId>136566342</targetId>
+    <weight>light</weight>
+    <priority>regular</priority>
+    <droneId>151911249</droneId>
+    <requested>2021-12-18T23:00:35.6129748+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129753+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1009</parcelId>
+    <senderId>265082097</senderId>
+    <targetId>136566342</targetId>
+    <weight>light</weight>
+    <priority>fast</priority>
+    <droneId>126677247</droneId>
+    <requested>2021-12-14T23:00:35.6129782+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129787+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+  <Parcel>
+    <parcelId>1010</parcelId>
+    <senderId>564424020</senderId>
+    <targetId>136566342</targetId>
+    <weight>average</weight>
+    <priority>regular</priority>
+    <droneId>283691986</droneId>
+    <requested>2021-12-10T23:00:35.6129859+02:00</requested>
+    <scheduled>2022-01-15T23:00:35.6129866+02:00</scheduled>
+    <pickedUp xsi:nil="true" />
+    <delivered xsi:nil="true" />
+    <fragile>false</fragile>
+    <active>false</active>
+  </Parcel>
+</ArrayOfParcel>
