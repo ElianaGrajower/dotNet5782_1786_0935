@@ -19,16 +19,19 @@ using System.Collections.ObjectModel;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for StationWindow.xaml
+    /// Shows the information of indevidual stations, and actions can be done on the stations.
     /// </summary>
     public partial class StationWindow : Window
     {
         internal readonly IBL Bl = BlFactory.GetBl();
         Station s;
         string cName;
-        
 
-        public StationWindow(IBL Station, string customerName) //new
+        /// <summary>
+        /// constructor for a new station
+        /// </summary>
+        /// <param name="customerName">the users name</param>
+        public StationWindow(IBL Station, string customerName) 
         {
             InitializeComponent();
             this.Bl = Station;
@@ -44,8 +47,12 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
-             
-        public StationWindow(IBL b, Station station, string customerName) //update
+        /// <summary>
+        /// constructor for an existing station 
+        /// </summary>
+        /// <param name="station">the existing station</param>
+        /// <param name="customerName">the users name</param>
+        public StationWindow(IBL b, Station station, string customerName) 
         {
             InitializeComponent();
             this.Bl = b;
@@ -64,13 +71,17 @@ namespace PL
             longitudeText.IsEnabled = false;
             inUseText.IsEnabled = false;
         }
-
-        private void close_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes the window
+        /// </summary>
+        private void close_Click(object sender, RoutedEventArgs e)  
         {
             Close();
         }
-
-        private void add_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// adds a new station
+        /// </summary>
+        private void add_Click(object sender, RoutedEventArgs e)  
         {
             try
             {
@@ -90,8 +101,10 @@ namespace PL
                 MessageBox.Show("ERROR can not add station");
             }
         }
-
-        private void update_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// updates a station
+        /// </summary>
+        private void update_Click(object sender, RoutedEventArgs e)  
         {
             try 
             {
@@ -107,10 +120,10 @@ namespace PL
                 MessageBox.Show("ERROR invalid input");
             }
         }
-
-
-
-        private void listOfDronesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e) 
+        /// <summary>
+        /// opens a drone that is at the current station.
+        /// </summary>
+        private void listOfDronesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)  
         {
             DroneInCharging updateDrone = new DroneInCharging();
             updateDrone = (DroneInCharging)listOfDronesAtStation.SelectedItem;
@@ -131,19 +144,19 @@ namespace PL
             }
             
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
         private void yesButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
             new StationWindow(Bl, cName).ShowDialog();
         }
-
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)  
         {
             new UserWindow().Show();
             Bl.releaseAllFromCharge();

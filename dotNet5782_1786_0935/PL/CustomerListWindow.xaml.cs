@@ -19,26 +19,30 @@ using System.Collections.ObjectModel;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for CustomerListWindow.xaml
+    /// This is the customers list, where the list of customers are and it leads to indavidual customers. 
     /// </summary>
     public partial class CustomerListWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
         bool checkIsCustomer;
         string cName;
-      
 
-        public CustomerListWindow(IBL b, bool _isCustomer, string customerName)
+        /// <summary>
+        /// constructor 
+        /// </summary>
+        /// <param name="_isCustomer">checks if the user is a customer or employee</param>
+        /// <param name="customerName">the users name</param>
+        public CustomerListWindow(IBL b, bool _isCustomer, string customerName) 
         {
             InitializeComponent();
             this.bl = b;
             this.checkIsCustomer = _isCustomer;
-            if (checkIsCustomer)
+            if (checkIsCustomer) //the list of costomers
             {
                 CustomersListView.ItemsSource = b.getUsersList();
                 addEmployeeButton.Visibility = Visibility.Hidden;
             }
-            else
+            else //the list of employees
             {
                 CustomersListView.ItemsSource = b.getEmployeesList();
                 addCustomerButton.Visibility = Visibility.Hidden;
@@ -46,12 +50,16 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
-
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes the window
+        /// </summary>
+        private void closeButton_Click(object sender, RoutedEventArgs e)  
         {
             Close();
         }
-
+        /// <summary>
+        /// updates the list to show the new changes
+        /// </summary>
         private void ShowInfo()  
         {
             IEnumerable<CustomerToList> d = new List<CustomerToList>();
@@ -60,14 +68,18 @@ namespace PL
             else
                 CustomersListView.ItemsSource = bl.getEmployeesList();
         }
-
+        /// <summary>
+        /// opens a window to add a new customer
+        /// </summary>
         private void addNewButton_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bl, true, true, cName).ShowDialog();
             ShowInfo();
         }
-
-        private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)  ////why does it earase???
+        /// <summary>
+        /// opens a window that shows an existing user
+        /// </summary>
+        private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)  
         {
             CustomerToList updateCustomer = new CustomerToList();
             updateCustomer = (CustomerToList)CustomersListView.SelectedItem;
@@ -86,13 +98,17 @@ namespace PL
             }
             
         }
-
+        /// <summary>
+        /// opens a window to add a new employee
+        /// </summary>
         private void addEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
             new CustomerWindow(bl, false, true, cName).ShowDialog();
             ShowInfo();
         }
-
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();

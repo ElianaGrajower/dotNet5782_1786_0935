@@ -28,6 +28,10 @@
     <None Remove="inline_image_preview.jpg" />
     <None Remove="istockphoto-1208274492-640x640.jpg" />
     <None Remove="little sky.jpg" />
+    <None Remove="loading.png" />
+    <None Remove="loading1.png" />
+    <None Remove="loading2.png" />
+    <None Remove="loading3.png" />
     <None Remove="log-out.png" />
     <None Remove="logout.png" />
     <None Remove="man.png" />
@@ -79,6 +83,10 @@
     <Resource Include="inline_image_preview.jpg" />
     <Resource Include="istockphoto-1208274492-640x640.jpg" />
     <Resource Include="little sky.jpg" />
+    <Resource Include="loading.png" />
+    <Resource Include="loading1.png" />
+    <Resource Include="loading2.png" />
+    <Resource Include="loading3.png" />
     <Resource Include="log-out.png" />
     <Resource Include="logout.png" />
     <Resource Include="man.png" />

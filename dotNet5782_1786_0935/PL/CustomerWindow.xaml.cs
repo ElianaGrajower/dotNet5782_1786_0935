@@ -22,7 +22,7 @@ using System.Net.Mail;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for CustomerWindow.xaml
+    /// Shows the information of indevidual cuatomers, and actions can be done on the customer.
     /// </summary>
 
     public partial class CustomerWindow : Window
@@ -31,7 +31,13 @@ namespace PL
         Customer c;
         Customer cutomerParcel;
         string cName;
-        public CustomerWindow(IBL customer, bool checkIsCustomer, bool isLogout, string custumerName="")//add new
+        /// <summary>
+        /// constructor for a new user
+        /// </summary>
+        /// <param name="checkIsCustomer">checks if the user is a customer or an employee</param>
+        /// <param name="isLogout">checks if its logged into an account</param>
+        /// <param name="custumerName">the users name</param>
+        public CustomerWindow(IBL customer, bool checkIsCustomer, bool isLogout, string custumerName="")
         {
             InitializeComponent();
             this.bl = customer;
@@ -54,7 +60,12 @@ namespace PL
                 logout.Visibility = Visibility.Hidden;
             }
         }
-        public CustomerWindow(IBL b, BO.Customer customer, string customerName)//update
+        /// <summary>
+        /// constructor for an existing user
+        /// </summary>
+        /// <param name="customer">the existing customer</param>
+        /// <param name="customerName">the users name</param>
+        public CustomerWindow(IBL b, BO.Customer customer, string customerName)
         {
             InitializeComponent();
             this.bl = b;
@@ -73,13 +84,16 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
-
+        /// <summary>
+        /// closes the window
+        /// </summary>
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-
+        /// <summary>
+        /// updates the info of the user
+        /// </summary>
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -99,14 +113,18 @@ namespace PL
                 MessageBox.Show("ERROR invalid input");
             }
         }
-
-
+        /// <summary>
+        /// opens the terms and conditions
+        /// </summary>
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             termesConditions.Visibility = Visibility.Visible;
             continueButton.IsEnabled = false;
         }
-        private void sentParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) /////////fix this!!!!!!!!!!!
+        /// <summary>
+        /// opens a parcel that the user sent
+        /// </summary>
+        private void sentParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) 
         {
             ParcelinCustomer updateParcel = new ParcelinCustomer();
             updateParcel = (ParcelinCustomer)sentParcelsList.SelectedItem;
@@ -123,6 +141,9 @@ namespace PL
                 
             }
         }
+        /// <summary>
+        /// opens a parcel that the user received
+        /// </summary>
         private void receivedParcelsList_MouseDoubleClick(object sender, MouseButtonEventArgs e) 
         {
             ParcelinCustomer updateParcel = new ParcelinCustomer();
@@ -140,7 +161,9 @@ namespace PL
                
             }
         }
-
+        /// <summary>
+        /// adds a new usert
+        /// </summary>
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
             SendEmail();
@@ -163,18 +186,25 @@ namespace PL
                 MessageBox.Show("ERROR can not add customer");
             }
         }
-
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
             bl.releaseAllFromCharge();
             this.Close();
         }
+        /// <summary>
+        /// closes the terms and conditions
+        /// </summary>
         private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             termesConditions.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// sends an email to the new user
+        /// </summary>
         private void SendEmail()
         {
             // Create a System.Net.Mail.MailMessage object

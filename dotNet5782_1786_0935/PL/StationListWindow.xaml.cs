@@ -19,14 +19,18 @@ using System.Collections.ObjectModel;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for StationListWindow.xaml
+    /// This is the station lists, where the list of stations are and it leads to indavidual stations. 
     /// </summary>
     public partial class StationListWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
         string cName;
-        
-        public StationListWindow(IBL b, string customerName) 
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="customerName">the users name</param>
+        public StationListWindow(IBL b, string customerName)  
         {
             InitializeComponent();
             this.bl = b;
@@ -35,9 +39,11 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
-        private void ShowInfo() 
+        /// <summary>
+        /// updates the list to show the new changes
+        /// </summary>
+        private void ShowInfo()  
         {
-            IEnumerable<StationToList> d = new List<StationToList>();
             if (filterSlots.Text != "")
                 StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
             else
@@ -48,40 +54,36 @@ namespace PL
                     StationsListView.ItemsSource = bl.getStationsList();
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// a button to adds a new station
+        /// </summary>
+        private void Button_Click(object sender, RoutedEventArgs e)  
         {
             new StationWindow(bl, cName).ShowDialog();
             ShowInfo();
         }
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// a close button
+        /// </summary>
+        private void closeButton_Click(object sender, RoutedEventArgs e)  
         {
             Close();
         }
-
-        private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// opens a station from the list of stations
+        /// </summary>
+        private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)  
         {
             StationToList updateStationList = new StationToList();
             updateStationList = (StationToList)StationsListView.SelectedItem;
             Station updateStation = new Station();
             try
             {
-                if (updateStationList == null)
+                if (updateStationList == null)  //makes sure the double click is on a station 
                     throw new Exception("clicked wrong area");
                 updateStation = bl.getStation(updateStationList.stationId);
                 new StationWindow(bl, updateStation, cName).ShowDialog();
                 ShowInfo();
-                if (filterSlots.Text != "")
-                {
-                    StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
-                }
-                if (availableChargesSelector.SelectedIndex == 0)
-                {
-                    StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
-                }
-                else
-                {
-                    StationsListView.ItemsSource = bl.getStationsList();
-                }
             }
             catch (Exception exc)
             {
@@ -89,9 +91,14 @@ namespace PL
             }
             
         }
-
-        private void availableChargesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// only shows the stations with available charge slots.
+        /// </summary>
+        private void availableChargesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)  
         {
+            int saveIndex = availableChargesSelector.SelectedIndex;
+            filterSlots.Text = "";  //clears the rest of the filter options.
+            availableChargesSelector.SelectedIndex = saveIndex;
             if (availableChargesSelector.SelectedIndex == 0)
             {
                 StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots > 0);
@@ -100,11 +107,13 @@ namespace PL
             {
                 StationsListView.ItemsSource = bl.getStationsList();
             }
-            filterSlots.Text = "";
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        /// <summary>
+        /// only shows the stations that have the inputed number of slots.
+        /// </summary>
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)  
         {
+            availableChargesSelector.SelectedIndex = -1;  //clears the rest of the filter options.
             if (filterSlots.Text != "")
             {
                 StationsListView.ItemsSource = bl.allStations(x => x.numberOfAvailableSlots == Convert.ToInt32(filterSlots.Text));
@@ -113,23 +122,30 @@ namespace PL
             {
                 StationsListView.ItemsSource = bl.getStationsList();
             }
-            availableChargesSelector.SelectedIndex = -1;
         }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// refresh button
+        /// </summary>
+        private void Button_Click_2(object sender, RoutedEventArgs e)  
         {
             StationsListView.ItemsSource = bl.allStations();
-            availableChargesSelector.SelectedIndex = -1;
+            availableChargesSelector.SelectedIndex = -1;  //clears the rest of the filter options.
             filterSlots.Text = "";
         }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// sorts the stations by smallest to largest amount of slots.
+        /// </summary>
+        private void Button_Click_4(object sender, RoutedEventArgs e)  
         {
+            filterSlots.Text = "";
+            availableChargesSelector.SelectedIndex = -1;
             IEnumerable<StationToList> query = bl.allStations().OrderBy(x => x.numberOfAvailableSlots);
             StationsListView.ItemsSource = query;
         }
-
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)  
         {
             new UserWindow().Show();
             bl.releaseAllFromCharge();

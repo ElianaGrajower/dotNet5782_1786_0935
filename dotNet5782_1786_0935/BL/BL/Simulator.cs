@@ -13,13 +13,17 @@ namespace BL
         private const int DELAY = 1000;
         private const double TIME_STEP = DELAY / 1000;
         private const double STEP = VELOCITY / TIME_STEP;
-        public Simulator(int droneId, Action updateDrone, Func<bool> isRun, BL bl)
+
+        /// <summary>
+        /// This is a simulator that allows the drone to fulfill deliveries autimaticlly.
+        /// </summary>
+        public Simulator(int droneId, Action updateDrone, Func<bool> isRun, BL bl)  //constructor
         {
             BO.Drone drone = new BO.Drone();
             drone = bl.getDrone(droneId);
-            while (!isRun())
+            while (!isRun()) //goes untill the manual button is pressed
             {
-                if (drone.droneStatus == BO.DroneStatus.available)
+                if (drone.droneStatus == BO.DroneStatus.available)  //if the drone is available
                 {
                     try
                     {
@@ -33,7 +37,8 @@ namespace BL
                         updateDrone();
                         Thread.Sleep(DELAY);
                     }
-                    catch
+                    catch  //if there is not anough battery to fulfill an order or if there are no available parcels left,
+                           //this sends the drone to a chrging station
                     {
                         bl.SendDroneToCharge(droneId);
                         while (drone.battery < 100)
@@ -52,9 +57,8 @@ namespace BL
                     }
                     drone = bl.getDrone(droneId);
                 }
-                if (drone.droneStatus == BO.DroneStatus.maintenance)
+                if (drone.droneStatus == BO.DroneStatus.maintenance) //if the drone is charging, finishes its charge.
                 {
-                    bl.SendDroneToCharge(droneId);
                     while (drone.battery < 100)
                     {
                         Thread.Sleep(DELAY);
@@ -69,7 +73,8 @@ namespace BL
                     updateDrone();
                     Thread.Sleep(DELAY);
                 }
-                if (drone.droneStatus == BO.DroneStatus.delivery)
+                if (drone.droneStatus == BO.DroneStatus.delivery)  //if the drone is in the middle of a delivery,
+                                                                   //it completes it before looking for new parcels
                 {
                     if (drone.parcel.parcelStatus == false)
                     {

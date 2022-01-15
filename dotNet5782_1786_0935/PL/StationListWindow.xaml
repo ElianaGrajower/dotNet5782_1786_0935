@@ -23,7 +23,7 @@
         <Label Content="Availability:" HorizontalAlignment="Left" Margin="120,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.921,0.541"/>
         <ComboBox x:Name="availableChargesSelector" HorizontalAlignment="Left" Margin="191,40,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="availableChargesSelector_SelectionChanged">
             <ComboBoxItem>available charges slots</ComboBoxItem>
-            <ComboBoxItem>all stations</ComboBoxItem>
+            <ComboBoxItem>clear</ComboBoxItem>
         </ComboBox>
         <Label Content="Enter amount of available charge slots:" HorizontalAlignment="Left" Margin="339,37,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="filterSlots" HorizontalAlignment="Left" Margin="554,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22" TextChanged="TextBox_TextChanged"/>

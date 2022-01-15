@@ -23,7 +23,7 @@ using System.ComponentModel;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for DroneWindow.xaml
+    /// Shows the information of indevidual drones, and actions can be done on the drone.
     /// </summary>
     public partial class DroneWindow : Window
     {
@@ -34,18 +34,26 @@ namespace PL
         DroneListWindow droneList;
        
         BackgroundWorker worker;
-        bool checkRun;
+        int counter = 1;
+
         private void updateDrone() => worker.ReportProgress(1);
         private bool checkStop() => worker.CancellationPending;
-
-        public DroneWindow(IBL b, Drone drone, string customerName, DroneListWindow dlw = null)//update drone
+        /// <summary>
+        /// constructor for an existing drone
+        /// </summary>
+        /// <param name="drone">the existing drone</param>
+        /// <param name="customerName">the users name</param>
+        /// <param name="dlw">the droneListWindow it came from</param>
+        public DroneWindow(IBL b, Drone drone, string customerName, DroneListWindow dlw = null)
         {
             InitializeComponent();
             this.bl = b;
-            /*textBlocks.*/DataContext = drone;
-            //parcelIdText.DataContext = drone;
+            DataContext = drone;
             d = drone;
-            
+            img1.Visibility = Visibility.Hidden;
+            img2.Visibility = Visibility.Hidden;
+            img3.Visibility = Visibility.Hidden;
+            img4.Visibility = Visibility.Hidden;
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
             stationIdCombo.ItemsSource = bl.allStations(s=>s.numberOfAvailableSlots>0).Select(s=>s.stationId);
             senderSelect.ItemsSource = bl.allCustomers().Select(c => c.customerId);
@@ -95,9 +103,11 @@ namespace PL
             cName = customerName;
             droneList = dlw;
         }
-
-
-        public DroneWindow(IBL drone, string customerName)//new drone
+        /// <summary>
+        /// constructor for a new drone
+        /// </summary>
+        /// <param name="customerName">the users name</param>
+        public DroneWindow(IBL drone, string customerName)
         {
             InitializeComponent();
             this.bl = drone;
@@ -106,7 +116,11 @@ namespace PL
             d.parcel = new ParcelInTransit();
             textBlocks.DataContext = d;
             weight.ItemsSource = Enum.GetValues(typeof(weightCategories));
-            stationIdCombo.ItemsSource = bl.allStations(s => s.numberOfAvailableSlots > 0).Select(s=>s.stationId);
+            stationIdCombo.ItemsSource = bl.allStations(s => s.numberOfAvailableSlots > 0).Select(s => s.stationId);
+            img1.Visibility = Visibility.Hidden;
+            img2.Visibility = Visibility.Hidden;
+            img3.Visibility = Visibility.Hidden;
+            img4.Visibility = Visibility.Hidden;
             updateButton.Visibility = Visibility.Hidden;
             chargeDrone.Visibility = Visibility.Hidden;
             releaseDrone.Visibility = Visibility.Hidden;
@@ -129,12 +143,16 @@ namespace PL
             automticButton.Visibility = Visibility.Hidden;
             manualButton.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// closes the window
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
+        /// <summary>
+        /// updates the drones details
+        /// </summary>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             
@@ -150,9 +168,11 @@ namespace PL
                 MessageBox.Show(exc.Message);
             }
         }
+        /// <summary>
+        /// adds a new drone
+        /// </summary>
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
                 int stationId = Convert.ToInt32(stationIdCombo.SelectedItem);
@@ -173,13 +193,16 @@ namespace PL
                 MessageBox.Show("ERROR can not add drone");
             }
         }
+        /// <summary>
+        /// releases a drone from charging
+        /// </summary>
         private void releaseDrone_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 int droneId = Convert.ToInt32(idText.Text);
                 bl.releaseDroneFromCharge(droneId);
-                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
+                DataContext = bl.getDrone(d.droneId);
                 MessageBox.Show("drone released succesfully");
                 releaseDrone.Visibility = Visibility.Hidden;    
                 chargeDrone.Visibility = Visibility.Visible;
@@ -193,15 +216,16 @@ namespace PL
             { MessageBox.Show(exc.Message); }
 
         }
-
+        /// <summary>
+        /// delivers a parcel
+        /// </summary>
         private void deliverParcel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 bl.deliveredParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone delivered succesfully");
-                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
-              //  parcelIdText.DataContext = bl.getDrone(d.droneId);
+                DataContext = bl.getDrone(d.droneId);
                 deliverParcel.Visibility = Visibility.Hidden;
                 matchUpParcel.Visibility = Visibility.Visible;
                 pickupParcel.Visibility = Visibility.Hidden;
@@ -222,15 +246,16 @@ namespace PL
                 MessageBox.Show("ERROR");
             }
         }
-
+        /// <summary>
+        /// matches up a drone with a parcel
+        /// </summary>
         private void matchUpParcel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 bl.matchDroneWithPacrel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone matched up succesfully");
-                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
-               // parcelIdText.DataContext = bl.getDrone(d.droneId);
+                DataContext = bl.getDrone(d.droneId);
                 matchUpParcel.Visibility = Visibility.Hidden;
                 pickupParcel.Visibility = Visibility.Visible;
                 deliverParcel.Visibility = Visibility.Hidden;
@@ -251,15 +276,16 @@ namespace PL
                 MessageBox.Show("ERROR");
             }
         }
-
+        /// <summary>
+        /// the drone pickes up the parcel that its matched to
+        /// </summary>
         private void pickupParcel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 bl.pickUpParcel(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone pickedUp succesfully");
-                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
-                // parcelIdText.DataContext = bl.getDrone(d.droneId);
+                DataContext = bl.getDrone(d.droneId);
                 pickupParcel.Visibility = Visibility.Hidden;
                 deliverParcel.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -275,14 +301,16 @@ namespace PL
                 MessageBox.Show("ERROR");
             }
         }
-
+        /// <summary>
+        /// sends a drone to a charging station to charge
+        /// </summary>
         private void chargeDrone_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 bl.SendDroneToCharge(Convert.ToInt32(idText.Text));
                 MessageBox.Show("drone charging succesfully");
-                /*textBlocks.*/DataContext = bl.getDrone(d.droneId);
+                DataContext = bl.getDrone(d.droneId);
                 chargeDrone.Visibility = Visibility.Hidden;
                 releaseDrone.Visibility = Visibility.Visible;
                 matchUpParcel.Visibility = Visibility.Hidden;
@@ -298,14 +326,14 @@ namespace PL
             {
             }
         }
-
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             Close();
             new DroneWindow(bl, cName).Show();
         }
-
-
+        /// <summary>
+        /// opens a parcel that the drone is carrying
+        /// </summary>
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Parcel updateParcel = new Parcel();
@@ -319,14 +347,18 @@ namespace PL
                 MessageBox.Show("The drone is not connecetd to a parcel\n");
             }
         }
-
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
             bl.releaseAllFromCharge();
             Close();
         }
-
+        /// <summary>
+        /// updates what the window shows while the simulator is running
+        /// </summary>
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             d = bl.getDrone(d.droneId);
@@ -338,22 +370,50 @@ namespace PL
                 prioritySelect.ItemsSource = Enum.GetValues(typeof(Priorities));
                 p = d.parcel;
                 if (p.parcelStatus == false)
-                    p.distance = bl.distance(d.location, p.pickupLocation);
+                    p.distance = bl.distance(d.location, p.pickupLocation);  //the distance between the drone and the parcel
                 if (p.parcelStatus == true)
-                    p.distance = bl.distance(p.pickupLocation, p.targetLocation);
+                    p.distance = bl.distance(p.pickupLocation, p.targetLocation);  //the distance between the parcel and the target
                 parcel.DataContext = p;
             }
             else
                 parcel.Visibility = Visibility.Hidden;
             textBlocks.DataContext = d;
-            droneList.updateListView();
+            droneList.updateListView();  //updates the droneListwindow
+            if (checkStop())  //after the maual button is pressed
+            {
+                if (counter == 1)
+                {
+                    img4.Visibility = Visibility.Hidden;
+                    img1.Visibility = Visibility.Visible;
+                }
+                if (counter == 2)
+                {
+                    img1.Visibility = Visibility.Hidden;
+                    img2.Visibility = Visibility.Visible;
+                }
+                if (counter == 3)
+                {
+                    img2.Visibility = Visibility.Hidden;
+                    img3.Visibility = Visibility.Visible;
+                }
+                if (counter == 4)
+                {
+                    img3.Visibility = Visibility.Hidden;
+                    img4.Visibility = Visibility.Visible;
+                    counter = 0;
+                }
+                counter++;
+            }
         }
+        /// <summary>
+        /// ends the simulation once the manual button is pushed
+        /// </summary>
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled == true)
             {
                 // e.Result throw System.InvalidOperationException
-                MessageBox.Show("The simulator is ended");
+                MessageBox.Show("The simulator has ended");
             }
             else if (e.Error != null)
             {
@@ -367,9 +427,13 @@ namespace PL
                 else
                     bl.pickUpParcel(d.droneId);
                 d = bl.getDrone(d.droneId);
-                textBlocks.DataContext = d;
+                DataContext = d;
             }
-            MessageBox.Show("The simulator is ended");
+            img1.Visibility = Visibility.Hidden;
+            img2.Visibility = Visibility.Hidden;
+            img3.Visibility = Visibility.Hidden;
+            img4.Visibility = Visibility.Hidden;
+            MessageBox.Show("The simulator has ended");
             buttons.Visibility = Visibility.Visible;
             automticButton.Visibility = Visibility.Visible;
             manualButton.Visibility = Visibility.Hidden;
@@ -384,7 +448,9 @@ namespace PL
             parcelIdRead.Visibility = Visibility.Hidden;
             parcelIdText.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// starts the simulation
+        /// </summary>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -396,8 +462,9 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
-
+        /// <summary>
+        /// starts the simulator
+        /// </summary>
         private void simulationButton_Click(object sender, RoutedEventArgs e)
         {
             worker = new BackgroundWorker();
@@ -413,7 +480,9 @@ namespace PL
             closeButton.Visibility = Visibility.Hidden;
             worker.RunWorkerAsync();
         }
-
+        /// <summary>
+        /// stops the simulator
+        /// </summary>
         private void manualButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -425,11 +494,7 @@ namespace PL
             {
 
             }
-
-           
-
         }
-
     }
 }
 

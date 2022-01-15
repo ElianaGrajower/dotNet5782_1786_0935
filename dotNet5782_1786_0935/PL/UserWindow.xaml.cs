@@ -18,20 +18,24 @@ using BlApi;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for UserWindow.xaml
+    /// This is the main window that opens when the project is started and here you can log into a users account
     /// </summary>
     public partial class UserWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
         
-
-        public UserWindow()
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public UserWindow() 
         {
             InitializeComponent();
             
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// checks if the customer exists and checks the password to log into the custor or employees account.
+        /// </summary>
+        private void Button_Click_1(object sender, RoutedEventArgs e) 
         {
             try    
             {
@@ -59,20 +63,26 @@ namespace PL
                 MessageBox.Show(exp.Message);
             }
         }
-
-        private void logInButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// opens the log in option.
+        /// </summary>
+        private void logInButton_Click(object sender, RoutedEventArgs e) 
         {
             userPassword.Visibility = Visibility.Visible;
             white.Visibility = Visibility.Visible;
             blackBackground.Visibility = Visibility.Visible;
         }
-
-        private void signUpButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// opens the customer window to create a new account.
+        /// </summary>
+        private void signUpButton_Click(object sender, RoutedEventArgs e) 
         {
             new CustomerWindow(bl, true, false).Show();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes the log in button
+        /// </summary>
+        private void Button_Click(object sender, RoutedEventArgs e) 
         {
             userPassword.Visibility = Visibility.Collapsed;
             white.Visibility = Visibility.Collapsed;

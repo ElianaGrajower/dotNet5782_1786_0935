@@ -19,7 +19,7 @@ using System.Collections.ObjectModel;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ParcelListWindow.xaml
+    /// This is the parcels lists, where the list of parcels are and it leads to indavidual parcels. 
     /// </summary>
     public partial class ParcelListWindow : Window
     {
@@ -29,10 +29,13 @@ namespace PL
         string cName;
         bool isUser = false;
         Customer c = new Customer();
-        
 
 
-        public ParcelListWindow(IBL parcel, string customerName) //for an employee
+        /// <summary>
+        /// constructor for an employee
+        /// </summary>
+        /// <param name="customerName">the users name</param>
+        public ParcelListWindow(IBL parcel, string customerName) 
         {
             InitializeComponent();
             ParcelsListView.ItemsSource = Bl.getParcelsList();
@@ -40,9 +43,13 @@ namespace PL
             prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             expanderHeader.Text = " " + customerName;
             cName = customerName;
-          
         }
-        public ParcelListWindow(IBL parcel, Customer customer, string customerName) //for a customer
+        /// <summary>
+        /// constructor for a customer (only shows the parcels that belog to the customer)
+        /// </summary>
+        /// <param name="customer">the customer</param>
+        /// <param name="customerName">the users name</param>
+        public ParcelListWindow(IBL parcel, Customer customer, string customerName) 
         {
             InitializeComponent();
             ParcelsListView.ItemsSource = Bl.allParcels().Where(x => x.sendername == customer.name || x.recivername == customer.name);  ///have to change the showinfo accordingly
@@ -53,6 +60,9 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
+        /// <summary>
+        /// updates the list to show the new changes
+        /// </summary>
         public void ShowInfo()  
         {
             IEnumerable<ParcelToList> p = new List<ParcelToList>();
@@ -63,9 +73,10 @@ namespace PL
             }
             else
             {
-                if (statusSelector.SelectedIndex != 4)
+                if (statusSelector.SelectedIndex != -1) 
                 {
-                    if (statusSelector.Text != "")
+                    statusFilter = (ParcelStatus)statusSelector.SelectedItem;
+                    if ((int)statusFilter != 5)
                         p = Bl.allParcels(x => x.parcelStatus == statusFilter);
                     else
                         p = Bl.allParcels();
@@ -82,27 +93,53 @@ namespace PL
                     if (dateRange.SelectedIndex == 3)
                         p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
                 }
-                if (pickDate.ToString() != "Select a date")
+                if (pickDate.Text != null)
                 {
-                    if (dateRange.SelectedIndex == 0)
-                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));
-                    if (dateRange.SelectedIndex == 1)
-                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
-                    if (dateRange.SelectedIndex == 2)
-                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddMonths(-1));
-                    if (dateRange.SelectedIndex == 3)
-                        p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
+                    ParcelsListView.ItemsSource = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested >= pickDate.SelectedDate && Bl.getParcel(x.parcelId).requested < pickDate.SelectedDate.Value.AddDays(1));                    
+                }
+                if (SortBy.SelectedIndex != -1) 
+                {
+                    if (SortBy.SelectedIndex == 0)
+                    {
+                        ParcelsListView.ItemsSource = Bl.allParcels();
+                        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                        PropertyGroupDescription groupDescription = new PropertyGroupDescription("sendername");
+                        view.GroupDescriptions.Add(groupDescription);
+                    }
+                    else
+                    {
+                        ParcelsListView.ItemsSource = Bl.allParcels();
+                        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                        PropertyGroupDescription groupDescription = new PropertyGroupDescription("recivername");
+                        view.GroupDescriptions.Add(groupDescription);
+                    }
+                }
+                if (prioritySelector.SelectedIndex != -1) 
+                {
+                    prioritiesFilter = (Priorities)prioritySelector.SelectedItem;
+                    if ((int)prioritiesFilter != 4)
+                        ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter);
+                    else
+                        ParcelsListView.ItemsSource = Bl.allParcels();
                 }
                 ParcelsListView.ItemsSource = p;
             }
         }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)  //date range
+        /// <summary>
+        /// filter list by date range
+        /// </summary>
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)  
         {
+            int saveIndex = dateRange.SelectedIndex;  //makes sure the selection is saves while the rest of the selections are being cleared.
+            SortBy.SelectedIndex = -1;  //clears the rest of the filter options.
+            statusSelector.SelectedIndex = -1;
+            prioritySelector.SelectedIndex = -1;
+            pickDate.Text = null;
+            dateRange.SelectedIndex = saveIndex;
             IEnumerable<ParcelToList> p = new List<ParcelToList>();
             p = Bl.getParcelsList();
             if (dateRange.SelectedIndex == 0)
-                p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));// && Bl.getParcel(x.parcelId).requested < DateTime.Now.AddDays(1));
+                p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-1));
             if (dateRange.SelectedIndex == 1)
                 p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddDays(-7));
             if (dateRange.SelectedIndex == 2)
@@ -111,19 +148,25 @@ namespace PL
                 p = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested > DateTime.Now.AddYears(-1));
             ParcelsListView.ItemsSource = p;
         }
-
-
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes the window
+        /// </summary>
+        private void closeButton_Click(object sender, RoutedEventArgs e)  
         {
             Close();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// opens a window for a new parcel
+        /// </summary>
+        private void Button_Click(object sender, RoutedEventArgs e)  
         {
             new ParcelWindow(Bl, cName).ShowDialog();
             ShowInfo();
         }
-        private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// opens a window for an existing parcel
+        /// </summary>
+        private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)  
         {
             ParcelToList updateParcel = new ParcelToList();
             updateParcel = (ParcelToList)ParcelsListView.SelectedItem;
@@ -141,87 +184,112 @@ namespace PL
               
             }
         }
-
-        private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)  //priority
+        /// <summary>
+        /// sorts list by priority
+        /// </summary>
+        private void typeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)  
         {
-            prioritiesFilter = (Priorities)prioritySelector.SelectedItem;
-            if ((int)prioritiesFilter != 4)
-                ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter);
-            else
-                ParcelsListView.ItemsSource = Bl.allParcels();
-        }
-
-        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)  //status 
-        {
-
-            if (prioritySelector.SelectedIndex == -1 && dateRange.SelectedIndex == -1 && pickDate.SelectedDate != DateTime.MinValue)
-            {
-                statusFilter = (ParcelStatus)statusSelector.SelectedItem;
-                if ((int)statusFilter != 5)
-                    ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
-                else
-                    ParcelsListView.ItemsSource = Bl.allParcels();
-            }
-            else if (prioritySelector.SelectedIndex != -1 && dateRange.SelectedIndex == -1 && pickDate.SelectedDate != DateTime.MinValue)
-            {
-                statusFilter = (ParcelStatus)statusSelector.SelectedItem;
-                prioritiesFilter = (Priorities)prioritySelector.SelectedItem;
-                if ((int)prioritiesFilter == 4)
-                    ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
-                else
-                {
-                    if ((int)statusFilter != 5)
-                        ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter && x.parcelStatus == statusFilter);
-                    else
-                        ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter);
-                }
-            }
-            else
-            {
-                statusFilter = (ParcelStatus)statusSelector.SelectedItem;
-                if ((int)statusFilter != 5)
-                    ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
-                else
-                    ParcelsListView.ItemsSource = Bl.allParcels();
-            }
-        }
-
-        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)  //calender
-        {
-            IEnumerable<ParcelToList> p = new List<ParcelToList>();
-            p = Bl.getParcelsList();
-            ParcelsListView.ItemsSource = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested >= pickDate.SelectedDate && Bl.getParcel(x.parcelId).requested < pickDate.SelectedDate.Value.AddDays(1));
-        }
-
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            ParcelsListView.ItemsSource = Bl.allParcels();
+            int saveIndex = prioritySelector.SelectedIndex;  //makes sure the selection is saves while the rest of the selections are being cleared.
+            statusSelector.SelectedIndex = -1;  //clears the rest of the filter options.
             SortBy.SelectedIndex = -1;
-        }
-
-        private void SortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (SortBy.SelectedIndex != -1)
+            dateRange.SelectedIndex = -1;
+            pickDate.Text = null;
+            prioritySelector.SelectedIndex = saveIndex;
+            if (prioritySelector.SelectedIndex != -1)
             {
-                if (SortBy.SelectedIndex == 0)
-                {
-                    ParcelsListView.ItemsSource = Bl.allParcels();
-                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
-                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("sendername");
-                    view.GroupDescriptions.Add(groupDescription);
-                }
+                prioritiesFilter = (Priorities)prioritySelector.SelectedItem;
+                if ((int)prioritiesFilter != 4)
+                    ParcelsListView.ItemsSource = Bl.allParcels(x => x.priority == prioritiesFilter);
                 else
-                {
                     ParcelsListView.ItemsSource = Bl.allParcels();
-                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
-                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("recivername");
-                    view.GroupDescriptions.Add(groupDescription);
-                }
             }
         }
+        /// <summary>
+        /// sorts list by status
+        /// </summary>
+        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)   
+        {
+            try
+            {
+                int saveIndex = statusSelector.SelectedIndex; //makes sure the selection is saves while the rest of the selections are being cleared.
+                if (statusSelector.SelectedIndex != -1)
+                {
+                    SortBy.SelectedIndex = -1; //clears the rest of the filter options.
+                    dateRange.SelectedIndex = -1;
+                    prioritySelector.SelectedIndex = -1;
+                    pickDate.Text = null;
+                    statusSelector.SelectedIndex = saveIndex;
+                    statusFilter = (ParcelStatus)statusSelector.SelectedItem;
+                    if ((int)statusFilter != 5)
+                        ParcelsListView.ItemsSource = Bl.allParcels(x => x.parcelStatus == statusFilter);
+                    else
+                        ParcelsListView.ItemsSource = Bl.allParcels();
+                }
+            }
+            catch
+            { }
+        }
+        /// <summary>
+        /// sorts list by calender
+        /// </summary>
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)  
+        {
+            DateTime? saveDate = pickDate.SelectedDate; //makes sure the selection is saves while the rest of the selections are being cleared.
+            if (pickDate.Text != null)
+            {
+                SortBy.SelectedIndex = -1; //clears the rest of the filter options.
+                statusSelector.SelectedIndex = -1;
+                dateRange.SelectedIndex = -1;
+                prioritySelector.SelectedIndex = -1;
+                pickDate.SelectedDate = saveDate;
+                ParcelsListView.ItemsSource = Bl.allParcels().Where(x => Bl.getParcel(x.parcelId).requested >= pickDate.SelectedDate && Bl.getParcel(x.parcelId).requested < pickDate.SelectedDate.Value.AddDays(1));
+            }
+        }
+        /// <summary>
+        /// refreshes the list
+        /// </summary>
+        private void Button_Click_1(object sender, RoutedEventArgs e)  
+        {
+            SortBy.SelectedIndex = -1;  //clears the rest of the filter options.
+            statusSelector.SelectedIndex = -1;
+            pickDate.Text = null;
+            dateRange.SelectedIndex = -1;
+            prioritySelector.SelectedIndex = -1;
+            ParcelsListView.ItemsSource = Bl.allParcels();
 
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        }
+        /// <summary>
+        /// sortd by sender/reciever
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)  
+        {
+            int saveIndex = SortBy.SelectedIndex; //makes sure the selection is saves while the rest of the selections are being cleared.
+            statusSelector.SelectedIndex = -1; //clears the rest of the filter options.
+            dateRange.SelectedIndex = -1;
+            prioritySelector.SelectedIndex = -1;
+            pickDate.Text = null;
+            SortBy.SelectedIndex = saveIndex;
+            if (SortBy.SelectedIndex == 0)
+            {
+                ParcelsListView.ItemsSource = Bl.allParcels();
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("sendername");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            else
+            {
+                ParcelsListView.ItemsSource = Bl.allParcels();
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelsListView.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("recivername");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+        }
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)  
         {
             new UserWindow().Show();
             Bl.releaseAllFromCharge();

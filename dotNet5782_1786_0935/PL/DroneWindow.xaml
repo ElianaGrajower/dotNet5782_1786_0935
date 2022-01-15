@@ -90,5 +90,9 @@
             <Label x:Name="StatusRead" Content="Parcel Status:" Height="26" Canvas.Top="211" Width="68"/>
             <TextBox x:Name="pStatusText" Text="{Binding parcelStatus, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" TextWrapping="Wrap" IsEnabled="False" Height="18" Canvas.Left="91" Canvas.Top="215" Width="149"/>
         </Canvas>
+        <Image x:Name="img1" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2" Source="/loading.png" Visibility="Visible"/>
+        <Image x:Name="img2" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2" Source="/loading1.png" Visibility="Visible"/>
+        <Image x:Name="img3" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2" Source="/loading2.png" Visibility="Visible"/>
+        <Image x:Name="img4" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2" Source="/loading3.png" Visibility="Visible"/>
     </Grid>
 </Window>

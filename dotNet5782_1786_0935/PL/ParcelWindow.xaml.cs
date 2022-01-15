@@ -17,15 +17,19 @@ using BlApi;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ParcelWindow.xaml
+    /// Shows the information of indevidual parcels, and actions can be done on the parcel.
     /// </summary>
     public partial class ParcelWindow : Window
     {
         internal readonly IBL Bl = BlFactory.GetBl();
         Parcel p;
         string cName;
-      
-        public ParcelWindow(IBL parcel, string customerName) //add
+
+        /// <summary>
+        /// constructor for a new parcel
+        /// </summary>
+        /// <param name="customerName">the users name</param>
+        public ParcelWindow(IBL parcel, string customerName) 
         {
             InitializeComponent();
             this.Bl = parcel;
@@ -57,7 +61,12 @@ namespace PL
             expanderHeader.Text = " " + customerName;
             cName = customerName;
         }
-        public ParcelWindow(IBL b, Parcel parcel, string customerName) //update
+        /// <summary>
+        /// constructor for an existing parcel
+        /// </summary>
+        /// <param name="parcel">the existing oarcel</param>
+        /// <param name="customerName">the users name</param>
+        public ParcelWindow(IBL b, Parcel parcel, string customerName)
         {
             InitializeComponent();
             weightSelect.ItemsSource = Enum.GetValues(typeof(weightCategories));
@@ -80,7 +89,7 @@ namespace PL
                 ParcelToList statusParcel = new ParcelToList();
                 int getParcelId = parcel.parcelId;
                 statusParcel = Bl.getParcelsList().Where(x => x.parcelId == getParcelId).FirstOrDefault();
-                if(statusParcel!=null)
+                if (statusParcel != null) 
                 if (!(statusParcel.parcelStatus == (ParcelStatus)2 || statusParcel.parcelStatus == (ParcelStatus)3))
                 {
                     droneButton.Visibility = Visibility.Hidden;
@@ -90,35 +99,49 @@ namespace PL
             {
                 droneButton.Visibility = Visibility.Hidden;
             }
+            if (parcel.scheduled != null)   
+            {
+                deleteButton.Visibility = Visibility.Hidden;
+            }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes a window
+        /// </summary>
+        private void Button_Click(object sender, RoutedEventArgs e)  
         {
             Close();
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// opens a window of a drone thats matched to the current parcel
+        /// </summary>
+        private void Button_Click_1(object sender, RoutedEventArgs e)  
         {
             Drone openDrone = new Drone();
             openDrone = Bl.getDrone(Convert.ToInt32(droneIdText.Text));
             new DroneWindow(Bl, openDrone, cName).ShowDialog();
         }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// opens the window of the sender of the parcel
+        /// </summary>
+        private void Button_Click_2(object sender, RoutedEventArgs e)  
         {
             Customer openCustomer = new Customer();
             openCustomer = Bl.getCustomer(Convert.ToInt32(senderSelect.SelectedItem));
             new CustomerWindow(Bl, openCustomer, cName).ShowDialog();
         }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// opens the window of the target of the parcel
+        /// </summary>
+        private void Button_Click_3(object sender, RoutedEventArgs e) 
         {
             Customer openCustomer = new Customer();
             openCustomer = Bl.getCustomer(Convert.ToInt32(targetSelect.SelectedItem));
             new CustomerWindow(Bl, openCustomer, cName).ShowDialog();
         }
-
-        private void addButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// adds a new parcel
+        /// </summary>
+        private void addButton_Click(object sender, RoutedEventArgs e)  
         {
             try
             {
@@ -139,15 +162,17 @@ namespace PL
                 MessageBox.Show("ERROR can not add parcel");
             }
         }
-
-
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// confirms a delete action
+        /// </summary>
+        private void deleteButton_Click(object sender, RoutedEventArgs e)  
         {
             checkDelete.Visibility = Visibility.Visible;
         }
-
-
-        private void yes_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// deletes a parcel
+        /// </summary>
+        private void yes_Click(object sender, RoutedEventArgs e)  
         {
             ParcelToList deleteParcel = new ParcelToList();
             int getParcelId = Convert.ToInt32(parcelIdText.Text);
@@ -172,13 +197,17 @@ namespace PL
                 checkDelete.Visibility = Visibility.Collapsed;
             }
         }
-
-        private void cancel_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// closes delete confirmation
+        /// </summary>
+        private void cancel_Click(object sender, RoutedEventArgs e)  
         {
             checkDelete.Visibility = Visibility.Collapsed;
         }
-
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)  
         {
             new UserWindow().Show();
             Bl.releaseAllFromCharge();

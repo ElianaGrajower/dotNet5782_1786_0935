@@ -20,7 +20,7 @@ using System.Collections.ObjectModel;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for DroneListWindow.xaml
+    /// This is the drone lists, where the list of drones are and it leads to indavidual drones. 
     /// </summary>
     public partial class DroneListWindow : Window
     {
@@ -30,7 +30,9 @@ namespace PL
         static DroneStatus? statusFilter;
         string cName;
 
-
+        /// <summary>
+        /// updates the list to show the new changes
+        /// </summary>
         private void ShowInfo()
         {
             IEnumerable<DroneToList> d = new List<DroneToList>();
@@ -46,6 +48,9 @@ namespace PL
             }
             DronesListView.ItemsSource = d;
         }
+        /// <summary>
+        /// constructor
+        /// </summary>
         public DroneListWindow(IBL b, string customerName)
         {
             InitializeComponent();
@@ -61,18 +66,26 @@ namespace PL
         {
 
         }
-
+        /// <summary>
+        /// opens a window to add a new drone
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl, cName).ShowDialog();
             ShowInfo();
         }
-
+        /// <summary>
+        /// closes the wwindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
+        /// <summary>
+        /// opens an existing drone
+        /// </summary>
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneToList updateDrone = new DroneToList();
@@ -91,7 +104,9 @@ namespace PL
                 
             }
         }
-
+        /// <summary>
+        /// filters the list by its weight
+        /// </summary>
         private void weightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (weightSelector.SelectedIndex != -1)
@@ -120,7 +135,9 @@ namespace PL
                 }
             }
         }
-
+        /// <summary>
+        /// filters the list by its status
+        /// </summary>
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (StatusSelector.SelectedIndex != -1)
@@ -149,28 +166,39 @@ namespace PL
                 }
             }
         }
-
+        /// <summary>
+        /// refreshes the list
+        /// </summary>
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             DronesListView.ItemsSource = bl.allDrones();
             StatusSelector.SelectedIndex = -1;
             weightSelector.SelectedIndex = -1;
         }
-
+        /// <summary>
+        /// groups the list according to its status
+        /// </summary>
         private void groupButton_Click(object sender, RoutedEventArgs e)
         {
             DronesListView.ItemsSource = bl.allDrones();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DronesListView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("droneStatus");
             view.GroupDescriptions.Add(groupDescription);
+            StatusSelector.SelectedIndex = -1;
+            weightSelector.SelectedIndex = -1;
         }
-
+        /// <summary>
+        /// logs out of the account
+        /// </summary>
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             new UserWindow().Show();
             bl.releaseAllFromCharge();
             Close();
         }
+        /// <summary>
+        /// updates the list of drones for the simulation
+        /// </summary>
         public void updateListView()
         {
             ShowInfo();
